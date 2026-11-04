@@ -16,5 +16,11 @@
     "rule": "email",
     "sha256": "cd29c5ac348a026a3ec5286890908fffb5bf6ab77f20672171be323a70c95026",
     "why": "The Co-Authored-By trailer of commits written with Claude Code: a vendor's public no-reply address."
+  },
+  {
+    "path": ".git/COMMIT",
+    "rule": "email",
+    "sha256": "3c205d8fc749f72977b9331e3179773c315bb1f4860c366de2abe9ec9337730b",
+    "why": "The committer of every squash merge made on GitHub: the vendor's public no-reply address."
   }
 ]
