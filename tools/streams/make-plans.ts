@@ -184,8 +184,10 @@ async function main(): Promise<void> {
   const root = join(import.meta.dir, '..', '..');
   const out = flag('out') ?? join(root, '.rafa', 'plans');
   const { batches } = (await Bun.file(join(import.meta.dir, 'batches.json')).json()) as { batches: Batch[] };
-  const streams = STREAMS.filter((stream) => [undefined, stream.id].includes(flag('stream')));
-  const picked = batches.filter((batch) => [undefined, batch.id].includes(flag('batch')));
+  const wantedStream = flag('stream');
+  const wantedBatch = flag('batch');
+  const streams = STREAMS.filter((stream) => wantedStream === undefined || stream.id === wantedStream);
+  const picked = batches.filter((batch) => wantedBatch === undefined || batch.id === wantedBatch);
   mkdirSync(out, { recursive: true });
   for (const stream of streams) {
     for (const batch of picked) {
