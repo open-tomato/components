@@ -102,6 +102,7 @@ const SHARED_RULES: readonly string[] = [
   'Run every command from `packages/ui`. Paths in this plan are relative to it.',
   'Touch only the files of this batch. A fix that needs a file outside it is reported as an `own-gap` in `out_of_scope_bugs`, naming the file.',
   'Change no style: no new classes, no token or theme edits.',
+  'Other loops share this machine: never stop a process or free a port, and never reseed a baseline (`test:visual:update`). A moved shot is a finding for the notes.',
   'Wrap every hunk you write in a file another stream may also edit (a component `.tsx`, its `.variants.ts`, a barrel) in provenance markers, one per line: `// @@{stream} {batch} begin` and `// @@{stream} {batch} end`, or `{/* @@{stream} {batch} begin */}` inside JSX. New files need none. `../../tools/streams/markers.sh list` shows them.',
   'Leave everything you add in its final form: explicit types on new exports, variants calls for new classes.',
   'The visual suite is `bun run test:visual`. It waits for the shared port, and a shot only counts as moved when it fails twice; read `visual-stable.json`.',
