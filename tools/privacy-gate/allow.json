@@ -1,0 +1,20 @@
+[
+  {
+    "path": "{package.json,packages/*/package.json}",
+    "rule": "email",
+    "sha256": "f8c042c4b4a514761e414b50b205ee32c612d207fda11f43a41866f84212bf23",
+    "why": "The author field: the maintainer's public contact address, the same one their public commits carry."
+  },
+  {
+    "path": ".git/COMMIT",
+    "rule": "email",
+    "sha256": "f8c042c4b4a514761e414b50b205ee32c612d207fda11f43a41866f84212bf23",
+    "why": "The maintainer's commit identity, public on every open-tomato repository."
+  },
+  {
+    "path": ".git/COMMIT",
+    "rule": "email",
+    "sha256": "cd29c5ac348a026a3ec5286890908fffb5bf6ab77f20672171be323a70c95026",
+    "why": "The Co-Authored-By trailer of commits written with Claude Code: a vendor's public no-reply address."
+  }
+]

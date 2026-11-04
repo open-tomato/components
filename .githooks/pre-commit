@@ -1,0 +1,12 @@
+#!/bin/sh
+# Refuse a commit whose STAGED content carries:
+#   - a raw control byte or an invisible/bidi codepoint (tools/control-byte-gate/);
+#   - personal or private data: machine names, home paths, addresses,
+#     credentials, or real people in sample data (tools/privacy-gate/).
+# Both judge the index blobs, not the worktree, so a value staged and then
+# cleaned up locally still blocks. Needs only bun + git, no install.
+#
+# Enable once per clone:
+#   git config core.hooksPath .githooks
+bun tools/control-byte-gate/control-byte-gate.ts --staged || exit 1
+exec bun tools/privacy-gate/privacy-gate.ts --staged
