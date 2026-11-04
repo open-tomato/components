@@ -1,4 +1,4 @@
-import { TomatoMark } from '../../atoms/TomatoMark';
+import { TomatoMark } from '../../internal/TomatoMark';
 
 /** Mark + wordmark, linking out of the auth flow. Wordmark colors are theme-aware tokens. */
 export const BrandLockup = ({ href = '#' }: { href?: string }) => (

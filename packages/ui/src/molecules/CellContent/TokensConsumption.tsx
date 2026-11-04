@@ -1,7 +1,6 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 
 import { cn, formatNumber } from '../../lib';
-import { UsageBar } from '../UsageChart';
 
 import {
   tokensConsumption,
@@ -9,6 +8,7 @@ import {
   tokensProgress,
   tokensProgressTone,
 } from './CellContent.variants';
+import { UsageBar } from './UsageBar';
 
 export interface TokensConsumptionProps
   extends HTMLAttributes<HTMLSpanElement> {

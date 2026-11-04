@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TomatoMark } from '../atoms/TomatoMark';
+import { TomatoMark } from '../internal/TomatoMark';
 import { cn } from '../lib';
 import {
   NotificationsBell,
@@ -13,10 +13,6 @@ import {
 } from '../organisms/SearchSuggest';
 import { ThemeSwitcher, type ThemeName } from '../organisms/ThemeSwitcher';
 import {
-  WorkspaceSwitcher,
-  type WorkspaceOption,
-} from '../organisms/WorkspaceSwitcher';
-import {
   AppShell,
   AppShellContent,
   AppShellMain,
@@ -27,6 +23,11 @@ import {
   SidebarWeekSummary,
   type SidebarNavConfigItem,
 } from '../templates/AppShell';
+
+import {
+  WorkspaceSwitcher,
+  type WorkspaceOption,
+} from './WorkspaceSwitcher';
 
 /**
  * Story harness for the AppShell stories. The chrome is the REAL library

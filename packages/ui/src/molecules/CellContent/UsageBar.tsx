@@ -8,7 +8,7 @@ import {
   usageBarOverflowFill,
   usageBarTrack,
   type UsageBarTrackVariants,
-} from './UsageChart.variants';
+} from './UsageBar.variants';
 
 export interface UsageBarProps
   extends HTMLAttributes<HTMLDivElement>,

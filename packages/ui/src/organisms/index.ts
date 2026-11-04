@@ -6,4 +6,3 @@ export * from './NotificationsBell';
 export * from './ProfileMenu';
 export * from './SearchSuggest';
 export * from './ThemeSwitcher';
-export * from './WorkspaceSwitcher';

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { UsageBar, type UsageBarProps } from '../UsageChart';
+import { UsageBar, type UsageBarProps } from './UsageBar';
 
 export type CellBarStroke = 'mini' | 'regular';
 

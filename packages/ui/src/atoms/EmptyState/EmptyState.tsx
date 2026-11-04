@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
+import { TomatoMark } from '../../internal/TomatoMark';
 import { cn } from '../../lib';
-import { TomatoMark } from '../TomatoMark';
 
 import { emptyState, type EmptyStateVariants } from './EmptyState.variants';
 

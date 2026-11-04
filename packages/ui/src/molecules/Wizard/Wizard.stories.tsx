@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { Field } from '../../atoms/Field';
-import { TomatoMark } from '../../atoms/TomatoMark';
+import { TomatoMark } from '../../internal/TomatoMark';
 
 import { Wizard, type WizardProps, type WizardStep } from './Wizard';
 

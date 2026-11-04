@@ -1,1 +1,0 @@
-export { ForgotSentPage } from './ForgotSentPage';

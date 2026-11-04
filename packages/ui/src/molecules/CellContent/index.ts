@@ -38,3 +38,11 @@ export {
   type TokensConsumptionProps,
   type TokensProgressProps,
 } from './TokensConsumption';
+export { UsageBar, type UsageBarProps } from './UsageBar';
+export {
+  usageBarFill,
+  usageBarGoalTick,
+  usageBarOverflowFill,
+  usageBarTrack,
+  type UsageBarTrackVariants,
+} from './UsageBar.variants';
