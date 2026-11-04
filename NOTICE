@@ -1,0 +1,13 @@
+components
+Copyright 2026 Marcos Tomatti
+
+This library was created by Marcos Tomatti. It is the UI package (@ar/ui)
+of the author's public template-agentic-research repository, carried over
+as a standalone component library. That package was extracted from Open
+Tomato (a project by the same author), and its components come from a
+design-extraction pipeline in a separate project by the same author.
+
+Per section 4(d) of the Apache License 2.0, redistributions of this work
+— in source form or bundled/derivative form — must include a readable
+copy of the attribution notices in this file. In short: keep the credit
+to the original author and the origin projects above.

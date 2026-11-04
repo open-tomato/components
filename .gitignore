@@ -1,0 +1,49 @@
+node_modules
+dist
+storybook-static/
+.tmp
+.env
+.docs/
+progress.txt
+*.log
+.DS_Store
+
+# Visual regression baselines are per-environment and untracked — regenerate
+# with `bun run test:visual:update` (packages/ui); never copy them between
+# machines.
+visual/
+visual-report.json
+
+# Working plans and sensitive specs are untracked on purpose: they can
+# describe critical (privacy/security) bugs before they are patched.
+# See context/security.md — "Plans and specs".
+.plans/
+.specs/
+
+# Research-pipeline build and export output: compiled n8n workflow bundles
+# and locally rendered export artifacts, neither of which is ever committed.
+# Anchored from the repo root — a slash-bearing pattern is relative to the
+# directory holding the .gitignore, so a bare `workflows/dist/` here would
+# only match a top-level `workflows/`, never the nested package path.
+packages/service/workflows/dist/
+packages/service/workflows/dist-external/
+packages/service/.exports/
+
+# Playwright output for @ar/web's e2e suite: `test-results/` holds the
+# per-failure artifacts (traces, screenshots, error context) and
+# `playwright-report/` the HTML reporter's output. Both are regenerated
+# by every run and neither is ever committed.
+test-results/
+playwright-report/
+
+# The effort store `rafa effort collect` appends to, under `.ralph/effort/`
+# (the directory name is rafa's, not this repo's). Never committed: the
+# rows measure ONE checkout's runs, are regenerable from the session
+# logs at any time, and carry plan stubs and dispatched task text
+# derived from the gitignored `.plans/` — committing them would put
+# on the remote the very thing that entry exists to hold back.
+.ralph/
+
+# >>> rafa tracking: rafa rewrites the lines up to the end marker
+.rafa/
+# <<< rafa tracking
