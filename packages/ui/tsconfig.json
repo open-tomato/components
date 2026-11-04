@@ -11,8 +11,8 @@
     "noImplicitOverride": true,
     "useDefineForClassFields": true,
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node", "bun"]
   },
-  "include": ["src", "*.ts", "*.tsx", "*.mjs", ".storybook"],
+  "include": ["src", "test", "*.ts", "*.tsx", "*.mjs", ".storybook"],
   "exclude": ["node_modules", "dist", "storybook-static"]
 }
