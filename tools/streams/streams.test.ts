@@ -10,7 +10,7 @@ import { join } from 'node:path';
 
 import { describe, expect, it } from 'bun:test';
 
-import { type Batch, checkFor, planFor, STREAMS } from './make-plans';
+import { type Batch, type SlotNames, checkFor, planFor, STREAMS } from './make-plans';
 import { hitsIn } from './origin-words';
 
 const ROOT = join(import.meta.dir, '..', '..');
@@ -86,5 +86,47 @@ describe('make-plans', () => {
 
     expect(checkFor(types, ['src/a/B', 'src/a/C'])).toContain('grep -E "^(src/a/B|src/a/C)"');
     expect(STREAMS.map((stream) => stream.id)).toEqual(['R', 'T', 'V', 'S']);
+  });
+
+  describe('slot names in stream S', () => {
+    const strip = STREAMS.find((stream) => stream.id === 'S')!;
+    const slots: SlotNames = {
+      criteria: 'Specific content becomes a slot.',
+      changes: [
+        { owner: 'mol-2', component: 'src/molecules/Toast', change: 'Rename Toast to Notice.', callers: ['src/organisms/Bell'] },
+        { owner: 'mol-2', component: 'src/organisms/Search', change: 'Add a kind map.', callers: [] },
+        { owner: 'ato-1', component: 'src/atoms/Mark', change: 'Rename Mark to Monogram.', callers: ['src/molecules/Modal/Modal.tsx'] },
+      ],
+      atRecombination: [],
+    };
+
+    it('leaves the plans of other streams without slot context', () => {
+      const plan = planFor(STREAMS.find((stream) => stream.id === 'V')!, batch, slots);
+
+      expect(plan).not.toContain('Slot criteria');
+    });
+
+    it('tells a batch which lines another batch owns', () => {
+      const plan = planFor(strip, batch, slots);
+
+      expect(plan).toContain('- `src/atoms/Mark` and its callers: batch ato-1 makes this change.');
+      expect(plan).not.toContain('Rename Mark to Monogram.');
+    });
+
+    it('lists the owned changes with their callers, and adds a task for one outside the batch', () => {
+      const plan = planFor(strip, batch, slots);
+      const tasks = plan.split('\n').filter((line) => line.startsWith('- [ ] '));
+
+      expect(plan).toContain('```rafa:stage-context\nSlot criteria: Specific content becomes a slot.');
+      expect(plan).toContain('- `src/molecules/Toast`: Rename Toast to Notice. Update its callers: `src/organisms/Bell`.');
+      expect(tasks).toHaveLength(5);
+      expect(tasks[3]).toContain('Apply the approved change to `src/organisms/Search`');
+    });
+
+    it('says so when no approved change touches the batch', () => {
+      const plan = planFor(strip, { ...batch, id: 'mol-9', components: ['src/molecules/Drawer'] }, slots);
+
+      expect(plan).toContain('No approved change touches this batch.');
+    });
   });
 });

@@ -10,7 +10,9 @@
  *
  * Each plan checks first, fixes in chunks of components, and checks again.
  * The stream definitions below are the only place a check command, an
- * agent or a stream rule is written.
+ * agent or a stream rule is written. Stream S also reads `slot-names.json`,
+ * the approved slots and renames: each batch applies the changes it owns and
+ * leaves the lines other batches own.
  */
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -22,6 +24,24 @@ export interface Batch {
   readonly perTask: number;
   readonly components: readonly string[];
   readonly shared?: readonly string[];
+}
+
+/** One approved slot or rename, applied by the batch that owns it. */
+export interface SlotChange {
+  readonly owner: string;
+  /** The folder or file the change is made in, relative to packages/ui. */
+  readonly component: string;
+  readonly change: string;
+  /** Files outside `component` that use the changed names. */
+  readonly callers: readonly string[];
+}
+
+/** The contents of `slot-names.json`. */
+export interface SlotNames {
+  readonly criteria: string;
+  readonly changes: readonly SlotChange[];
+  /** Removals the merge makes after every batch has landed. */
+  readonly atRecombination: readonly string[];
 }
 
 /** One stream: a kind of check run over every batch. */
@@ -89,10 +109,11 @@ export const STREAMS: readonly Stream[] = [
     fixRoute: 'agent=component-porter effort=high',
     movesPixels: true,
     rules: [
-      'Reword every origin word in comments, stories and fixtures to a neutral one. A word inside an exported name (a component, a prop, a type) is a public-API rename: list it in the notes as a proposal and leave it.',
-      'Preserve layout: a shell or toolbar becomes a wrapper whose layout defines slots, some required and some optional, and what fills them is the caller\'s. A template that repeats one shape with small differences (KnownEntities) becomes driven by one `kind` prop that swaps icon, colours and texts.',
-      'Story titles and story names stay, so story ids keep pairing with the baselines. Shots may move: list each moved shot in the notes for the user\'s review.',
-      'Done when the check prints no hit outside the listed rename proposals.',
+      'Reword every origin word in comments, stories and fixtures to a neutral one.',
+      'Apply exactly the approved changes listed in the Fix stage, with the names they give. A word inside an exported name (a component, a prop, a type) that no approved change covers is a rename proposal: list it in the notes and leave it.',
+      'An approved change also updates every caller it lists, in any batch, each hunk inside this batch\'s markers. That is the one exception to touching only this batch\'s files. Lines another batch owns, listed in the Fix stage, stay as they are.',
+      'Story titles and story names stay where the component keeps its name, so story ids keep pairing with the baselines. Shots may move: list each moved shot and each story id that changed in the notes for the user\'s review.',
+      'Done when the check prints no hit outside the rename proposals and the lines another batch owns.',
     ],
   },
 ];
@@ -126,8 +147,42 @@ export function checkFor(stream: Stream, paths: readonly string[]): string {
   return stream.check.replace('{paths}', paths.join(' ')).replace('{pathsRegex}', regex);
 }
 
+/** Whether `path` lies inside one of `roots` (a folder or the file itself). */
+function within(path: string, roots: readonly string[]): boolean {
+  return roots.some((root) => path === root || path.startsWith(`${root}/`));
+}
+
+/** The Fix stage's context for stream S: what the batch changes and what it leaves. */
+function slotContext(batch: Batch, slots: SlotNames): { context: string[]; extraTasks: SlotChange[] } {
+  const paths = [...batch.components, ...(batch.shared ?? [])];
+  const owned = slots.changes.filter((change) => change.owner === batch.id);
+  const foreign = slots.changes.filter((change) => change.owner !== batch.id
+    && [change.component, ...change.callers].some((path) => within(path, paths)));
+  const lines = [`Slot criteria: ${slots.criteria}`, ''];
+  if (owned.length > 0) {
+    lines.push('Approved changes this batch makes:', '');
+    for (const change of owned) {
+      const callers = change.callers.length > 0
+        ? ` Update its callers: ${codeList(change.callers)}.`
+        : '';
+      lines.push(`- \`${change.component}\`: ${change.change}${callers}`);
+    }
+    lines.push('');
+  }
+  if (foreign.length > 0) {
+    lines.push('Lines another batch owns; leave them as they are:', '');
+    for (const change of foreign) lines.push(`- \`${change.component}\` and its callers: batch ${change.owner} makes this change.`);
+    lines.push('');
+  }
+  if (owned.length === 0 && foreign.length === 0) lines.push('No approved change touches this batch.', '');
+  return {
+    context: ['```rafa:stage-context', ...lines.slice(0, -1), '```', ''],
+    extraTasks: owned.filter((change) => !within(change.component, batch.components)),
+  };
+}
+
 /** The plan text for one stream and one batch. */
-export function planFor(stream: Stream, batch: Batch): string {
+export function planFor(stream: Stream, batch: Batch, slots?: SlotNames): string {
   const stub = `components-${stream.id}-${batch.id}`;
   const paths = [...batch.components, ...(batch.shared ?? [])];
   const notes = `.rafa/notes/${stub}.md`;
@@ -138,6 +193,10 @@ export function planFor(stream: Stream, batch: Batch): string {
   const fixTasks = chunks(batch.components, batch.perTask)
     .map((group) => `- [ ] ${stream.fix} ${codeList(group)}  {${stream.fixRoute}}`);
   if (batch.shared !== undefined) fixTasks.push(`- [ ] ${stream.fix} the shared folders ${codeList(batch.shared)}  {${stream.fixRoute}}`);
+  const slot = stream.id === 'S' && slots !== undefined
+    ? slotContext(batch, slots)
+    : undefined;
+  for (const change of slot?.extraTasks ?? []) fixTasks.push(`- [ ] Apply the approved change to \`${change.component}\` and update its callers  {${stream.fixRoute}}`);
   return [
     `# Plan: components port, ${stream.name}, batch ${batch.id}`,
     '',
@@ -166,6 +225,7 @@ export function planFor(stream: Stream, batch: Batch): string {
     '',
     '# Stage: Fix',
     '',
+    ...(slot?.context ?? []),
     ...fixTasks,
     '',
     '# Stage: Check again',
@@ -184,6 +244,7 @@ async function main(): Promise<void> {
   const root = join(import.meta.dir, '..', '..');
   const out = flag('out') ?? join(root, '.rafa', 'plans');
   const { batches } = (await Bun.file(join(import.meta.dir, 'batches.json')).json()) as { batches: Batch[] };
+  const slots = (await Bun.file(join(import.meta.dir, 'slot-names.json')).json()) as SlotNames;
   const wantedStream = flag('stream');
   const wantedBatch = flag('batch');
   const streams = STREAMS.filter((stream) => wantedStream === undefined || stream.id === wantedStream);
@@ -191,7 +252,7 @@ async function main(): Promise<void> {
   mkdirSync(out, { recursive: true });
   for (const stream of streams) {
     for (const batch of picked) {
-      await Bun.write(join(out, `PLAN-components-${stream.id}-${batch.id}.md`), planFor(stream, batch));
+      await Bun.write(join(out, `PLAN-components-${stream.id}-${batch.id}.md`), planFor(stream, batch, slots));
     }
   }
   console.log(`make-plans: wrote ${streams.length * picked.length} plan(s) to ${out}`);

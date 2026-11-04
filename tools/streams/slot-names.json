@@ -1,0 +1,69 @@
+{
+  "criteria": "Content specific to the source project is removed and its region becomes a slot; a generic shape with a project-specific name is renamed. Slot names: leading, title, subtitle, trailing, actions, brand, illustration, footer. Hard-coded copy becomes a prop with a neutral default.",
+  "changes": [
+    {
+      "owner": "mol-3",
+      "component": "src/molecules/KnownEntities",
+      "change": "Merge AgentCell, AgentTitle, BranchInline, ModelCell, SessionCell, SessionInline, TaskCell, ToolTitle and UserInline into one `Entity` with `layout` (`inline` | `cell` | `title`), the slots `leading`, `title`, `subtitle` and `trailing` (ToolTitle's badge goes in `trailing`), and a `kind` key into an `EntityKinds` map the implementor supplies through `EntityKindsProvider` (icon, tone and default texts per kind). The kit ships no kinds; stories use a neutral demo map. `SessionStatus` and `SESSION_STATUS_TONE` become `ActivityStatus` and `ACTIVITY_STATUS_TONE`, with the same five values.",
+      "callers": ["src/organisms/Table/cellTypes.tsx", "src/organisms/SearchSuggest"]
+    },
+    {
+      "owner": "mol-3",
+      "component": "src/organisms/SearchSuggest",
+      "change": "Replace the five fixed kinds (`SearchSuggestionKind`, `KIND_ICON` and the kind pill variants) with a `kind` that reads the same `EntityKinds` map as `Entity`. The placeholder becomes a prop defaulting to \"Search…\".",
+      "callers": []
+    },
+    {
+      "owner": "mol-3",
+      "component": "src/organisms/Table/cellTypes.tsx",
+      "change": "The cell types `agent-title`, `agent-cell`, `session-inline`, `session-cell` and the other KnownEntities keys become `entity-inline`, `entity-cell` and `entity-title`, rendering `Entity`.",
+      "callers": []
+    },
+    {
+      "owner": "mol-1",
+      "component": "src/molecules/CellContent",
+      "change": "Rename `TokensConsumption` to `QuotaUsage`; `TokensProgress`, `TOKENS_WARN_RATIO` and `TOKENS_DANGER_RATIO` to `QuotaProgress`, `QUOTA_WARN_RATIO` and `QUOTA_DANGER_RATIO`; `SpendOverTime` to `AmountOverTime`, with its `cost` prop renamed `amount`. Their cva exports and prop types follow the same names. In `src/organisms/Table/cellTypes.tsx` the cell types `tokens-progress` and `spend-over-time` become `quota-progress` and `amount-over-time`.",
+      "callers": ["src/organisms/Table/cellTypes.tsx", "src/molecules/SmallStatCard/SmallStatCard.stories.tsx", "src/atoms/Sparkline/Sparkline.stories.tsx"]
+    },
+    {
+      "owner": "mol-1",
+      "component": "src/molecules/Wizard",
+      "change": "The fixed \"Create workspace\" label becomes a `submitLabel` prop with a neutral default.",
+      "callers": []
+    },
+    {
+      "owner": "ato-2",
+      "component": "src/atoms/WorkspaceMark",
+      "change": "Rename the folder, the component, its variants and its types to `Monogram`.",
+      "callers": ["src/atoms/index.ts", "src/molecules/OptionCard", "src/stories/WorkspaceSwitcher/WorkspaceSwitcher.tsx"]
+    },
+    {
+      "owner": "ato-1",
+      "component": "src/atoms/EmptyState",
+      "change": "Drop the source's mark (`TomatoMark`) and add an optional `illustration` slot in its place.",
+      "callers": []
+    },
+    {
+      "owner": "org-2",
+      "component": "src/organisms/ProfileMenu",
+      "change": "Remove `onSwitchWorkspace` and its \"Switch workspace\" item, and add an `actions` slot for extra menu items.",
+      "callers": []
+    },
+    {
+      "owner": "tpl-1",
+      "component": "src/templates/AuthShell",
+      "change": "Replace `BrandLockup`, which draws the source's mark and name, with a `brand` slot.",
+      "callers": ["src/stories/shell-fixtures.tsx"]
+    },
+    {
+      "owner": "tpl-1",
+      "component": "src/templates/AppShell",
+      "change": "Rename `SidebarWeekSummary` to `SidebarQuota`, drop its default `tokens` unit, and give its heading a `title` slot.",
+      "callers": ["src/stories/shell-fixtures.tsx"]
+    }
+  ],
+  "atRecombination": [
+    "Delete `src/internal/TomatoMark.tsx` once no file imports it; stories that drew it fill the new slots with a neutral placeholder.",
+    "Remove the `--wordmark-tomato` tokens, their theme mapping and the `.wordmark` rule once no file uses them (Badge's variants and the shell fixtures did)."
+  ]
+}
