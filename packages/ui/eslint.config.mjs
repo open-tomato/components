@@ -12,6 +12,7 @@ import globals from 'globals';
 import * as jsoncParser from 'jsonc-eslint-parser';
 
 import baseConfig from '../../eslint.base.mjs';
+import otPlugin from '../../tools/eslint-rules/cva-only-classname.mjs';
 import sharedRules from '../../sharedRules.mjs';
 
 // Reference-free gate targets (see rule below) — split so the literal names
@@ -112,6 +113,17 @@ export default defineConfig([
       'react/require-default-props': 0,
     },
 
+  },
+  {
+    // ot/cva-only-classname: a className holds only a variants call, a cn()
+    // over variants and the passthrough, or the passthrough. Registered and
+    // OFF for the port: stream V checks a batch with eslint.variants.mjs,
+    // which turns it on for the same files, and recombination turns it on
+    // here. Layout classes in templates, stories and tests stay free.
+    files: ['src/**/*.tsx'],
+    ignores: ['src/templates/**', 'src/stories/**', '**/*.stories.tsx', '**/*.test.tsx'],
+    plugins: { ot: otPlugin },
+    rules: { 'ot/cva-only-classname': 'off' },
   },
   {
     files: ['**/*.md'],

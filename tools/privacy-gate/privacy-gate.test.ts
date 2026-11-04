@@ -66,6 +66,11 @@ describe('shapes on every file', () => {
     expect(rules('src/a.tsx', '<path d="M12 .5a12 12 0 00-3.2.8.8" />')).not.toContain('ip-address');
   });
 
+  it('ignores a property chain that ends like a LAN suffix', () => {
+    expect(rules('src/a.ts', 'imported.add(specifier.local.name);')).not.toContain('lan-host');
+    expect(rules('src/a.ts', 'config.internal(x)')).not.toContain('lan-host');
+  });
+
   it('finds a LAN host name', () => {
     expect(rules('src/a.ts', `host: build-box.${'local'}`)).toContain('lan-host');
   });

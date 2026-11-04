@@ -93,8 +93,8 @@ const IPV4 = /(?<![\w.])(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})(?![\w.]*\d)/g
 /** An SVG path or points attribute, whose numbers read like dotted quads. */
 const SVG_PATH = /(^|\s)(d|points)=["{]/;
 
-/** A host name on a LAN-only suffix. */
-const LAN_HOST = /\b[a-z0-9-]+\.(local|lan|internal|home\.arpa|localdomain)\b/i;
+/** A host name on a LAN-only suffix, not a property chain like `node.local.name`. */
+const LAN_HOST = /\b[a-z0-9-]+\.(local|lan|internal|home\.arpa|localdomain)\b(?![.(\w])/i;
 
 /** An email address; the domain is checked after the match. */
 const EMAIL = /(?<![\w/@.-])[A-Za-z0-9._%+-]+@((?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,})(?![\w-])/g;
