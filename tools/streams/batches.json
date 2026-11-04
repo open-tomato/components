@@ -1,0 +1,145 @@
+{
+  "$comment": "Batches of the components port. Paths are relative to packages/ui. Weighted per component by source lines, stories, cva calls and behaviour hooks; see the parallel-streams spec. Only tpl-1 edits the barrels and shared folders.",
+  "batches": [
+    {
+      "id": "ato-1",
+      "group": "atoms",
+      "perTask": 3,
+      "components": [
+        "src/atoms/Badge",
+        "src/atoms/Card",
+        "src/atoms/Content",
+        "src/atoms/Droppable",
+        "src/atoms/EmptyState",
+        "src/atoms/IconButton",
+        "src/atoms/IconTile",
+        "src/atoms/Sparkline",
+        "src/atoms/Tag"
+      ]
+    },
+    {
+      "id": "ato-2",
+      "group": "atoms",
+      "perTask": 3,
+      "components": [
+        "src/atoms/Grid",
+        "src/atoms/Icon",
+        "src/atoms/Menu",
+        "src/atoms/OAuthButton",
+        "src/atoms/PasswordStrength",
+        "src/atoms/Sortable",
+        "src/atoms/Switch",
+        "src/atoms/Touchable",
+        "src/atoms/TrendIndicator",
+        "src/atoms/WorkspaceMark"
+      ]
+    },
+    {
+      "id": "ato-3",
+      "group": "atoms",
+      "perTask": 3,
+      "components": [
+        "src/atoms/Avatar",
+        "src/atoms/Button",
+        "src/atoms/Chip",
+        "src/atoms/Divider",
+        "src/atoms/Field",
+        "src/atoms/Formatted",
+        "src/atoms/GridItem",
+        "src/atoms/Overlay",
+        "src/atoms/Shell",
+        "src/atoms/StatusIndicator"
+      ]
+    },
+    {
+      "id": "mol-1",
+      "group": "molecules",
+      "perTask": 3,
+      "components": [
+        "src/molecules/CellContent",
+        "src/molecules/CodeInput",
+        "src/molecules/Pagination",
+        "src/molecules/RowStatCard",
+        "src/molecules/Segmented",
+        "src/molecules/Select",
+        "src/molecules/Stepper",
+        "src/molecules/Wizard"
+      ]
+    },
+    {
+      "id": "mol-2",
+      "group": "molecules",
+      "perTask": 3,
+      "components": [
+        "src/molecules/Banner",
+        "src/molecules/Breadcrumb",
+        "src/molecules/EntityCard",
+        "src/molecules/Modal",
+        "src/molecules/PasskeyPrompt",
+        "src/molecules/SectionCard",
+        "src/molecules/Toast",
+        "src/molecules/Tooltip",
+        "src/molecules/TreeNav"
+      ]
+    },
+    {
+      "id": "mol-3",
+      "group": "molecules",
+      "perTask": 3,
+      "components": [
+        "src/molecules/ConfirmPopover",
+        "src/molecules/Disclosure",
+        "src/molecules/Drawer",
+        "src/molecules/FilesChanged",
+        "src/molecules/KnownEntities",
+        "src/molecules/OptionCard",
+        "src/molecules/Progress",
+        "src/molecules/Skeleton",
+        "src/molecules/SmallStatCard"
+      ]
+    },
+    {
+      "id": "org-1",
+      "group": "organisms",
+      "perTask": 1,
+      "components": [
+        "src/organisms/FormKit",
+        "src/organisms/NotificationsBell",
+        "src/organisms/SearchSuggest"
+      ]
+    },
+    {
+      "id": "org-2",
+      "group": "organisms",
+      "perTask": 1,
+      "components": [
+        "src/organisms/CommandPalette",
+        "src/organisms/ProfileMenu",
+        "src/organisms/Table",
+        "src/organisms/ThemeSwitcher",
+        "src/organisms/Toolbar"
+      ]
+    },
+    {
+      "id": "tpl-1",
+      "group": "templates",
+      "perTask": 1,
+      "components": [
+        "src/templates/AppShell",
+        "src/templates/AuthShell"
+      ],
+      "shared": [
+        "src/stories",
+        "src/internal",
+        "src/lib",
+        "src/cache",
+        "src/styles",
+        "src/index.tsx",
+        "src/atoms/index.ts",
+        "src/molecules/index.ts",
+        "src/organisms/index.ts",
+        "src/templates/index.ts"
+      ]
+    }
+  ]
+}

@@ -13,6 +13,8 @@ progress.txt
 # machines.
 visual/
 visual-report.json
+visual-report.first.json
+visual-stable.json
 
 # Working plans and sensitive specs are untracked on purpose: they can
 # describe critical (privacy/security) bugs before they are patched.

@@ -1,0 +1,3 @@
+# `bun test` from this folder: a DOM for the component render tests.
+[test]
+preload = ["./test/happy-dom.ts"]
