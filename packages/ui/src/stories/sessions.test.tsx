@@ -15,7 +15,9 @@ describe('fmtTokens', () => {
   });
 });
 
-describe('session fixtures', () => {
+// @@S tpl-1 begin
+describe('item fixtures', () => {
+// @@S tpl-1 end
   it('ranks every status used by the dataset', () => {
     expect(SESSIONS.length).toBeGreaterThan(0);
     for (const s of SESSIONS) expect(STATUS[s.status]).toBeDefined();
@@ -39,7 +41,9 @@ describe('session fixtures', () => {
     expect(screen.getByText(row.model)).toBeTruthy();
     expect(screen.getByText(`${row.updated}m ago`)).toBeTruthy();
     const footers = cols.map((c) => c.footer?.(SESSIONS)).filter(Boolean);
-    expect(footers).toContain(`${SESSIONS.length} sessions`);
+    // @@S tpl-1 begin
+    expect(footers).toContain(`${SESSIONS.length} items`);
+    // @@S tpl-1 end
     expect(footers.some((f) => String(f).endsWith(' total'))).toBe(true);
   });
 

@@ -1,5 +1,7 @@
 // @@T tpl-1 begin
-import type { FC } from 'react';
+// @@S tpl-1 begin
+import type { FC, ReactNode } from 'react';
+// @@S tpl-1 end
 // @@T tpl-1 end
 
 import { Badge } from '../../atoms/Badge';
@@ -21,13 +23,17 @@ import {
 } from './AppShell.variants';
 // @@V tpl-1 end
 
-export interface SidebarWeekSummaryProps {
+// @@S tpl-1 begin
+export interface SidebarQuotaProps {
   /** Drives the pill's copy and tone. */
   status: 'healthy' | 'unhealthy';
-  /** Tokens used this week. */
+  /** Amount used so far in the period. */
   used: number;
-  /** The week's token limit. */
+  /** The period's limit. */
   limit: number;
+  /** Heading slot, left of the status pill. */
+  title?: ReactNode;
+  /** Unit label after the limit; omitted when not given. */
   unit?: string;
   /** Hidden entirely when the rail is collapsed. */
   collapsed?: boolean;
@@ -35,22 +41,24 @@ export interface SidebarWeekSummaryProps {
 }
 
 /**
- * The sidebar's week-summary widget (app-shell spec: Side Bar) —
- * deliberately a STUB for the PoC: "this week" + a healthy/unhealthy
- * status pill, tokens-over-limit, and a progress bar underneath. The
- * caller aligns it to the bottom of the nav area (a flex spacer above);
- * bottom-anchoring is composition, not widget state.
+ * The sidebar's quota widget (app-shell spec: Side Bar) — deliberately a
+ * STUB for the PoC: a heading slot + a healthy/unhealthy status pill,
+ * used-over-limit, and a progress bar underneath. The caller aligns it to
+ * the bottom of the nav area (a flex spacer above); bottom-anchoring is
+ * composition, not widget state.
  */
-// @@T tpl-1 begin
-export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
-// @@T tpl-1 end
+export const SidebarQuota: FC<SidebarQuotaProps> = ({
+// @@S tpl-1 end
   status,
   used,
   limit,
-  unit = 'tokens',
+  // @@S tpl-1 begin
+  title = 'usage',
+  unit,
+  // @@S tpl-1 end
   collapsed = false,
   className,
-}: SidebarWeekSummaryProps) => {
+}: SidebarQuotaProps) => {
   if (collapsed) return null;
   const pct = limit > 0
     ? (used / limit) * 100
@@ -64,7 +72,9 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
         <div className={weekSummaryHeader()}>
           <span className={weekSummaryEyebrow()}>
             {/* @@V tpl-1 end */}
-            this week
+            {/* @@S tpl-1 begin */}
+            {title}
+            {/* @@S tpl-1 end */}
           </span>
           <Badge
             tone={status === 'healthy'
@@ -83,7 +93,11 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
           </span>
           <span className={weekSummaryLimit()}>
             {/* @@V tpl-1 end */}
-            / {formatNumber(limit)} {unit}
+            {/* @@S tpl-1 begin */}
+            / {formatNumber(limit)}{unit
+              ? ` ${unit}`
+              : ''}
+            {/* @@S tpl-1 end */}
           </span>
         </div>
         <Progress
@@ -100,4 +114,6 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
   );
 };
 
-SidebarWeekSummary.displayName = 'SidebarWeekSummary';
+// @@S tpl-1 begin
+SidebarQuota.displayName = 'SidebarQuota';
+// @@S tpl-1 end

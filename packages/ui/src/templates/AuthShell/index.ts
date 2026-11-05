@@ -1,7 +1,7 @@
 export { AuthShell, type AuthShellProps } from './AuthShell';
 export { AuthHeading, type AuthHeadingProps } from './AuthHeading';
-export { BrandLockup } from './BrandLockup';
 export {
+  authBrand,
   authCard,
   authEyebrow,
   authFooter,

@@ -25,6 +25,7 @@ import {
   type AppShellSidebarVariants,
 } from './AppShell.variants';
 
+// @@S tpl-1 begin
 /**
  * Compound API — the shell is layout only; everything inside the zones is
  * components from earlier chapters:
@@ -33,7 +34,7 @@ import {
  *     <AppShellSidebar collapsed={collapsed}>…brand, nav, NavItems…</AppShellSidebar>
  *     <AppShellMain>
  *       <AppShellTopbar onToggleSidebar={…} sidebarCollapsed={collapsed}>
- *         …workspace switcher, title, search, Menu-driven buttons…
+ *         …group switcher, title, search, Menu-driven buttons…
  *       </AppShellTopbar>
  *       <AppShellContent footer={…}>{page}</AppShellContent>
  *     </AppShellMain>
@@ -44,6 +45,7 @@ import {
  * on the toolbar. Per the app-shell spec the sidebar collapse BUTTON belongs
  * to the topbar wrapper itself (`onToggleSidebar`), not to page chrome.
  */
+// @@S tpl-1 end
 
 export type AppShellProps = HTMLAttributes<HTMLDivElement>;
 

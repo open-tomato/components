@@ -12,7 +12,9 @@ describe('style sheets', () => {
     expect(css.split('{').length).toBe(css.split('}').length);
   });
 
-  it('tokens define the colour custom properties components use', () => {
+  // @@S tpl-1 begin
+  it('theme values define the colour custom properties components use', () => {
+  // @@S tpl-1 end
     const css = read('tokens.css') + read('theme.css');
     expect(css).toContain('--primary');
     expect(css).toContain('--accent');

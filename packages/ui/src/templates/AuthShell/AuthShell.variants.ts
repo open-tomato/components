@@ -4,11 +4,13 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S tpl-1 begin
 /**
  * AuthShell — the pre-authentication shell: centred card on a softly
- * tinted backdrop, brand lockup on top, footer line below.
- * Card widths: 440 default, 500 workspace pick, 520 the 2FA flow.
+ * tinted backdrop, brand slot on top, footer line below.
+ * Card widths: 440 default, 500 group pick, 520 the 2FA flow.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const authShell: (props?: ClassProp) => string = cva([
 // @@T tpl-1 end
@@ -62,20 +64,12 @@ export const authHeadingSub: (props?: ClassProp) => string = cva(
   'mt-1.5 text-sm leading-normal text-pretty text-fg2',
 );
 
-/** BrandLockup's link: mark + wordmark in a row above the card. */
-export const brandLockup: (props?: ClassProp) => string = cva(
+// @@S tpl-1 begin
+/** The brand slot's wrapper: caller content in a row above the card. */
+export const authBrand: (props?: ClassProp) => string = cva(
   'mb-6 inline-flex items-center gap-2.5 text-inherit !no-underline',
 );
-
-/** BrandLockup's wordmark ("open tomato"). */
-export const brandLockupWordmark: (props?: ClassProp) => string = cva(
-  'font-display text-[19px] font-extrabold tracking-[-0.02em]',
-);
-
-/** BrandLockup's wordmark halves, each on its own theme-aware token. */
-export const brandLockupWordmarkOpen: (props?: ClassProp) => string = cva('text-wordmark-open');
-
-export const brandLockupWordmarkTomato: (props?: ClassProp) => string = cva('text-wordmark-tomato');
+// @@S tpl-1 end
 // @@V tpl-1 end
 
 export type AuthCardVariants = VariantProps<typeof authCard>;

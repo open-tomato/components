@@ -20,19 +20,25 @@ const open = async (ui: ReactElement) => {
 };
 
 describe('WorkspaceSwitcher', () => {
-  it('renders nothing for fewer than two workspaces', async () => {
+  // @@S tpl-1 begin
+  it('renders nothing for fewer than two groups', async () => {
+  // @@S tpl-1 end
     await open(<WorkspaceSwitcher workspaces={[WS[0]!]} activeId="a" />);
     expect(screen.queryByRole('button')).toBeNull();
   });
 
-  it('shows the active workspace in the trigger, falling back to the first', async () => {
+  // @@S tpl-1 begin
+  it('shows the active group in the trigger, falling back to the first', async () => {
+  // @@S tpl-1 end
     await open(<WorkspaceSwitcher workspaces={WS} activeId="missing" className="extra" />);
     const trigger = screen.getByRole('button');
     expect(trigger.textContent).toContain('alpha');
     expect(trigger.className).toContain('extra');
   });
 
-  it('lists only the five most recent workspaces when open', async () => {
+  // @@S tpl-1 begin
+  it('lists only the five most recent groups when open', async () => {
+  // @@S tpl-1 end
     const many = Array.from({ length: 7 }, (_, i) => ({ id: `w${i}`, name: `ws-${i}` }));
     await open(<WorkspaceSwitcher workspaces={many} activeId="w0" defaultOpen />);
     expect(screen.getAllByRole('menuitem').length).toBe(5 + 2);
@@ -48,8 +54,10 @@ describe('WorkspaceSwitcher', () => {
 
   it.each([
     ['beta', 'onSwitch', 'b'],
-    ['See all workspaces', 'onSeeAll', undefined],
-    ['New workspace', 'onNew', undefined],
+    // @@S tpl-1 begin
+    ['See all groups', 'onSeeAll', undefined],
+    ['New group', 'onNew', undefined],
+    // @@S tpl-1 end
   ] as const)('selecting %s calls %s', async (label, handler, arg) => {
     const fns = { onSwitch: mock(() => {}), onSeeAll: mock(() => {}), onNew: mock(() => {}) };
     await open(<WorkspaceSwitcher workspaces={WS} activeId="a" defaultOpen {...fns} />);
@@ -63,7 +71,9 @@ describe('WorkspaceSwitcher', () => {
   it('tolerates selection without handlers', async () => {
     await open(<WorkspaceSwitcher workspaces={WS} activeId="a" defaultOpen />);
     await act(async () => {
-      fireEvent.click(screen.getByText('New workspace'));
+      // @@S tpl-1 begin
+      fireEvent.click(screen.getByText('New group'));
+      // @@S tpl-1 end
     });
   });
 

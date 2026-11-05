@@ -2,7 +2,9 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva } from 'class-variance-authority';
 
-/** TomatoMark — the mascot svg: never shrinks inside a flex row. */
+// @@S tpl-1 begin
+/** The mark svg: never shrinks inside a flex row. */
+// @@S tpl-1 end
 export const tomatoMark: (props?: ClassProp) => string = cva('shrink-0');
 
 /** The mark's leaf path, in the accent fill. */
