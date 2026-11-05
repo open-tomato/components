@@ -45,7 +45,9 @@ export const Neutral: Story = {
 };
 
 export const Accent: Story = {
-  args: { tone: 'accent', children: 'agent' },
+  // @@S ato-1 begin
+  args: { tone: 'accent', children: 'active' },
+  // @@S ato-1 end
 };
 
 /** Portal marketing release pill — garden-green leaf tint. */

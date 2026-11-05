@@ -260,7 +260,9 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     header: 'Usage',
     // @@S org-2 end
     width: 130,
-    cell: (r) => renderCellContent('tokens-progress', {
+    // @@S mol-1 begin
+    cell: (r) => renderCellContent('quota-progress', {
+    // @@S mol-1 end
       // @@S org-2 begin
       used: r.used,
       // @@S org-2 end
@@ -274,8 +276,12 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     header: 'Cost · Time',
     // @@S org-2 end
     width: 148,
-    cell: (r) => renderCellContent('spend-over-time', {
-      cost: r.cost,
+    // @@S mol-1 begin
+    cell: (r) => renderCellContent('amount-over-time', {
+    // @@S mol-1 end
+      // @@S mol-1 begin
+      amount: r.cost,
+      // @@S mol-1 end
       seconds: r.seconds,
       date: r.date,
       now: REF_NOW,

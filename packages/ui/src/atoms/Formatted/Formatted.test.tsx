@@ -18,9 +18,15 @@ const YESTERDAY = new Date(2026, 6, 21, 9, 0, 0);
 
 describe('HumanReadableValue', () => {
   it('compacts by default and shows the unit', () => {
-    const { container } = render(<HumanReadableValue value={8240} unit="tokens" locale={LOCALE} />);
-    expect(container.textContent).toBe('8.2Ktokens');
-    expect(container.querySelector('span span')?.textContent).toBe('tokens');
+    // @@S ato-3 begin
+    const { container } = render(<HumanReadableValue value={8240} unit="units" locale={LOCALE} />);
+    // @@S ato-3 end
+    // @@S ato-3 begin
+    expect(container.textContent).toBe('8.2Kunits');
+    // @@S ato-3 end
+    // @@S ato-3 begin
+    expect(container.querySelector('span span')?.textContent).toBe('units');
+    // @@S ato-3 end
   });
 
   it('prints the full number when short is false', () => {
@@ -163,8 +169,12 @@ describe('FormattedRelativeTime', () => {
 
 describe('FormattedValue', () => {
   it('dispatches number', () => {
-    const { container } = render(<FormattedValue type="number" value={8240} unit="tokens" locale={LOCALE} />);
-    expect(container.textContent).toBe('8.2Ktokens');
+    // @@S ato-3 begin
+    const { container } = render(<FormattedValue type="number" value={8240} unit="units" locale={LOCALE} />);
+    // @@S ato-3 end
+    // @@S ato-3 begin
+    expect(container.textContent).toBe('8.2Kunits');
+    // @@S ato-3 end
   });
 
   it('dispatches currency', () => {

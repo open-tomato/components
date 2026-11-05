@@ -81,11 +81,31 @@ describe('Wizard', () => {
     expect(screen.getByText(/2 \/ 2 · optional/)).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
     expect(h.onBack).toHaveBeenCalledTimes(1);
-    fireEvent.click(screen.getByRole('button', { name: 'Create workspace' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Finish' }));
     expect(h.onFinish).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(h.onClose).toHaveBeenCalledTimes(1);
   });
+
+  // @@S mol-1 begin
+  it('uses the submitLabel prop on the last step', () => {
+    render(
+      <Wizard
+        open
+        steps={steps}
+        step={1}
+        answers={{ name: 'x' }}
+        submitLabel="Create"
+        onAnswer={() => {}}
+        onBack={() => {}}
+        onNext={() => {}}
+        onClose={() => {}}
+        onFinish={() => {}}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Create' })).toBeTruthy();
+  });
+  // @@S mol-1 end
 
   it('renders nothing for an out-of-range step', () => {
     setup(5);

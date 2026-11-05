@@ -6,9 +6,9 @@ import { afterEach, describe, expect, it, mock } from 'bun:test';
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · agent-7d2f' },
+  { kind: 'agent', label: 'auth-refactor', sub: 'running · stage-7d2f' },
   { kind: 'session', label: 'settings page draft', sub: '12m ago' },
-  { kind: 'task', label: 'Add spend chart', sub: 'roadmap · high' },
+  { kind: 'task', label: 'Add usage chart', sub: 'roadmap · high' },
   { kind: 'tool', label: 'github-issues', sub: 'MCP · connected', icon: 'cpu' },
   { kind: 'doc', label: 'Composting context' },
 ];
@@ -42,7 +42,7 @@ describe('SearchSuggest', () => {
       expect(screen.getByText(k)).toBeTruthy();
     }
     expect(screen.getByText('suggested')).toBeTruthy();
-    expect(screen.getByText('running · agent-7d2f')).toBeTruthy();
+    expect(screen.getByText('running · stage-7d2f')).toBeTruthy();
   });
 
   it('opens on focus', async () => {

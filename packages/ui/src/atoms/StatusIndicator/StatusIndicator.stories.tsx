@@ -66,7 +66,9 @@ export const Pulse: Story = {
   args: { pulse: true, label: 'running' },
 };
 
-/** Inline usage next to text — the session-row pattern. */
+// @@S ato-3 begin
+/** Inline usage next to text — the list-row pattern. */
+// @@S ato-3 end
 export const InlineWithText: Story = {
   render: () => (
     <span className="inline-flex items-center gap-2 text-sm text-fg1">

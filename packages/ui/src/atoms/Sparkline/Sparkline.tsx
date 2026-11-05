@@ -18,12 +18,16 @@ export interface SparklineProps
   data: number[];
   /** Series color from the shared chart palette. */
   tone?: ChartTone;
-  /** Faint area fill under the line (original MetricTile default). */
+  // @@S ato-1 begin
+  /** Faint area fill under the line. */
+  // @@S ato-1 end
   fill?: boolean;
+  // @@S ato-1 begin
   /**
-   * Accessible label (e.g. "tokens over the last 30 days"). Without it
+   * Accessible label (e.g. "usage over the last 30 days"). Without it
    * the chart is decorative (aria-hidden) — pair it with visible text.
    */
+  // @@S ato-1 end
   label?: string;
 }
 
@@ -43,16 +47,17 @@ const buildPath = (data: number[]): string => {
     .join(' ');
 };
 
+// @@S ato-1 begin
 /**
  * Sparkline — small inline SVG trend chart (card bottom lines, table
  * cells). Hand-rolled per the D1 decision (see LineChart/D1-DECISION.md);
- * mirrors the original design Sparkline in
- * the original MetricTile screen.
+ * mirrors the design source's Sparkline.
  *
  * The path normalizes to the data's own min/max (a sparkline shows shape,
  * not scale); the box stretches to the container while
  * `vector-effect: non-scaling-stroke` keeps the line weight constant.
  */
+// @@S ato-1 end
 // @@T ato-1 begin
 export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps & import('react').RefAttributes<SVGSVGElement>> = forwardRef<SVGSVGElement, SparklineProps>(
   ({ className, data, tone, fill = true, label, size, ...props }, ref) => {

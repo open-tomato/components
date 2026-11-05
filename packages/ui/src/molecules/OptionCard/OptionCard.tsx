@@ -19,7 +19,9 @@ export interface OptionCardProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'title'>,
   OptionCardVariants {
   selected: boolean;
-  /** Identity slot — WorkspaceMark, IconTile, …. */
+  // @@S ato-2 begin
+  /** Identity slot — Monogram, IconTile, …. */
+  // @@S ato-2 end
   leading?: ReactNode;
   title: ReactNode;
   description?: ReactNode;

@@ -4,18 +4,17 @@ import type { ClassProp } from 'class-variance-authority/types';
 // @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S mol-1 begin
 /**
- * RowStatCard — full-width single-row stat card. Design source: original design
- * `BudgetBar` + `BudgetReadout` in
- * the original Usage screen (inline styles, no CVA
- * source); contract: "RowStatCard".
+ * RowStatCard — full-width single-row stat card; contract: "RowStatCard".
  *
- * Spec deltas vs the original design (specs win):
- * - the forecast legend is re-aligned under its tick (see
- *   `RowStatCardMeter`) — the spec calls the original version misaligned;
- * - the meter track uses the theme's surface-sunk instead of the original
- *   literal cream-300 so dark mode stays coherent.
+ * Spec notes (specs win):
+ * - the forecast legend is aligned under its tick (see
+ *   `RowStatCardMeter`) rather than centered in the caption row;
+ * - the meter track uses the theme's surface-sunk instead of a literal
+ *   light colour so dark mode stays coherent.
  */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const rowStatCard: (props?: ClassProp) => string = cva(
 // @@T mol-1 end
@@ -94,7 +93,9 @@ export const rowStatCardMeterFill: (props?: { tone?: 'accent' | 'warning' | 'dan
   defaultVariants: { tone: 'accent' },
 });
 
-/** The marker tick — overhangs the track like the original forecast tick. */
+// @@S mol-1 begin
+/** The marker tick — overhangs the track. */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const rowStatCardMeterTick: (props?: ClassProp) => string = cva(
 // @@T mol-1 end
@@ -107,7 +108,9 @@ export const rowStatCardMeterLabels: (props?: ClassProp) => string = cva(
   'relative flex justify-between font-mono text-[10px] text-fg3',
 );
 
-/** Marker legend, centered under its tick (the original design centered it in the row — misaligned; spec calls it out). */
+// @@S mol-1 begin
+/** Marker legend, centered under its tick (not in the caption row — the spec calls that misaligned). */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const rowStatCardMeterMarkerLabel: (props?: ClassProp) => string = cva(
 // @@T mol-1 end

@@ -26,9 +26,13 @@ const meta: Meta<typeof NotificationsBell> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Original design NOTIFICATIONS seed. */
+// @@S org-1 begin
+/** Sample notifications. */
+// @@S org-1 end
 const NOTIFICATIONS: NotificationItem[] = [
-  { id: 1, unread: true, level: 'ok', title: 'auth-refactor finished', body: '8 files updated · 12.3k tokens', time: '2m ago' },
+  // @@S org-1 begin
+  { id: 1, unread: true, level: 'ok', title: 'auth-refactor finished', body: '8 files updated · 12.3k units used', time: '2m ago' },
+  // @@S org-1 end
   { id: 2, unread: true, level: 'warn', title: 'perf-investigate is waiting', body: 'Token budget paused at 0/200k. Approve to continue.', time: '14m ago' },
   { id: 3, unread: true, level: 'err', title: 'rate-limit-bug failed', body: 'Rate-limited by upstream provider after 6m 47s.', time: '1h ago' },
   { id: 4, unread: false, level: 'info', icon: 'user-plus', title: 'ren joined open-garden', body: 'Sam invited them as a Member.', time: 'yesterday' },

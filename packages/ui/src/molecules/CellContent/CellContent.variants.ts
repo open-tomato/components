@@ -11,8 +11,7 @@ import { chartTone, type ChartTone } from '../../lib';
 /**
  * CellContent kit — standardized cell formats for tables and table-like
  * layouts (spec-driven, "Table enhancements →
- * CellContent"; rendered references: the Sessions/Tasks table rows in
- * the original Sessions/Tasks screens).
+ * CellContent"; typical use: the rows of an item table).
  *
  * Contract-typed and table-agnostic: every piece renders identically inside
  * a Table column `cell`, a UsageChart free column, or any card layout —
@@ -124,28 +123,38 @@ export const cellLabelGroup: (props?: ClassProp) => string = cva('inline-flex fl
 export const cellLabelTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
 // @@V mol-1 end
 
-/** tokens-consumption — bold full number used, greyed quota. */
+/** quota-usage — bold full number used, greyed quota. */
 // @@T mol-1 begin
-export const tokensConsumption: (props?: ClassProp) => string = cva(
+// @@S mol-1 begin
+export const quotaUsage: (props?: ClassProp) => string = cva(
+// @@S mol-1 end
 // @@T mol-1 end
   'whitespace-nowrap font-mono text-xs font-semibold text-fg1',
 );
 
 // @@T mol-1 begin
-export const tokensConsumptionQuota: (props?: ClassProp) => string = cva('font-normal text-fg3');
+// @@S mol-1 begin
+export const quotaUsageQuota: (props?: ClassProp) => string = cva('font-normal text-fg3');
+// @@S mol-1 end
 // @@T mol-1 end
 
 // @@T mol-1 begin
-export const tokensProgress: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-1');
+// @@S mol-1 begin
+export const quotaProgress: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-1');
+// @@S mol-1 end
 // @@T mol-1 end
 
-/** spend-over-time — currency over a greyed duration · relative-time line. */
+/** amount-over-time — currency over a greyed duration · relative-time line. */
 // @@T mol-1 begin
-export const spendOverTime: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
+// @@S mol-1 begin
+export const amountOverTime: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
+// @@S mol-1 end
 // @@T mol-1 end
 
 // @@T mol-1 begin
-export const spendOverTimeMeta: (props?: ClassProp) => string = cva(
+// @@S mol-1 begin
+export const amountOverTimeMeta: (props?: ClassProp) => string = cva(
+// @@S mol-1 end
 // @@T mol-1 end
   'truncate font-mono text-[11px] leading-tight text-fg3',
 );
@@ -156,12 +165,14 @@ export const spendOverTimeMeta: (props?: ClassProp) => string = cva(
  * the exact cutoffs weren't given: green below 45%, yellow from 45%, red
  * from 85% (and for any overflow past the quota).
  */
-export const TOKENS_WARN_RATIO = 0.45;
-export const TOKENS_DANGER_RATIO = 0.85;
+// @@S mol-1 begin
+export const QUOTA_WARN_RATIO = 0.45;
+export const QUOTA_DANGER_RATIO = 0.85;
 
-export const tokensProgressTone = (ratio: number): ChartTone => {
-  if (ratio >= TOKENS_DANGER_RATIO) return 'danger';
-  if (ratio >= TOKENS_WARN_RATIO) return 'gold';
+export const quotaProgressTone = (ratio: number): ChartTone => {
+  if (ratio >= QUOTA_DANGER_RATIO) return 'danger';
+  if (ratio >= QUOTA_WARN_RATIO) return 'gold';
+  // @@S mol-1 end
   return 'success';
 };
 

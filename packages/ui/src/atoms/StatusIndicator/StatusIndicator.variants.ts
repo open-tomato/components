@@ -4,15 +4,17 @@ import type { ClassProp } from 'class-variance-authority/types';
 // @@T ato-3 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S ato-3 begin
 /**
  * StatusIndicator — the standalone inline status dot (spec-driven,
  * the component spec). `Badge dot` already draws one inside a pill; this
- * is the free-floating atom for session rows, model cells, live counters.
+ * is the free-floating atom for list rows, table cells, live counters.
  *
  * Tones follow the table-status scale (ok/warn/err/info/disabled); the original
  * DS pulses live dots with the pulseRing keyframes already mapped to
  * `animate-pulse-ring` in src/styles/theme.css.
  */
+// @@S ato-3 end
 // @@T ato-3 begin
 export const statusIndicator: (
   props?: {

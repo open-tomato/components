@@ -107,7 +107,7 @@ Dark mode: set `data-theme="dark"` on the document element (default follows
 (the auth flow frame, paired with the `src/pages/auth` set) are the templates
 tier — most of their composition is reusable as-is, with app-specific layouts
 tweaked at the consumer. Brand atoms (`Wordmark`, `TomatoMark`,
-`WorkspaceMark`) are the shells' logo slots: swap or restyle them per product.
+`Monogram`) are the shells' logo slots: swap or restyle them per product.
 Demo content in stories uses the placeholder brand "Acme".
 
 ## Theming (v1: theme definition via CSS)

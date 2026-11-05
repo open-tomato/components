@@ -34,8 +34,10 @@ export const Scoring: Story = {
   play: async () => {
     await expect(passwordStrength('')).toEqual({ score: 0, label: 'empty' });
     await expect(passwordStrength('short1')).toEqual({ score: 1, label: 'weak' });
-    await expect(passwordStrength('tomatogarden')).toEqual({ score: 2, label: 'okay' });
-    await expect(passwordStrength('TomatoGarden1')).toEqual({ score: 4, label: 'strong' });
-    await expect(passwordStrength('Tomato-Garden-42')).toEqual({ score: 5, label: 'great' });
+    // @@S ato-2 begin
+    await expect(passwordStrength('gardenwalker')).toEqual({ score: 2, label: 'okay' });
+    await expect(passwordStrength('GardenPath12')).toEqual({ score: 4, label: 'strong' });
+    await expect(passwordStrength('Garden-Path-42')).toEqual({ score: 5, label: 'great' });
+    // @@S ato-2 end
   },
 };

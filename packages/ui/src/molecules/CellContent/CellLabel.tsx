@@ -38,13 +38,15 @@ const normalize = (
     ? { text: l }
     : l)));
 
+// @@S mol-1 begin
 /**
  * CellLabel — accent-colored label-format text with array support (spec:
- * "CellContent → Label"; rendered reference: the
- * Overview "Top 5 sessions" rank labels — subtle or transparent background
- * with a simple accent color). Tones come from the shared chart palette;
+ * "CellContent → Label"; typical use: ranking labels — subtle or
+ * transparent background with a simple accent color). Tones come from the
+ * shared chart palette;
  * `bg="soft"` adds the subtle currentColor tint.
  */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const CellLabel: ForwardRefExoticComponent<PropsWithoutRef<CellLabelProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, CellLabelProps>(
 // @@T mol-1 end
