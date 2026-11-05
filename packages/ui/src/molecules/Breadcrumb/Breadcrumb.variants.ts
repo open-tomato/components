@@ -22,4 +22,12 @@ export const breadcrumbItem: (props?: ({state?: 'current' | 'past' | 'upcoming' 
   },
 );
 
+// @@V mol-2 begin
+/** The nav row holding the items and separators. */
+export const breadcrumb: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex flex-wrap items-center gap-1');
+
+/** The chevron separator between items. */
+export const breadcrumbSeparator: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0 text-fg3');
+// @@V mol-2 end
+
 export type BreadcrumbItemVariants = VariantProps<typeof breadcrumbItem>;

@@ -1,3 +1,7 @@
+// @@V mol-2 begin
+import { toneIcon } from './Banner.variants';
+// @@V mol-2 end
+
 /**
  * The tone scale's icons: the scale owns hue, icon and
  * meaning together — status surfaces render the icon for their tone rather
@@ -32,7 +36,9 @@ export const ToneIcon = ({
     strokeWidth="1.75"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="shrink-0"
+    // @@V mol-2 begin
+    className={toneIcon()}
+    // @@V mol-2 end
     aria-hidden
   >
     {PATHS[tone].split('M').filter(Boolean)
