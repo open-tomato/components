@@ -251,12 +251,14 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
     );
 };
 
-const meta = {
+// @@T org-2 begin
+const meta: Meta<typeof Toolbar> = {
   title: 'Organisms/Toolbar',
   component: Toolbar,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
-} satisfies Meta<typeof Toolbar>;
+};
+// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
