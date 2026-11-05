@@ -24,7 +24,9 @@ import {
   AppShellTopbar,
   SidebarNav,
   SidebarQuickAccess,
-  SidebarWeekSummary,
+  // @@S tpl-1 begin
+  SidebarQuota,
+  // @@S tpl-1 end
   type SidebarNavConfigItem,
 } from '../templates/AppShell';
 
@@ -50,14 +52,16 @@ import {
   type WorkspaceOption,
 } from './WorkspaceSwitcher';
 
+// @@S tpl-1 begin
 /**
  * Story harness for the AppShell stories. The chrome is the REAL library
  * components — WorkspaceSwitcher, SearchSuggest, NotificationsBell,
  * ThemeSwitcher, ProfileMenu in the topbar; SidebarNav +
- * SidebarWeekSummary + SidebarQuickAccess in the rail — this file only
+ * SidebarQuota + SidebarQuickAccess in the rail — this file only
  * supplies demo data, placeholder page content and the LiveShell wiring.
  * The shell remains; the page content changes.
  */
+// @@S tpl-1 end
 
 /* ---- demo data ----------------------------------------------------------- */
 
@@ -132,12 +136,16 @@ export const SidebarDemo = ({
     {/* @@V tpl-1 begin */}
     <div className={shellDemoSpacer()} />
     {/* @@V tpl-1 end */}
-    <SidebarWeekSummary
+    {/* @@S tpl-1 begin */}
+    <SidebarQuota
+      title="this week"
+      unit="tokens"
       status="healthy"
       used={1_200_000}
       limit={4_000_000}
       collapsed={collapsed}
     />
+    {/* @@S tpl-1 end */}
     <SidebarQuickAccess
       collapsed={collapsed}
       items={[

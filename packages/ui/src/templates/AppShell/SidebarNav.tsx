@@ -33,12 +33,14 @@ export interface SidebarNavProps {
   className?: string;
 }
 
+// @@S tpl-1 begin
 /**
  * The sidebar's data-driven navigation: a column of NavItems rendered
  * from a config array. The current spec'd set is Overview
- * (layout-dashboard), Sessions (terminal), Agents (bot), Roadmap (list),
+ * (layout-dashboard), Reports (terminal), Members (bot), Roadmap (list),
  * Tools (cpu) — but the component takes whatever the config says.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const SidebarNav: FC<SidebarNavProps> = ({
 // @@T tpl-1 end

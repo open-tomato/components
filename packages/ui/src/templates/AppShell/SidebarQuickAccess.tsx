@@ -73,8 +73,10 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
             touchable({ rounded: 'md', noBrightness: false }),
             navItem({ active: false, collapsed }),
             // @@V tpl-1 begin
-            // tokens.css ships unlayered `a` element rules that beat
-            // Tailwind utilities — win with `!` (see AGENTS.md gotcha).
+            // @@S tpl-1 begin
+            // The theme's element defaults can beat Tailwind utilities
+            // on `a` — win with `!` (see the layered-base gotcha in the docs).
+            // @@S tpl-1 end
             quickAccessLink(),
             // @@V tpl-1 end
           )}

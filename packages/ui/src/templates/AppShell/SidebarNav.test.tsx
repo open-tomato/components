@@ -6,7 +6,7 @@ import { SidebarNav } from './SidebarNav';
 
 const items = [
   { id: 'a', label: 'Overview', icon: 'layout-dashboard' as const },
-  { id: 'b', label: 'Sessions', icon: 'terminal' as const },
+  { id: 'b', label: 'Reports', icon: 'terminal' as const },
 ];
 
 describe('SidebarNav', () => {
@@ -16,7 +16,7 @@ describe('SidebarNav', () => {
     });
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeTruthy();
     expect(screen.getAllByRole('button')).toHaveLength(2);
-    expect(screen.getByRole('button', { name: 'Sessions' }).getAttribute('aria-current')).toBe('page');
+    expect(screen.getByRole('button', { name: 'Reports' }).getAttribute('aria-current')).toBe('page');
     expect(screen.getByRole('button', { name: 'Overview' }).hasAttribute('aria-current')).toBe(false);
   });
 
@@ -25,7 +25,7 @@ describe('SidebarNav', () => {
     await act(async () => {
       render(<SidebarNav items={items} onNavigate={onNavigate} />);
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Sessions' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reports' }));
     expect(onNavigate).toHaveBeenCalledWith('b');
   });
 

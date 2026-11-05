@@ -82,10 +82,12 @@ export const appShellFooter: (props?: ClassProp) => string = cva([
   'text-xs text-fg3 [&_a]:text-fg3 [&_a:hover]:text-fg1',
 ]);
 
+// @@S tpl-1 begin
 /**
- * The sidebar's week-summary card (app-shell spec: Side Bar) — a
- * stub for now: status pill + tokens-over-limit progress underneath.
+ * The sidebar's quota card (app-shell spec: Side Bar) — a
+ * stub for now: status pill + used-over-limit progress underneath.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const weekSummaryCard: (props?: ClassProp) => string = cva([
 // @@T tpl-1 end
@@ -165,13 +167,17 @@ export const sidebarQuickAccess: (
 /** A quick-access external link's text override, merged last over navItem. */
 export const quickAccessLink: (props?: ClassProp) => string = cva('!text-fg2 !no-underline');
 
-/** The week-summary widget's outer inset around its card. */
+// @@S tpl-1 begin
+/** The quota widget's outer inset around its card. */
+// @@S tpl-1 end
 export const weekSummary: (props?: ClassProp) => string = cva('px-3 py-2');
 
 /** The card's first row: eyebrow left, status pill right. */
 export const weekSummaryHeader: (props?: ClassProp) => string = cva('flex items-center justify-between');
 
-/** The "this week" eyebrow. */
+// @@S tpl-1 begin
+/** The heading eyebrow. */
+// @@S tpl-1 end
 export const weekSummaryEyebrow: (props?: ClassProp) => string = cva(
   'font-mono text-[10px] uppercase tracking-[0.08em] text-fg3',
 );
@@ -179,7 +185,9 @@ export const weekSummaryEyebrow: (props?: ClassProp) => string = cva(
 /** The used-over-limit row, aligned on the text baseline. */
 export const weekSummaryFigures: (props?: ClassProp) => string = cva('flex items-baseline gap-1.5');
 
-/** The tokens-used figure. */
+// @@S tpl-1 begin
+/** The amount-used figure. */
+// @@S tpl-1 end
 export const weekSummaryUsed: (props?: ClassProp) => string = cva(
   'font-display text-[22px] font-bold tracking-[-0.01em] text-fg1',
 );
