@@ -18,6 +18,9 @@ import {
   appShellFooter,
   appShellMain,
   appShellSidebar,
+  // @@V tpl-1 begin
+  appShellToggle,
+  // @@V tpl-1 end
   appShellTopbar,
   type AppShellSidebarVariants,
 } from './AppShell.variants';
@@ -117,7 +120,9 @@ export const AppShellTopbar: ForwardRefExoticComponent<
     <header ref={ref} className={cn(appShellTopbar(), className)} {...props}>
       {onToggleSidebar != null && (
         <IconButton
-          className="-ml-1 shrink-0"
+          // @@V tpl-1 begin
+          className={appShellToggle()}
+          // @@V tpl-1 end
           icon={<Icon name="panel-left" size={18} />}
           label={sidebarCollapsed
             ? 'Expand sidebar'
