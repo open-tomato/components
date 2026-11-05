@@ -1,8 +1,10 @@
 import { forwardRef, useMemo, type SVGAttributes } from 'react';
 
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V ato-1 begin
+import { cn, type ChartTone } from '../../lib';
 
-import { sparkline, type SparklineVariants } from './Sparkline.variants';
+import { sparkline, sparklineTone, type SparklineVariants } from './Sparkline.variants';
+// @@V ato-1 end
 
 /** ViewBox geometry — the box is stretched, strokes stay non-scaling. */
 const VIEW_W = 100;
@@ -71,7 +73,9 @@ export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps
           : undefined}
         aria-label={label}
         aria-hidden={label == null || undefined}
-        className={cn(sparkline({ size }), chartTone({ tone }), className)}
+        // @@V ato-1 begin
+        className={cn(sparkline({ size }), sparklineTone({ tone }), className)}
+        // @@V ato-1 end
         {...props}
       >
         {fill && (
