@@ -13,8 +13,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *   demo's internal `rows`/`row.id`;
  * - `stickyHeader` is omitted — the demo destructures it but never reads it
  *   (the header is structurally outside the scroll region, always pinned);
- * - the demo hard-codes the totals footer ("N sessions" / token sum); the
+ * // @@S org-2 begin
+ * - the demo hard-codes the totals footer ("N items" / usage sum); the
  *   library generalizes it to a per-column `footer(data)` renderer;
+ * // @@S org-2 end
  * - `initialSort` mirrors the demo's seeded `{key:'updated', dir:'asc'}`.
  */
 

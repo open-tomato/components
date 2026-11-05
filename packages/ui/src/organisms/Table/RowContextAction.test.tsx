@@ -11,7 +11,7 @@ const setup = () => {
   const ui = (
     <RowContextAction
       defaultOpen
-      entityType="session"
+      entityType="item"
       entityName="auth-refactor"
       actions={[{ icon: 'pencil', title: 'Rename', onClick: onEdit }]}
       destructive={{ icon: 'trash-2', title: 'Delete', onClick: onDelete }}

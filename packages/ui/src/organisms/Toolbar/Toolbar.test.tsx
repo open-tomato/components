@@ -70,7 +70,9 @@ describe('Toolbar compound', () => {
 describe('SearchInput', () => {
   it('shows the default placeholder and no clear button when empty', () => {
     render(<SearchInput value="" onChange={() => {}} />);
-    expect(screen.getByPlaceholderText('Search sessions…')).toBeTruthy();
+    // @@S org-2 begin
+    expect(screen.getByPlaceholderText('Search…')).toBeTruthy();
+    // @@S org-2 end
     expect(screen.queryByRole('button', { name: 'Clear search' })).toBeNull();
   });
 

@@ -1,6 +1,8 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, mock } from 'bun:test';
 
+import { MenuItem } from '../../atoms/Menu';
+
 import { ProfileMenu } from './ProfileMenu';
 
 const USER = { name: 'Sam Lin', email: 'sam@example.com', role: 'owner' };
@@ -18,7 +20,7 @@ describe('ProfileMenu', () => {
     render(<ProfileMenu user={USER} defaultOpen />);
     expect(screen.getByText('sam@example.com')).toBeTruthy();
     expect(screen.getByText('owner')).toBeTruthy();
-    for (const name of ['My profile', 'Account settings', 'Switch workspace', 'Log out']) {
+    for (const name of ['My profile', 'Account settings', 'Log out']) {
       expect(screen.getByRole('menuitem', { name })).toBeTruthy();
     }
   });
@@ -26,13 +28,29 @@ describe('ProfileMenu', () => {
   it.each([
     ['My profile', 'onProfile'],
     ['Account settings', 'onAccountSettings'],
-    ['Switch workspace', 'onSwitchWorkspace'],
   ] as const)('fires the handler for %s', (name, prop) => {
     const handler = mock(() => {});
     render(<ProfileMenu user={USER} defaultOpen {...{ [prop]: handler }} />);
     fireEvent.click(screen.getByRole('menuitem', { name }));
     expect(handler).toHaveBeenCalledTimes(1);
   });
+
+  // @@S org-2 begin
+  it('renders the actions slot between the built-in items and Log out', () => {
+    const onSelect = mock(() => {});
+    render(
+      <ProfileMenu
+        user={USER}
+        defaultOpen
+        actions={<MenuItem onSelect={onSelect}>Help</MenuItem>}
+      />,
+    );
+    const names = screen.getAllByRole('menuitem').map((el) => el.textContent);
+    expect(names).toEqual(['My profile', 'Account settings', 'Help', 'Log out']);
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Help' }));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+  // @@S org-2 end
 
   it('confirms logout inline, cancel returns to the menu', () => {
     const onLogout = mock(() => {});
