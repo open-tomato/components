@@ -9,14 +9,18 @@ describe('ConfirmInline', () => {
     const onCancel = mock(() => {});
     render(
       <ConfirmInline
-        message="Delete the agent example-bot?"
+        // @@S mol-3 begin
+        message="Delete the item example-item?"
+        // @@S mol-3 end
         confirmLabel="Yes, delete"
         danger
         onConfirm={onConfirm}
         onCancel={onCancel}
       />,
     );
-    expect(screen.getByText('Delete the agent example-bot?')).toBeTruthy();
+    // @@S mol-3 begin
+    expect(screen.getByText('Delete the item example-item?')).toBeTruthy();
+    // @@S mol-3 end
     fireEvent.click(screen.getByRole('button', { name: 'Yes, delete' }));
     expect(onConfirm).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
