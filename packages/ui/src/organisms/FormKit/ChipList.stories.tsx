@@ -28,17 +28,23 @@ const meta: Meta<typeof ChipList> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** the tools-page spec "Call webhook on" — known system events. */
+// @@S org-1 begin
+/** Known system events for the "Call webhook on" field. */
+// @@S org-1 end
 const EVENTS: ChipOption[] = [
-  { value: 'session.started', label: 'session.started' },
-  { value: 'session.finished', label: 'session.finished' },
-  { value: 'session.failed', label: 'session.failed' },
-  { value: 'agent.created', label: 'agent.created' },
+  // @@S org-1 begin
+  { value: 'run.started', label: 'run.started' },
+  { value: 'run.finished', label: 'run.finished' },
+  { value: 'run.failed', label: 'run.failed' },
+  { value: 'profile.created', label: 'profile.created' },
+  // @@S org-1 end
   { value: 'task.moved', label: 'task.moved' },
   { value: 'budget.exceeded', label: 'budget.exceeded' },
 ];
 
-const MultiDemo = ({ initial = ['session.failed'] }: { initial?: string[] }) => {
+// @@S org-1 begin
+const MultiDemo = ({ initial = ['run.failed'] }: { initial?: string[] }) => {
+// @@S org-1 end
   const [picked, setPicked] = useState(initial);
   return (
     <div className="w-[380px]">
@@ -80,26 +86,40 @@ export const MultiKeyboard: Story = {
     const canvas = within(canvasElement);
     const input = canvas.getByRole('combobox');
     // Typing opens the list, first result preselected; Enter takes it.
-    await userEvent.type(input, 'session');
+    // @@S org-1 begin
+    await userEvent.type(input, 'run');
+    // @@S org-1 end
     await waitFor(() => expect(input).toHaveAttribute('aria-expanded', 'true'));
     const first = canvas.getAllByRole('option');
-    await expect(first[0]).toHaveTextContent('session.started');
+    // @@S org-1 begin
+    await expect(first[0]).toHaveTextContent('run.started');
+    // @@S org-1 end
     await expect(first[0]).toHaveAttribute('aria-selected', 'true');
     await userEvent.keyboard('{Enter}');
-    await expect(await canvas.findByText('session.started')).toBeVisible();
+    // @@S org-1 begin
+    await expect(await canvas.findByText('run.started')).toBeVisible();
+    // @@S org-1 end
     // The selected option is excluded from the next search; arrows move.
-    await userEvent.type(input, 'session');
+    // @@S org-1 begin
+    await userEvent.type(input, 'run');
+    // @@S org-1 end
     const next = canvas.getAllByRole('option');
-    await expect(next.map((o) => o.textContent)).not.toContain('session.started');
+    // @@S org-1 begin
+    await expect(next.map((o) => o.textContent)).not.toContain('run.started');
+    // @@S org-1 end
     await userEvent.keyboard('{ArrowDown}');
     await waitFor(() => expect(next[1]).toHaveAttribute('aria-selected', 'true'));
     await userEvent.keyboard('{Enter}');
-    await expect(await canvas.findByText('session.failed')).toBeVisible();
+    // @@S org-1 begin
+    await expect(await canvas.findByText('run.failed')).toBeVisible();
+    // @@S org-1 end
   },
 };
 
 const SingleDemo = () => {
-  const [picked, setPicked] = useState(['agent.created']);
+  // @@S org-1 begin
+  const [picked, setPicked] = useState(['profile.created']);
+  // @@S org-1 end
   return (
     <div className="w-[380px]">
       <FormField label="Trigger event" hint="Single mode — remove the chip to search again.">

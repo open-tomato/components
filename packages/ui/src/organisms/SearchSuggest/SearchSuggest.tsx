@@ -49,7 +49,9 @@ export type SearchSuggestionKind =
 export interface SearchSuggestion {
   kind: SearchSuggestionKind;
   label: string;
-  /** Mono context line under the label ("running · agent-7d2f"). */
+  // @@S org-1 begin
+  /** Mono context line under the label ("running · job-7d2f"). */
+  // @@S org-1 end
   sub?: string;
   /** Overrides the kind's default glyph. */
   icon?: IconName;
@@ -72,7 +74,9 @@ export interface SearchSuggestProps {
   className?: string;
 }
 
-/** Kind → default Lucide glyph (original SUGGESTIONS seed). */
+// @@S org-1 begin
+/** Kind → default Lucide glyph. */
+// @@S org-1 end
 const KIND_ICON: Record<SearchSuggestionKind, IconName> = {
   agent: 'bot',
   session: 'terminal',
@@ -83,10 +87,10 @@ const KIND_ICON: Record<SearchSuggestionKind, IconName> = {
 
 const VISIBLE_LIMIT = 5;
 
+// @@S org-1 begin
 /**
- * SearchSuggest (the original TopbarLive demo; app-shell spec: Top Bar):
- * lens-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
- * across five kinds (agent/session/task/tool/doc) each with its own
+ * SearchSuggest: search-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
+ * across five kinds (see `SearchSuggestionKind`) each with its own
  * accent. Keyboard-driven: ↑↓ move the active row, Enter opens it, and
  * Enter with no match falls through to `onSearch` — as does the explicit
  * "Search all" row.
@@ -95,12 +99,13 @@ const VISIBLE_LIMIT = 5;
  * shared internals. Both follow the same keyboard model (active-index
  * list, ↑↓/Enter, hand-rolled rows), but SearchSuggest is an inline
  * ARIA combobox — focus stays in the input, the panel anchors to it,
- * substring filtering (original behavior) — while CommandPalette is a modal
+ * substring filtering — while CommandPalette is a modal
  * Overlay running commands with fuzzy matching and focus capture.
  * Merging them would couple an input-anchored popup to a portal overlay
  * for no shared behavior win; what IS shared is reused directly (the
  * `paletteKbd` chip chrome for the ⌘K/↵ hints).
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const SearchSuggest: FC<SearchSuggestProps> = ({
 // @@T org-1 end
@@ -108,7 +113,9 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
   onSelect,
   onSearch,
   hotkey = true,
-  placeholder = 'Search sessions, agents, tools…',
+  // @@S org-1 begin
+  placeholder = 'Search…',
+  // @@S org-1 end
   defaultOpen = false,
   className,
 }: SearchSuggestProps) => {

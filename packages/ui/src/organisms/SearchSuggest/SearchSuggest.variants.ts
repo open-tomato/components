@@ -4,14 +4,14 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S org-1 begin
 /**
- * SearchSuggest — the topbar's ⌘K search box with an anchored suggestion
- * list. From the original TopbarLive screen SearchSuggest
- * (the original topbar screen "Search · suggest" card); app-shell spec: Top Bar.
+ * SearchSuggest — a ⌘K search box with an anchored suggestion list.
  *
- * Five suggestion kinds, each with its own accent (original kindColor map):
- * agent→primary, session→accent, task→gold, tool→info, doc→green.
+ * Five suggestion kinds, each with its own accent, in order: primary,
+ * accent, gold, info, green.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const searchSuggestBox: (props?: ({ open?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -41,7 +41,9 @@ export const searchSuggestPanel: (props?: import('class-variance-authority/types
   'rounded-lg border border-border-soft bg-surface-2 shadow-lg',
 ]);
 
-/** A suggestion row; active mirrors the original hover/keyboard sink. */
+// @@S org-1 begin
+/** A suggestion row; active marks the hovered or keyboard-selected row. */
+// @@S org-1 end
 // @@T org-1 begin
 export const searchSuggestRow: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -107,7 +109,9 @@ export const searchSuggestKindPill: (props?: ({ kind?: 'agent' | 'session' | 'ta
 /** The root wrapper — anchors the suggestion panel. */
 export const searchSuggestRoot: (props?: ClassProp | undefined) => string = cva('relative w-[340px]');
 
-/** The leading lens icon. */
+// @@S org-1 begin
+/** The leading search icon. */
+// @@S org-1 end
 export const searchSuggestLens: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
 
 /** The combobox input inside the box. */

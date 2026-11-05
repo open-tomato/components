@@ -18,20 +18,20 @@ import {
 } from './FormKit.variants';
 // @@V org-1 end
 
+// @@S org-1 begin
 /**
- * DecoratedToggle / DecoratedToggleList — generalized from the original design
- * ToolPicker (the original AgentEditor screen; spec:
- * "ToolPicker"): bordered rows of decoration +
+ * DecoratedToggle / DecoratedToggleList: bordered rows of decoration +
  * title/description + switch that tint accent when on, grouped under a
- * mono header carrying an x/y-on indicator. Not tied to the tool use
- * case — the tools-page spec reuses it for auto-start and skill toggles.
+ * mono header carrying an x/y-on indicator. Not tied to one use case:
+ * the same rows serve option pickers, auto-start flags and skill toggles.
  *
- * A11y note: the original row is a label wrapping a separate Switch (two
+ * A11y note: the common pattern is a label wrapping a separate Switch (two
  * click targets, double-fire risk). Here the ROW ITSELF is the switch
  * control (`role="switch"`); the Switch atom's track/thumb cvas render
  * decoratively inside it, so there is exactly one focusable control per
  * row and the whole box is its hit area.
  */
+// @@S org-1 end
 
 export interface DecoratedToggleProps {
   /** Leading decoration — icon, avatar… — vertically centered. */
