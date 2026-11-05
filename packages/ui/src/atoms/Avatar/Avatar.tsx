@@ -8,7 +8,9 @@ import {
 
 import { cn, initials } from '../../lib';
 
-import { avatar, avatarStatus, type AvatarVariants } from './Avatar.variants';
+// @@V ato-3 begin
+import { avatar, avatarRoot, avatarStatus, type AvatarVariants } from './Avatar.variants';
+// @@V ato-3 end
 
 export interface AvatarProps
   extends HTMLAttributes<HTMLSpanElement>,
@@ -28,7 +30,9 @@ export const Avatar: ForwardRefExoticComponent<
       ref={ref}
       role="img"
       aria-label={name}
-      className={cn('relative inline-flex shrink-0', className)}
+      // @@V ato-3 begin
+      className={cn(avatarRoot(), className)}
+      // @@V ato-3 end
       {...props}
     >
       <span className={avatar({ size, shape })}>{initials(name)}</span>

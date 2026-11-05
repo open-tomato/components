@@ -72,5 +72,10 @@ export const avatarStatus: (
   },
 );
 
+// @@V ato-3 begin
+/** The positioning wrapper the presence dot is placed against. */
+export const avatarRoot: (props?: ClassProp | undefined) => string = cva('relative inline-flex shrink-0');
+// @@V ato-3 end
+
 export type AvatarVariants = VariantProps<typeof avatar> &
   Pick<VariantProps<typeof avatarStatus>, 'status'>;

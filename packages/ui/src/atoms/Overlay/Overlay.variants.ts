@@ -42,5 +42,10 @@ export const overlay: (
   },
 });
 
+// @@V ato-3 begin
+/** The dialog panel slot: a positioning context with no focus ring. */
+export const overlayContent: (props?: ClassProp | undefined) => string = cva('relative outline-none');
+// @@V ato-3 end
+
 export type OverlayVariants = VariantProps<typeof overlay>;
 export type OverlayDismiss = 'both' | 'escape' | 'backdrop' | 'manual';

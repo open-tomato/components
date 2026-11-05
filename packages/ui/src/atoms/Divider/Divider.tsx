@@ -10,7 +10,9 @@ import {
 
 import { cn } from '../../lib';
 
-import { divider, dividerLabel, dividerRule } from './Divider.variants';
+// @@V ato-3 begin
+import { divider, dividerLabel, dividerPlain, dividerRule } from './Divider.variants';
+// @@V ato-3 end
 
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   /** Mono label rendered mid-rule; omit for a plain rule. */
@@ -28,7 +30,9 @@ export const Divider: ForwardRefExoticComponent<
       <div
         ref={ref}
         role="separator"
-        className={cn('h-px w-full bg-border-soft', className)}
+        // @@V ato-3 begin
+        className={cn(dividerPlain(), className)}
+        // @@V ato-3 end
         {...props}
       />
     )

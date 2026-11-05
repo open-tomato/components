@@ -11,7 +11,18 @@ import {
 
 import { cn } from '../../lib';
 
-import { field, fieldHelper, type FieldVariants } from './Field.variants';
+// @@V ato-3 begin
+import {
+  field,
+  fieldControl,
+  fieldHelper,
+  fieldIcon,
+  fieldIconPad,
+  fieldLabel,
+  fieldRoot,
+  type FieldVariants,
+} from './Field.variants';
+// @@V ato-3 end
 
 export interface FieldProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'disabled'>,
@@ -35,23 +46,25 @@ export const Field: ForwardRefExoticComponent<
     const inputId = id ?? autoId;
     return (
       <div
-        className={cn(
-          'flex flex-col gap-1.5',
-          state === 'disabled' && 'opacity-60',
-          className,
-        )}
+        // @@V ato-3 begin
+        className={cn(fieldRoot({ disabled: state === 'disabled' }), className)}
+        // @@V ato-3 end
       >
         {label != null && (
           <label
             htmlFor={inputId}
-            className="text-[12.5px] font-semibold text-fg1"
+            // @@V ato-3 begin
+            className={fieldLabel()}
+            // @@V ato-3 end
           >
             {label}
           </label>
         )}
-        <span className="relative flex items-center">
+        {/* @@V ato-3 begin */}
+        <span className={fieldControl()}>
           {icon != null && (
-            <span className="absolute left-[11px] text-fg3 pointer-events-none">
+            <span className={fieldIcon()}>
+              {/* @@V ato-3 end */}
               {icon}
             </span>
           )}
@@ -59,7 +72,9 @@ export const Field: ForwardRefExoticComponent<
             ref={ref}
             id={inputId}
             disabled={state === 'disabled'}
-            className={cn(field({ state, size }), icon != null && 'pl-8')}
+            // @@V ato-3 begin
+            className={cn(field({ state, size }), fieldIconPad({ icon: icon != null }))}
+            // @@V ato-3 end
             {...props}
           />
         </span>
