@@ -10,12 +10,14 @@ import { ThemeSwitcher, type ThemeName } from './ThemeSwitcher';
  * entirely when the user preference is "system" — the OS drives the
  * theme then.
  */
-const meta = {
+// @@T org-2 begin
+const meta: Meta<typeof ThemeSwitcher> = {
+// @@T org-2 end
   title: 'Organisms/ThemeSwitcher',
   component: ThemeSwitcher,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof ThemeSwitcher>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
