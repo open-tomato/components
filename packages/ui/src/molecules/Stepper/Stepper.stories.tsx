@@ -45,7 +45,9 @@ export const AuthFlow: Story = {
   args: {
     items: [
       { key: 'account', label: 'Account' },
-      { key: 'workspace', label: 'Workspace' },
+      // @@S mol-1 begin
+      { key: 'details', label: 'Details' },
+      // @@S mol-1 end
     ],
     index: 1,
     tone: 'accent',
