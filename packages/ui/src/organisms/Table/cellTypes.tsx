@@ -25,22 +25,23 @@ import { RowContextAction, type RowContextActionProps } from './RowContextAction
 import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
 // @@V org-2 end
 
+// @@S mol-3 begin
 /**
- * Self-describing column types (spec: "Known
- * Entities" — "a self defining table grid can infer the component to use
- * if the data type for a column is of `{entity}-{variant}`"). Target
- * shape: the JSON table configs in the sessions-page spec / the roadmap-page spec
- * (`session-cell`, `agent-cell`, `tokens-progress`, `spend-over-time`,
- * `user-inline`, `task-cell`, `badge`, `text`, `relative-time`,
- * `context-menu`, …).
+ * Self-describing column types: a self-defining table grid can infer the
+ * component to use if the data type for a column is of
+ * `{entity}-{variant}`. Target shape: JSON table configs naming types such
+ * as (`entity-cell`, `entity-inline`, `entity-title`, `tokens-progress`,
+ * `spend-over-time`, `badge`, `text`, `relative-time`, `context-menu`, …).
  *
  * A lightweight lookup, deliberately: one typed data contract per type
  * (`CellTypeDataMap`) and one render function per type. A config-driven
  * table resolves a column's `type` string with `isKnownCellType` and
  * renders each row through `renderCellContent(type, data)` from its
  * column `cell` — the registry never wraps or replaces the Table's own
- * column machinery.
+ * column machinery. The `entity-*` types render `Entity`; the kinds they
+ * can name come from the `EntityKindsProvider` the implementor mounts.
  */
+// @@S mol-3 end
 
 export interface CellTypeDataMap {
   /* known entities */
