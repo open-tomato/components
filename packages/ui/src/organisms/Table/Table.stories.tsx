@@ -230,7 +230,9 @@ const CONFIG_COLUMNS: Column<SessionRow>[] = [
     key: 'tokens',
     header: 'Tokens',
     width: 130,
-    cell: (r) => renderCellContent('tokens-progress', {
+    // @@S mol-1 begin
+    cell: (r) => renderCellContent('quota-progress', {
+    // @@S mol-1 end
       used: r.tokens,
       quota: r.quota,
       locale: 'en-US',
@@ -240,8 +242,12 @@ const CONFIG_COLUMNS: Column<SessionRow>[] = [
     key: 'spend',
     header: 'Spend · Time',
     width: 148,
-    cell: (r) => renderCellContent('spend-over-time', {
-      cost: r.cost,
+    // @@S mol-1 begin
+    cell: (r) => renderCellContent('amount-over-time', {
+    // @@S mol-1 end
+      // @@S mol-1 begin
+      amount: r.cost,
+      // @@S mol-1 end
       seconds: r.seconds,
       date: r.date,
       now: REF_NOW,
