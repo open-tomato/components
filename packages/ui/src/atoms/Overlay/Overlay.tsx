@@ -6,11 +6,14 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import { cn } from '../../lib';
 
+// @@V ato-3 begin
 import {
   overlay,
+  overlayContent,
   type OverlayDismiss,
   type OverlayVariants,
 } from './Overlay.variants';
+// @@V ato-3 end
 
 export interface OverlayProps extends OverlayVariants {
   open: boolean;
@@ -63,7 +66,9 @@ export const Overlay: FC<OverlayProps> = ({
         <div className={cn(overlay({ position, backdrop }), className)}>
           <Dialog.Content
             aria-label={label}
-            className="relative outline-none"
+            // @@V ato-3 begin
+            className={overlayContent()}
+            // @@V ato-3 end
             onEscapeKeyDown={(e) => {
               if (!canEscape) e.preventDefault();
             }}
