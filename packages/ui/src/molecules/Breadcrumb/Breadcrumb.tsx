@@ -34,7 +34,10 @@ const Chevron = () => (
   </svg>
 );
 
-export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
+// @@T mol-2 begin
+export const Breadcrumb: import('react').ForwardRefExoticComponent<BreadcrumbProps & import('react').RefAttributes<HTMLElement>> = forwardRef<
+// @@T mol-2 end
+  HTMLElement, BreadcrumbProps>(
   ({ className, items, index, onChange, ...props }, ref) => (
     <nav
       ref={ref}

@@ -20,7 +20,9 @@ export const ToneIcon = ({
 }: {
   tone: FeedbackTone;
   size?: number;
-}) => (
+// @@T mol-2 begin
+}): import('react').JSX.Element => (
+// @@T mol-2 end
   <svg
     width={size}
     height={size}

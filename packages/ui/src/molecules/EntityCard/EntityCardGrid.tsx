@@ -20,7 +20,10 @@ export interface EntityCardGridProps
  * carries a grid-template class. See `EntityCard.variants.ts` for why
  * `Grid` could not answer this.
  */
-export const EntityCardGrid = forwardRef<HTMLDivElement, EntityCardGridProps>(
+// @@T mol-2 begin
+export const EntityCardGrid: import('react').ForwardRefExoticComponent<EntityCardGridProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
+// @@T mol-2 end
+  HTMLDivElement, EntityCardGridProps>(
   ({ className, min, gap, ...props }, ref) => (
     <div
       ref={ref}

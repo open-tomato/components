@@ -9,13 +9,15 @@ const PATH = [
   { key: 's', label: 'Session #4128' },
 ];
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof Breadcrumb> = {
+// @@T mol-2 end
   title: 'Molecules/Breadcrumb',
   component: Breadcrumb,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   args: { items: PATH, index: 3 },
-} satisfies Meta<typeof Breadcrumb>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

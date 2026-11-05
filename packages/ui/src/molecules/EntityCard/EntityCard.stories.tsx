@@ -49,12 +49,14 @@ const OTHER_ROWS: readonly TaxonomyRow[] = [
   { id: 4104, name: 'Benchmarks and evaluations', terms: 34, reviewed: '2026-02-02' },
 ];
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof EntityCard> = {
+// @@T mol-2 end
   title: 'Molecules/EntityCard',
   component: EntityCard,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
-} satisfies Meta<typeof EntityCard>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
