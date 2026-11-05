@@ -8,7 +8,18 @@ import { cn, formatNumber } from '../../lib';
 // cross-tree barrel inits (see the built-storybook lazy-init chunking hazard).
 import { Progress } from '../../molecules/Progress/Progress';
 
-import { weekSummaryCard } from './AppShell.variants';
+// @@V tpl-1 begin
+import {
+  weekSummary,
+  weekSummaryCard,
+  weekSummaryEyebrow,
+  weekSummaryFigures,
+  weekSummaryHeader,
+  weekSummaryLimit,
+  weekSummaryProgress,
+  weekSummaryUsed,
+} from './AppShell.variants';
+// @@V tpl-1 end
 
 export interface SidebarWeekSummaryProps {
   /** Drives the pill's copy and tone. */
@@ -45,10 +56,14 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
     ? (used / limit) * 100
     : 0;
   return (
-    <div className={cn('px-3 py-2', className)}>
+    // @@V tpl-1 begin
+    <div className={cn(weekSummary(), className)}>
       <div className={weekSummaryCard()}>
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-fg3">
+        {/* @@V tpl-1 end */}
+        {/* @@V tpl-1 begin */}
+        <div className={weekSummaryHeader()}>
+          <span className={weekSummaryEyebrow()}>
+            {/* @@V tpl-1 end */}
             this week
           </span>
           <Badge
@@ -61,11 +76,13 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
             {status}
           </Badge>
         </div>
-        <div className="flex items-baseline gap-1.5">
-          <span className="font-display text-[22px] font-bold tracking-[-0.01em] text-fg1">
+        {/* @@V tpl-1 begin */}
+        <div className={weekSummaryFigures()}>
+          <span className={weekSummaryUsed()}>
             {formatNumber(used)}
           </span>
-          <span className="text-xs text-fg3">
+          <span className={weekSummaryLimit()}>
+            {/* @@V tpl-1 end */}
             / {formatNumber(limit)} {unit}
           </span>
         </div>
@@ -74,7 +91,9 @@ export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
           tone={status === 'healthy'
             ? 'accent'
             : 'danger'}
-          className="h-1"
+          // @@V tpl-1 begin
+          className={weekSummaryProgress()}
+          // @@V tpl-1 end
         />
       </div>
     </div>

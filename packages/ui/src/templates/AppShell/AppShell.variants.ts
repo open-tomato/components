@@ -122,5 +122,74 @@ export const navItem: (
   },
 );
 
+// @@V tpl-1 begin
+/** The topbar's sidebar toggle — pulled flush to the band's left padding. */
+export const appShellToggle: (props?: ClassProp) => string = cva('-ml-1 shrink-0');
+
+/** A nav entry's leading icon slot — never shrinks under a long label. */
+export const navItemIcon: (props?: ClassProp) => string = cva('shrink-0');
+
+/** A nav entry's label — one line, ellipsized. */
+export const navItemLabel: (props?: ClassProp) => string = cva('truncate');
+
+/** The data-driven nav column — the collapsed rail tightens its inset. */
+export const sidebarNav: (
+  props?: {
+    collapsed?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva('flex flex-col gap-0.5 pt-1', {
+  variants: {
+    collapsed: {
+      false: 'px-3',
+      true: 'px-2',
+    },
+  },
+  defaultVariants: { collapsed: false },
+});
+
+/** The bordered quick-access band at the rail's foot. */
+export const sidebarQuickAccess: (
+  props?: {
+    collapsed?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva('flex flex-col gap-0.5 border-t border-border-soft', {
+  variants: {
+    collapsed: {
+      false: 'px-3 pb-3 pt-2',
+      true: 'p-2',
+    },
+  },
+  defaultVariants: { collapsed: false },
+});
+
+/** A quick-access external link's text override, merged last over navItem. */
+export const quickAccessLink: (props?: ClassProp) => string = cva('!text-fg2 !no-underline');
+
+/** The week-summary widget's outer inset around its card. */
+export const weekSummary: (props?: ClassProp) => string = cva('px-3 py-2');
+
+/** The card's first row: eyebrow left, status pill right. */
+export const weekSummaryHeader: (props?: ClassProp) => string = cva('flex items-center justify-between');
+
+/** The "this week" eyebrow. */
+export const weekSummaryEyebrow: (props?: ClassProp) => string = cva(
+  'font-mono text-[10px] uppercase tracking-[0.08em] text-fg3',
+);
+
+/** The used-over-limit row, aligned on the text baseline. */
+export const weekSummaryFigures: (props?: ClassProp) => string = cva('flex items-baseline gap-1.5');
+
+/** The tokens-used figure. */
+export const weekSummaryUsed: (props?: ClassProp) => string = cva(
+  'font-display text-[22px] font-bold tracking-[-0.01em] text-fg1',
+);
+
+/** The "/ limit unit" trailer. */
+export const weekSummaryLimit: (props?: ClassProp) => string = cva('text-xs text-fg3');
+
+/** The thin progress bar under the figures. */
+export const weekSummaryProgress: (props?: ClassProp) => string = cva('h-1');
+// @@V tpl-1 end
+
 export type AppShellSidebarVariants = VariantProps<typeof appShellSidebar>;
 export type NavItemVariants = VariantProps<typeof navItem>;

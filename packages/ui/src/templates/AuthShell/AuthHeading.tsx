@@ -2,6 +2,10 @@
 import type { FC, ReactNode } from 'react';
 // @@T tpl-1 end
 
+// @@V tpl-1 begin
+import { authHeadingSub, authHeadingTitle } from './AuthShell.variants';
+// @@V tpl-1 end
+
 /** Display title + supporting line — the first block inside every auth card. */
 export interface AuthHeadingProps {
   title: ReactNode;
@@ -12,12 +16,14 @@ export interface AuthHeadingProps {
 export const AuthHeading: FC<AuthHeadingProps> = ({ title, sub }: AuthHeadingProps) => (
 // @@T tpl-1 end
   <div>
-    <h2 className="!m-0 font-display !text-[26px] font-bold !tracking-[-0.02em] !leading-[normal] text-balance text-fg1">
+    {/* @@V tpl-1 begin */}
+    <h2 className={authHeadingTitle()}>
       {title}
     </h2>
     {sub != null && (
-      <div className="mt-1.5 text-sm leading-normal text-pretty text-fg2">{sub}</div>
+      <div className={authHeadingSub()}>{sub}</div>
     )}
+    {/* @@V tpl-1 end */}
   </div>
 );
 
