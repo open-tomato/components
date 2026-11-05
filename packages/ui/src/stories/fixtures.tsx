@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+// @@T tpl-1 begin
+import type { JSX, ReactNode } from 'react';
+// @@T tpl-1 end
 
 import { cn } from '../lib';
 
@@ -11,7 +13,9 @@ import { cn } from '../lib';
  */
 
 /** The `Ph` placeholder pill. Size/color via className overrides. */
-export const Ph = ({ className }: { className?: string }) => (
+// @@T tpl-1 begin
+export const Ph = ({ className }: { className?: string }): JSX.Element => (
+// @@T tpl-1 end
   <span
     className={cn(
       'block h-[12px] rounded-full bg-border-strong opacity-50',
@@ -21,7 +25,9 @@ export const Ph = ({ className }: { className?: string }) => (
 );
 
 /** The header row + text rows rendered inside Shell demos. */
-export const ShellFiller = () => (
+// @@T tpl-1 begin
+export const ShellFiller = (): JSX.Element => (
+// @@T tpl-1 end
   <span className="flex flex-col gap-3.5">
     <span className="flex items-center gap-2.5">
       <Ph className="w-[26px] h-[26px] rounded-[8px] bg-primary opacity-90" />
@@ -34,7 +40,9 @@ export const ShellFiller = () => (
 );
 
 /** The text-block rows rendered inside Card demos. */
-export const CardFiller = () => (
+// @@T tpl-1 begin
+export const CardFiller = (): JSX.Element => (
+// @@T tpl-1 end
   <span className="flex flex-col gap-2">
     <Ph className="w-[70%] h-[12px] bg-fg2" />
     <Ph className="w-full h-[9px]" />

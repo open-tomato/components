@@ -1,3 +1,6 @@
+// @@T tpl-1 begin
+import type { JSX } from 'react';
+// @@T tpl-1 end
 /**
  * Story fixture — a deterministic "QR-ish" 25×25 pattern that LOOKS like a
  * QR code without claiming to be one (seeded LCG, no Math.random, stable
@@ -36,7 +39,9 @@ const Finder = ({ gx, gy, cell }: { gx: number; gy: number; cell: number }) => (
   </g>
 );
 
-export const FakeQrCode = ({ size = 172 }: { size?: number }) => {
+// @@T tpl-1 begin
+export const FakeQrCode = ({ size = 172 }: { size?: number }): JSX.Element => {
+// @@T tpl-1 end
   const cell = size / N;
   return (
     <div className="rounded-md border border-border-soft bg-surface-2 p-2 shadow-xs">

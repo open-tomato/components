@@ -1,3 +1,5 @@
+import type { ClassProp } from 'class-variance-authority/types';
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -11,7 +13,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `neutral`/`muted` map to fg2/fg3 (char-200 / warm-500 in light) rather
  * than the original literals so dark mode stays legible.
  */
-export const chartTone = cva('', {
+// @@T tpl-1 begin
+export const chartTone: (
+  props?: {
+    tone?: 'accent' | 'primary' | 'gold' | 'info' | 'success' | 'danger' | 'neutral' | 'muted' | null | undefined;
+  } & ClassProp,
+) => string = cva('', {
+// @@T tpl-1 end
   variants: {
     tone: {
       accent: 'text-accent',

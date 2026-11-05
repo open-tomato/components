@@ -1,4 +1,7 @@
+// @@T tpl-1 begin
 import type { WorkspaceMarkProps } from '../../atoms/WorkspaceMark';
+import type { FC } from 'react';
+// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import {
@@ -49,7 +52,9 @@ export interface WorkspaceSwitcherProps {
  * single-workspace users (the spec's default), and scope-free — no topbar
  * dependency, so it can move to the sidebar later.
  */
-export const WorkspaceSwitcher = ({
+// @@T tpl-1 begin
+export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
+// @@T tpl-1 end
   workspaces,
   activeId,
   onSwitch,

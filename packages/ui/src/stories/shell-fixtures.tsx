@@ -1,3 +1,7 @@
+// @@T tpl-1 begin
+import type { JSX } from 'react';
+
+// @@T tpl-1 end
 import { useState } from 'react';
 
 import { TomatoMark } from '../internal/TomatoMark';
@@ -83,7 +87,9 @@ export const SidebarDemo = ({
   active: string;
   onNavigate: (id: string) => void;
   collapsed?: boolean;
-}) => (
+// @@T tpl-1 begin
+}): JSX.Element => (
+// @@T tpl-1 end
   <>
     <div
       className={cn(
@@ -132,7 +138,9 @@ export const SidebarDemo = ({
 
 /* ---- topbar -------------------------------------------------------------- */
 
-export const TopbarDemo = ({ title }: { title: string }) => {
+// @@T tpl-1 begin
+export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
+// @@T tpl-1 end
   const [theme, setTheme] = useState<ThemeName>('light');
   return (
     <>
@@ -189,7 +197,9 @@ export const LiveShell = ({
   page?: string;
   collapsed?: boolean;
   withFooter?: boolean;
-}) => {
+// @@T tpl-1 begin
+}): JSX.Element => {
+// @@T tpl-1 end
   const [page, setPage] = useState(initialPage);
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   return (
