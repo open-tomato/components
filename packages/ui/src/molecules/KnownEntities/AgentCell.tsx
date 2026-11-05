@@ -3,14 +3,18 @@ import type { IconName } from '../../atoms/Icon';
 import { forwardRef, type HTMLAttributes } from 'react';
 
 import { Icon } from '../../atoms/Icon';
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V mol-3 begin
+import { cn, type ChartTone } from '../../lib';
 
 import {
   entityCell,
+  entityCellStack,
   entityTile,
   entityTitleName,
   entityTitleSub,
+  entityTone,
 } from './KnownEntities.variants';
+// @@V mol-3 end
 
 export interface AgentCellProps extends HTMLAttributes<HTMLDivElement> {
   /** Agent display name — bold top line. */
@@ -36,10 +40,12 @@ export const AgentCell: import('react').ForwardRefExoticComponent<
 // @@T mol-3 end
   ({ className, name, model, tone = 'primary', icon = 'bot', ...props }, ref) => (
     <div ref={ref} className={cn(entityCell(), className)} {...props}>
-      <span className={cn(entityTile({ size: 'sm' }), chartTone({ tone }))}>
+      {/* @@V mol-3 begin */}
+      <span className={cn(entityTile({ size: 'sm' }), entityTone({ tone }))}>
         <Icon name={icon} size={13} />
       </span>
-      <div className="flex min-w-0 flex-col gap-[3px]">
+      <div className={entityCellStack()}>
+        {/* @@V mol-3 end */}
         <span className={entityTitleName()}>{name}</span>
         <span className={entityTitleSub()}>{model}</span>
       </div>

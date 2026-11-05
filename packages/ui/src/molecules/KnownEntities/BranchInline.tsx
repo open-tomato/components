@@ -3,7 +3,9 @@ import { forwardRef, type HTMLAttributes } from 'react';
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
 
-import { branchInline } from './KnownEntities.variants';
+// @@V mol-3 begin
+import { branchInline, branchInlineName } from './KnownEntities.variants';
+// @@V mol-3 end
 
 export interface BranchInlineProps extends HTMLAttributes<HTMLSpanElement> {
   /** Branch name. */
@@ -22,7 +24,9 @@ export const BranchInline: import('react').ForwardRefExoticComponent<
   ({ className, name, ...props }, ref) => (
     <span ref={ref} className={cn(branchInline(), className)} {...props}>
       <Icon name="git-branch" size={10} />
-      <span className="min-w-0 truncate">{name}</span>
+      {/* @@V mol-3 begin */}
+      <span className={branchInlineName()}>{name}</span>
+      {/* @@V mol-3 end */}
     </span>
   ),
 );

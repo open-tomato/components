@@ -3,11 +3,15 @@ import type { IconName } from '../../atoms/Icon';
 import { forwardRef, type HTMLAttributes } from 'react';
 
 import { Icon } from '../../atoms/Icon';
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V mol-3 begin
+import { cn, type ChartTone } from '../../lib';
 
 import {
   entityCell,
+  entityTone,
+  modelCellDot,
   modelCellName,
+  // @@V mol-3 end
   modelFooter,
   modelFooterName,
 } from './KnownEntities.variants';
@@ -34,12 +38,14 @@ export const ModelCell: import('react').ForwardRefExoticComponent<
 // @@T mol-3 end
   ({ className, name, tone = 'accent', icon, ...props }, ref) => (
     <span ref={ref} className={cn(entityCell(), className)} {...props}>
-      <span className={chartTone({ tone })}>
+      {/* @@V mol-3 begin */}
+      <span className={entityTone({ tone })}>
         {icon != null
           ? <Icon name={icon} size={12} />
           : (
             <span
-              className="block size-2 rounded-full bg-current"
+              // @@V mol-3 end
+              className={modelCellDot()}
               aria-hidden
             />
           )}
