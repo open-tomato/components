@@ -30,7 +30,9 @@ export const SearchInput: ForwardRefExoticComponent<SearchInputProps & RefAttrib
 // @@T org-2 end
 
   (
-    { className, value, onChange, placeholder = 'Search sessions…', ...props },
+    // @@S org-2 begin
+    { className, value, onChange, placeholder = 'Search…', ...props },
+    // @@S org-2 end
     ref,
   ) => (
     <div
