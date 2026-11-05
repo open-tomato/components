@@ -26,3 +26,11 @@ export const passwordStrengthSegment:
 export type PasswordStrengthSegmentVariants = VariantProps<
   typeof passwordStrengthSegment
 >;
+
+// @@V ato-2 begin
+/** The meter row: segments plus the label. */
+export const passwordStrength: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex items-center gap-1.5');
+
+/** The mono score label after the segments. */
+export const passwordStrengthLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-10 font-mono text-[11px] text-fg3');
+// @@V ato-2 end

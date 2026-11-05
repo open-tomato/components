@@ -15,3 +15,8 @@ export const oauthButton:
 ]);
 
 export type OAuthButtonVariants = VariantProps<typeof oauthButton>;
+
+// @@V ato-2 begin
+/** Provider glyph: never shrinks inside the button row. */
+export const providerGlyph: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0');
+// @@V ato-2 end
