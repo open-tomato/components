@@ -1,4 +1,12 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type ReactNode,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+} from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 
@@ -9,7 +17,12 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   label?: ReactNode;
 }
 
-export const Divider = forwardRef<HTMLDivElement, DividerProps>(
+// @@T ato-3 begin
+export const Divider: ForwardRefExoticComponent<
+  DividerProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLDivElement, DividerProps>(
   ({ className, label, ...props }, ref) => label == null
     ? (
       <div

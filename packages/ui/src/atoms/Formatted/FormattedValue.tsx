@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ReactElement } from 'react';
+// @@T ato-3 end
+
 import { FormattedCurrency, type FormattedCurrencyProps } from './FormattedCurrency';
 import { FormattedDate, type FormattedDateProps } from './FormattedDate';
 import { FormattedDuration, type FormattedDurationProps } from './FormattedDuration';
@@ -27,7 +31,13 @@ const omitType = <T extends { type: string }>(props: T): Omit<T, 'type'> => {
  * specific component — this dispatcher stays ref-less on purpose because
  * the underlying element differs per type (`span` vs `time`).
  */
-export const FormattedValue = (props: FormattedValueProps) => {
+// @@T ato-3 begin
+export const FormattedValue: {
+  (props: FormattedValueProps): ReactElement;
+  displayName: string;
+} = (props: FormattedValueProps): ReactElement => {
+// @@T ato-3 end
+
   switch (props.type) {
     case 'number':
       return <HumanReadableValue {...omitType(props)} />;

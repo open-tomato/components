@@ -1,9 +1,13 @@
+// @@T ato-3 begin
 import {
   forwardRef,
   useId,
   type InputHTMLAttributes,
   type ReactNode,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
 } from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 
@@ -20,7 +24,12 @@ export interface FieldProps
   icon?: ReactNode;
 }
 
-export const Field = forwardRef<HTMLInputElement, FieldProps>(
+// @@T ato-3 begin
+export const Field: ForwardRefExoticComponent<
+  FieldProps & RefAttributes<HTMLInputElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLInputElement, FieldProps>(
   ({ className, state, size, label, helper, icon, id, ...props }, ref) => {
     const autoId = useId();
     const inputId = id ?? autoId;

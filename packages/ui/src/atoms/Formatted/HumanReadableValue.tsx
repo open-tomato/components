@@ -1,4 +1,11 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+} from 'react';
+// @@T ato-3 end
 
 import { cn, formatNumber } from '../../lib';
 
@@ -26,7 +33,12 @@ export interface HumanReadableValueProps
  * unit suffix (spec: "Formatted / Human readable
  * values").
  */
-export const HumanReadableValue = forwardRef<
+// @@T ato-3 begin
+export const HumanReadableValue: ForwardRefExoticComponent<
+  HumanReadableValueProps & RefAttributes<HTMLSpanElement>
+> = forwardRef<
+// @@T ato-3 end
+  
   HTMLSpanElement,
   HumanReadableValueProps
 >(
