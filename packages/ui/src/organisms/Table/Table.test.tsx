@@ -22,8 +22,10 @@ const COLUMNS: Column<Row>[] = [
 
 const getRowId = (r: Row): string => r.id;
 
-const bodyNames = (): string[] =>
-  screen.getAllByRole('row').slice(1).map((r) => within(r).getAllByRole('cell')[0]?.textContent ?? '');
+const bodyNames = (): string[] => screen
+  .getAllByRole('row')
+  .slice(1)
+  .map((r) => within(r).getAllByRole('cell')[0]?.textContent ?? '');
 
 afterEach(cleanup);
 
