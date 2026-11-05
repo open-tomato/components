@@ -5,6 +5,9 @@ import {
   useId,
   useRef,
   useState,
+  // @@T org-1 begin
+  type FC,
+  // @@T org-1 end
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
 
@@ -85,7 +88,9 @@ const VISIBLE_LIMIT = 5;
  * for no shared behavior win; what IS shared is reused directly (the
  * `paletteKbd` chip chrome for the ⌘K/↵ hints).
  */
-export const SearchSuggest = ({
+// @@T org-1 begin
+export const SearchSuggest: FC<SearchSuggestProps> = ({
+// @@T org-1 end
   suggestions,
   onSelect,
   onSearch,

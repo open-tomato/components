@@ -1,3 +1,7 @@
+// @@T org-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T org-1 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -19,7 +23,9 @@ const CONTROL_FOCUS = [
   'focus-visible:shadow-[0_0_0_2px_var(--bg),0_0_0_4px_color-mix(in_oklab,var(--leaf)_55%,transparent)]',
 ];
 
-export const textInput = cva(
+// @@T org-1 begin
+export const textInput: (props?: ({ invalid?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'h-[42px] w-full rounded-md bg-surface-1 border px-[13px]',
     'font-body text-[14.5px] text-fg1 placeholder:text-fg3',
@@ -36,7 +42,9 @@ export const textInput = cva(
   },
 );
 
-export const textarea = cva(
+// @@T org-1 begin
+export const textarea: (props?: ({ invalid?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'w-full rounded-md bg-surface-1 border px-[13px] py-[11px] resize-y',
     'font-body text-[14.5px] leading-normal text-fg1 placeholder:text-fg3',
@@ -54,7 +62,9 @@ export const textarea = cva(
 );
 
 /** The 19px checkbox square. */
-export const checkboxBox = cva(
+// @@T org-1 begin
+export const checkboxBox: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'mt-px inline-flex size-[19px] shrink-0 items-center justify-center',
     'rounded-[5px] border-[1.5px] transition-colors',
@@ -71,7 +81,9 @@ export const checkboxBox = cva(
 );
 
 /** Grid the CheckGroup lays its options into. */
-export const checkGroup = cva('grid gap-2.5', {
+// @@T org-1 begin
+export const checkGroup: (props?: ({ columns?: 1 | 2 | null | undefined } & ClassProp) | undefined) => string = cva('grid gap-2.5', {
+// @@T org-1 end
   variants: {
     columns: {
       1: 'grid-cols-1',
@@ -82,7 +94,9 @@ export const checkGroup = cva('grid gap-2.5', {
 });
 
 /** A radio option row — a bordered card that tints when selected. */
-export const radioOption = cva(
+// @@T org-1 begin
+export const radioOption: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex w-full items-center gap-[11px] rounded-md px-[13px] py-[11px]',
     'text-left cursor-pointer border',
@@ -99,7 +113,9 @@ export const radioOption = cva(
 );
 
 /** The 18px radio circle. */
-export const radioCircle = cva(
+// @@T org-1 begin
+export const radioCircle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'inline-flex size-[18px] shrink-0 items-center justify-center',
     'rounded-full border-2',
@@ -116,7 +132,9 @@ export const radioCircle = cva(
 );
 
 /** The range input (.otx-range) — track fill driven by --pct. */
-export const sliderInput = cva([
+// @@T org-1 begin
+export const sliderInput: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'h-1.5 flex-1 cursor-pointer appearance-none rounded-full outline-none',
   'border border-border-soft',
   'bg-[linear-gradient(to_right,var(--primary)_var(--pct,50%),var(--surface-sunk)_var(--pct,50%))]',
@@ -141,7 +159,9 @@ export const sliderInput = cva([
 ]);
 
 /** The landed-file chip FileDrop swaps to once a file is set. */
-export const fileChip = cva([
+// @@T org-1 begin
+export const fileChip: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'flex items-center gap-[11px] rounded-md px-[13px] py-[11px]',
   'bg-surface-1 border border-border-soft',
 ]);
@@ -155,7 +175,9 @@ export const fileChip = cva([
  * Original uses the accent scale for selection (vs the primary-toned
  * RadioGroup above) — kept as rendered truth of the source screens.
  */
-export const verboseOption = cva(
+// @@T org-1 begin
+export const verboseOption: (props?: ({ selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex w-full items-start gap-2.5 rounded-md border px-3 py-2.5',
     'text-left cursor-pointer transition-colors',
@@ -173,7 +195,9 @@ export const verboseOption = cva(
 );
 
 /** VerboseOption's leading control glyph (16px, accent when selected). */
-export const verboseControl = cva(
+// @@T org-1 begin
+export const verboseControl: (props?: ({ mode?: 'checkbox' | 'radio' | null | undefined; selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'relative mt-0.5 inline-flex size-4 shrink-0 items-center',
     'justify-center border-2',
@@ -194,7 +218,9 @@ export const verboseControl = cva(
 );
 
 /** The mono capability pill on a VerboseOption ("web", "code", …). */
-export const verboseCap = cva([
+// @@T org-1 begin
+export const verboseCap: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'rounded-full border border-border-soft bg-surface-sunk',
   'px-[7px] py-px font-mono text-[10px] text-fg3',
 ]);
@@ -205,7 +231,9 @@ export const verboseCap = cva([
  * switch) that tints accent when on. The ROW is the switch control; the
  * Switch atom's track/thumb cvas render decoratively inside it.
  */
-export const decoratedToggle = cva(
+// @@T org-1 begin
+export const decoratedToggle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex w-full items-center gap-3 rounded-md border px-3 py-2',
     'text-left cursor-pointer transition-colors',
@@ -223,7 +251,9 @@ export const decoratedToggle = cva(
 );
 
 /** DecoratedToggleList's group header (mono label + x/y-on indicator). */
-export const decoratedToggleHeader = cva([
+// @@T org-1 begin
+export const decoratedToggleHeader: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'mb-1.5 flex items-center gap-2 font-mono text-[10px]',
   'uppercase tracking-[0.1em] text-fg3',
 ]);
@@ -233,7 +263,9 @@ export const decoratedToggleHeader = cva([
  * selected chips render IN the container; in multi mode the input stays
  * below them, in single mode the chip takes over until removed.
  */
-export const chipListBox = cva([
+// @@T org-1 begin
+export const chipListBox: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'flex w-full flex-col gap-2 rounded-md border border-border-strong',
   'bg-surface-1 px-[13px] py-[9px]',
   'focus-within:border-border-focus',
@@ -241,7 +273,9 @@ export const chipListBox = cva([
 ]);
 
 /** A ChipList suggestion row. */
-export const chipListOption = cva(
+// @@T org-1 begin
+export const chipListOption: (props?: ({ active?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex w-full cursor-pointer items-center gap-2.5 rounded-sm',
     'border-none px-2.5 py-2 text-left text-[13px] text-fg1',
@@ -258,7 +292,9 @@ export const chipListOption = cva(
 );
 
 /** The anchored ChipList suggestion panel. */
-export const chipListPanel = cva([
+// @@T org-1 begin
+export const chipListPanel: (props?: ClassProp | undefined) => string = cva([
+// @@T org-1 end
   'absolute inset-x-0 top-[calc(100%+6px)] z-popover overflow-hidden',
   'rounded-md border border-border-soft bg-surface-1 p-1 shadow-lg',
 ]);
@@ -268,7 +304,9 @@ export const chipListPanel = cva([
  * grid (original design AvatarPicker, the original AgentEditor demo). Tones cover the original
  * AVATAR_COLORS palette.
  */
-export const avatarPreview = cva(
+// @@T org-1 begin
+export const avatarPreview: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex size-[60px] items-center justify-center rounded-md',
     'font-display text-[28px] font-extrabold text-cream-50',
@@ -289,7 +327,9 @@ export const avatarPreview = cva(
 );
 
 /** One color swatch in the AvatarSelector grid. */
-export const avatarSwatch = cva(
+// @@T org-1 begin
+export const avatarSwatch: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined; selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   'size-[18px] cursor-pointer rounded-full p-0 transition-shadow',
   {
     variants: {

@@ -32,7 +32,9 @@ export interface FileDropProps {
  * empty, a removable file chip once a file lands. Same controlled contract
  * as every other control — value + onChange.
  */
-export const FileDrop = ({
+// @@T org-1 begin
+export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   value,
   onChange,
   accept,

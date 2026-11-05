@@ -29,7 +29,9 @@ export interface TextInputProps
 const PREFIX_PAD_BASE = 12;
 const PREFIX_PAD_PER_CHAR = 7.5;
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+// @@T org-1 begin
+export const TextInput: import('react').ForwardRefExoticComponent<TextInputProps & import('react').RefAttributes<HTMLInputElement>> = forwardRef<HTMLInputElement, TextInputProps>(
+// @@T org-1 end
   ({ className, value, onChange, invalid, prefix, suffix, type = 'text', ...props }, ref) => {
     const stringPrefix = typeof prefix === 'string'
       ? prefix

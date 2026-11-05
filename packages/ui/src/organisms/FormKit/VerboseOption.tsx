@@ -38,7 +38,9 @@ export interface VerboseOptionProps {
   className?: string;
 }
 
-export const VerboseOption = ({
+// @@T org-1 begin
+export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   mode = 'radio',
   selected,
   onSelect,
@@ -129,7 +131,9 @@ export type VerboseOptionListProps =
   | VerboseOptionCheckboxListProps;
 
 /** Data-driven column of VerboseOptions with the mode's group semantics. */
-export const VerboseOptionList = (props: VerboseOptionListProps) => {
+// @@T org-1 begin
+export const VerboseOptionList: { (props: VerboseOptionListProps): import('react').JSX.Element; displayName: string } = (props: VerboseOptionListProps) => {
+// @@T org-1 end
   const { options, ariaLabel, className } = props;
   const isRadio = props.mode !== 'checkbox';
   const isSelected = (v: string) => (props.mode === 'checkbox'

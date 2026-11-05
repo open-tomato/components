@@ -55,7 +55,9 @@ interface SuggestionRow {
   isNew?: boolean;
 }
 
-export const ChipList = ({
+// @@T org-1 begin
+export const ChipList: { (props: ChipListProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   options,
   value,
   onChange,

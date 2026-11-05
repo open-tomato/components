@@ -39,7 +39,9 @@ const DEFAULT_TONES: AvatarSelectorTone[] = [
   'slate',
 ];
 
-export const AvatarSelector = ({
+// @@T org-1 begin
+export const AvatarSelector: { (props: AvatarSelectorProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   initials,
   onInitialsChange,
   tone,

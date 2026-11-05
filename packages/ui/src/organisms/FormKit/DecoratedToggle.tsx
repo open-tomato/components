@@ -33,7 +33,9 @@ export interface DecoratedToggleProps {
   className?: string;
 }
 
-export const DecoratedToggle = ({
+// @@T org-1 begin
+export const DecoratedToggle: { (props: DecoratedToggleProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   decoration,
   title,
   description,
@@ -111,7 +113,9 @@ export interface DecoratedToggleListProps {
 }
 
 /** Grouped toggles with the spec's x/y-on indicator in the header. */
-export const DecoratedToggleList = ({
+// @@T org-1 begin
+export const DecoratedToggleList: { (props: DecoratedToggleListProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   title,
   options,
   value,
