@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, mock } from 'bun:test';
 
@@ -11,7 +13,7 @@ const SUGGESTIONS: SearchSuggestion[] = [
   { kind: 'doc', label: 'Composting context' },
 ];
 
-const renderOpen = async (props: Partial<React.ComponentProps<typeof SearchSuggest>> = {}) => {
+const renderOpen = async (props: Partial<ComponentProps<typeof SearchSuggest>> = {}) => {
   await act(async () => {
     render(<SearchSuggest suggestions={SUGGESTIONS} {...props} />);
   });
