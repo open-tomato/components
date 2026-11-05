@@ -14,12 +14,14 @@ import {
  * by level (ok / warn / err / info) where the original demo rendered a flat
  * list; mark-all-read sits in the popover header either way.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof NotificationsBell> = {
+// @@T org-1 end
   title: 'Organisms/NotificationsBell',
   component: NotificationsBell,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof NotificationsBell>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

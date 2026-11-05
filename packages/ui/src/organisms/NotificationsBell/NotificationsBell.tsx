@@ -1,5 +1,7 @@
 import type { IconName } from '../../atoms/Icon';
-import type { ReactNode } from 'react';
+// @@T org-1 begin
+import type { FC, ReactNode } from 'react';
+// @@T org-1 end
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -63,7 +65,9 @@ const LEVEL_ORDER: NotificationLevel[] = ['ok', 'warn', 'err', 'info'];
  * parent-owned: the component renders `notifications` and reports
  * intents through callbacks.
  */
-export const NotificationsBell = ({
+// @@T org-1 begin
+export const NotificationsBell: FC<NotificationsBellProps> = ({
+// @@T org-1 end
   notifications,
   onMarkAllRead,
   onOpenItem,
