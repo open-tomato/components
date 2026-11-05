@@ -12,7 +12,14 @@ import { cn } from '../../lib';
 // imports create a chunk cycle in the static Storybook build (React #130).
 import { OverlayHeader } from '../Modal/OverlayHeader';
 
-import { drawerPanel, type DrawerPanelVariants } from './Drawer.variants';
+// @@V mol-3 begin
+import {
+  drawerBody,
+  drawerFooter,
+  drawerPanel,
+  type DrawerPanelVariants,
+} from './Drawer.variants';
+// @@V mol-3 end
 
 export interface DrawerProps extends DrawerPanelVariants {
   open: boolean;
@@ -64,14 +71,16 @@ export const Drawer: { (props: DrawerProps): JSX.Element; displayName: string } 
             onClose={onClose}
           />
         )}
-        <div className="flex-1 overflow-y-auto p-5 text-sm leading-relaxed text-fg2">
+        {/* @@V mol-3 begin */}
+        <div className={drawerBody()}>
           {children}
         </div>
         {footer != null && (
-          <div className="flex shrink-0 justify-end gap-2.5 border-t border-border-soft bg-surface-sunk px-5 py-3.5">
+          <div className={drawerFooter()}>
             {footer}
           </div>
         )}
+        {/* @@V mol-3 end */}
       </div>
     </Overlay>
   );

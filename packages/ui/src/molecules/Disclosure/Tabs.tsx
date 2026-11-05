@@ -12,7 +12,14 @@ import {
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { disclosureFrame, tabsList, tabsTrigger } from './Disclosure.variants';
+// @@V mol-3 begin
+import {
+  disclosureFrame,
+  tabsContent,
+  tabsList,
+  tabsTrigger,
+} from './Disclosure.variants';
+// @@V mol-3 end
 
 /**
  * Tabs — the same disclosure machine in single mode that never lets the
@@ -88,7 +95,9 @@ export const TabsContent: ForwardRefExoticComponent<
   ({ className, ...props }, ref) => (
     <RadixTabs.Content
       ref={ref}
-      className={cn('min-h-24 px-[18px] pb-5 pt-[18px] outline-none', className)}
+      // @@V mol-3 begin
+      className={cn(tabsContent(), className)}
+      // @@V mol-3 end
       {...props}
     />
   ),
