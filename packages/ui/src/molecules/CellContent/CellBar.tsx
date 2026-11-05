@@ -1,4 +1,6 @@
-import { forwardRef } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { UsageBar, type UsageBarProps } from './UsageBar';
 
@@ -17,7 +19,9 @@ export interface CellBarProps extends Omit<UsageBarProps, 'size'> {
  * 10px one. Everything else (ratio semantics, >100% overflow treatment,
  * `track` for progress backgrounds, tones) is UsageBar verbatim.
  */
-export const CellBar = forwardRef<HTMLDivElement, CellBarProps>(
+// @@T mol-1 begin
+export const CellBar: ForwardRefExoticComponent<PropsWithoutRef<CellBarProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, CellBarProps>(
+// @@T mol-1 end
   ({ stroke = 'regular', ...props }, ref) => (
     <UsageBar
       ref={ref}

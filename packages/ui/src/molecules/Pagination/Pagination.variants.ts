@@ -1,10 +1,16 @@
+// @@T mol-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
  * Pagination — "page N of M": a controlled current index over page numbers.
 
  */
-export const paginationButton = cva(
+// @@T mol-1 begin
+export const paginationButton: (props?: { active?: boolean | null } & ClassProp) => string = cva(
+// @@T mol-1 end
   [
     'inline-flex min-w-8 h-8 items-center justify-center px-2 rounded-md',
     'font-mono text-[13px] border',

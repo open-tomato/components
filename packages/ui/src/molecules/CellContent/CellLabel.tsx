@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { chartTone, cn, type ChartTone } from '../../lib';
 
@@ -38,7 +40,9 @@ const normalize = (
  * with a simple accent color). Tones come from the shared chart palette;
  * `bg="soft"` adds the subtle currentColor tint.
  */
-export const CellLabel = forwardRef<HTMLSpanElement, CellLabelProps>(
+// @@T mol-1 begin
+export const CellLabel: ForwardRefExoticComponent<PropsWithoutRef<CellLabelProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, CellLabelProps>(
+// @@T mol-1 end
   ({ className, labels, tone, bg, ...props }, ref) => {
     const items = normalize(labels);
     return (

@@ -1,8 +1,14 @@
+// @@T mol-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /* ── UsageBar (colocated bar indicator, reused by 03c cell content) ── */
 
-export const usageBarTrack = cva('relative w-full overflow-hidden', {
+// @@T mol-1 begin
+export const usageBarTrack: (props?: { size?: 'md' | 'sm' | null; track?: boolean | null } & ClassProp) => string = cva('relative w-full overflow-hidden', {
+// @@T mol-1 end
   variants: {
     size: {
       /** Original ToolBars stroke (simple rows). */
@@ -19,7 +25,9 @@ export const usageBarTrack = cva('relative w-full overflow-hidden', {
   defaultVariants: { size: 'md', track: false },
 });
 
-export const usageBarFill = cva(
+// @@T mol-1 begin
+export const usageBarFill: (props?: ClassProp) => string = cva(
+// @@T mol-1 end
   'absolute inset-y-0 left-0 rounded-[inherit] bg-current',
 );
 
@@ -30,11 +38,15 @@ export const usageBarFill = cva(
  * region past the tick renders the same danger at reduced opacity, and
  * a contrast tick marks where 100% sits.
  */
-export const usageBarOverflowFill = cva(
+// @@T mol-1 begin
+export const usageBarOverflowFill: (props?: ClassProp) => string = cva(
+// @@T mol-1 end
   'absolute inset-y-0 right-0 rounded-r-[inherit] bg-current opacity-40',
 );
 
-export const usageBarGoalTick = cva(
+// @@T mol-1 begin
+export const usageBarGoalTick: (props?: ClassProp) => string = cva(
+// @@T mol-1 end
   'absolute inset-y-0 w-0.5 -translate-x-1/2 bg-surface-1',
 );
 

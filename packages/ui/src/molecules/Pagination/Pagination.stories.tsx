@@ -2,13 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Pagination } from './Pagination';
 
-const meta = {
+// @@T mol-1 begin
+const meta: Meta<typeof Pagination> = {
+// @@T mol-1 end
   title: 'Molecules/Pagination',
   component: Pagination,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   args: { count: 6, index: 2 },
-} satisfies Meta<typeof Pagination>;
+// @@T mol-1 begin
+};
+// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
