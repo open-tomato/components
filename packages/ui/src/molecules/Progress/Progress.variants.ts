@@ -1,3 +1,7 @@
+// @@T mol-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T mol-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -6,26 +10,33 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * danger past 85%; the threshold decision belongs to the caller, the
  * tone variant is the mechanism).
  */
-export const progressTrack = cva(
+// @@T mol-3 begin
+export const progressTrack: (props?: ClassProp) => string = cva(
+// @@T mol-3 end
   'relative h-2 w-full overflow-hidden rounded-full border border-border-soft bg-surface-sunk',
 );
 
-export const progressBar = cva('h-full rounded-full', {
-  variants: {
-    tone: {
-      accent: 'bg-accent',
-      danger: 'bg-danger',
-      leaf: 'bg-leaf',
+// @@T mol-3 begin
+export const progressBar: (props?: { tone?: 'accent' | 'danger' | 'leaf' | null | undefined; indeterminate?: boolean | null | undefined } & ClassProp) => string = cva(
+// @@T mol-3 end
+  'h-full rounded-full',
+  {
+    variants: {
+      tone: {
+        accent: 'bg-accent',
+        danger: 'bg-danger',
+        leaf: 'bg-leaf',
+      },
+      indeterminate: {
+        false: '',
+        true: [
+          'absolute inset-y-0 w-[40%] animate-indeterminate',
+          'motion-reduce:animate-none motion-reduce:left-0 motion-reduce:w-full motion-reduce:opacity-50',
+        ].join(' '),
+      },
     },
-    indeterminate: {
-      false: '',
-      true: [
-        'absolute inset-y-0 w-[40%] animate-indeterminate',
-        'motion-reduce:animate-none motion-reduce:left-0 motion-reduce:w-full motion-reduce:opacity-50',
-      ].join(' '),
-    },
+    defaultVariants: { tone: 'accent', indeterminate: false },
   },
-  defaultVariants: { tone: 'accent', indeterminate: false },
-});
+);
 
 export type ProgressBarVariants = VariantProps<typeof progressBar>;

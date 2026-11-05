@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Progress } from './Progress';
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof Progress> = {
+// @@T mol-3 end
   title: 'Molecules/Progress',
   component: Progress,
   parameters: { layout: 'padded' },
@@ -17,7 +19,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Progress>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

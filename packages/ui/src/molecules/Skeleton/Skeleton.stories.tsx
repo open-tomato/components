@@ -2,12 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Skeleton } from './Skeleton';
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof Skeleton> = {
+// @@T mol-3 end
   title: 'Molecules/Skeleton',
   component: Skeleton,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
-} satisfies Meta<typeof Skeleton>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

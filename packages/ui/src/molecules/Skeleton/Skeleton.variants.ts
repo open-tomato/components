@@ -1,3 +1,7 @@
+// @@T mol-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T mol-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -6,7 +10,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * className — a skeleton IS layout filler, so that's layout context,
  * not decoration override.
  */
-export const skeleton = cva(
+// @@T mol-3 begin
+export const skeleton: (props?: ClassProp) => string = cva(
+// @@T mol-3 end
   [
     'block h-3 rounded-full animate-shimmer motion-reduce:animate-none',
     'bg-[linear-gradient(90deg,var(--surface-sunk)_0%,color-mix(in_oklab,var(--surface-sunk)_40%,var(--surface-2))_50%,var(--surface-sunk)_100%)]',
