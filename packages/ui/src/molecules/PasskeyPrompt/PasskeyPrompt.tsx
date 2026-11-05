@@ -29,13 +29,17 @@ export interface PasskeyPromptProps {
  * step candidate between the method pick and the done splash (app
  * wiring is WS08 scope — this ships only the component).
  */
-export const PasskeyPrompt = ({
+// @@T mol-2 begin
+export const PasskeyPrompt: { (props: PasskeyPromptProps): import('react').JSX.Element; displayName?: string } = ({
+// @@T mol-2 end
   title = 'We\'ll ask your browser to register a passkey',
   description = 'Your device picks the method — Touch ID, Face ID, Windows Hello, or your hardware key. Acme never sees the secret.',
   onCancel,
   cancelLabel = 'Cancel',
   className,
-}: PasskeyPromptProps) => (
+// @@T mol-2 begin
+}: PasskeyPromptProps): import('react').JSX.Element => (
+// @@T mol-2 end
   <div role="status" className={cn(passkeyPrompt(), className)}>
     <span className={passkeyPromptIndicator()} aria-hidden>
       <Icon name="key-round" size={30} />

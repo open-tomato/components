@@ -8,21 +8,31 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * small subtitle, and an 18px-padded body (`padded={false}` for
  * full-bleed lists).
  */
-export const sectionCard = cva(
+// @@T mol-2 begin
+export const sectionCard: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T mol-2 end
   'flex flex-col overflow-hidden rounded-lg border border-border-soft bg-surface-1',
 );
 
-export const sectionCardHeader = cva(
+// @@T mol-2 begin
+export const sectionCardHeader: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T mol-2 end
   'flex items-center justify-between gap-3 border-b border-border-soft bg-surface-1 px-[18px] py-3.5',
 );
 
-export const sectionCardTitle = cva(
+// @@T mol-2 begin
+export const sectionCardTitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T mol-2 end
   'font-display text-[15px] font-bold tracking-[-0.01em] text-fg1',
 );
 
-export const sectionCardSubtitle = cva('mt-0.5 text-xs text-fg3');
+// @@T mol-2 begin
+export const sectionCardSubtitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mt-0.5 text-xs text-fg3');
+// @@T mol-2 end
 
-export const sectionCardBody = cva('flex-1', {
+// @@T mol-2 begin
+export const sectionCardBody: (props?: ({padded?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex-1', {
+// @@T mol-2 end
   variants: {
     padded: {
       false: 'p-0',
@@ -33,7 +43,9 @@ export const sectionCardBody = cva('flex-1', {
 });
 
 /** Footer line (UsageChart contract): small text, optional divider. */
-export const sectionCardFooter = cva('px-[18px] pb-3.5 text-xs text-fg3', {
+// @@T mol-2 begin
+export const sectionCardFooter: (props?: ({divider?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('px-[18px] pb-3.5 text-xs text-fg3', {
+// @@T mol-2 end
   variants: {
     divider: {
       false: '',

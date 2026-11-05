@@ -26,7 +26,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * the containing block it stretches against — that class is load-bearing
  * and not decoration.
  */
-export const entityCard = cva(
+// @@T mol-2 begin
+export const entityCard: (props?: ({openable?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T mol-2 end
+
   [
     'relative flex flex-col gap-3 rounded-lg border p-4',
     'border-border-soft bg-surface-1 transition-colors',
@@ -49,7 +52,9 @@ export const entityCard = cva(
 );
 
 /** Title left, control cluster right; `items-start` so a wrapped title does not drag the controls down. */
-export const entityCardHeader = cva('flex items-start justify-between gap-2');
+// @@T mol-2 begin
+export const entityCardHeader: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex items-start justify-between gap-2');
+// @@T mol-2 end
 
 /**
  * The heading itself. A card in a page's grid is a section of that page,
@@ -61,10 +66,14 @@ export const entityCardHeader = cva('flex items-start justify-between gap-2');
  * overlay would clip it back to the title's own box, which is the whole
  * mechanism gone. The clipping lives one level down, on the text.
  */
-export const entityCardTitle = cva('m-0 min-w-0 flex-1 text-base');
+// @@T mol-2 begin
+export const entityCardTitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('m-0 min-w-0 flex-1 text-base');
+// @@T mol-2 end
 
 /** Where the title's truncation lives — see `entityCardTitle` for why it is not on the heading. */
-export const entityCardTitleText = cva('block truncate');
+// @@T mol-2 begin
+export const entityCardTitleText: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('block truncate');
+// @@T mol-2 end
 
 /**
  * The open button. No `overflow` of any kind, for the same reason the
@@ -72,7 +81,10 @@ export const entityCardTitleText = cva('block truncate');
  * card because the title IS the control, and a ring around a hit area
  * whose bounds are invisible reads as a card that has gone selected.
  */
-export const entityCardOpen = cva([
+// @@T mol-2 begin
+export const entityCardOpen: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva([
+// @@T mol-2 end
+
   'block w-full cursor-pointer rounded-sm text-left',
   'transition-colors hover:text-accent',
   'focus-visible:outline-none focus-visible:ring-2',
@@ -85,7 +97,9 @@ export const entityCardOpen = cva([
  * radius matches the card's own so a future focus or hover treatment on
  * it lands square on the corners.
  */
-export const entityCardOverlay = cva('absolute inset-0 rounded-lg');
+// @@T mol-2 begin
+export const entityCardOverlay: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('absolute inset-0 rounded-lg');
+// @@T mol-2 end
 
 /**
  * The control cluster. `relative` lifts it out of the static flow and
@@ -93,12 +107,17 @@ export const entityCardOverlay = cva('absolute inset-0 rounded-lg');
  * resting on the two being painted in document order, so moving the
  * overlay later cannot silently swallow the switch.
  */
-export const entityCardControls = cva(
+// @@T mol-2 begin
+export const entityCardControls: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T mol-2 end
+
   'relative z-10 flex shrink-0 items-center gap-1',
 );
 
 /** The badge row under the header — `flex-wrap` because a card is narrow and tones are additive. */
-export const entityCardBadges = cva('flex flex-wrap items-center gap-2');
+// @@T mol-2 begin
+export const entityCardBadges: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex flex-wrap items-center gap-2');
+// @@T mol-2 end
 
 /**
  * The meta footer. `mt-auto` pins it to the bottom edge whatever the
@@ -106,7 +125,10 @@ export const entityCardBadges = cva('flex flex-wrap items-center gap-2');
  * footers at three different heights read as three different kinds of
  * thing.
  */
-export const entityCardMeta = cva([
+// @@T mol-2 begin
+export const entityCardMeta: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva([
+// @@T mol-2 end
+
   'mt-auto flex flex-wrap items-center gap-2 border-t border-border-soft',
   'pt-3 text-[12.5px] text-fg2',
 ]);
@@ -121,7 +143,10 @@ export const entityCardMeta = cva([
  * persona grids, 340px for the connector grid, both `auto-fill` so a
  * short list stays card-width instead of stretching to fill the row.
  */
-export const entityCardGrid = cva('grid', {
+// @@T mol-2 begin
+export const entityCardGrid: (props?: ({min?: 'md' | 'lg' | null | undefined; gap?: 'sm' | 'md' | 'lg' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('grid', {
+// @@T mol-2 end
+
   variants: {
     min: {
       md: 'grid-cols-[repeat(auto-fill,minmax(300px,1fr))]',

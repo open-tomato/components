@@ -16,10 +16,14 @@ export interface ModalFooterStatusProps {
   className?: string;
 }
 
-export const ModalFooterStatus = ({
+// @@T mol-2 begin
+export const ModalFooterStatus: { (props: ModalFooterStatusProps): import('react').JSX.Element; displayName?: string } = ({
+// @@T mol-2 end
   children,
   className,
-}: ModalFooterStatusProps) => (
+// @@T mol-2 begin
+}: ModalFooterStatusProps): import('react').JSX.Element => (
+// @@T mol-2 end
   <span
     aria-live="polite"
     className={cn(

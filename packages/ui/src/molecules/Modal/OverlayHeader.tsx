@@ -15,7 +15,9 @@ export interface OverlayHeaderProps {
   id?: string;
 }
 
-export const OverlayHeader = ({ title, eyebrow, onClose, id }: OverlayHeaderProps) => (
+// @@T mol-2 begin
+export const OverlayHeader: { (props: OverlayHeaderProps): import('react').JSX.Element; displayName?: string } = ({ title, eyebrow, onClose, id }: OverlayHeaderProps): import('react').JSX.Element => (
+// @@T mol-2 end
   <div className="flex shrink-0 items-start gap-4 border-b border-border-soft px-5 py-[18px]">
     <div className="min-w-0 flex-1">
       {eyebrow != null && (

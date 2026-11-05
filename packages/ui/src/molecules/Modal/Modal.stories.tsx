@@ -34,7 +34,10 @@ const DemoBody = () => (
   </div>
 );
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof Modal> = {
+// @@T mol-2 end
+
   title: 'Molecules/Modal',
   component: Modal,
   parameters: { layout: 'fullscreen' },
@@ -64,7 +67,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Modal>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

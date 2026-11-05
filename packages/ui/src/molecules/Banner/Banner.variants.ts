@@ -6,7 +6,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * Fills use the softer `*-wash` tier the feedback surfaces share.
  */
-export const banner = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
+// @@T mol-2 begin
+export const banner: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
+// @@T mol-2 end
+
   variants: {
     tone: {
       success: 'bg-success-wash border-success-tint',
@@ -20,7 +23,10 @@ export const banner = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
 });
 
 /** Tone color for the leading icon. */
-export const bannerIcon = cva('mt-px shrink-0', {
+// @@T mol-2 begin
+export const bannerIcon: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('mt-px shrink-0', {
+// @@T mol-2 end
+
   variants: {
     tone: {
       success: 'text-success',
@@ -34,7 +40,10 @@ export const bannerIcon = cva('mt-px shrink-0', {
 });
 
 /** The optional tone-colored action button. */
-export const bannerAction = cva(
+// @@T mol-2 begin
+export const bannerAction: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T mol-2 end
+
   'self-center shrink-0 rounded-md border bg-surface-1 px-3 py-1.5 text-[12.5px] font-semibold',
   {
     variants: {

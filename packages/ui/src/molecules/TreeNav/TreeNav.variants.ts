@@ -37,7 +37,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * hover treatment every row chrome in this package carries (see
  * `AppShell.variants.ts`'s `navItem`) and is not enter/exit motion.
  */
-export const treeNav = cva('m-0 flex list-none flex-col gap-0.5 p-0');
+// @@T mol-2 begin
+export const treeNav: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
+// @@T mol-2 end
+  cva('m-0 flex list-none flex-col gap-0.5 p-0');
 
 /**
  * A branch's children. `role="group"` in the markup, so its indent
@@ -48,10 +51,13 @@ export const treeNav = cva('m-0 flex list-none flex-col gap-0.5 p-0');
  * unbroken past a row's own padding, which is what makes two sibling
  * subtrees readable at the same indent.
  */
-export const treeNavGroup = cva([
-  'm-0 ml-3 flex list-none flex-col gap-0.5',
-  'border-l border-border-soft py-0 pr-0 pl-2',
-]);
+// @@T mol-2 begin
+export const treeNavGroup: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
+// @@T mol-2 end
+  cva([
+    'm-0 ml-3 flex list-none flex-col gap-0.5',
+    'border-l border-border-soft py-0 pr-0 pl-2',
+  ]);
 
 /**
  * One treeitem. Structure and focus only — see the header for why
@@ -63,9 +69,12 @@ export const treeNavGroup = cva([
  * stylesheet in every engine, and a marker appearing in one of them
  * would move a pixel in exactly one baseline.
  */
-export const treeNavItem = cva(
-  'group/tree-item list-none focus:outline-none focus-visible:outline-none',
-);
+// @@T mol-2 begin
+export const treeNavItem: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
+// @@T mol-2 end
+  cva(
+    'group/tree-item list-none focus:outline-none focus-visible:outline-none',
+  );
 
 /**
  * The visible row: twisty, then label. Selection is the axis because
@@ -75,26 +84,29 @@ export const treeNavItem = cva(
  * `hover` is on the unselected arm alone: a hover fill on the row
  * that is already filled reads as the selection having moved.
  */
-export const treeNavRow = cva(
-  [
-    'flex w-full items-center gap-1.5 rounded-md px-2 py-1.5',
-    'cursor-pointer text-left text-sm transition-[background-color]',
-    'group-focus-visible/tree-item:ring-2',
-    'group-focus-visible/tree-item:ring-leaf',
-  ],
-  {
-    variants: {
-      selected: {
-        false: [
-          'bg-transparent font-medium text-fg2',
-          'hover:bg-[color-mix(in_oklab,var(--surface-sunk)_55%,transparent)]',
-        ],
-        true: 'bg-surface-sunk font-semibold text-fg1',
+// @@T mol-2 begin
+export const treeNavRow: (props?: ({selected?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+// @@T mol-2 end
+  cva(
+    [
+      'flex w-full items-center gap-1.5 rounded-md px-2 py-1.5',
+      'cursor-pointer text-left text-sm transition-[background-color]',
+      'group-focus-visible/tree-item:ring-2',
+      'group-focus-visible/tree-item:ring-leaf',
+    ],
+    {
+      variants: {
+        selected: {
+          false: [
+            'bg-transparent font-medium text-fg2',
+            'hover:bg-[color-mix(in_oklab,var(--surface-sunk)_55%,transparent)]',
+          ],
+          true: 'bg-surface-sunk font-semibold text-fg1',
+        },
       },
+      defaultVariants: { selected: false },
     },
-    defaultVariants: { selected: false },
-  },
-);
+  );
 
 /**
  * The expand/collapse glyph, and the same box a leaf reserves so
@@ -105,26 +117,32 @@ export const treeNavRow = cva(
  * gives. The `leaf` arm is empty rather than `invisible` because a
  * leaf renders no glyph at all — the arm exists to reserve the box.
  */
-export const treeNavTwisty = cva(
-  'flex h-4 w-4 shrink-0 items-center justify-center text-fg3',
-  {
-    variants: {
-      state: {
-        collapsed: '-rotate-90 cursor-pointer',
-        expanded: 'rotate-0 cursor-pointer',
-        leaf: '',
+// @@T mol-2 begin
+export const treeNavTwisty: (props?: ({state?: 'collapsed' | 'expanded' | 'leaf' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+// @@T mol-2 end
+  cva(
+    'flex h-4 w-4 shrink-0 items-center justify-center text-fg3',
+    {
+      variants: {
+        state: {
+          collapsed: '-rotate-90 cursor-pointer',
+          expanded: 'rotate-0 cursor-pointer',
+          leaf: '',
+        },
       },
+      defaultVariants: { state: 'leaf' },
     },
-    defaultVariants: { state: 'leaf' },
-  },
-);
+  );
 
 /**
  * The row's text. `truncate` plus `min-w-0` so a long label shortens
  * instead of pushing the row wider than its column — a tree lives in
  * a rail whose width is not its own.
  */
-export const treeNavLabel = cva('min-w-0 flex-1 truncate');
+// @@T mol-2 begin
+export const treeNavLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
+// @@T mol-2 end
+  cva('min-w-0 flex-1 truncate');
 
 export type TreeNavRowVariants = VariantProps<typeof treeNavRow>;
 export type TreeNavTwistyVariants = VariantProps<typeof treeNavTwisty>;

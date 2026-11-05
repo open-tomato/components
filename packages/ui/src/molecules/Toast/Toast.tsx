@@ -15,7 +15,9 @@ export interface ToastProps
   onClose?: () => void;
 }
 
-export const Toast = forwardRef<HTMLDivElement, ToastProps>(
+// @@T mol-2 begin
+export const Toast: import('react').ForwardRefExoticComponent<ToastProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToastProps>(
+// @@T mol-2 end
   ({ className, tone = 'success', floating, onClose, children, ...props }, ref) => (
     <div
       ref={ref}

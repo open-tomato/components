@@ -17,7 +17,9 @@ export interface TooltipProps {
   className?: string;
 }
 
-export const Tooltip = ({ label, children, open, side = 'top', className }: TooltipProps) => (
+// @@T mol-2 begin
+export const Tooltip: { (props: TooltipProps): import('react').JSX.Element; displayName?: string } = ({ label, children, open, side = 'top', className }: TooltipProps): import('react').JSX.Element => (
+// @@T mol-2 end
   <RadixTooltip.Provider delayDuration={200}>
     <RadixTooltip.Root open={open}>
       <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>

@@ -21,7 +21,10 @@ export interface BannerProps
   onClose?: () => void;
 }
 
-export const Banner = forwardRef<HTMLDivElement, BannerProps>(
+// @@T mol-2 begin
+export const Banner: import('react').ForwardRefExoticComponent<BannerProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
+// @@T mol-2 end
+  HTMLDivElement, BannerProps>(
   ({ className, tone = 'info', title, action, onClose, children, ...props }, ref) => (
     <div ref={ref} className={cn(banner({ tone }), className)} {...props}>
       <span className={bannerIcon({ tone })}>

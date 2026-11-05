@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Banner } from './Banner';
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof Banner> = {
+// @@T mol-2 end
   title: 'Molecules/Banner',
   component: Banner,
   parameters: { layout: 'padded' },
@@ -13,7 +15,7 @@ const meta = {
       options: ['success', 'warning', 'danger', 'info', 'neutral'],
     },
   },
-} satisfies Meta<typeof Banner>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

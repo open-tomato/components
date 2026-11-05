@@ -33,7 +33,10 @@ export interface SectionCardProps
  * (UsageChart, CalendarHeatmap, LineChart, FilesChanged) compose on it so
  * the header/body/footer chrome stays in one place.
  */
-export const SectionCard = forwardRef<HTMLElement, SectionCardProps>(
+// @@T mol-2 begin
+export const SectionCard: import('react').ForwardRefExoticComponent<SectionCardProps & import('react').RefAttributes<HTMLElement>> = forwardRef<
+// @@T mol-2 end
+  HTMLElement, SectionCardProps>(
   (
     {
       className,
