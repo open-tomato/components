@@ -4,7 +4,9 @@ import type { ClassProp } from 'class-variance-authority/types';
 // @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { type ChartTone } from '../../lib';
+// @@V mol-1 begin
+import { chartTone, type ChartTone } from '../../lib';
+// @@V mol-1 end
 
 /**
  * CellContent kit — standardized cell formats for tables and table-like
@@ -113,6 +115,14 @@ export const cellLabel: (props?: { bg?: 'none' | 'soft' | null } & ClassProp) =>
 // @@T mol-1 begin
 export const cellLabelGroup: (props?: ClassProp) => string = cva('inline-flex flex-wrap items-center gap-1.5');
 // @@T mol-1 end
+
+// @@V mol-1 begin
+/**
+ * A label's accent: the shared chart palette (`chartTone` in `src/lib`),
+ * bound here so the component reads every class from its variants file.
+ */
+export const cellLabelTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
+// @@V mol-1 end
 
 /** tokens-consumption — bold full number used, greyed quota. */
 // @@T mol-1 begin

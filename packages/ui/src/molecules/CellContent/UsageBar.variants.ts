@@ -4,6 +4,10 @@ import type { ClassProp } from 'class-variance-authority/types';
 // @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@V mol-1 begin
+import { chartTone, type ChartTone } from '../../lib';
+// @@V mol-1 end
+
 /* ── UsageBar (colocated bar indicator, reused by 03c cell content) ── */
 
 // @@T mol-1 begin
@@ -49,5 +53,14 @@ export const usageBarGoalTick: (props?: ClassProp) => string = cva(
 // @@T mol-1 end
   'absolute inset-y-0 w-0.5 -translate-x-1/2 bg-surface-1',
 );
+
+// @@V mol-1 begin
+/**
+ * The bar's series color: the shared chart palette (`chartTone` in
+ * `src/lib`), bound here so the component reads every class from its
+ * variants file.
+ */
+export const usageBarTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
+// @@V mol-1 end
 
 export type UsageBarTrackVariants = VariantProps<typeof usageBarTrack>;

@@ -4,7 +4,9 @@ import { useRef, type JSX, type KeyboardEvent } from 'react';
 
 import { cn } from '../../lib';
 
-import { codeInputCell } from './CodeInput.variants';
+// @@V mol-1 begin
+import { codeInputCell, codeInputGroup } from './CodeInput.variants';
+// @@V mol-1 end
 
 export interface CodeInputProps {
   /** Number of digit cells. */
@@ -48,7 +50,13 @@ export const CodeInput: {
   };
 
   return (
-    <div role="group" aria-label={label} className={cn('flex justify-center gap-2', className)}>
+    <div
+      role="group"
+      aria-label={label}
+      // @@V mol-1 begin
+      className={cn(codeInputGroup(), className)}
+      // @@V mol-1 end
+    >
       {chars.map((c, i) => (
         <input
           key={i}

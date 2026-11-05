@@ -2,12 +2,17 @@
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
 // @@T mol-1 end
 
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V mol-1 begin
+import { cn, type ChartTone } from '../../lib';
+// @@V mol-1 end
 
 import {
   usageBarFill,
   usageBarGoalTick,
   usageBarOverflowFill,
+  // @@V mol-1 begin
+  usageBarTone,
+  // @@V mol-1 end
   usageBarTrack,
   type UsageBarTrackVariants,
 } from './UsageBar.variants';
@@ -64,7 +69,9 @@ export const UsageBar: ForwardRefExoticComponent<PropsWithoutRef<UsageBarProps> 
         aria-label={label ?? pctText}
         className={cn(
           usageBarTrack({ size, track }),
-          chartTone({
+          // @@V mol-1 begin
+          usageBarTone({
+          // @@V mol-1 end
             tone: isOver
               ? 'danger'
               : tone,
