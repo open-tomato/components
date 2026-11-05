@@ -58,7 +58,9 @@ export const entityCardHeader: (props?: import('class-variance-authority/types')
 
 /**
  * The heading itself. A card in a page's grid is a section of that page,
- * so the element is an `h2` — the two element defaults `tokens.css`
+// @@S mol-2 begin
+ * so the element is an `h2` — the two element defaults the theme's base layer
+// @@S mol-2 end
  * gives one are cancelled here, and family, weight and colour are left
  * to it.
  *

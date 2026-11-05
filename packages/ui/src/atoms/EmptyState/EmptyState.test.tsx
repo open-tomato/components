@@ -7,16 +7,23 @@ afterEach(cleanup);
 
 describe('EmptyState', () => {
   it('renders the title only by default', () => {
-    render(<EmptyState title="No agents" />);
-    expect(screen.getByText('No agents')).toBeTruthy();
+    render(<EmptyState title="No items" />);
+    expect(screen.getByText('No items')).toBeTruthy();
   });
 
   it('renders description and action', () => {
     render(
-      <EmptyState title="t" description="Nothing here" action={<button type="button">New agent</button>} />,
+      <EmptyState title="t" description="Nothing here" action={<button type="button">New item</button>} />,
     );
     expect(screen.getByText('Nothing here')).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'New agent' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'New item' })).toBeTruthy();
+  });
+
+  it('renders the illustration slot only when given', () => {
+    const { rerender } = render(<EmptyState title="t" data-testid="es" />);
+    expect(screen.getByTestId('es').querySelector('[data-slot="art"]')).toBeNull();
+    rerender(<EmptyState title="t" data-testid="es" illustration={<i data-slot="art" />} />);
+    expect(screen.getByTestId('es').querySelector('[data-slot="art"]')).toBeTruthy();
   });
 
   it.each(['sm', 'md', 'lg'] as const)('renders the %s size', (size) => {

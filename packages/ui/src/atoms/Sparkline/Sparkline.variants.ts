@@ -4,14 +4,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { chartTone, type ChartTone } from '../../lib';
 // @@V ato-1 end
 
+// @@S ato-1 begin
 /**
  * Sparkline — a small inline trend chart for card bottoms and table cells.
- * Derived from the original design `Sparkline` in
- * the original MetricTile screen (inline-styled SVG,
+ * Derived from the design source's `Sparkline` (inline-styled SVG,
  * no CVA source): 1.5px line in the series color over a faint area fill.
  * Color rides on `currentColor` via the shared chart tone axis, so the
  * same palette drives every chart component.
  */
+// @@S ato-1 end
 // @@T ato-1 begin
 export const sparkline: (props?: ({ size?: 'sm' | 'md' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string =
 // @@T ato-1 end
@@ -20,7 +21,9 @@ export const sparkline: (props?: ({ size?: 'sm' | 'md' | null | undefined } & im
       size: {
       /** Table-cell scale. */
         sm: 'h-6',
-        /** Card-bottom scale (original MetricTile renders at 36px). */
+        // @@S ato-1 begin
+        /** Card-bottom scale (the design source renders it at 36px). */
+        // @@S ato-1 end
         md: 'h-9',
       },
     },

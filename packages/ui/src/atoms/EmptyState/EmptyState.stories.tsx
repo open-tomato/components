@@ -1,8 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { JSX } from 'react';
 
 import { Button } from '../Button';
 
 import { EmptyState } from './EmptyState';
+
+// @@S ato-1 begin
+const ArtPlaceholder = (): JSX.Element => (
+  <svg width={30} height={30} viewBox="0 0 64 64" aria-hidden>
+    <circle cx="32" cy="32" r="20" className="fill-primary" />
+  </svg>
+);
+// @@S ato-1 end
 
 // @@T ato-1 begin
 const meta: Meta<typeof EmptyState> = {
@@ -16,8 +25,11 @@ const meta: Meta<typeof EmptyState> = {
     align: { control: 'select', options: ['center', 'start'] },
   },
   args: {
-    title: 'No agents running',
-    description: 'Drop a roadmap item in and we\'ll seed an agent session for it.',
+    title: 'Nothing here yet',
+    // @@S ato-1 begin
+    illustration: <ArtPlaceholder />,
+    // @@S ato-1 end
+    description: 'Add an item and it will show up in this list.',
   },
   decorators: [
     (Story) => (
@@ -38,7 +50,7 @@ export const Default: Story = {};
 
 export const WithAction: Story = {
   args: {
-    action: <Button size="sm">New agent</Button>,
+    action: <Button size="sm">New item</Button>,
   },
 };
 

@@ -13,9 +13,9 @@ import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
 // @@S mol-3 begin
 /**
- * The topbar's ⌘K search box with anchored suggestions (app-shell spec: Top
- * Bar). Each suggestion's `kind` is a key into the `EntityKinds` map — here a
- * neutral demo map of five kinds, each with its own accent puck + pill.
+ * A ⌘K search box with anchored suggestions. Each suggestion's `kind` is a
+ * key into the `EntityKinds` map — here a neutral demo map of five kinds,
+ * each with its own accent puck + pill.
  * Keyboard-driven; Enter with no match falls through to the full search
  * page. Sibling of CommandPalette, not a variant of it — see the
  * component docblock for the recorded relationship decision.
@@ -52,9 +52,9 @@ const DEMO_KINDS: EntityKinds = {
   doc: { icon: 'book', tone: 'success' },
 };
 
-/** Demo suggestions — one of each kind. */
+/** Sample suggestions — one of each kind. */
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'worker', label: 'auth-refactor', sub: 'running · worker-7d2f' },
+  { kind: 'worker', label: 'auth-refactor', sub: 'running · stage-7d2f' },
   { kind: 'run', label: 'settings page draft', sub: '12m ago · sam' },
   { kind: 'task', label: 'Add per-connector usage chart to usage page', sub: 'roadmap · high' },
   { kind: 'connector', label: 'github-issues', sub: 'MCP · connected' },
@@ -62,16 +62,20 @@ const SUGGESTIONS: SearchSuggestion[] = [
 ];
 // @@S mol-3 end
 
-/** Resting input: magnifier icon left, ⌘K chip right. */
+// @@S mol-3 begin
+/** Resting input: search icon left, ⌘K chip right. */
+// @@S mol-3 end
 export const Default: Story = {
   args: { suggestions: SUGGESTIONS },
 };
 
+// @@S org-1 begin
 /**
  * Panel open with the five kinds, each carrying its own accent (worker→
  * primary, run→accent, task→gold, connector→info, doc→success) on both the
  * icon puck and the trailing kind pill.
  */
+// @@S org-1 end
 export const Open: Story = {
   args: {
     suggestions: SUGGESTIONS,

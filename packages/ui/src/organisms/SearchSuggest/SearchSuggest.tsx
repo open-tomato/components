@@ -48,7 +48,9 @@ export interface SearchSuggestion {
   /** Key into the `EntityKinds` map: supplies the glyph and accent, and is shown in the pill. */
   kind?: string;
   label: string;
-  /** Mono context line under the label ("running · worker-7d2f"). */
+  // @@S org-1 begin
+  /** Mono context line under the label ("running · job-7d2f"). */
+  // @@S org-1 end
   sub?: string;
   /** Overrides the kind's default glyph. */
   icon?: IconName;
@@ -79,8 +81,7 @@ const VISIBLE_LIMIT = 5;
 
 // @@S mol-3 begin
 /**
- * SearchSuggest (app-shell spec: Top Bar):
- * magnifier-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
+ * SearchSuggest: search-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
  * across the kinds of the `EntityKinds` map (supplied through
  * `EntityKindsProvider`), each with its own glyph and accent. Keyboard-driven: ↑↓ move the active row, Enter opens it, and
  * Enter with no match falls through to `onSearch` — as does the explicit
@@ -90,7 +91,7 @@ const VISIBLE_LIMIT = 5;
  * shared internals. Both follow the same keyboard model (active-index
  * list, ↑↓/Enter, hand-rolled rows), but SearchSuggest is an inline
  * ARIA combobox — focus stays in the input, the panel anchors to it,
- * substring filtering (original behavior) — while CommandPalette is a modal
+ * substring filtering — while CommandPalette is a modal
  * Overlay running commands with fuzzy matching and focus capture.
  * Merging them would couple an input-anchored popup to a portal overlay
  * for no shared behavior win; what IS shared is reused directly (the

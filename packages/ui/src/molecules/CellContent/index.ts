@@ -9,14 +9,16 @@ export {
   cellStatus,
   cellStatusText,
   cellValue,
-  spendOverTime,
-  spendOverTimeMeta,
-  TOKENS_DANGER_RATIO,
-  TOKENS_WARN_RATIO,
-  tokensConsumption,
-  tokensConsumptionQuota,
-  tokensProgress,
-  tokensProgressTone,
+  // @@S mol-1 begin
+  amountOverTime,
+  amountOverTimeMeta,
+  QUOTA_DANGER_RATIO,
+  QUOTA_WARN_RATIO,
+  quotaProgress,
+  quotaProgressTone,
+  quotaUsage,
+  quotaUsageQuota,
+  // @@S mol-1 end
   type CellLabelVariants,
   type CellStatusTone,
   type CellStatusVariants,
@@ -31,13 +33,15 @@ export {
   type CellStatusProps,
 } from './CellStatus';
 export { CellValue, type CellValueProps } from './CellValue';
-export { SpendOverTime, type SpendOverTimeProps } from './SpendOverTime';
+// @@S mol-1 begin
+export { AmountOverTime, type AmountOverTimeProps } from './AmountOverTime';
 export {
-  TokensConsumption,
-  TokensProgress,
-  type TokensConsumptionProps,
-  type TokensProgressProps,
-} from './TokensConsumption';
+  QuotaProgress,
+  QuotaUsage,
+  type QuotaProgressProps,
+  type QuotaUsageProps,
+} from './QuotaUsage';
+// @@S mol-1 end
 export { UsageBar, type UsageBarProps } from './UsageBar';
 export {
   usageBarFill,

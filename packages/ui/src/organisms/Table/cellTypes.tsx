@@ -8,13 +8,17 @@ import { devWarn } from '../../lib/dev';
 // built storybook's lazy-init chunking can drop barrel member inits
 // (renders undefined → React #130); see the matching note in
 // CellValue.tsx.
+// @@S mol-1 begin
+import { AmountOverTime, type AmountOverTimeProps } from '../../molecules/CellContent/AmountOverTime';
+// @@S mol-1 end
 import { CellBar, type CellBarProps } from '../../molecules/CellContent/CellBar';
 import { CellDoubleLine, type CellDoubleLineProps } from '../../molecules/CellContent/CellDoubleLine';
 import { CellLabel, type CellLabelProps } from '../../molecules/CellContent/CellLabel';
 import { CellStatus, type CellStatusProps } from '../../molecules/CellContent/CellStatus';
 import { CellValue, type CellValueProps } from '../../molecules/CellContent/CellValue';
-import { SpendOverTime, type SpendOverTimeProps } from '../../molecules/CellContent/SpendOverTime';
-import { TokensProgress, type TokensProgressProps } from '../../molecules/CellContent/TokensConsumption';
+// @@S mol-1 begin
+import { QuotaProgress, type QuotaProgressProps } from '../../molecules/CellContent/QuotaUsage';
+// @@S mol-1 end
 // @@S mol-3 begin
 import { Entity, type EntityProps } from '../../molecules/KnownEntities/Entity';
 import { ModelFooter, type ModelFooterProps } from '../../molecules/KnownEntities/ModelFooter';
@@ -30,8 +34,8 @@ import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
  * Self-describing column types: a self-defining table grid can infer the
  * component to use if the data type for a column is of
  * `{entity}-{variant}`. Target shape: JSON table configs naming types such
- * as (`entity-cell`, `entity-inline`, `entity-title`, `tokens-progress`,
- * `spend-over-time`, `badge`, `text`, `relative-time`, `context-menu`, …).
+ * as (`entity-cell`, `entity-inline`, `entity-title`, `quota-progress`,
+ * `amount-over-time`, `badge`, `text`, `relative-time`, `context-menu`, …).
  *
  * A lightweight lookup, deliberately: one typed data contract per type
  * (`CellTypeDataMap`) and one render function per type. A config-driven
@@ -57,8 +61,10 @@ export interface CellTypeDataMap {
   'status': CellStatusProps;
   'label': CellLabelProps;
   'bar': CellBarProps;
-  'tokens-progress': TokensProgressProps;
-  'spend-over-time': SpendOverTimeProps;
+  // @@S mol-1 begin
+  'quota-progress': QuotaProgressProps;
+  'amount-over-time': AmountOverTimeProps;
+  // @@S mol-1 end
   /* primitives the configs also name */
   'text': { text: ReactNode };
   'badge': { label: string; tone?: BadgeProps['tone']; dot?: boolean };
@@ -84,8 +90,10 @@ const registry: CellRegistry = {
   'status': (d) => <CellStatus {...d} />,
   'label': (d) => <CellLabel {...d} />,
   'bar': (d) => <CellBar {...d} />,
-  'tokens-progress': (d) => <TokensProgress {...d} />,
-  'spend-over-time': (d) => <SpendOverTime {...d} />,
+  // @@S mol-1 begin
+  'quota-progress': (d) => <QuotaProgress {...d} />,
+  'amount-over-time': (d) => <AmountOverTime {...d} />,
+  // @@S mol-1 end
   'text': (d) => (
     <span
       // @@V org-2 begin
@@ -129,8 +137,10 @@ const REQUIRED_KEYS: Record<KnownCellType, string[]> = {
   'status': [],
   'label': ['labels'],
   'bar': ['ratio'],
-  'tokens-progress': ['used', 'quota'],
-  'spend-over-time': ['cost', 'seconds', 'date'],
+  // @@S mol-1 begin
+  'quota-progress': ['used', 'quota'],
+  'amount-over-time': ['amount', 'seconds', 'date'],
+  // @@S mol-1 end
   'text': ['text'],
   'badge': ['label'],
   'relative-time': ['date'],

@@ -22,17 +22,23 @@ export const ORIGIN_WORDS: readonly string[] = [
 /** The npm scope the kit publishes under, which is not a hit. */
 const SCOPE = /@open-tomato\//g;
 
+/**
+ * Proper nouns that hold an origin word as a capitalised part (`GitHub`
+ * holds `Hub`), which are not a hit: an OAuth provider keeps its name.
+ */
+const PROPER_NOUNS = /GitHub/g;
+
 /** Source extensions the check reads. */
 const READ = /\.(ts|tsx|css|mdx?)$/;
 
 /**
- * Every word hit on one line, after removing the publishing scope: a whole
- * word in any case (`workspace`), the head of a camel-case name
- * (`tokensUsed`), or a capitalised part of one (`TokensConsumption`,
- * `useSession`).
+ * Every word hit on one line, after removing the publishing scope and the
+ * proper nouns: a whole word in any case (`workspace`), the head of a
+ * camel-case name (`tokensUsed`), or a capitalised part of one
+ * (`TokensConsumption`, `useSession`).
  */
 export function hitsIn(line: string): string[] {
-  const text = line.replace(SCOPE, '');
+  const text = line.replace(SCOPE, '').replace(PROPER_NOUNS, '');
   return ORIGIN_WORDS.filter((word) => {
     const capital = `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
     return new RegExp(`(^|[^A-Za-z])${word}([^A-Za-z]|$)`, 'i').test(text)

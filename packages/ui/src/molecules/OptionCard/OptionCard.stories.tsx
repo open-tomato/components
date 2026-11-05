@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Badge } from '../../atoms/Badge';
 import { IconTile } from '../../atoms/IconTile';
-import { WorkspaceMark } from '../../atoms/WorkspaceMark';
+// @@S ato-2 begin
+import { Monogram } from '../../atoms/Monogram';
+// @@S ato-2 end
 import { StrokeIcon } from '../../lib/icons';
 
 import { OptionCard } from './OptionCard';
@@ -24,12 +26,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // @@S mol-3 begin
-/** Group picker row — centered, mark leading, role badge. */
+/** Group picker row — centered, Monogram leading, role badge. */
 // @@S mol-3 end
 export const Workspace: Story = {
   args: {
     selected: true,
-    leading: <WorkspaceMark name="open-garden" />,
+    // @@S ato-2 begin
+    leading: <Monogram name="open-garden" />,
+    // @@S ato-2 end
     title: 'open-garden',
     meta: <Badge tone="neutral">member</Badge>,
     // @@S mol-3 begin
@@ -41,7 +45,9 @@ export const Workspace: Story = {
 export const Unselected: Story = {
   args: {
     selected: false,
-    leading: <WorkspaceMark name="seed-bank" tone="gold" />,
+    // @@S ato-2 begin
+    leading: <Monogram name="seed-bank" tone="gold" />,
+    // @@S ato-2 end
     title: 'seed-bank',
     meta: <Badge tone="neutral">viewer</Badge>,
     description: 'Experiments · invited by kai · 3 members',

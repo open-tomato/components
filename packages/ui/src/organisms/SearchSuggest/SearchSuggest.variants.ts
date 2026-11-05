@@ -6,8 +6,7 @@ import { cva } from 'class-variance-authority';
 
 // @@S mol-3 begin
 /**
- * SearchSuggest — a ⌘K search box with an anchored suggestion list (app-shell
- * spec: Top Bar).
+ * SearchSuggest — a ⌘K search box with an anchored suggestion list.
  *
  * A suggestion's `kind` is a key into the `EntityKinds` map the implementor
  * supplies; the puck and the pill take their accent from the kind's tone
@@ -43,7 +42,9 @@ export const searchSuggestPanel: (props?: import('class-variance-authority/types
   'rounded-lg border border-border-soft bg-surface-2 shadow-lg',
 ]);
 
-/** A suggestion row; active mirrors the original hover/keyboard sink. */
+// @@S org-1 begin
+/** A suggestion row; active marks the hovered or keyboard-selected row. */
+// @@S org-1 end
 // @@T org-1 begin
 export const searchSuggestRow: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -83,9 +84,9 @@ export const searchSuggestKindPill: (props?: ClassProp | undefined) => string = 
 /** The root wrapper — anchors the suggestion panel. */
 export const searchSuggestRoot: (props?: ClassProp | undefined) => string = cva('relative w-[340px]');
 
-// @@S mol-3 begin
-/** The leading magnifier icon. */
-// @@S mol-3 end
+// @@S org-1 begin
+/** The leading search icon. */
+// @@S org-1 end
 export const searchSuggestLens: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
 
 /** The combobox input inside the box. */

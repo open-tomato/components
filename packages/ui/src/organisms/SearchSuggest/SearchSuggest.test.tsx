@@ -18,7 +18,7 @@ const KINDS: EntityKinds = {
 };
 
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'worker', label: 'auth-refactor', sub: 'running · worker-7d2f' },
+  { kind: 'worker', label: 'auth-refactor', sub: 'running · stage-7d2f' },
   { kind: 'run', label: 'settings page draft', sub: '12m ago' },
   { kind: 'task', label: 'Add usage chart', sub: 'roadmap · high' },
   { kind: 'connector', label: 'github-issues', sub: 'MCP · connected', icon: 'cpu' },
@@ -69,7 +69,7 @@ describe('SearchSuggest', () => {
       expect(screen.getByText(k)).toBeTruthy();
     }
     expect(screen.getByText('suggested')).toBeTruthy();
-    expect(screen.getByText('running · worker-7d2f')).toBeTruthy();
+    expect(screen.getByText('running · stage-7d2f')).toBeTruthy();
   });
 
   it('renders no pill for a suggestion without a kind', async () => {

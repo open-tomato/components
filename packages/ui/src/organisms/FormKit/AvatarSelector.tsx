@@ -13,13 +13,14 @@ import {
   type AvatarSelectorTone,
 } from './FormKit.variants';
 
+// @@S org-1 begin
 /**
- * AvatarSelector (original design AvatarPicker, the original AgentEditor demo; spec:
- * "AvatarSelector"): a big avatar preview, a
+ * AvatarSelector: a big avatar preview, a
  * matching-width 1–2 character initials input, and a 3-column swatch
  * grid picking the background color. Controlled throughout — the parent
- * owns `initials` and `tone` (an agent form, a workspace form, …).
+ * owns `initials` and `tone` (a profile form, a group form, …).
  */
+// @@S org-1 end
 
 export interface AvatarSelectorProps {
   /** 1–2 characters shown in the avatar; uppercased on input. */
@@ -27,9 +28,11 @@ export interface AvatarSelectorProps {
   onInitialsChange?: (initials: string) => void;
   tone: AvatarSelectorTone;
   onToneChange?: (tone: AvatarSelectorTone) => void;
-  /** Spec allows 1 or 2 characters; the original agent picker used 1. */
+  // @@S org-1 begin
+  /** Allows 1 or 2 characters. */
   maxLength?: 1 | 2;
-  /** Swatches offered — defaults to the full original palette (6). */
+  /** Swatches offered — defaults to the full palette (6). */
+  // @@S org-1 end
   tones?: AvatarSelectorTone[];
   id?: string;
   className?: string;

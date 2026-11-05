@@ -20,7 +20,7 @@ export interface OptionCardProps
   OptionCardVariants {
   selected: boolean;
   // @@S mol-3 begin
-  /** Identity slot — an avatar mark, IconTile, …. */
+  /** Identity slot — Monogram, IconTile, …. */
   // @@S mol-3 end
   leading?: ReactNode;
   title: ReactNode;

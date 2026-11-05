@@ -34,14 +34,16 @@ export interface UsageBarProps
   label?: string;
 }
 
+// @@S mol-1 begin
 /**
  * UsageBar — the borderless bar indicator behind UsageChart rows
- * (original design ToolBars/AgentRanking bars). Exported for reuse as a table
+ * (simple and multi-row bar designs). Exported for reuse as a table
  * cell indicator (03c "Bar indicator" cell content).
  *
  * The >100% treatment is a spec-driven design (not in the original
  * artboards): see `usageBarOverflowFill` in the variants file.
  */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const UsageBar: ForwardRefExoticComponent<PropsWithoutRef<UsageBarProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, UsageBarProps>(
 // @@T mol-1 end
