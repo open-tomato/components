@@ -11,7 +11,8 @@ export interface BadgeProps
   dot?: boolean;
 }
 
-export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+// @@T ato-1 begin
+export const Badge: import('react').ForwardRefExoticComponent<BadgeProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, tone, size, dot = false, children, ...props }, ref) => (
     <span ref={ref} className={cn(badge({ tone, size }), className)} {...props}>
       {dot && <span className="size-1.5 rounded-full bg-current" aria-hidden />}
@@ -19,5 +20,6 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     </span>
   ),
 );
+// @@T ato-1 end
 
 Badge.displayName = 'Badge';

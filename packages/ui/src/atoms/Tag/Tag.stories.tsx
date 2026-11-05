@@ -23,7 +23,10 @@ const TagIcon = ({ d }: { d: string }) => (
   </svg>
 );
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof Tag> = {
+// @@T ato-1 end
+
   title: 'Atoms/Tag',
   component: Tag,
   parameters: { layout: 'centered' },
@@ -34,10 +37,12 @@ const meta = {
       options: ['neutral', 'success', 'warning', 'danger', 'info'],
     },
   },
-} satisfies Meta<typeof Tag>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof Tag>;
+// @@T ato-1 end
 
 /** Defaults: neutral, monospace — an id. */
 export const Default: Story = {

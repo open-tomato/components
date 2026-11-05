@@ -7,7 +7,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `whitespace-nowrap` is deliberate — a wrapping status pill would be
  * broken.
  */
-export const badge = cva(
+// @@T ato-1 begin
+export const badge: (props?: ({ tone?: 'accent' | 'info' | 'success' | 'danger' | 'neutral' | 'warning' | 'leaf' | null | undefined; size?: 'sm' | 'md' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   'inline-flex items-center gap-1.5 rounded-full font-semibold leading-tight whitespace-nowrap',
   {
     variants: {

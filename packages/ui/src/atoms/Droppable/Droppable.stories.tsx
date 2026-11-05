@@ -29,7 +29,9 @@ const FileGlyph = ({ size = 15 }: { size?: number }) => (
   </svg>
 );
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof Droppable> = {
+// @@T ato-1 end
   title: 'Atoms/Droppable',
   component: Droppable,
   parameters: { layout: 'centered' },
@@ -37,10 +39,12 @@ const meta = {
   argTypes: {
     feedback: { control: 'select', options: ['zone', 'inline', 'region'] },
   },
-} satisfies Meta<typeof Droppable>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof Droppable>;
+// @@T ato-1 end
 
 /** zone — the standing dashed target. */
 export const Zone: Story = {

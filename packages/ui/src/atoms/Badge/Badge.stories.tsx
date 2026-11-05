@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Badge } from './Badge';
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof Badge> = {
+// @@T ato-1 end
   title: 'Atoms/Badge',
   component: Badge,
   parameters: { layout: 'centered' },
@@ -14,10 +16,12 @@ const meta = {
     },
     size: { control: 'select', options: ['sm', 'md'] },
   },
-} satisfies Meta<typeof Badge>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof Badge>;
+// @@T ato-1 end
 
 /** Defaults: success tone, md — the "running" state. */
 export const Default: Story = {

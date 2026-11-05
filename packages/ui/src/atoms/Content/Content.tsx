@@ -8,7 +8,8 @@ export interface ContentProps
   extends HTMLAttributes<HTMLDivElement>,
   ContentVariants {}
 
-export const Content = forwardRef<HTMLDivElement, ContentProps>(
+// @@T ato-1 begin
+export const Content: import('react').ForwardRefExoticComponent<ContentProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ContentProps>(
   ({ className, direction, gap, align, justify, wrap, ...props }, ref) => (
     <div
       ref={ref}
@@ -20,5 +21,6 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
     />
   ),
 );
+// @@T ato-1 end
 
 Content.displayName = 'Content';

@@ -51,7 +51,8 @@ const buildPath = (data: number[]): string => {
  * not scale); the box stretches to the container while
  * `vector-effect: non-scaling-stroke` keeps the line weight constant.
  */
-export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(
+// @@T ato-1 begin
+export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps & import('react').RefAttributes<SVGSVGElement>> = forwardRef<SVGSVGElement, SparklineProps>(
   ({ className, data, tone, fill = true, label, size, ...props }, ref) => {
     const path = useMemo(
       () => (data.length < 2
@@ -93,5 +94,6 @@ export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(
     );
   },
 );
+// @@T ato-1 end
 
 Sparkline.displayName = 'Sparkline';

@@ -6,7 +6,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * optional.
 
  */
-export const emptyState = cva('flex flex-col w-full', {
+// @@T ato-1 begin
+export const emptyState: (props?: ({ size?: 'sm' | 'md' | 'lg' | null | undefined; align?: 'start' | 'center' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex flex-col w-full', {
+// @@T ato-1 end
   variants: {
     size: {
       sm: 'py-6 gap-2',

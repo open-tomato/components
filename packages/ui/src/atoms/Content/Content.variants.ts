@@ -7,7 +7,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * No explicit w-full: as a block-level flex container it fills its
  * parent anyway.
  */
-export const content = cva('flex', {
+// @@T ato-1 begin
+export const content: (props?: ({ direction?: 'row' | 'col' | null | undefined; gap?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | null | undefined; align?: 'stretch' | 'start' | 'center' | 'end' | null | undefined; justify?: 'start' | 'center' | 'end' | 'between' | null | undefined; wrap?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex', {
+// @@T ato-1 end
   variants: {
     direction: {
       col: 'flex-col',

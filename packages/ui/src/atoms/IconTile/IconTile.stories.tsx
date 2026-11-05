@@ -5,15 +5,20 @@ import { StrokeIcon } from '../../lib/icons';
 import { IconTile } from './IconTile';
 
 /** Tinted icon square/circle — method cards, next-step rows, status circles. */
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof IconTile> = {
+// @@T ato-1 end
+
   title: 'Atoms/IconTile',
   component: IconTile,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof IconTile>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof IconTile>;
+// @@T ato-1 end
 
 /** The 2FA method card's 36px accent tile. */
 export const Default: Story = {
