@@ -18,55 +18,76 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * - `initialSort` mirrors the demo's seeded `{key:'updated', dir:'asc'}`.
  */
 
-export const tableFrame = cva('overflow-hidden', {
-  variants: {
-    frame: {
-      true: 'rounded-lg border border-border-soft bg-surface-1 shadow-xs',
-      false: 'rounded-none border-none bg-transparent shadow-none',
+// @@T org-2 begin
+export const tableFrame: (props?: ({ frame?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+  'overflow-hidden',
+  {
+    variants: {
+      frame: {
+        true: 'rounded-lg border border-border-soft bg-surface-1 shadow-xs',
+        false: 'rounded-none border-none bg-transparent shadow-none',
+      },
     },
+    defaultVariants: { frame: true },
   },
-  defaultVariants: { frame: true },
-});
+);
 
 /** Header/footer band — its own table, gutter-reserved to match the body. */
-export const tableBand = cva('overflow-hidden bg-surface-2', {
-  variants: {
-    edge: {
-      header: 'border-b border-border-strong',
-      footer: 'border-t border-border-strong',
+// @@T org-2 begin
+export const tableBand: (props?: ({ edge?: 'header' | 'footer' | null | undefined; gutter?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+  'overflow-hidden bg-surface-2',
+  {
+    variants: {
+      edge: {
+        header: 'border-b border-border-strong',
+        footer: 'border-t border-border-strong',
+      },
+      gutter: {
+        true: 'pr-[10px]',
+        false: 'pr-0',
+      },
     },
-    gutter: {
-      true: 'pr-[10px]',
-      false: 'pr-0',
-    },
+    defaultVariants: { gutter: false },
   },
-  defaultVariants: { gutter: false },
-});
+);
 
 /** The body wrap — the ONLY scrolling element (scrollbar always shown). */
-export const tableScroll = cva('', {
-  variants: {
-    layout: {
-      fit: 'overflow-visible',
-      scroll: [
-        'overflow-y-scroll overflow-x-hidden',
-        '[&::-webkit-scrollbar]:w-[10px]',
-        '[&::-webkit-scrollbar-thumb]:rounded-full',
-        '[&::-webkit-scrollbar-thumb]:bg-border-strong',
-        '[&::-webkit-scrollbar-thumb]:border-2',
-        '[&::-webkit-scrollbar-thumb]:border-solid',
-        '[&::-webkit-scrollbar-thumb]:border-surface-1',
-        '[&::-webkit-scrollbar-track]:bg-transparent',
-      ],
+// @@T org-2 begin
+export const tableScroll: (props?: ({ layout?: 'fit' | 'scroll' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+  '',
+  {
+    variants: {
+      layout: {
+        fit: 'overflow-visible',
+        scroll: [
+          'overflow-y-scroll overflow-x-hidden',
+          '[&::-webkit-scrollbar]:w-[10px]',
+          '[&::-webkit-scrollbar-thumb]:rounded-full',
+          '[&::-webkit-scrollbar-thumb]:bg-border-strong',
+          '[&::-webkit-scrollbar-thumb]:border-2',
+          '[&::-webkit-scrollbar-thumb]:border-solid',
+          '[&::-webkit-scrollbar-thumb]:border-surface-1',
+          '[&::-webkit-scrollbar-track]:bg-transparent',
+        ],
+      },
     },
+    defaultVariants: { layout: 'fit' },
   },
-  defaultVariants: { layout: 'fit' },
-});
+);
 
 /** Every internal table: fixed tracks, collapsed spacing, full width. */
-export const tableEl = cva('w-full table-fixed border-separate border-spacing-0');
+// @@T org-2 begin
+export const tableEl: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T org-2 end
+  'w-full table-fixed border-separate border-spacing-0',
+);
 
-export const tableHead = cva(
+// @@T org-2 begin
+export const tableHead: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined; active?: boolean | null | undefined; sortable?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   [
     'whitespace-nowrap text-left font-mono text-[11px] font-semibold',
     'uppercase tracking-[0.06em]',
@@ -90,7 +111,9 @@ export const tableHead = cva(
   },
 );
 
-export const tableCell = cva(
+// @@T org-2 begin
+export const tableCell: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   [
     'max-w-0 border-b border-border-soft text-[13.5px] text-fg1',
     'transition-[background-color]',
@@ -109,7 +132,9 @@ export const tableCell = cva(
 );
 
 /** Footer cells — mono summary line on the surface-2 band. */
-export const tableFoot = cva(
+// @@T org-2 begin
+export const tableFoot: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined; align?: 'start' | 'center' | 'end' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   'whitespace-nowrap bg-surface-2 font-mono text-xs text-fg2',
   {
     variants: {
@@ -133,31 +158,38 @@ export const tableFoot = cva(
  * reorder feedback states (drop-target insert line drawn as an inset
  * shadow so nothing shifts; the dragged row dims like Sortable does).
  */
-export const tableRowEl = cva('group/row', {
-  variants: {
-    striped: {
-      false: '',
-      true: 'even:bg-[color-mix(in_oklab,var(--surface-sunk)_45%,transparent)]',
+// @@T org-2 begin
+export const tableRowEl: (props?: ({ striped?: boolean | null | undefined; drop?: 'none' | 'above' | 'below' | null | undefined; dragging?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+  'group/row',
+  {
+    variants: {
+      striped: {
+        false: '',
+        true: 'even:bg-[color-mix(in_oklab,var(--surface-sunk)_45%,transparent)]',
+      },
+      drop: {
+        none: '',
+        above: '[&>td]:shadow-[inset_0_2px_0_0_var(--accent)]',
+        below: '[&>td]:shadow-[inset_0_-2px_0_0_var(--accent)]',
+      },
+      dragging: {
+        false: '',
+        true: 'opacity-40',
+      },
     },
-    drop: {
-      none: '',
-      above: '[&>td]:shadow-[inset_0_2px_0_0_var(--accent)]',
-      below: '[&>td]:shadow-[inset_0_-2px_0_0_var(--accent)]',
-    },
-    dragging: {
-      false: '',
-      true: 'opacity-40',
-    },
+    defaultVariants: { striped: false, drop: 'none', dragging: false },
   },
-  defaultVariants: { striped: false, drop: 'none', dragging: false },
-});
+);
 
 /**
  * Modifier columns (checkbox / sort handle) — narrow leading tracks with
  * their own padding so the 19px controls sit flush; the row hover wash
  * matches tableCell.
  */
-export const tableModCell = cva(
+// @@T org-2 begin
+export const tableModCell: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   [
     'border-b border-border-soft align-middle',
     'transition-[background-color]',
@@ -175,18 +207,25 @@ export const tableModCell = cva(
   },
 );
 
-export const tableModHead = cva('bg-surface-2 align-middle', {
-  variants: {
-    density: {
-      comfortable: 'py-[11px] pl-3.5 pr-0',
-      compact: 'py-2 pl-3 pr-0',
+// @@T org-2 begin
+export const tableModHead: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+  'bg-surface-2 align-middle',
+  {
+    variants: {
+      density: {
+        comfortable: 'py-[11px] pl-3.5 pr-0',
+        compact: 'py-2 pl-3 pr-0',
+      },
     },
+    defaultVariants: { density: 'comfortable' },
   },
-  defaultVariants: { density: 'comfortable' },
-});
+);
 
 /** The grab affordance for row reordering (grip-vertical glyph). */
-export const tableSortHandle = cva(
+// @@T org-2 begin
+export const tableSortHandle: (props?: ({ disabled?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   [
     'inline-flex items-center justify-center rounded-sm p-0.5 text-fg3',
     'cursor-grab select-none hover:text-fg2 active:cursor-grabbing',
@@ -203,11 +242,15 @@ export const tableSortHandle = cva(
 );
 
 /** The clipped-cell tooltip (fixed-position; coordinates are dynamic). */
-export const tableTip = cva([
-  'fixed z-[100] max-w-[360px] -translate-x-1/2 -translate-y-full',
-  'pointer-events-none rounded-md border border-char-300 bg-char-700',
-  'px-[11px] py-2 text-[12.5px] leading-[1.45] text-cream-50 shadow-lg',
-]);
+// @@T org-2 begin
+export const tableTip: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T org-2 end
+  [
+    'fixed z-[100] max-w-[360px] -translate-x-1/2 -translate-y-full',
+    'pointer-events-none rounded-md border border-char-300 bg-char-700',
+    'px-[11px] py-2 text-[12.5px] leading-[1.45] text-cream-50 shadow-lg',
+  ],
+);
 
 export type TableFrameVariants = VariantProps<typeof tableFrame>;
 export type TableRowVariants = VariantProps<typeof tableRowEl>;

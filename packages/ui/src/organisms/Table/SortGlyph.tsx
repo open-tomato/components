@@ -1,3 +1,7 @@
+// @@T org-2 begin
+import type { ReactElement } from 'react';
+// @@T org-2 end
+
 import { StrokeIcon } from '../../lib/icons';
 
 export interface SortGlyphProps {
@@ -10,7 +14,12 @@ export interface SortGlyphProps {
  * The header sort affordance: a faint chevron hint that brightens on header
  * hover (via the th's group/head), swapping to an accent arrow when active.
  */
-export const SortGlyph = ({ sortable, active, dir }: SortGlyphProps) => {
+// @@T org-2 begin
+export const SortGlyph: {
+  (props: SortGlyphProps): ReactElement | null;
+  displayName?: string;
+} = ({ sortable, active, dir }: SortGlyphProps): ReactElement | null => {
+// @@T org-2 end
   if (!sortable) return null;
   if (!active)
     return (
