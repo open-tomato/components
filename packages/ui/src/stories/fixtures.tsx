@@ -3,6 +3,18 @@ import type { JSX, ReactNode } from 'react';
 // @@T tpl-1 end
 
 import { cn } from '../lib';
+// @@V tpl-1 begin
+
+import {
+  cardFiller,
+  contentTile,
+  gridTile,
+  ph,
+  phShape,
+  shellFiller,
+  shellFillerHeader,
+} from './fixtures.variants';
+// @@V tpl-1 end
 
 /**
  * Story-only demo fillers (the `Ph` placeholder pill and the demo tiles
@@ -17,10 +29,9 @@ import { cn } from '../lib';
 export const Ph = ({ className }: { className?: string }): JSX.Element => (
 // @@T tpl-1 end
   <span
-    className={cn(
-      'block h-[12px] rounded-full bg-border-strong opacity-50',
-      className,
-    )}
+    // @@V tpl-1 begin
+    className={cn(ph(), className)}
+    // @@V tpl-1 end
   />
 );
 
@@ -28,42 +39,43 @@ export const Ph = ({ className }: { className?: string }): JSX.Element => (
 // @@T tpl-1 begin
 export const ShellFiller = (): JSX.Element => (
 // @@T tpl-1 end
-  <span className="flex flex-col gap-3.5">
-    <span className="flex items-center gap-2.5">
-      <Ph className="w-[26px] h-[26px] rounded-[8px] bg-primary opacity-90" />
-      <Ph className="w-[120px] h-[14px] bg-fg2" />
+  // @@V tpl-1 begin
+  <span className={shellFiller()}>
+    <span className={shellFillerHeader()}>
+      <Ph className={phShape({ shape: 'logo' })} />
+      <Ph className={phShape({ shape: 'title' })} />
     </span>
-    <Ph className="w-full h-[10px]" />
-    <Ph className="w-[78%] h-[10px]" />
-    <Ph className="w-[90%] h-[10px]" />
+    <Ph className={phShape({ shape: 'line' })} />
+    <Ph className={phShape({ shape: 'lineShort' })} />
+    <Ph className={phShape({ shape: 'lineLong' })} />
   </span>
+  // @@V tpl-1 end
 );
 
 /** The text-block rows rendered inside Card demos. */
 // @@T tpl-1 begin
 export const CardFiller = (): JSX.Element => (
 // @@T tpl-1 end
-  <span className="flex flex-col gap-2">
-    <Ph className="w-[70%] h-[12px] bg-fg2" />
-    <Ph className="w-full h-[9px]" />
-    <Ph className="w-[85%] h-[9px]" />
+  // @@V tpl-1 begin
+  <span className={cardFiller()}>
+    <Ph className={phShape({ shape: 'heading' })} />
+    <Ph className={phShape({ shape: 'body' })} />
+    <Ph className={phShape({ shape: 'bodyLong' })} />
   </span>
+  // @@V tpl-1 end
 );
 
 /** The tinted `item N` tiles from the Content demo. */
-const TILE_TONES = [
-  'bg-[color-mix(in_oklab,var(--primary)_16%,var(--surface-1))] border-[color-mix(in_oklab,var(--primary)_40%,transparent)] text-primary',
-  'bg-[color-mix(in_oklab,var(--accent)_16%,var(--surface-1))] border-[color-mix(in_oklab,var(--accent)_40%,transparent)] text-accent',
-  'bg-[color-mix(in_oklab,var(--gold-500)_16%,var(--surface-1))] border-[color-mix(in_oklab,var(--gold-500)_40%,transparent)] text-gold-500',
-] as const;
+// @@V tpl-1 begin
+const TILE_TONES = ['primary', 'accent', 'gold'] as const;
+// @@V tpl-1 end
 
 export const ContentTiles = ({ count = 3 }: { count?: number }): ReactNode => Array.from({ length: count }, (_, i) => (
   <span
     key={i}
-    className={cn(
-      'border rounded-md px-4 py-3 font-mono font-semibold text-[13px] whitespace-nowrap',
-      TILE_TONES[i % TILE_TONES.length],
-    )}
+    // @@V tpl-1 begin
+    className={cn(contentTile({ tone: TILE_TONES[i % TILE_TONES.length] }))}
+    // @@V tpl-1 end
   >
     item {i + 1}
   </span>
@@ -73,7 +85,9 @@ export const ContentTiles = ({ count = 3 }: { count?: number }): ReactNode => Ar
 export const GridTiles = ({ count = 6 }: { count?: number }): ReactNode => Array.from({ length: count }, (_, i) => (
   <span
     key={i}
-    className="h-[56px] rounded-md bg-surface-1 border border-border-soft flex items-center justify-center text-fg3 font-mono text-xs"
+    // @@V tpl-1 begin
+    className={gridTile()}
+    // @@V tpl-1 end
   >
     {i + 1}
   </span>
