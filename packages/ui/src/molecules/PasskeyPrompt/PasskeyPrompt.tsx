@@ -4,10 +4,15 @@ import { Button } from '../../atoms/Button';
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
 
+// @@V mol-2 begin
 import {
   passkeyPrompt,
+  passkeyPromptCopy,
+  passkeyPromptDescription,
   passkeyPromptIndicator,
+  passkeyPromptTitle,
 } from './PasskeyPrompt.variants';
+// @@V mol-2 end
 
 export interface PasskeyPromptProps {
   title?: ReactNode;
@@ -44,12 +49,14 @@ export const PasskeyPrompt: { (props: PasskeyPromptProps): import('react').JSX.E
     <span className={passkeyPromptIndicator()} aria-hidden>
       <Icon name="key-round" size={30} />
     </span>
-    <div className="max-w-[380px]">
-      <div className="mb-1.5 font-display text-lg font-bold text-fg1">
+    {/* @@V mol-2 begin */}
+    <div className={passkeyPromptCopy()}>
+      <div className={passkeyPromptTitle()}>
         {title}
       </div>
-      <div className="text-[13px] leading-[1.55] text-fg2">{description}</div>
+      <div className={passkeyPromptDescription()}>{description}</div>
     </div>
+    {/* @@V mol-2 end */}
     {onCancel != null && (
       <Button variant="ghost" size="sm" onClick={onCancel}>
         {cancelLabel}

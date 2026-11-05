@@ -20,4 +20,15 @@ export const passkeyPrompt: (props?: import('class-variance-authority/types').Cl
   'flex flex-col items-center gap-4 py-4 text-center',
 );
 
+// @@V mol-2 begin
+/** The copy column, capped at 380px. */
+export const passkeyPromptCopy: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('max-w-[380px]');
+
+/** The display-font title line. */
+export const passkeyPromptTitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mb-1.5 font-display text-lg font-bold text-fg1');
+
+/** The instruction copy under the title. */
+export const passkeyPromptDescription: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-[13px] leading-[1.55] text-fg2');
+// @@V mol-2 end
+
 export type PasskeyPromptVariants = VariantProps<typeof passkeyPrompt>;

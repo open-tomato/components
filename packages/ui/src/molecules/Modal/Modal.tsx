@@ -3,7 +3,14 @@ import { useId, type ReactNode } from 'react';
 import { Overlay, type OverlayDismiss, type OverlayVariants } from '../../atoms/Overlay';
 import { cn } from '../../lib';
 
-import { modalPanel, type ModalPanelVariants } from './Modal.variants';
+// @@V mol-2 begin
+import {
+  modalBody,
+  modalFooter,
+  modalPanel,
+  type ModalPanelVariants,
+} from './Modal.variants';
+// @@V mol-2 end
 import { ModalFooterStatus } from './ModalFooterStatus';
 import { OverlayHeader } from './OverlayHeader';
 
@@ -65,17 +72,19 @@ export const Modal: { (props: ModalProps): import('react').JSX.Element; displayN
             onClose={onClose}
           />
         )}
-        <div className="overflow-y-auto p-5 text-sm leading-relaxed text-fg2">
+        {/* @@V mol-2 begin */}
+        <div className={modalBody()}>
           {children}
         </div>
         {(footer != null || footerStatus != null) && (
-          <div className="flex shrink-0 justify-end gap-2.5 border-t border-border-soft bg-surface-sunk px-5 py-3.5">
+          <div className={modalFooter()}>
             {footerStatus != null && (
               <ModalFooterStatus>{footerStatus}</ModalFooterStatus>
             )}
             {footer}
           </div>
         )}
+        {/* @@V mol-2 end */}
       </div>
     </Overlay>
   );

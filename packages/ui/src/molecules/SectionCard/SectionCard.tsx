@@ -2,8 +2,10 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 import { cn } from '../../lib';
 
+// @@V mol-2 begin
 import {
   sectionCard,
+  sectionCardAction,
   sectionCardBody,
   sectionCardFooter,
   sectionCardHeader,
@@ -11,6 +13,7 @@ import {
   sectionCardTitle,
   type SectionCardBodyVariants,
 } from './SectionCard.variants';
+// @@V mol-2 end
 
 export interface SectionCardProps
   extends HTMLAttributes<HTMLElement>,
@@ -60,7 +63,9 @@ export const SectionCard: import('react').ForwardRefExoticComponent<SectionCardP
               <div className={sectionCardSubtitle()}>{subtitle}</div>
             )}
           </div>
-          {action != null && <div className="flex gap-2">{action}</div>}
+          {/* @@V mol-2 begin */}
+          {action != null && <div className={sectionCardAction()}>{action}</div>}
+          {/* @@V mol-2 end */}
         </header>
       )}
       <div className={sectionCardBody({ padded })}>{children}</div>

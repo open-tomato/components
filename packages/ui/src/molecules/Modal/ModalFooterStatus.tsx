@@ -2,6 +2,10 @@ import type { ReactNode } from 'react';
 
 import { cn } from '../../lib';
 
+// @@V mol-2 begin
+import { modalFooterStatus } from './Modal.variants';
+// @@V mol-2 end
+
 /**
  * The left-aligned status slot in a Modal footer (spec:
  * "ModalFooterStatus"). Driven by state changes in the
@@ -27,7 +31,9 @@ export const ModalFooterStatus: { (props: ModalFooterStatusProps): import('react
   <span
     aria-live="polite"
     className={cn(
-      'mr-auto min-w-0 truncate self-center font-mono text-[11px] text-fg3',
+      // @@V mol-2 begin
+      modalFooterStatus(),
+      // @@V mol-2 end
       className,
     )}
   >
