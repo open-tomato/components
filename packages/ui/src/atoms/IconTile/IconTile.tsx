@@ -12,7 +12,8 @@ export interface IconTileProps
   pulse?: boolean;
 }
 
-export const IconTile = forwardRef<HTMLSpanElement, IconTileProps>(
+// @@T ato-1 begin
+export const IconTile: import('react').ForwardRefExoticComponent<IconTileProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, IconTileProps>(
   ({ className, icon, tone, size, shape, pulse = false, ...props }, ref) => (
     <span
       ref={ref}
@@ -29,5 +30,6 @@ export const IconTile = forwardRef<HTMLSpanElement, IconTileProps>(
     </span>
   ),
 );
+// @@T ato-1 end
 
 IconTile.displayName = 'IconTile';

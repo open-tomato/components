@@ -9,7 +9,8 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement>, TagVariants {
   icon?: ReactNode;
 }
 
-export const Tag = forwardRef<HTMLSpanElement, TagProps>(
+// @@T ato-1 begin
+export const Tag: import('react').ForwardRefExoticComponent<TagProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, TagProps>(
   ({ className, tone, mono, icon, children, ...props }, ref) => (
     <span
       ref={ref}
@@ -23,5 +24,6 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     </span>
   ),
 );
+// @@T ato-1 end
 
 Tag.displayName = 'Tag';

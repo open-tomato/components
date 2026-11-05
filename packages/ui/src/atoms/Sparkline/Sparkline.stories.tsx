@@ -3,7 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Sparkline } from './Sparkline';
 
 /** Fixed 30-point series mirroring the original MetricTile's weekly rhythm. */
-const TOKENS_30D = [
+// @@T ato-1 begin
+const TOKENS_30D: number[] = [
+// @@T ato-1 end
+
   22, 26, 30, 12, 10, 28, 34, 38, 31, 14,
   11, 33, 39, 41, 36, 15, 13, 38, 44, 40,
   37, 16, 14, 42, 47, 45, 41, 18, 46, 52,
@@ -11,7 +14,10 @@ const TOKENS_30D = [
 
 const COST_30D = TOKENS_30D.map((v, i) => v * 0.8 + (i % 5));
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof Sparkline> = {
+// @@T ato-1 end
+
   title: 'Atoms/Sparkline',
   component: Sparkline,
   parameters: { layout: 'centered' },
@@ -38,10 +44,12 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Sparkline>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof Sparkline>;
+// @@T ato-1 end
 
 /**
  * Original-design MetricTile treatment: accent line over a faint area fill.

@@ -6,7 +6,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * confirmation screens (lg 64 / xl 72 / 2xl 80). Tints ship at 14% for
  * every tone.
  */
-export const iconTile = cva(
+// @@T ato-1 begin
+export const iconTile: (props?: ({ tone?: 'accent' | 'primary' | 'success' | null | undefined; size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | null | undefined; shape?: 'rounded' | 'circle' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   'relative inline-flex shrink-0 items-center justify-center',
   {
     variants: {
