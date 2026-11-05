@@ -19,14 +19,14 @@ import {
   // @@V org-1 end
 } from './FormKit.variants';
 
+// @@S org-1 begin
 /**
- * VerboseOption / VerboseOptionList — generalized from the original design
- * ModelOption (the original AgentEditor screen; spec:
- * "ModelOption"): a rich option row — name, badge
+ * VerboseOption / VerboseOptionList: a rich option row — name, badge
  * slot, short description — behaving as a radio or checkbox, tinting
- * accent when selected. Deliberately NOT tied to the model use case:
- * the model picker is just `options` data.
+ * accent when selected. Deliberately NOT tied to one use case:
+ * a model picker, say, is just `options` data.
  */
+// @@S org-1 end
 
 export interface VerboseOptionProps {
   /** Control semantics: exclusive pick vs independent toggle. */
@@ -36,13 +36,17 @@ export interface VerboseOptionProps {
   onSelect?: () => void;
   /** The option's name (raw: mono semibold model id). */
   label: ReactNode;
+  // @@S org-1 begin
   /**
    * Badge slot next to the name — Badges, or plain strings rendered as
-   * the original capability pills ("fast", "web", "code", …).
+   * capability pills ("fast", "web", "code", …).
    */
+  // @@S org-1 end
   badges?: ReactNode[];
   description?: ReactNode;
-  /** Extra mono line under the description (original `verbose` cost line). */
+  // @@S org-1 begin
+  /** Extra mono line under the description (a cost line, say). */
+  // @@S org-1 end
   meta?: ReactNode;
   disabled?: boolean;
   className?: string;

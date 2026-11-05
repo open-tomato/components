@@ -20,11 +20,12 @@ export interface FormFieldProps {
   labelEnd?: ReactNode;
   /** Shown under the control when there's no error. */
   hint?: ReactNode;
+  // @@S org-1 begin
   /**
-   * 'above' renders the hint between label and control — the auth screens'
-   * layout (the original Shared screen Field). Default
-   * 'below' keeps the original form-kit chapter's placement.
+   * 'above' renders the hint between label and control, as auth-style
+   * forms do. Default 'below' puts the hint under the control.
    */
+  // @@S org-1 end
   hintPlacement?: 'below' | 'above';
   /** Replaces the below-hint and turns the message danger-toned. */
   error?: ReactNode;
@@ -34,12 +35,14 @@ export interface FormFieldProps {
   children: ReactNode;
 }
 
+// @@S org-1 begin
 /**
  * The shared envelope — Field is to inputs what Touchable is to buttons:
  * it owns labelling, the hint/error slot and the controlled-value posture,
  * so no control re-implements them. Swap the control in the middle and
- * everything else comes along unchanged (the original form-controls demo).
+ * everything else comes along unchanged.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const FormField: { (props: FormFieldProps): import('react').JSX.Element; displayName: string } = ({
 // @@T org-1 end

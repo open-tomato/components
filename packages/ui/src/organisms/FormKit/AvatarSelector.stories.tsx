@@ -7,11 +7,12 @@ import {
 } from './AvatarSelector';
 import { type AvatarSelectorTone } from './FormKit.variants';
 
+// @@S org-1 begin
 /**
- * Big avatar preview + initials input + color-swatch grid (original design
- * AvatarPicker, the original AgentEditor demo; spec: the component spec
- * "AvatarSelector"). Controlled: the parent owns initials and tone.
+ * Big avatar preview + initials input + color-swatch grid. Controlled: the
+ * parent owns initials and tone.
  */
+// @@S org-1 end
 // @@T org-1 begin
 const meta: Meta<typeof AvatarSelector> = {
 // @@T org-1 end
@@ -40,22 +41,28 @@ const Demo = ({ maxLength = 2 as 1 | 2, start = 'R' }) => {
   );
 };
 
+// @@S org-1 begin
 /**
  * Spec: preview + input (2 chars max here) + 3-column swatch grid — the
- * original palette's 6 colors, selected swatch ringed. Input uppercases.
+ * palette's 6 colors, selected swatch ringed. Input uppercases.
  */
+// @@S org-1 end
 export const Default: Story = {
   args: { initials: 'R', tone: 'primary' },
   render: () => <Demo />,
 };
 
-/** The original agent picker's single-character mode. */
+// @@S org-1 begin
+/** Single-character mode. */
+// @@S org-1 end
 export const SingleCharacter: Story = {
   args: { initials: 'A', tone: 'primary', maxLength: 1 },
   render: () => <Demo maxLength={1} start="A" />,
 };
 
-/** Empty initials fall back to the original "?" placeholder. */
+// @@S org-1 begin
+/** Empty initials fall back to the "?" placeholder. */
+// @@S org-1 end
 export const EmptyFallback: Story = {
   args: { initials: '', tone: 'primary' },
   render: () => <Demo start="" />,

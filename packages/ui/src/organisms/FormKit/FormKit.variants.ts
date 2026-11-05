@@ -4,20 +4,21 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S org-1 begin
 /**
  * The form kit — every input is the SAME envelope (label + control +
  * hint/error) wrapped around a single interactive control; each control just
- * reads `value` and calls `onChange`. Mirrors
- * the original form-controls demo (+ the .otx-field-control
- * and .otx-range CSS from the original demo shell).
+ * reads `value` and calls `onChange`.
  *
- * Naming reconciliation: the original form-controls demo calls the envelope `Field`, but
- * the library already ships the original children demo Field atom (label + built-in
- * input), so the envelope is `FormField` here. The original demo's `Toggle` is the
+ * Naming: the library already ships a Field atom (label + built-in
+ * input), so the envelope is named `FormField` here. A toggle is the
  * shipped Switch atom — FormKit composes it rather than re-implementing.
  */
+// @@S org-1 end
 
-/** The focus ring every text-like control shares (.otx-field-control). */
+// @@S org-1 begin
+/** The focus ring every text-like control shares. */
+// @@S org-1 end
 const CONTROL_FOCUS = [
   'outline-none focus-visible:border-border-focus',
   'focus-visible:shadow-[0_0_0_2px_var(--bg),0_0_0_4px_color-mix(in_oklab,var(--leaf)_55%,transparent)]',
@@ -131,7 +132,9 @@ export const radioCircle: (props?: ({ checked?: boolean | null | undefined } & C
   },
 );
 
-/** The range input (.otx-range) — track fill driven by --pct. */
+// @@S org-1 begin
+/** The range input — track fill driven by --pct. */
+// @@S org-1 end
 // @@T org-1 begin
 export const sliderInput: (props?: ClassProp | undefined) => string = cva([
 // @@T org-1 end
@@ -168,13 +171,14 @@ export const fileChip: (props?: ClassProp | undefined) => string = cva([
 
 /* ── WS03d additions ("FormKit additions") ────────── */
 
+// @@S org-1 begin
 /**
- * VerboseOption — generalized from the original design ModelOption
- * (the original AgentEditor screen): a bordered option
+ * VerboseOption: a bordered option
  * row with radio/checkbox semantics that tints accent when selected.
- * Original uses the accent scale for selection (vs the primary-toned
- * RadioGroup above) — kept as rendered truth of the source screens.
+ * It uses the accent scale for selection (vs the primary-toned
+ * RadioGroup above) — kept as rendered truth of the design source.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const verboseOption: (props?: ({ selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -225,12 +229,13 @@ export const verboseCap: (props?: ClassProp | undefined) => string = cva([
   'px-[7px] py-px font-mono text-[10px] text-fg3',
 ]);
 
+// @@S org-1 begin
 /**
- * DecoratedToggle — generalized from the original design ToolPicker rows
- * (the original AgentEditor demo): a bordered row (decoration + title/description +
+ * DecoratedToggle: a bordered row (decoration + title/description +
  * switch) that tints accent when on. The ROW is the switch control; the
  * Switch atom's track/thumb cvas render decoratively inside it.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const decoratedToggle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -299,11 +304,12 @@ export const chipListPanel: (props?: ClassProp | undefined) => string = cva([
   'rounded-md border border-border-soft bg-surface-1 p-1 shadow-lg',
 ]);
 
+// @@S org-1 begin
 /**
  * AvatarSelector — big avatar preview + initials input + color-swatch
- * grid (original design AvatarPicker, the original AgentEditor demo). Tones cover the original
- * AVATAR_COLORS palette.
+ * grid. Tones cover the avatar color palette.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const avatarPreview: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end

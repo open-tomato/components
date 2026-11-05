@@ -15,7 +15,9 @@ import { Slider } from './Slider';
 import { Textarea } from './Textarea';
 import { TextInput } from './TextInput';
 
-/** Demo data from the original form-kit demo — the "New agent" form. */
+// @@S org-1 begin
+/** Demo data for the "New profile" form. */
+// @@S org-1 end
 const FK_MODELS = [
   { value: 'haiku-4', label: 'haiku-4' },
   { value: 'sonnet-4.5', label: 'sonnet-4.5' },
@@ -29,7 +31,9 @@ const FK_TOOLS = [
 ];
 const FK_VISIBILITY = [
   { value: 'private', label: 'Private', hint: 'Only you can run it' },
-  { value: 'team', label: 'Team', hint: 'Anyone in the workspace' },
+  // @@S org-1 begin
+  { value: 'team', label: 'Team', hint: 'Anyone in the group' },
+  // @@S org-1 end
 ];
 
 const BotIcon = () => (
@@ -74,7 +78,9 @@ export const TextField: Story = {
           label="Name"
           required
           htmlFor="fk-name"
-          hint="Lowercase, no spaces. Used in the agent's URL."
+          // @@S org-1 begin
+          hint="Lowercase, no spaces. Used in the profile's URL."
+          // @@S org-1 end
         >
           <TextInput
             id="fk-name"
@@ -92,7 +98,9 @@ export const TextField: Story = {
 /** The error slot replaces the hint and flips the border. */
 export const TextFieldError: Story = {
   render: function TextFieldErrorDemo() {
-    const [name, setName] = useState('My Agent');
+    // @@S org-1 begin
+    const [name, setName] = useState('My Profile');
+    // @@S org-1 end
     return (
       <div className="w-[360px]">
         <FormField
@@ -122,7 +130,9 @@ export const TextareaField: Story = {
         <FormField
           label="Description"
           htmlFor="fk-desc"
-          hint="Optional — what is this agent for?"
+          // @@S org-1 begin
+          hint="Optional — what is this profile for?"
+          // @@S org-1 end
         >
           <Textarea
             id="fk-desc"
@@ -145,7 +155,9 @@ export const CheckGroupField: Story = {
         <FormField
           label="Tools"
           required
-          hint="What this agent is allowed to call."
+          // @@S org-1 begin
+          hint="What this profile is allowed to call."
+          // @@S org-1 end
         >
           <CheckGroup
             options={FK_TOOLS}
@@ -179,19 +191,27 @@ export const RadioGroupField: Story = {
 
 export const SliderField: Story = {
   render: function SliderFieldDemo() {
-    const [tokens, setTokens] = useState(184000);
+    // @@S org-1 begin
+    const [limit, setLimit] = useState(184000);
+    // @@S org-1 end
     return (
       <div className="w-[360px]">
         <FormField
-          label="Max tokens"
+          // @@S org-1 begin
+          label="Usage limit"
+          // @@S org-1 end
           required
-          htmlFor="fk-tokens"
-          hint="Per-session ceiling."
+          // @@S org-1 begin
+          htmlFor="fk-limit"
+          hint="Per-run ceiling."
+          // @@S org-1 end
         >
           <Slider
-            id="fk-tokens"
-            value={tokens}
-            onChange={setTokens}
+            // @@S org-1 begin
+            id="fk-limit"
+            value={limit}
+            onChange={setLimit}
+            // @@S org-1 end
             min={20000}
             max={400000}
             step={4000}
@@ -210,7 +230,9 @@ export const FileDropField: Story = {
       <div className="w-[420px]">
         <FormField
           label="Seed context"
-          hint="Optional — a brief or spec the agent reads first. Drag a real .md file here."
+          // @@S org-1 begin
+          hint="Optional — a brief or spec read first. Drag a real .md file here."
+          // @@S org-1 end
         >
           <FileDrop
             value={ctx}
@@ -232,7 +254,9 @@ export const FileDropField: Story = {
 export const FileDropLanded: Story = {
   render: function FileDropLandedDemo() {
     const [ctx, setCtx] = useState<FileValue | null>({
-      name: 'agent-brief.md',
+      // @@S org-1 begin
+      name: 'brief.md',
+      // @@S org-1 end
       size: 4200,
     });
     return (
@@ -251,46 +275,62 @@ export const FileDropLanded: Story = {
   },
 };
 
-interface AgentDraft {
+// @@S org-1 begin
+interface ProfileDraft {
+// @@S org-1 end
   name: string;
   desc: string;
   model: string;
-  tokens: number;
+  // @@S org-1 begin
+  limit: number;
+  // @@S org-1 end
   tools: string[];
   visibility: string;
   autorun: boolean;
   context: FileValue | null;
 }
 
-const FK_INITIAL: AgentDraft = {
+// @@S org-1 begin
+const FK_INITIAL: ProfileDraft = {
+// @@S org-1 end
   name: '',
   desc: '',
   model: 'sonnet-4.5',
-  tokens: 184000,
+  // @@S org-1 begin
+  limit: 184000,
+  // @@S org-1 end
   tools: ['read', 'edit'],
   visibility: 'team',
   autorun: false,
   context: null,
 };
 
-function validateForm(v: AgentDraft): Partial<Record<string, string>> {
+// @@S org-1 begin
+function validateForm(v: ProfileDraft): Partial<Record<string, string>> {
+// @@S org-1 end
   const e: Partial<Record<string, string>> = {};
   if (!/^[a-z0-9][a-z0-9-]{2,}$/.test(v.name))
     e.name = 'Lowercase, numbers and dashes — at least 3 characters.';
   if (v.desc.trim().length > 0 && v.desc.trim().length < 12)
     e.desc = 'Give it a sentence, or leave it blank.';
-  if (v.tools.length === 0) e.tools = 'An agent needs at least one tool.';
+  // @@S org-1 begin
+  if (v.tools.length === 0) e.tools = 'A profile needs at least one tool.';
+  // @@S org-1 end
   return e;
 }
 
 /** The whole bundle demo form — a pure function of one values object. */
 export const NewAgentForm: Story = {
   parameters: { layout: 'padded' },
-  render: function NewAgentFormDemo() {
+  // @@S org-1 begin
+  render: function NewProfileFormDemo() {
+  // @@S org-1 end
     const [v, setV] = useState(FK_INITIAL);
     const [showErrors, setShowErrors] = useState(false);
     const set =
-      <K extends keyof AgentDraft>(k: K) => (val: AgentDraft[K]) => setV((s) => ({ ...s, [k]: val }));
+      // @@S org-1 begin
+      <K extends keyof ProfileDraft>(k: K) => (val: ProfileDraft[K]) => setV((s) => ({ ...s, [k]: val }));
+      // @@S org-1 end
     const errors = validateForm(v);
     const errFor = (k: string) => (showErrors
       ? errors[k]
@@ -304,10 +344,14 @@ export const NewAgentForm: Story = {
           </span>
           <div>
             <div className="font-display text-[17px] font-bold text-fg1">
-              New agent
+              {/* @@S org-1 begin */}
+              New profile
+              {/* @@S org-1 end */}
             </div>
             <div className="text-[12.5px] text-fg3">
-              Define a reusable agent for this workspace
+              {/* @@S org-1 begin */}
+              Define a reusable profile for this group
+              {/* @@S org-1 end */}
             </div>
           </div>
         </div>
@@ -317,7 +361,9 @@ export const NewAgentForm: Story = {
           required
           htmlFor="naf-name"
           error={errFor('name')}
-          hint="Lowercase, no spaces. Used in the agent's URL."
+          // @@S org-1 begin
+          hint="Lowercase, no spaces. Used in the profile's URL."
+          // @@S org-1 end
         >
           <TextInput
             id="naf-name"
@@ -333,7 +379,9 @@ export const NewAgentForm: Story = {
           label="Description"
           htmlFor="naf-desc"
           error={errFor('desc')}
-          hint="Optional — what is this agent for?"
+          // @@S org-1 begin
+          hint="Optional — what is this profile for?"
+          // @@S org-1 end
         >
           <Textarea
             id="naf-desc"
@@ -356,15 +404,21 @@ export const NewAgentForm: Story = {
             />
           </FormField>
           <FormField
-            label="Max tokens"
+            // @@S org-1 begin
+            label="Usage limit"
+            // @@S org-1 end
             required
-            htmlFor="naf-tokens"
-            hint="Per-session ceiling."
+            // @@S org-1 begin
+            htmlFor="naf-limit"
+            hint="Per-run ceiling."
+            // @@S org-1 end
           >
             <Slider
-              id="naf-tokens"
-              value={v.tokens}
-              onChange={set('tokens')}
+              // @@S org-1 begin
+              id="naf-limit"
+              value={v.limit}
+              onChange={set('limit')}
+              // @@S org-1 end
               min={20000}
               max={400000}
               step={4000}
@@ -377,7 +431,9 @@ export const NewAgentForm: Story = {
           label="Tools"
           required
           error={errFor('tools')}
-          hint="What this agent is allowed to call."
+          // @@S org-1 begin
+          hint="What this profile is allowed to call."
+          // @@S org-1 end
         >
           <CheckGroup
             options={FK_TOOLS}
@@ -398,7 +454,9 @@ export const NewAgentForm: Story = {
 
         <FormField
           label="Seed context"
-          hint="Optional — a brief or spec the agent reads first. Drag a real .md file here."
+          // @@S org-1 begin
+          hint="Optional — a brief or spec read first. Drag a real .md file here."
+          // @@S org-1 end
         >
           <FileDrop
             value={v.context}
@@ -418,7 +476,9 @@ export const NewAgentForm: Story = {
               Auto-run on roadmap items
             </div>
             <div className="mt-px text-xs text-fg3">
-              Seed a session whenever a matching task appears
+              {/* @@S org-1 begin */}
+              Start a run whenever a matching task appears
+              {/* @@S org-1 end */}
             </div>
           </div>
           <Switch
@@ -429,7 +489,9 @@ export const NewAgentForm: Story = {
         </div>
 
         <div className="flex items-center gap-2.5 pt-1">
-          <Button onClick={() => setShowErrors(true)}>Create agent</Button>
+          {/* @@S org-1 begin */}
+          <Button onClick={() => setShowErrors(true)}>Create profile</Button>
+          {/* @@S org-1 end */}
           <Button
             variant="secondary"
             onClick={() => {

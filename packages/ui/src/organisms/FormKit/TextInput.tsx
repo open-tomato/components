@@ -23,18 +23,20 @@ export interface TextInputProps
   TextInputVariants {
   value: string;
   onChange: (value: string) => void;
+  // @@S org-1 begin
   /**
-   * Leading slot. A string keeps the original demo's mono-prefix treatment ("@");
-   * a ReactNode renders as a 14px leading icon slot — extension sourced from
-   * the auth screens (the original Auth screen), not the
-   * original form-kit chapter.
+   * Leading slot. A string keeps the mono-prefix treatment ("@");
+   * a ReactNode renders as a 14px leading icon slot (an icon, say).
    */
+  // @@S org-1 end
   prefix?: ReactNode;
   /** Trailing slot — interactive (the auth eye-toggle is a real button). */
   suffix?: ReactNode;
 }
 
-/** Left padding per prefix character (the original demo's 12 + len * 7.5). */
+// @@S org-1 begin
+/** Left padding per prefix character (12 + len * 7.5). */
+// @@S org-1 end
 const PREFIX_PAD_BASE = 12;
 const PREFIX_PAD_PER_CHAR = 7.5;
 
