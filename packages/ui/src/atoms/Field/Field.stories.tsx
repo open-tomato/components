@@ -18,7 +18,9 @@ const SearchIcon = () => (
   </svg>
 );
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Field> = {
+// @@T ato-3 end
   title: 'Atoms/Field',
   component: Field,
   parameters: { layout: 'centered' },
@@ -42,7 +44,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Field>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

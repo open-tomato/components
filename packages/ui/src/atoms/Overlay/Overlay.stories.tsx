@@ -35,7 +35,9 @@ const DemoPanel = ({ side = false }: { side?: boolean }) => (
   </div>
 );
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Overlay> = {
+// @@T ato-3 end
   title: 'Atoms/Overlay',
   component: Overlay,
   parameters: { layout: 'fullscreen' },
@@ -67,7 +69,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Overlay>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

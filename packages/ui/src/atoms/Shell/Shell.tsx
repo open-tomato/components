@@ -1,4 +1,11 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type RefAttributes,
+} from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 
@@ -8,7 +15,12 @@ export interface ShellProps
   extends HTMLAttributes<HTMLDivElement>,
   ShellVariants {}
 
-export const Shell = forwardRef<HTMLDivElement, ShellProps>(
+// @@T ato-3 begin
+export const Shell: ForwardRefExoticComponent<
+  ShellProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLDivElement, ShellProps>(
   ({ className, padding, tone, bordered, rounded, ...props }, ref) => (
     <div
       ref={ref}

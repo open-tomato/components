@@ -38,15 +38,19 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
 /** Render-only stories still need args (the dispatcher's props are required). */
 const BASE_ARGS = { type: 'number', value: 0, locale: LOCALE } as const;
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof FormattedValue> = {
+// @@T ato-3 end
   title: 'Atoms/Formatted',
   component: FormattedValue,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof FormattedValue>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-3 begin
+type Story = StoryObj<typeof FormattedValue>;
+// @@T ato-3 end
 
 /**
  * Spec: FormattedValue dispatches to the right family member by `type` —

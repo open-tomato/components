@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+// @@T ato-3 begin
+import type { FC, ReactNode } from 'react';
+// @@T ato-3 end
 
 import * as Dialog from '@radix-ui/react-dialog';
 
@@ -28,7 +30,10 @@ export interface OverlayProps extends OverlayVariants {
   children: ReactNode;
 }
 
-export const Overlay = ({
+// @@T ato-3 begin
+export const Overlay: FC<OverlayProps> = ({
+// @@T ato-3 end
+
   open,
   onClose,
   position,
@@ -39,7 +44,7 @@ export const Overlay = ({
   label,
   className,
   children,
-}: OverlayProps) => {
+}) => {
   const canEscape = dismiss === 'both' || dismiss === 'escape';
   const canBackdrop = dismiss === 'both' || dismiss === 'backdrop';
   return (

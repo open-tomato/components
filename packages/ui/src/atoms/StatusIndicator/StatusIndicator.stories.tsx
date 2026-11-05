@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { StatusIndicator } from './StatusIndicator';
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof StatusIndicator> = {
+// @@T ato-3 end
   title: 'Atoms/StatusIndicator',
   component: StatusIndicator,
   parameters: { layout: 'centered' },
@@ -16,7 +18,7 @@ const meta = {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     pulse: { control: 'boolean' },
   },
-} satisfies Meta<typeof StatusIndicator>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -5,7 +9,16 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * lg padding is p-10 (40px) by spec.
  */
-export const shell = cva('flex flex-col w-full', {
+// @@T ato-3 begin
+export const shell: (
+  props?: {
+    padding?: 'none' | 'sm' | 'md' | 'lg' | null | undefined;
+    tone?: 'bg' | 'surface' | 'sunk' | null | undefined;
+    bordered?: boolean | null | undefined;
+    rounded?: 'none' | 'lg' | 'xl' | null | undefined;
+  } & ClassProp,
+) => string = cva('flex flex-col w-full', {
+// @@T ato-3 end
   variants: {
     padding: {
       none: 'p-0',

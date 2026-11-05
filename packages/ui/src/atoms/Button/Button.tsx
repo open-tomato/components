@@ -1,5 +1,11 @@
 import { Slot } from '@radix-ui/react-slot';
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+  type ButtonHTMLAttributes, type ReactNode } from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 import { touchable } from '../Touchable/Touchable.variants';
@@ -17,7 +23,12 @@ export interface ButtonProps
   iconTrailing?: ReactNode;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+// @@T ato-3 begin
+export const Button: ForwardRefExoticComponent<
+  ButtonProps & RefAttributes<HTMLButtonElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLButtonElement, ButtonProps>(
   (
     {
       asChild = false,

@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T ato-3 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -9,30 +13,43 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * DS pulses live dots with the pulseRing keyframes already mapped to
  * `animate-pulse-ring` in src/styles/theme.css.
  */
-export const statusIndicator = cva('inline-block shrink-0', {
-  variants: {
-    tone: {
-      ok: 'bg-success',
-      warn: 'bg-gold-500',
-      err: 'bg-danger',
-      info: 'bg-info',
-      disabled: 'bg-fg3/50',
+// @@T ato-3 begin
+export const statusIndicator: (
+  props?: {
+    tone?: 'ok' | 'warn' | 'err' | 'info' | 'disabled' | null | undefined;
+    shape?: 'circle' | 'square' | null | undefined;
+    size?: 'sm' | 'md' | 'lg' | null | undefined;
+    pulse?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva(
+// @@T ato-3 end
+
+  'inline-block shrink-0',
+  {
+    variants: {
+      tone: {
+        ok: 'bg-success',
+        warn: 'bg-gold-500',
+        err: 'bg-danger',
+        info: 'bg-info',
+        disabled: 'bg-fg3/50',
+      },
+      shape: {
+        circle: 'rounded-full',
+        square: 'rounded-[3px]',
+      },
+      size: {
+        sm: 'size-1.5',
+        md: 'size-2',
+        lg: 'size-2.5',
+      },
+      pulse: {
+        false: '',
+        true: 'animate-pulse-ring motion-reduce:animate-none',
+      },
     },
-    shape: {
-      circle: 'rounded-full',
-      square: 'rounded-[3px]',
-    },
-    size: {
-      sm: 'size-1.5',
-      md: 'size-2',
-      lg: 'size-2.5',
-    },
-    pulse: {
-      false: '',
-      true: 'animate-pulse-ring motion-reduce:animate-none',
-    },
+    defaultVariants: { tone: 'ok', shape: 'circle', size: 'md', pulse: false },
   },
-  defaultVariants: { tone: 'ok', shape: 'circle', size: 'md', pulse: false },
-});
+);
 
 export type StatusIndicatorVariants = VariantProps<typeof statusIndicator>;

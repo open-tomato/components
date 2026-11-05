@@ -4,7 +4,9 @@ import { ShellFiller } from '../../stories/fixtures';
 
 import { Shell } from './Shell';
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Shell> = {
+// @@T ato-3 end
   title: 'Atoms/Shell',
   component: Shell,
   parameters: { layout: 'padded' },
@@ -15,7 +17,7 @@ const meta = {
     rounded: { control: 'select', options: ['none', 'lg', 'xl'] },
   },
   args: { children: <ShellFiller /> },
-} satisfies Meta<typeof Shell>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

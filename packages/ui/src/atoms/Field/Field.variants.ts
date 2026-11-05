@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -6,7 +10,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * never per-call overrides.
 
  */
-export const field = cva(
+// @@T ato-3 begin
+export const field: (props?: { state?: 'default' | 'error' | 'success' | 'disabled' | null | undefined; size?: 'sm' | 'md' | null | undefined } & ClassProp) => string = cva(
+// @@T ato-3 end
+
   'w-full rounded-md bg-surface-1 border px-3 text-fg1 placeholder:text-fg3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf',
   {
     variants: {
@@ -29,16 +36,19 @@ export const field = cva(
 );
 
 /** The helper/error line under the control; color follows the state. */
-export const fieldHelper = cva('text-[11.5px]', {
-  variants: {
-    state: {
-      default: 'text-fg3',
-      error: 'text-danger',
-      success: 'text-success',
-      disabled: 'text-fg3',
+// @@T ato-3 begin
+export const fieldHelper: (props?: { state?: 'default' | 'error' | 'success' | 'disabled' | null | undefined } & ClassProp) => string =
+// @@T ato-3 end
+  cva('text-[11.5px]', {
+    variants: {
+      state: {
+        default: 'text-fg3',
+        error: 'text-danger',
+        success: 'text-success',
+        disabled: 'text-fg3',
+      },
     },
-  },
-  defaultVariants: { state: 'default' },
-});
+    defaultVariants: { state: 'default' },
+  });
 
 export type FieldVariants = VariantProps<typeof field>;

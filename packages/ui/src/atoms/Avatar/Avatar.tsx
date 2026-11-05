@@ -1,4 +1,10 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+  type HTMLAttributes } from 'react';
+// @@T ato-3 end
 
 import { cn, initials } from '../../lib';
 
@@ -11,7 +17,12 @@ export interface AvatarProps
   name: string;
 }
 
-export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
+// @@T ato-3 begin
+export const Avatar: ForwardRefExoticComponent<
+  AvatarProps & RefAttributes<HTMLSpanElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLSpanElement, AvatarProps>(
   ({ className, name, size, shape, status, ...props }, ref) => (
     <span
       ref={ref}

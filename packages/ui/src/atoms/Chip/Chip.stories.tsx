@@ -2,12 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Chip } from './Chip';
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Chip> = {
+// @@T ato-3 end
   title: 'Atoms/Chip',
   component: Chip,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof Chip>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

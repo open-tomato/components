@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Avatar } from './Avatar';
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Avatar> = {
+// @@T ato-3 end
   title: 'Atoms/Avatar',
   component: Avatar,
   parameters: { layout: 'centered' },
@@ -13,7 +15,7 @@ const meta = {
     status: { control: 'select', options: ['none', 'online', 'busy', 'away'] },
   },
   args: { name: 'refactor-bot' },
-} satisfies Meta<typeof Avatar>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

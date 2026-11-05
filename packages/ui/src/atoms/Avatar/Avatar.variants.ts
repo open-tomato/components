@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -7,7 +11,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `status` drives a bottom-right presence dot with a surface border
  * (avatarStatus below) rather than a ring on the avatar itself.
  */
-export const avatar = cva(
+// @@T ato-3 begin
+export const avatar: (
+  props?: {
+    size?: 'sm' | 'md' | 'lg' | null | undefined;
+    shape?: 'circle' | 'rounded' | null | undefined;
+  } & ClassProp,
+) => string = cva(
+// @@T ato-3 end
+
   'inline-flex items-center justify-center shrink-0 font-display font-bold text-cream-50 bg-primary',
   {
     variants: {
@@ -29,7 +41,15 @@ export const avatar = cva(
 );
 
 /** The presence dot (demo: 0.3× avatar size, 2px surface border). */
-export const avatarStatus = cva(
+// @@T ato-3 begin
+export const avatarStatus: (
+  props?: {
+    status?: 'none' | 'online' | 'busy' | 'away' | null | undefined;
+    size?: 'sm' | 'md' | 'lg' | null | undefined;
+  } & ClassProp,
+) => string = cva(
+// @@T ato-3 end
+
   'absolute -bottom-px -right-px rounded-full border-2 border-surface-1',
   {
     variants: {
