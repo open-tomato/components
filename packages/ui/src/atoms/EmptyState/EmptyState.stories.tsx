@@ -4,7 +4,9 @@ import { Button } from '../Button';
 
 import { EmptyState } from './EmptyState';
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof EmptyState> = {
+// @@T ato-1 end
   title: 'Atoms/EmptyState',
   component: EmptyState,
   parameters: { layout: 'centered' },
@@ -24,10 +26,12 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof EmptyState>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof EmptyState>;
+// @@T ato-1 end
 
 /** Defaults: md, centered, no action. */
 export const Default: Story = {};

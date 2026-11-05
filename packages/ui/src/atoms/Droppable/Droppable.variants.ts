@@ -10,7 +10,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** inline — invisible until a drag is over it, then ring + dim + glyph. */
-export const droppableInline = cva(
+// @@T ato-1 begin
+export const droppableInline: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; rounded?: 'full' | 'none' | 'sm' | 'md' | 'lg' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   [
     'relative inline-flex cursor-pointer border-none bg-transparent p-0',
     'transition-shadow',
@@ -35,7 +37,9 @@ export const droppableInline = cva(
 );
 
 /** The media inside the inline target dims while a drag is over it. */
-export const droppableInlineMedia = cva(
+// @@T ato-1 begin
+export const droppableInlineMedia: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; rounded?: 'full' | 'none' | 'sm' | 'md' | 'lg' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   'inline-flex overflow-hidden transition-[filter]',
   {
     variants: {
@@ -57,7 +61,9 @@ export const droppableInlineMedia = cva(
 );
 
 /** zone — a standing dashed target that intensifies under a drag. */
-export const droppableZone = cva(
+// @@T ato-1 begin
+export const droppableZone: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; compact?: boolean | null | undefined; disabled?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   [
     'flex w-full flex-col items-center border-[1.5px] border-dashed',
     'rounded-lg text-fg2 cursor-pointer',
@@ -85,7 +91,9 @@ export const droppableZone = cva(
 );
 
 /** The zone's icon puck — leaf-tinted, lifts while a drag hovers. */
-export const droppableZoneIcon = cva(
+// @@T ato-1 begin
+export const droppableZoneIcon: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; compact?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   [
     'inline-flex items-center justify-center rounded-md',
     'transition-transform ease-out',
@@ -108,7 +116,9 @@ export const droppableZoneIcon = cva(
 );
 
 /** region — a full-area overlay floated over wrapped content on drag. */
-export const droppableRegionOverlay = cva(
+// @@T ato-1 begin
+export const droppableRegionOverlay: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   [
     'absolute inset-0 z-[5] flex flex-col items-center justify-center gap-3',
     'rounded-lg border-2 border-dashed text-white',
@@ -128,7 +138,9 @@ export const droppableRegionOverlay = cva(
 );
 
 /** The region overlay's glyph puck. */
-export const droppableRegionIcon = cva(
+// @@T ato-1 begin
+export const droppableRegionIcon: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-1 end
   'flex size-14 items-center justify-center rounded-full shadow-lg',
   {
     variants: {

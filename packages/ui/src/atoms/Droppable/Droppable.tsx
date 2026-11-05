@@ -46,7 +46,8 @@ export interface DroppableInlineProps
   glyph?: ReactNode;
 }
 
-export const DroppableInline = ({
+// @@T ato-1 begin
+export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
   onReject,
@@ -55,7 +56,7 @@ export const DroppableInline = ({
   glyph,
   className,
   children,
-}: DroppableInlineProps) => {
+}: DroppableInlineProps): import('react').JSX.Element => {
   const { state, reason, handlers } = useDroppable({
     accept,
     onDrop,
@@ -100,7 +101,8 @@ export const DroppableInline = ({
       {input}
     </button>
   );
-};
+}) as { (p: DroppableInlineProps): import('react').JSX.Element; displayName: string };
+// @@T ato-1 end
 
 DroppableInline.displayName = 'DroppableInline';
 
@@ -112,7 +114,8 @@ export interface DroppableZoneProps extends DroppableBaseProps {
   compact?: boolean;
 }
 
-export const DroppableZone = ({
+// @@T ato-1 begin
+export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
   onReject,
@@ -123,7 +126,7 @@ export const DroppableZone = ({
   compact = false,
   className,
   children,
-}: DroppableZoneProps) => {
+}: DroppableZoneProps): import('react').JSX.Element => {
   const { state, reason, handlers } = useDroppable({
     accept,
     onDrop,
@@ -181,7 +184,8 @@ export const DroppableZone = ({
       {input}
     </div>
   );
-};
+}) as { (p: DroppableZoneProps): import('react').JSX.Element; displayName: string };
+// @@T ato-1 end
 
 DroppableZone.displayName = 'DroppableZone';
 
@@ -192,7 +196,8 @@ export interface DroppableRegionProps extends DroppableBaseProps {
   minHeight?: number;
 }
 
-export const DroppableRegion = ({
+// @@T ato-1 begin
+export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
   onReject,
@@ -202,7 +207,7 @@ export const DroppableRegion = ({
   minHeight = 200,
   className,
   children,
-}: DroppableRegionProps) => {
+}: DroppableRegionProps): import('react').JSX.Element => {
   const { state, reason, handlers } = useDroppable({
     accept,
     onDrop,
@@ -241,7 +246,8 @@ export const DroppableRegion = ({
       </div>
     </div>
   );
-};
+}) as { (p: DroppableRegionProps): import('react').JSX.Element; displayName: string };
+// @@T ato-1 end
 
 DroppableRegion.displayName = 'DroppableRegion';
 
@@ -253,7 +259,8 @@ export type DroppableProps =
   | ({ feedback: 'region' } & DroppableRegionProps);
 
 /** The one public component — `feedback` picks the presentation. */
-export const Droppable = (props: DroppableProps) => {
+// @@T ato-1 begin
+export const Droppable: { (props: DroppableProps): import('react').JSX.Element; displayName: string } = ((props: DroppableProps): import('react').JSX.Element => {
   if (props.feedback === 'inline') {
     const { feedback: _feedback, ...rest } = props;
     return <DroppableInline {...rest} />;
@@ -264,6 +271,7 @@ export const Droppable = (props: DroppableProps) => {
   }
   const { feedback: _feedback, ...rest } = props;
   return <DroppableZone {...rest} />;
-};
+}) as { (props: DroppableProps): import('react').JSX.Element; displayName: string };
+// @@T ato-1 end
 
 Droppable.displayName = 'Droppable';

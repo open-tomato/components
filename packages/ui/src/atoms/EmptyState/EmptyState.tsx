@@ -14,7 +14,8 @@ export interface EmptyStateProps
   action?: ReactNode;
 }
 
-export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
+// @@T ato-1 begin
+export const EmptyState: import('react').ForwardRefExoticComponent<EmptyStateProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ className, size, align, title, description, action, ...props }, ref) => (
     <div
       ref={ref}
@@ -36,5 +37,6 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
     </div>
   ),
 );
+// @@T ato-1 end
 
 EmptyState.displayName = 'EmptyState';
