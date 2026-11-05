@@ -13,7 +13,9 @@ import {
 import { cn } from '../../lib';
 import { devError } from '../../lib/dev';
 
-import { icon, type IconVariants } from './Icon.variants';
+// @@V ato-2 begin
+import { icon, iconPlaceholder, type IconVariants } from './Icon.variants';
+// @@V ato-2 end
 
 /** Matches the stroke weight of the kit's hand-rolled glyphs (lib/icons). */
 const DEFAULT_STROKE_WIDTH = 1.75;
@@ -52,7 +54,9 @@ const GlyphPlaceholder = ({ size, pending = false }: { size: number; pending?: b
   <span
     aria-hidden
     data-glyph-pending={pending || undefined}
-    className="inline-block"
+    // @@V ato-2 begin
+    className={iconPlaceholder()}
+    // @@V ato-2 end
     style={{ width: size, height: size }}
   />
 );

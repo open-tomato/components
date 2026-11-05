@@ -7,12 +7,17 @@ import {
 
 import { cn } from '../../lib';
 
+// @@V ato-2 begin
 import {
   menu,
   menuItem,
+  menuItemLabel,
+  menuLabel,
+  menuSep,
   type MenuItemVariants,
   type MenuVariants,
 } from './Menu.variants';
+// @@V ato-2 end
 
 /**
  * Compound API:
@@ -89,7 +94,9 @@ import('react').ForwardRefExoticComponent<MenuItemProps & import('react').RefAtt
       {...props}
     >
       {icon}
-      <span className="min-w-0 flex-1 truncate">{children}</span>
+      {/* @@V ato-2 begin */}
+      <span className={menuItemLabel()}>{children}</span>
+      {/* @@V ato-2 end */}
       {trailing}
     </DropdownMenu.Item>
   ),
@@ -106,10 +113,9 @@ import('react').ForwardRefExoticComponent<Omit<DropdownMenu.DropdownMenuLabelPro
 >(({ className, ...props }, ref) => (
   <DropdownMenu.Label
     ref={ref}
-    className={cn(
-      'px-2.5 pb-[3px] pt-[5px] font-mono text-[10.5px] uppercase tracking-[0.08em] text-fg3',
-      className,
-    )}
+    // @@V ato-2 begin
+    className={cn(menuLabel(), className)}
+    // @@V ato-2 end
     {...props}
   />
 ));
@@ -125,7 +131,9 @@ import('react').ForwardRefExoticComponent<Omit<DropdownMenu.DropdownMenuSeparato
 >(({ className, ...props }, ref) => (
   <DropdownMenu.Separator
     ref={ref}
-    className={cn('mx-0.5 my-1 h-px bg-border-soft', className)}
+    // @@V ato-2 begin
+    className={cn(menuSep(), className)}
+    // @@V ato-2 end
     {...props}
   />
 ));

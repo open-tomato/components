@@ -33,3 +33,8 @@ export const icon:
 });
 
 export type IconVariants = VariantProps<typeof icon>;
+
+// @@V ato-2 begin
+/** Same-box stand-in shown while a glyph chunk loads (or for unknown names). */
+export const iconPlaceholder: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('inline-block');
+// @@V ato-2 end
