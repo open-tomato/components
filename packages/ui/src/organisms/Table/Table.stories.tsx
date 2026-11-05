@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { useState } from 'react';
 
+// @@S mol-3 begin
+import { StatusIndicator } from '../../atoms/StatusIndicator';
+import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
+// @@S mol-3 end
 // @@S org-2 begin
 import { makeColumns, SESSIONS as ITEMS, type Session as Item } from '../../stories/sessions';
 // @@S org-2 end
@@ -224,12 +228,19 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     key: 'item',
     header: 'Item',
     // @@S org-2 end
-    cell: (r) => renderCellContent('session-cell', {
-      name: r.name,
-      status: r.status,
-      agentInstanceId: r.id,
-      branch: `feat/${r.name}`,
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-cell', {
+      leading: (
+        <StatusIndicator
+          tone={ACTIVITY_STATUS_TONE[r.status]}
+          pulse={r.status === 'running'}
+          label={r.status}
+        />
+      ),
+      title: r.name,
+      subtitle: `${r.id} · feat/${r.name}`,
     }),
+    // @@S mol-3 end
   },
   {
     // @@S org-2 begin
@@ -237,13 +248,14 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     header: 'Owner · Model',
     // @@S org-2 end
     width: 170,
-    cell: (r) => renderCellContent('agent-cell', {
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-cell', {
       // @@S org-2 begin
-      name: r.owner,
+      title: r.owner,
       // @@S org-2 end
-      model: r.model,
-      tone: r.tone,
+      subtitle: r.model,
     }),
+    // @@S mol-3 end
   },
   {
     key: 'status',
@@ -292,7 +304,9 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     key: 'by',
     header: 'By',
     width: 96,
-    cell: (r) => renderCellContent('user-inline', { handle: r.by }),
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-inline', { title: r.by }),
+    // @@S mol-3 end
   },
   {
     key: 'menu',
@@ -317,8 +331,8 @@ const ConfigTable = Table<ItemRow>;
  * // @@S org-2 begin
  * The self-describing table: every column resolves its renderer
  * from the `{entity}-{variant}` type registry, mirroring the JSON table
- * config in the page spec (item cell / owner cell / badge /
- * usage progress / cost over time / user-inline / context-menu).
+ * config in the page spec (entity-cell / badge / quota-progress /
+ * amount-over-time / entity-inline / context-menu).
  * Fidelity source: the original screen's table region, captured
  * light+dark during the one-time port fidelity check. Spec-over-original
  * divergences: the usage bar colors by consumption thresholds, not

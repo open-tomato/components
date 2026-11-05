@@ -19,55 +19,42 @@ import { CellValue, type CellValueProps } from '../../molecules/CellContent/Cell
 // @@S mol-1 begin
 import { QuotaProgress, type QuotaProgressProps } from '../../molecules/CellContent/QuotaUsage';
 // @@S mol-1 end
-import { AgentCell, type AgentCellProps } from '../../molecules/KnownEntities/AgentCell';
-import { AgentTitle, type AgentTitleProps } from '../../molecules/KnownEntities/AgentTitle';
-import { BranchInline, type BranchInlineProps } from '../../molecules/KnownEntities/BranchInline';
-import {
-  ModelCell,
-  ModelFooter,
-  type ModelCellProps,
-  type ModelFooterProps,
-} from '../../molecules/KnownEntities/ModelCell';
-import { SessionCell, type SessionCellProps } from '../../molecules/KnownEntities/SessionCell';
-import { SessionInline, type SessionInlineProps } from '../../molecules/KnownEntities/SessionInline';
-import { TaskCell, type TaskCellProps } from '../../molecules/KnownEntities/TaskCell';
-import { ToolTitle, type ToolTitleProps } from '../../molecules/KnownEntities/ToolTitle';
-import { UserInline, type UserInlineProps } from '../../molecules/KnownEntities/UserInline';
+// @@S mol-3 begin
+import { Entity, type EntityProps } from '../../molecules/KnownEntities/Entity';
+import { ModelFooter, type ModelFooterProps } from '../../molecules/KnownEntities/ModelFooter';
+// @@S mol-3 end
 
 import { RowContextAction, type RowContextActionProps } from './RowContextAction';
 // @@V org-2 begin
 import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
 // @@V org-2 end
 
+// @@S mol-3 begin
 /**
- * Self-describing column types (spec: "Known
- * Entities" — "a self defining table grid can infer the component to use
- * if the data type for a column is of `{entity}-{variant}`"). Target
- * shape: the JSON table configs in the sessions-page spec / the roadmap-page spec
- * (`session-cell`, `agent-cell`, `quota-progress`, `amount-over-time`,
- * `user-inline`, `task-cell`, `badge`, `text`, `relative-time`,
- * `context-menu`, …).
+ * Self-describing column types: a self-defining table grid can infer the
+ * component to use if the data type for a column is of
+ * `{entity}-{variant}`. Target shape: JSON table configs naming types such
+ * as (`entity-cell`, `entity-inline`, `entity-title`, `quota-progress`,
+ * `amount-over-time`, `badge`, `text`, `relative-time`, `context-menu`, …).
  *
  * A lightweight lookup, deliberately: one typed data contract per type
  * (`CellTypeDataMap`) and one render function per type. A config-driven
  * table resolves a column's `type` string with `isKnownCellType` and
  * renders each row through `renderCellContent(type, data)` from its
  * column `cell` — the registry never wraps or replaces the Table's own
- * column machinery.
+ * column machinery. The `entity-*` types render `Entity`; the kinds they
+ * can name come from the `EntityKindsProvider` the implementor mounts.
  */
+// @@S mol-3 end
 
 export interface CellTypeDataMap {
   /* known entities */
-  'agent-title': AgentTitleProps;
-  'agent-cell': AgentCellProps;
-  'session-inline': SessionInlineProps;
-  'session-cell': SessionCellProps;
-  'model-cell': ModelCellProps;
+  // @@S mol-3 begin
+  'entity-inline': EntityProps;
+  'entity-cell': EntityProps;
+  'entity-title': EntityProps;
   'model-footer': ModelFooterProps;
-  'branch-inline': BranchInlineProps;
-  'user-inline': UserInlineProps;
-  'task-cell': TaskCellProps;
-  'tool-title': ToolTitleProps;
+  // @@S mol-3 end
   /* cell-content kit */
   'value': CellValueProps;
   'double-line': CellDoubleLineProps;
@@ -92,16 +79,12 @@ type CellRegistry = {
 };
 
 const registry: CellRegistry = {
-  'agent-title': (d) => <AgentTitle {...d} />,
-  'agent-cell': (d) => <AgentCell {...d} />,
-  'session-inline': (d) => <SessionInline {...d} />,
-  'session-cell': (d) => <SessionCell {...d} />,
-  'model-cell': (d) => <ModelCell {...d} />,
+  // @@S mol-3 begin
+  'entity-inline': (d) => <Entity {...d} layout="inline" />,
+  'entity-cell': (d) => <Entity {...d} layout="cell" />,
+  'entity-title': (d) => <Entity {...d} layout="title" />,
   'model-footer': (d) => <ModelFooter {...d} />,
-  'branch-inline': (d) => <BranchInline {...d} />,
-  'user-inline': (d) => <UserInline {...d} />,
-  'task-cell': (d) => <TaskCell {...d} />,
-  'tool-title': (d) => <ToolTitle {...d} />,
+  // @@S mol-3 end
   'value': (d) => <CellValue {...d} />,
   'double-line': (d) => <CellDoubleLine {...d} />,
   'status': (d) => <CellStatus {...d} />,
@@ -142,16 +125,12 @@ const registry: CellRegistry = {
  * the consuming app's job at its config boundary.
  */
 const REQUIRED_KEYS: Record<KnownCellType, string[]> = {
-  'agent-title': ['name'],
-  'agent-cell': ['name', 'model'],
-  'session-inline': ['name', 'status'],
-  'session-cell': ['name', 'status', 'agentInstanceId'],
-  'model-cell': ['name'],
+  // @@S mol-3 begin
+  'entity-inline': [],
+  'entity-cell': [],
+  'entity-title': [],
   'model-footer': ['name'],
-  'branch-inline': ['name'],
-  'user-inline': ['handle'],
-  'task-cell': ['title'],
-  'tool-title': ['name', 'type', 'slug'],
+  // @@S mol-3 end
   'value': [],
   'double-line': ['title'],
   // status/value: every key is optional (tone defaults to ok).

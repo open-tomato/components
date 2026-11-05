@@ -20,18 +20,20 @@ import {
   confirmPopoverContent,
 } from './ConfirmPopover.variants';
 
+// @@S mol-3 begin
 /**
- * The reusable confirmation pattern (the original TopbarLive demo; spec:
- * the app-shell spec "Confirmation popover"). Two flavours:
+ * The reusable confirmation pattern (spec: the app-shell spec
+ * "Confirmation popover"). Two flavours:
  *
  * - `ConfirmPopover` — standalone: anchors the panel to any trigger.
  * - `ConfirmInline` — inline: renders the panel in-place, e.g. swapped in
  *   for a menu item (ProfileMenu logout, RowContextAction destructive).
  *
- * The message must always NAME the action ("Delete the agent
- * the-changelog-bot?"), never a bare "are you sure?" — and `confirmLabel`
+ * The message must always NAME the action ("Delete the item
+ * example-item?"), never a bare "are you sure?" — and `confirmLabel`
  * names it again ("Yes, delete"), never generic OK.
  */
+// @@S mol-3 end
 
 export interface ConfirmInlineProps {
   /** Names the action and its object — never a bare "are you sure?". */

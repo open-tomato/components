@@ -4,18 +4,23 @@ import { useState } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { Badge } from '../../atoms/Badge';
+// @@S mol-3 begin
+import { EntityKindsProvider } from '../../molecules/KnownEntities/EntityKinds';
+import { type EntityKinds } from '../../molecules/KnownEntities/entityKindsContext';
+// @@S mol-3 end
 
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
-// @@S org-1 begin
+// @@S mol-3 begin
 /**
- * A ⌘K search box with anchored suggestions. Five kinds, each with its
- * own accent puck + pill.
+ * A ⌘K search box with anchored suggestions. Each suggestion's `kind` is a
+ * key into the `EntityKinds` map — here a neutral demo map of five kinds,
+ * each with its own accent puck + pill.
  * Keyboard-driven; Enter with no match falls through to the full search
  * page. Sibling of CommandPalette, not a variant of it — see the
  * component docblock for the recorded relationship decision.
  */
-// @@S org-1 end
+// @@S mol-3 end
 // @@T org-1 begin
 const meta: Meta<typeof SearchSuggest> = {
 // @@T org-1 end
@@ -23,33 +28,52 @@ const meta: Meta<typeof SearchSuggest> = {
   component: SearchSuggest,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  // @@S mol-3 begin
+  decorators: [
+    (Story) => (
+      <EntityKindsProvider kinds={DEMO_KINDS}>
+        <Story />
+      </EntityKindsProvider>
+    ),
+  ],
+  // @@S mol-3 end
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S org-1 begin
+// @@S mol-3 begin
+/** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
+const DEMO_KINDS: EntityKinds = {
+  worker: { icon: 'bot', tone: 'primary' },
+  run: { icon: 'terminal', tone: 'accent' },
+  task: { icon: 'list', tone: 'gold' },
+  connector: { icon: 'cpu', tone: 'info' },
+  doc: { icon: 'book', tone: 'success' },
+};
+
 /** Sample suggestions — one of each kind. */
-// @@S org-1 end
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · stage-7d2f' },
-  { kind: 'session', label: 'settings page draft', sub: '12m ago · sam · model-a' },
-  { kind: 'task', label: 'Add per-tool usage chart to overview page', sub: 'roadmap · high' },
-  { kind: 'tool', label: 'github-issues', sub: 'MCP · connected' },
+  { kind: 'worker', label: 'auth-refactor', sub: 'running · stage-7d2f' },
+  { kind: 'run', label: 'settings page draft', sub: '12m ago · sam' },
+  { kind: 'task', label: 'Add per-connector usage chart to usage page', sub: 'roadmap · high' },
+  { kind: 'connector', label: 'github-issues', sub: 'MCP · connected' },
   { kind: 'doc', label: 'Composting context between runs', sub: 'docs/experiments' },
 ];
+// @@S mol-3 end
 
-// @@S org-1 begin
+// @@S mol-3 begin
 /** Resting input: search icon left, ⌘K chip right. */
-// @@S org-1 end
+// @@S mol-3 end
 export const Default: Story = {
   args: { suggestions: SUGGESTIONS },
 };
 
 // @@S org-1 begin
 /**
- * Panel open with the five kinds, each carrying its own accent on both
- * the icon puck and the trailing kind pill.
+ * Panel open with the five kinds, each carrying its own accent (worker→
+ * primary, run→accent, task→gold, connector→info, doc→success) on both the
+ * icon puck and the trailing kind pill.
  */
 // @@S org-1 end
 export const Open: Story = {

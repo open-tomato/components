@@ -6,7 +6,9 @@ import { Tag } from '../../atoms/Tag';
 
 import { Drawer } from './Drawer';
 
-/** Demo session-detail body. */
+// @@S mol-3 begin
+/** Demo item-detail body. */
+// @@S mol-3 end
 const DemoBody = () => (
   <div className="flex flex-col gap-[18px]">
     <div className="flex items-center gap-3">
@@ -32,7 +34,9 @@ const DemoBody = () => (
       {[
         ['Model', 'sonnet-4.5'],
         ['Elapsed', '4m 12s'],
-        ['Tokens', '184.2k'],
+        // @@S mol-3 begin
+        ['Units', '184.2k'],
+        // @@S mol-3 end
         ['Tools', '4 active'],
       ].map(([k, v]) => (
         <div
@@ -71,7 +75,9 @@ const meta: Meta<typeof Drawer> = {
   args: {
     open: true,
     onClose: () => {},
-    eyebrow: 'Session',
+    // @@S mol-3 begin
+    eyebrow: 'Item',
+    // @@S mol-3 end
     title: 'refactor-bot · split-primitives',
     children: <DemoBody />,
     footer: (

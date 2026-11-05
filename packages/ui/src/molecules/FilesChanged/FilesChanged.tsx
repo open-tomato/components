@@ -76,8 +76,9 @@ const iconFor = (file: FileChange): IconName => {
   return EXTENSION_ICONS[extension] ?? 'file';
 };
 
+// @@S mol-3 begin
 /**
- * FilesChanged — the "files touched" card (session view, PR summaries).
+ * FilesChanged — the "files touched" card (detail views, PR summaries).
  * Spec: "FilesChanged" (no design artboard):
  * header carries the file count + total additions (green) and deletions
  * (red); each row shows a file-type icon, the path, and `+n` / `-n`.
@@ -85,6 +86,7 @@ const iconFor = (file: FileChange): IconName => {
  * Interpretation decision: zero deltas render dimmed (`+0`/`-0` at half
  * opacity) so the columns stay scannable without shouting zeros.
  */
+// @@S mol-3 end
 // @@T mol-3 begin
 export const FilesChanged: import('react').ForwardRefExoticComponent<
   FilesChangedProps & import('react').RefAttributes<HTMLElement>

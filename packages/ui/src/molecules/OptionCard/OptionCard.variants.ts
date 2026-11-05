@@ -4,10 +4,12 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S mol-3 begin
 /**
- * OptionCard — one selectable card for both auth pickers: workspace choice
+ * OptionCard — one selectable card for both pickers: group choice
  * (centered, 20px radio) and 2FA method choice (top-aligned, 18px radio).
  */
+// @@S mol-3 end
 // @@T mol-3 begin
 export const optionCard: (props?: { selected?: boolean | null | undefined; align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva(
 // @@T mol-3 end
@@ -31,7 +33,9 @@ export const optionCard: (props?: { selected?: boolean | null | undefined; align
   },
 );
 
-/** Workspace titles are display-face 15px; 2FA method titles body 14px. */
+// @@S mol-3 begin
+/** Centered titles are display-face 15px; top-aligned method titles body 14px. */
+// @@S mol-3 end
 // @@T mol-3 begin
 export const optionCardTitle: (props?: { align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva('font-bold text-fg1', {
 // @@T mol-3 end

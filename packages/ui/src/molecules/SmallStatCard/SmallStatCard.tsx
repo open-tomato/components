@@ -33,7 +33,9 @@ export interface SmallStatCardProps
    * (e.g. `<FormattedCurrency>`) to take over formatting.
    */
   value: number | ReactNode;
-  /** Unit suffix — small, greyed, right of the value (`tokens`, `runs`). */
+  // @@S mol-3 begin
+  /** Unit suffix — small, greyed, right of the value (`units`, `runs`). */
+  // @@S mol-3 end
   unit?: string;
   /** Renders the suffix as `/ goal` (current / goal), before any unit. */
   goal?: number;
@@ -47,8 +49,9 @@ export interface SmallStatCardProps
   footer?: ReactNode;
 }
 
+// @@S mol-3 begin
 /**
- * SmallStatCard — at-a-glance stat tile (Overview/Sessions hero rows).
+ * SmallStatCard — at-a-glance stat tile (hero rows of overview pages).
  * Design source: original design `MetricTile` (the original usage screen); contract:
  * "SmallStatCard".
  *
@@ -58,6 +61,7 @@ export interface SmallStatCardProps
  * - Numeric values format via the shared human-readable formatter; any
  *   ReactNode value renders verbatim for currency/custom cases.
  */
+// @@S mol-3 end
 // @@T mol-3 begin
 export const SmallStatCard: import('react').ForwardRefExoticComponent<
   SmallStatCardProps & import('react').RefAttributes<HTMLDivElement>

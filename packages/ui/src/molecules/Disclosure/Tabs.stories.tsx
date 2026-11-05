@@ -47,7 +47,9 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Session tabs: strip + one panel, first tab active. */
+// @@S mol-3 begin
+/** Item tabs: strip + one panel, first tab active. */
+// @@S mol-3 end
 export const Default: Story = {
   render: () => (
     <Tabs defaultValue="overview">

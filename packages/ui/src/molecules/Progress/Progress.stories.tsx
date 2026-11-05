@@ -34,7 +34,9 @@ export const DangerThreshold: Story = {
   args: { value: 92, tone: 'danger', 'aria-label': 'Token budget' },
 };
 
-/** Indeterminate — "agent thinking". */
+// @@S mol-3 begin
+/** Indeterminate — "work in progress". */
+// @@S mol-3 end
 export const Indeterminate: Story = {
   args: { indeterminate: true, 'aria-label': 'Working' },
 };
