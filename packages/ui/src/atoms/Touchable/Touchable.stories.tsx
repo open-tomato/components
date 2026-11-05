@@ -33,7 +33,9 @@ const DemoSurface = ({ stretch = false }: { stretch?: boolean }) => (
   </span>
 );
 
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof Touchable> = {
+// @@T ato-2 end
   title: 'Atoms/Touchable',
   component: Touchable,
   parameters: { layout: 'centered' },
@@ -44,7 +46,7 @@ const meta = {
       options: ['none', 'sm', 'md', 'lg', 'full'],
     },
   },
-} satisfies Meta<typeof Touchable>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

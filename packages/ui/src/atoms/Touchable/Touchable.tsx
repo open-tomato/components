@@ -16,7 +16,10 @@ export interface TouchableProps
   asChild?: boolean;
 }
 
-export const Touchable = forwardRef<HTMLButtonElement, TouchableProps>(
+// @@T ato-2 begin
+export const Touchable:
+import('react').ForwardRefExoticComponent<TouchableProps & import('react').RefAttributes<HTMLButtonElement>> = forwardRef<HTMLButtonElement, TouchableProps>(
+// @@T ato-2 end
   (
     {
       asChild = false,

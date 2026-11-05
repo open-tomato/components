@@ -5,7 +5,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * Decoration is supplied by whatever composes inside it (Card, Shell, …).
  */
-export const touchable = cva(
+// @@T ato-2 begin
+export const touchable:
+(props?: { inline?: boolean | null; stretch?: boolean | null; noBrightness?: boolean | null; rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full' | null } & import('class-variance-authority/types').ClassProp) => string = cva(
+// @@T ato-2 end
   [
     'relative cursor-pointer select-none items-center',
     'transition-[transform,filter] active:scale-[0.97]',

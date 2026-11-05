@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Switch } from './Switch';
 
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof Switch> = {
+// @@T ato-2 end
   title: 'Atoms/Switch',
   component: Switch,
   parameters: { layout: 'centered' },
@@ -11,7 +13,7 @@ const meta = {
     size: { control: 'select', options: ['sm', 'md'] },
     tone: { control: 'select', options: ['accent', 'primary'] },
   },
-} satisfies Meta<typeof Switch>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
