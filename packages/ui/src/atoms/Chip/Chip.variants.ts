@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -7,7 +11,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * Always accent-tinted; the padding tightens on the remove side to
  * optically balance the round button.
  */
-export const chip = cva(
+// @@T ato-3 begin
+export const chip: (
+  props?: {
+    removable?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva(
+// @@T ato-3 end
+
   'inline-flex items-center gap-[7px] rounded-full border bg-accent-soft border-accent-tint text-fg1 text-[12.5px] font-semibold',
   {
     variants: {

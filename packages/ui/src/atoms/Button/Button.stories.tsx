@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Button } from './Button';
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof Button> = {
+// @@T ato-3 end
   title: 'Atoms/Button',
   component: Button,
   parameters: { layout: 'centered' },
@@ -14,7 +16,7 @@ const meta = {
     },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

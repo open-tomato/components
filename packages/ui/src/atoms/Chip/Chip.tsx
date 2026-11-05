@@ -1,4 +1,10 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+  type HTMLAttributes, type ReactNode } from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 import { Touchable } from '../Touchable';
@@ -12,7 +18,12 @@ export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   onRemove?: () => void;
 }
 
-export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
+// @@T ato-3 begin
+export const Chip: ForwardRefExoticComponent<
+  ChipProps & RefAttributes<HTMLSpanElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLSpanElement, ChipProps>(
   ({ className, icon, onRemove, children, ...props }, ref) => (
     <span
       ref={ref}
