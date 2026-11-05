@@ -154,5 +154,52 @@ export const droppableRegionIcon: (props?: ({ state?: 'idle' | 'over' | 'reject'
   },
 );
 
+// @@V ato-1 begin
+/** The inline target's glyph layer, shown only while a drag hovers. */
+export const droppableInlineGlyph: (props?: ({ visible?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  'pointer-events-none absolute inset-0 flex items-center justify-center text-white transition-opacity',
+  {
+    variants: {
+      visible: {
+        true: 'opacity-100',
+        false: 'opacity-0',
+      },
+    },
+  },
+);
+
+/** The zone's label: smaller when compact, danger-toned on reject. */
+export const droppableZoneLabel: (props?: ({ compact?: boolean | null | undefined; rejected?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  'font-semibold',
+  {
+    variants: {
+      compact: {
+        true: 'text-[13px]',
+        false: 'text-sm',
+      },
+      rejected: {
+        true: 'text-danger',
+        false: 'text-fg1',
+      },
+    },
+  },
+);
+
+/** The zone's hint line under the label. */
+export const droppableZoneHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('font-mono text-[11.5px] text-fg3');
+
+/** region — the wrapper the overlay is positioned against. */
+export const droppableRegion: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('relative rounded-lg');
+
+/** The region overlay's label. */
+export const droppableRegionLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('font-display text-lg font-bold [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]');
+
+/** The region overlay's hint line under the label. */
+export const droppableRegionHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-[13px] opacity-85 [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]');
+
+/** The hidden file input behind click-to-pick. */
+export const droppableFileInput: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('hidden');
+// @@V ato-1 end
+
 export type DroppableInlineVariants = VariantProps<typeof droppableInline>;
 export type DroppableZoneVariants = VariantProps<typeof droppableZone>;

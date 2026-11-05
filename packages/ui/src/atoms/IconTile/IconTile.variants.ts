@@ -40,4 +40,9 @@ export const iconTile: (props?: ({ tone?: 'accent' | 'primary' | 'success' | nul
   },
 );
 
+// @@V ato-1 begin
+/** The animated success ring drawn over the tile when `pulse` is on. */
+export const iconTilePulse: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('absolute -inset-1.5 rounded-full border-2 border-current opacity-35 motion-safe:animate-pulse-ring');
+// @@V ato-1 end
+
 export type IconTileVariants = VariantProps<typeof iconTile>;

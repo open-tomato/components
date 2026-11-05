@@ -2,7 +2,9 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 import { cn } from '../../lib';
 
-import { iconTile, type IconTileVariants } from './IconTile.variants';
+// @@V ato-1 begin
+import { iconTile, iconTilePulse, type IconTileVariants } from './IconTile.variants';
+// @@V ato-1 end
 
 export interface IconTileProps
   extends HTMLAttributes<HTMLSpanElement>,
@@ -24,7 +26,9 @@ export const IconTile: import('react').ForwardRefExoticComponent<IconTileProps &
       {pulse && (
         <span
           aria-hidden
-          className="absolute -inset-1.5 rounded-full border-2 border-current opacity-35 motion-safe:animate-pulse-ring"
+          // @@V ato-1 begin
+          className={iconTilePulse()}
+          // @@V ato-1 end
         />
       )}
     </span>

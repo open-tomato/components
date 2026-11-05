@@ -36,4 +36,9 @@ export const badge: (props?: ({ tone?: 'accent' | 'info' | 'success' | 'danger' 
   },
 );
 
+// @@V ato-1 begin
+/** The optional leading dot: a 6px circle in the tone's current color. */
+export const badgeDot: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('size-1.5 rounded-full bg-current');
+// @@V ato-1 end
+
 export type BadgeVariants = VariantProps<typeof badge>;

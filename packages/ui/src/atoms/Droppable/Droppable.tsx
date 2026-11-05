@@ -4,15 +4,23 @@ import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 import { touchable } from '../Touchable/Touchable.variants';
 
+// @@V ato-1 begin
 import {
   droppableInline,
+  droppableInlineGlyph,
   droppableInlineMedia,
+  droppableRegion,
+  droppableRegionHint,
   droppableRegionIcon,
+  droppableRegionLabel,
   droppableRegionOverlay,
   droppableZone,
+  droppableZoneHint,
   droppableZoneIcon,
+  droppableZoneLabel,
   type DroppableInlineVariants,
 } from './Droppable.variants';
+// @@V ato-1 end
 import {
   useDroppable,
   useFilePick,
@@ -83,12 +91,9 @@ export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.E
       </span>
       <span
         aria-hidden
-        className={cn(
-          'pointer-events-none absolute inset-0 flex items-center justify-center text-white transition-opacity',
-          showGlyph
-            ? 'opacity-100'
-            : 'opacity-0',
-        )}
+        // @@V ato-1 begin
+        className={cn(droppableInlineGlyph({ visible: showGlyph }))}
+        // @@V ato-1 end
       >
         {state === 'reject'
           ? (
@@ -160,15 +165,9 @@ export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Eleme
             )}
         </span>
         <span
-          className={cn(
-            'font-semibold',
-            compact
-              ? 'text-[13px]'
-              : 'text-sm',
-            rejected
-              ? 'text-danger'
-              : 'text-fg1',
-          )}
+          // @@V ato-1 begin
+          className={cn(droppableZoneLabel({ compact, rejected }))}
+          // @@V ato-1 end
         >
           {rejected
             ? reason
@@ -176,9 +175,11 @@ export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Eleme
               ? 'Release to add'
               : (label ?? 'Drag a file here')}
         </span>
+        {/* @@V ato-1 begin */}
         {!rejected && hint != null && (
-          <span className="font-mono text-[11.5px] text-fg3">{hint}</span>
+          <span className={droppableZoneHint()}>{hint}</span>
         )}
+        {/* @@V ato-1 end */}
       </button>
       {children}
       {input}
@@ -220,7 +221,9 @@ export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.E
   return (
     <div
       {...handlers}
-      className={cn('relative rounded-lg', className)}
+      // @@V ato-1 begin
+      className={cn(droppableRegion(), className)}
+      // @@V ato-1 end
       style={style}
     >
       {children}
@@ -233,16 +236,18 @@ export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.E
             size={28}
           />
         </span>
-        <span className="font-display text-lg font-bold [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]">
+        {/* @@V ato-1 begin */}
+        <span className={droppableRegionLabel()}>
           {rejected
             ? reason
             : (label ?? 'Drop files to add them here')}
         </span>
         {!rejected && hint != null && (
-          <span className="text-[13px] opacity-85 [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]">
+          <span className={droppableRegionHint()}>
             {hint}
           </span>
         )}
+        {/* @@V ato-1 end */}
       </div>
     </div>
   );

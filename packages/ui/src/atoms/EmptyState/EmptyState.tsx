@@ -3,7 +3,16 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { TomatoMark } from '../../internal/TomatoMark';
 import { cn } from '../../lib';
 
-import { emptyState, type EmptyStateVariants } from './EmptyState.variants';
+// @@V ato-1 begin
+import {
+  emptyState,
+  emptyStateAction,
+  emptyStateDescription,
+  emptyStateMark,
+  emptyStateTitle,
+  type EmptyStateVariants,
+} from './EmptyState.variants';
+// @@V ato-1 end
 
 export interface EmptyStateProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -22,18 +31,20 @@ export const EmptyState: import('react').ForwardRefExoticComponent<EmptyStatePro
       className={cn(emptyState({ size, align }), className)}
       {...props}
     >
-      <span className="flex size-[52px] items-center justify-center rounded-full bg-[color-mix(in_oklab,var(--primary)_12%,var(--surface-1))]">
+      {/* @@V ato-1 begin */}
+      <span className={emptyStateMark()}>
         <TomatoMark />
       </span>
-      <span className="font-display text-[17px] font-bold text-fg1">
+      <span className={emptyStateTitle()}>
         {title}
       </span>
       {description != null && (
-        <span className="max-w-[240px] text-[13px] leading-normal text-fg2">
+        <span className={emptyStateDescription()}>
           {description}
         </span>
       )}
-      {action != null && <span className="mt-1">{action}</span>}
+      {action != null && <span className={emptyStateAction()}>{action}</span>}
+      {/* @@V ato-1 end */}
     </div>
   ),
 );
