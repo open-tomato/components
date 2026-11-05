@@ -2,9 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Sparkline } from './Sparkline';
 
-/** Fixed 30-point series mirroring the original MetricTile's weekly rhythm. */
+// @@S ato-1 begin
+/** Fixed 30-point series with a weekly rhythm. */
+// @@S ato-1 end
 // @@T ato-1 begin
-const TOKENS_30D: number[] = [
+// @@S ato-1 begin
+const USAGE_30D: number[] = [
+// @@S ato-1 end
 // @@T ato-1 end
 
   22, 26, 30, 12, 10, 28, 34, 38, 31, 14,
@@ -12,7 +16,9 @@ const TOKENS_30D: number[] = [
   37, 16, 14, 42, 47, 45, 41, 18, 46, 52,
 ];
 
-const COST_30D = TOKENS_30D.map((v, i) => v * 0.8 + (i % 5));
+// @@S ato-1 begin
+const COST_30D = USAGE_30D.map((v, i) => v * 0.8 + (i % 5));
+// @@S ato-1 end
 
 // @@T ato-1 begin
 const meta: Meta<typeof Sparkline> = {
@@ -51,18 +57,23 @@ export default meta;
 type Story = StoryObj<typeof Sparkline>;
 // @@T ato-1 end
 
+// @@S ato-1 begin
 /**
- * Original-design MetricTile treatment: accent line over a faint area fill.
- * Fidelity source: the original MetricTile screen Sparkline (the original usage screen hero
- * tiles).
+ * Design-source treatment: accent line over a faint area fill.
+ * Fidelity source: the design source's Sparkline (its hero tiles).
  */
+// @@S ato-1 end
 export const Default: Story = {
-  args: { data: TOKENS_30D },
+  // @@S ato-1 begin
+  args: { data: USAGE_30D },
+  // @@S ato-1 end
 };
 
 /** Line only — `fill={false}` for dense contexts (table cells). */
 export const LineOnly: Story = {
-  args: { data: TOKENS_30D, fill: false },
+  // @@S ato-1 begin
+  args: { data: USAGE_30D, fill: false },
+  // @@S ato-1 end
 };
 
 /** Table-cell scale (`size="sm"`), muted tone. */
@@ -72,7 +83,9 @@ export const CellSize: Story = {
 
 /** Series colors ride the shared chart palette (`tone`). */
 export const Tones: Story = {
-  args: { data: TOKENS_30D },
+  // @@S ato-1 begin
+  args: { data: USAGE_30D },
+  // @@S ato-1 end
   render: (args) => (
     <div className="flex w-56 flex-col gap-2">
       <Sparkline {...args} tone="accent" />

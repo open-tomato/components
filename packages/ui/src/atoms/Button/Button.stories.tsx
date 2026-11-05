@@ -22,7 +22,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: { children: 'Run agent' },
+  // @@S ato-3 begin
+  args: { children: 'Run task' },
+  // @@S ato-3 end
 };
 
 export const Accent: Story = {
@@ -38,7 +40,9 @@ export const Ghost: Story = {
 };
 
 export const Danger: Story = {
-  args: { variant: 'danger', children: 'Delete agent' },
+  // @@S ato-3 begin
+  args: { variant: 'danger', children: 'Delete item' },
+  // @@S ato-3 end
 };
 
 export const SmallSize: Story = {
@@ -60,7 +64,9 @@ export const Disabled: Story = {
 
 export const WithLeadingIcon: Story = {
   args: {
-    children: 'Run agent',
+    // @@S ato-3 begin
+    children: 'Run task',
+    // @@S ato-3 end
     iconLeading: (
       // Stroked zap icon (size = text + 2px).
       <svg

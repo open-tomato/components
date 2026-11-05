@@ -20,7 +20,9 @@ export interface CellValueProps
    * (FormattedCurrency, FormattedDate, …) instead.
    */
   value?: number;
-  /** Unit suffix (`tokens`, `runs`, …) — small, greyed, to the right. */
+  // @@S mol-1 begin
+  /** Unit suffix (`units`, `runs`, …) — small, greyed, to the right. */
+  // @@S mol-1 end
   unit?: string;
   /** Compact notation (`12.5K`). Default true — "human readable". */
   short?: boolean;

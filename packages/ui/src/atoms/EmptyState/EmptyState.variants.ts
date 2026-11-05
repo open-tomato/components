@@ -1,9 +1,8 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
- * EmptyState — the "nothing here yet" surface, and the one place the mascot
- * appears in-app. Variants set scale and alignment; the action slot is
- * optional.
+ * EmptyState — the "nothing here yet" surface. Variants set scale and
+ * alignment; the illustration and action slots are optional.
 
  */
 // @@T ato-1 begin
@@ -27,7 +26,7 @@ export const emptyState: (props?: ({ size?: 'sm' | 'md' | 'lg' | null | undefine
 });
 
 // @@V ato-1 begin
-/** The mascot's puck: a primary-tinted circle. */
+/** The illustration slot's puck: a primary-tinted circle. */
 export const emptyStateMark: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex size-[52px] items-center justify-center rounded-full bg-[color-mix(in_oklab,var(--primary)_12%,var(--surface-1))]');
 
 /** The title line. */

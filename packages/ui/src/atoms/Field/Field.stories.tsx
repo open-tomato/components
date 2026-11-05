@@ -33,7 +33,9 @@ const meta: Meta<typeof Field> = {
     size: { control: 'select', options: ['sm', 'md'] },
   },
   args: {
-    label: 'Workspace name',
+    // @@S ato-3 begin
+    label: 'Group name',
+    // @@S ato-3 end
     defaultValue: 'open-garden',
     helper: 'Lowercase, no spaces.',
   },
@@ -69,7 +71,9 @@ export const SmallSize: Story = {
 };
 
 export const WithIcon: Story = {
-  args: { icon: <SearchIcon />, placeholder: 'Search agents…', defaultValue: '' },
+  // @@S ato-3 begin
+  args: { icon: <SearchIcon />, placeholder: 'Search items…', defaultValue: '' },
+  // @@S ato-3 end
 };
 
 export const NoLabel: Story = {

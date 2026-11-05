@@ -7,14 +7,18 @@ import { FormattedCurrency } from '../../atoms/Formatted/FormattedCurrency';
 import { FormattedDate } from '../../atoms/Formatted/FormattedDate';
 import { Icon } from '../../atoms/Icon';
 
+// @@S mol-1 begin
+import { AmountOverTime } from './AmountOverTime';
+// @@S mol-1 end
 import { CellBar } from './CellBar';
 import { CellDecoration } from './CellDecoration';
 import { CellDoubleLine } from './CellDoubleLine';
 import { CellLabel } from './CellLabel';
 import { CellStatus } from './CellStatus';
 import { CellValue } from './CellValue';
-import { SpendOverTime } from './SpendOverTime';
-import { TokensConsumption, TokensProgress } from './TokensConsumption';
+// @@S mol-1 begin
+import { QuotaProgress, QuotaUsage } from './QuotaUsage';
+// @@S mol-1 end
 
 /**
  * Deterministic fixtures — fixed locale + reference dates so visual
@@ -54,11 +58,15 @@ type Story = StoryObj<typeof meta>;
  * (currency, date, time).
  */
 export const Value: Story = {
-  args: { value: 184200, unit: 'tokens', locale: LOCALE },
+  // @@S mol-1 begin
+  args: { value: 184200, unit: 'units', locale: LOCALE },
+  // @@S mol-1 end
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="value + unit (end)">
-        <CellValue value={184200} unit="tokens" locale={LOCALE} />
+        {/* @@S mol-1 begin */}
+        <CellValue value={184200} unit="units" locale={LOCALE} />
+        {/* @@S mol-1 end */}
       </Row>
       <Row label="value only">
         <CellValue value={128} locale={LOCALE} />
@@ -110,7 +118,9 @@ export const DoubleLine: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
       <Row label="name + subtitle">
-        <CellDoubleLine title="auth-refactor" subtitle="agent-7d2f · feat/jwt-sessions" />
+        {/* @@S mol-1 begin */}
+        <CellDoubleLine title="auth-refactor" subtitle="item-7d2f · feat/jwt-refresh" />
+        {/* @@S mol-1 end */}
       </Row>
       <Row label="truncating subtitle">
         <CellDoubleLine
@@ -211,49 +221,52 @@ export const BarIndicator: Story = {
   ),
 };
 
+// @@S mol-1 begin
 /**
- * Spec: tokens-consumption — bold FULL used number, greyed human-readable
- * quota; tokens-progress stacks the mini bar below, green below 45%,
+ * Spec: quota-usage — bold FULL used number, greyed human-readable
+ * quota; quota-progress stacks the mini bar below, green below 45%,
  * yellow from 45%, red from 85% (threshold cutoffs are a documented spec
- * interpretation). Spec-over-original: the original Sessions table colors this bar
- * by session status; the spec's consumption thresholds win.
+ * interpretation). A bar colored by item status would diverge from the
+ * spec; the spec's usage thresholds win.
  */
-export const Tokens: Story = {
+export const Quota: Story = {
   args: { value: 0 },
   render: () => (
     <div className="flex flex-col gap-3">
       <Row label="consumption">
-        <TokensConsumption used={8240} quota={50000} locale={LOCALE} />
+        <QuotaUsage used={8240} quota={50000} locale={LOCALE} />
       </Row>
       <Row label="progress, low (green)">
-        <TokensProgress used={8240} quota={50000} locale={LOCALE} />
+        <QuotaProgress used={8240} quota={50000} locale={LOCALE} />
       </Row>
       <Row label="progress, ~50% (yellow)">
-        <TokensProgress used={27450} quota={50000} locale={LOCALE} />
+        <QuotaProgress used={27450} quota={50000} locale={LOCALE} />
       </Row>
       <Row label="progress, ~100% (red)">
-        <TokensProgress used={48900} quota={50000} locale={LOCALE} />
+        <QuotaProgress used={48900} quota={50000} locale={LOCALE} />
       </Row>
       <Row label="progress, over quota">
-        <TokensProgress used={61000} quota={50000} locale={LOCALE} />
+        <QuotaProgress used={61000} quota={50000} locale={LOCALE} />
       </Row>
     </div>
   ),
 };
+// @@S mol-1 end
 
+// @@S mol-1 begin
 /**
- * Spec: spend-over-time — FormattedCurrency over a smaller greyed
+ * Spec: amount-over-time — FormattedCurrency over a smaller greyed
  * `FormattedDuration · FormattedRelativeTime` line. Separator note: spec
- * prose writes `-`, the original design renders `·` — the middot wins (DS-wide
+ * prose writes `-`, the design renders `·` — the middot wins (DS-wide
  * meta separator).
  */
-export const SpendTime: Story = {
+export const AmountTime: Story = {
   args: { value: 0 },
   render: () => (
     <div className="flex flex-col gap-3">
       <Row label="same day (hh:mm)">
-        <SpendOverTime
-          cost={0.42}
+        <AmountOverTime
+          amount={0.42}
           seconds={437}
           date={TODAY_NOON}
           now={REF_NOW}
@@ -261,8 +274,8 @@ export const SpendTime: Story = {
         />
       </Row>
       <Row label="yesterday">
-        <SpendOverTime
-          cost={1.92}
+        <AmountOverTime
+          amount={1.92}
           seconds={1104}
           date={YESTERDAY}
           now={REF_NOW}
@@ -272,3 +285,4 @@ export const SpendTime: Story = {
     </div>
   ),
 };
+// @@S mol-1 end
