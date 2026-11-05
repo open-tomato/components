@@ -1,5 +1,5 @@
 // @@T org-2 begin
-import { useState, type ReactElement } from 'react';
+import { useState, type ReactElement, type ReactNode } from 'react';
 // @@T org-2 end
 
 import { Avatar } from '../../atoms/Avatar';
@@ -41,7 +41,13 @@ export interface ProfileMenuProps {
   user: ProfileMenuUser;
   onProfile?: () => void;
   onAccountSettings?: () => void;
-  onSwitchWorkspace?: () => void;
+  // @@S org-2 begin
+  /**
+   * Extra menu items (`MenuItem`s) rendered after Account settings and
+   * before the separator that precedes Log out.
+   */
+  actions?: ReactNode;
+  // @@S org-2 end
   /** Fires only after the inline confirm is accepted. */
   onLogout?: () => void;
   /**
@@ -53,17 +59,18 @@ export interface ProfileMenuProps {
   defaultOpen?: boolean;
 }
 
+// @@S org-2 begin
 /**
- * ProfileMenu (the original TopbarLive demo; app-shell spec: Top Bar): a
- * touchable Avatar opening a menu headed by the user's identity (avatar,
- * name, email, role badge) over My Profile / Account Settings / Switch
- * workspace / Logout. Logout swaps the item for ConfirmPopover's inline
- * flavour in-place — Cancel returns to the menu, confirm fires
- * `onLogout` and closes.
+ * ProfileMenu (app-shell spec: Top Bar): a touchable Avatar opening a menu
+ * headed by the user's identity (avatar, name, email, role badge) over
+ * My Profile / Account Settings / any caller-supplied `actions` / Logout.
+ * Logout swaps the item for ConfirmPopover's inline flavour in-place —
+ * Cancel returns to the menu, confirm fires `onLogout` and closes.
  *
- * Spec-over-original divergence (recorded): the original demo also lists "Help &
- * docs"; the spec's option list does not, so it is omitted.
+ * Fidelity note (recorded): a "Help & docs" item is omitted — the spec's
+ * option list does not include it; pass it through `actions` if needed.
  */
+// @@S org-2 end
 // @@T org-2 begin
 export const ProfileMenu: {
   (props: ProfileMenuProps): ReactElement;
@@ -72,7 +79,9 @@ export const ProfileMenu: {
   user,
   onProfile,
   onAccountSettings,
-  onSwitchWorkspace,
+  // @@S org-2 begin
+  actions,
+  // @@S org-2 end
   onLogout,
   logoutMessage = 'Log out of Acme?',
   defaultOpen = false,
@@ -152,12 +161,9 @@ export const ProfileMenu: {
           >
             Account settings
           </MenuItem>
-          <MenuItem
-            icon={<Icon name="arrow-right-left" size={15} />}
-            onSelect={() => onSwitchWorkspace?.()}
-          >
-            Switch workspace
-          </MenuItem>
+          {/* @@S org-2 begin */}
+          {actions}
+          {/* @@S org-2 end */}
         </div>
         <MenuSep
           // @@V org-2 begin

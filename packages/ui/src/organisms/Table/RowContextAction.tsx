@@ -51,7 +51,9 @@ export interface RowContextActionsConfig {
 }
 
 export interface RowContextActionProps extends RowContextActionsConfig {
-  /** Entity vocabulary for the confirmation copy (`session`, `task`). */
+  // @@S org-2 begin
+  /** Entity vocabulary for the confirmation copy (`item`, `task`). */
+  // @@S org-2 end
   entityType: string;
   entityName: string;
   /** Accessible name for the trigger (defaults to `Actions for {name}`). */

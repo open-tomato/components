@@ -6,12 +6,14 @@ import { Button } from '../../atoms/Button';
 import { Chip } from '../../atoms/Chip';
 import { EmptyState } from '../../atoms/EmptyState';
 import { Select } from '../../molecules/Select/Select';
+// @@S org-2 begin
 import {
   makeColumns,
-  SESSIONS,
+  SESSIONS as ITEMS,
   STATUS,
-  type Session,
+  type Session as Item,
 } from '../../stories/sessions';
+// @@S org-2 end
 import { Table } from '../Table/Table';
 
 import { FilterDropdown } from './FilterDropdown';
@@ -19,8 +21,9 @@ import { SearchInput } from './SearchInput';
 import { Toolbar, ToolbarControls, ToolbarSep, ToolbarSummary } from './Toolbar';
 
 /** Status swatch dot from the original toolbar demo. */
+// @@S org-2 begin
 const STATUS_COLOR: Record<
-  (typeof STATUS)[Session['status']]['tone'],
+  (typeof STATUS)[Item['status']]['tone'],
   string
 > = {
   success: 'var(--success)',
@@ -29,6 +32,7 @@ const STATUS_COLOR: Record<
   info: 'var(--info)',
   neutral: 'var(--fg3)',
 };
+// @@S org-2 end
 
 const Dot = ({ c }: { c: string }) => (
   <span
@@ -61,14 +65,18 @@ const CPU_D =
 const SEARCH_D = 'M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z';
 
 const STATUS_OPTIONS = (
-  Object.entries(STATUS) as [Session['status'], (typeof STATUS)[Session['status']]][]
+// @@S org-2 begin
+  Object.entries(STATUS) as [Item['status'], (typeof STATUS)[Item['status']]][]
+// @@S org-2 end
 ).map(([value, s]) => ({
   value,
   label: s.label,
   swatch: <Dot c={STATUS_COLOR[s.tone]} />,
 }));
 
-const MODEL_OPTIONS = [...new Set(SESSIONS.map((r) => r.model))].map((m) => ({
+// @@S org-2 begin
+const MODEL_OPTIONS = [...new Set(ITEMS.map((r) => r.model))].map((m) => ({
+// @@S org-2 end
   value: m,
   label: m,
 }));
@@ -94,7 +102,9 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
       : [...arr, v]);
 
   const rows = useMemo(
-    () => SESSIONS.filter((r) => {
+    // @@S org-2 begin
+    () => ITEMS.filter((r) => {
+    // @@S org-2 end
       if (
         query &&
           !(r.name + ' ' + r.goal).toLowerCase().includes(query.toLowerCase())
@@ -153,11 +163,13 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
       <span className="font-mono text-xs font-semibold text-fg1">
         {rows.length}
       </span>
+      {/* @@S org-2 begin */}
       <span className="text-[12.5px] text-fg3">
         {anyFilter
-          ? `of ${SESSIONS.length} sessions`
-          : 'sessions'}
+          ? `of ${ITEMS.length} items`
+          : 'items'}
       </span>
+      {/* @@S org-2 end */}
       {anyFilter && (
         <>
           <div className="mx-1 h-4 w-px bg-border-soft" aria-hidden />
@@ -175,8 +187,10 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
               onRemove={() => setStatuses((a) => a.filter((x) => x !== s))}
             >
               <span className="inline-flex items-center gap-1.5">
-                <Dot c={STATUS_COLOR[STATUS[s as Session['status']].tone]} />
-                {STATUS[s as Session['status']].label}
+                {/* @@S org-2 begin */}
+                <Dot c={STATUS_COLOR[STATUS[s as Item['status']].tone]} />
+                {STATUS[s as Item['status']].label}
+                {/* @@S org-2 end */}
               </span>
             </Chip>
           ))}
@@ -203,7 +217,9 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
 
   const empty = (
     <EmptyState
-      title="No sessions match"
+      // @@S org-2 begin
+      title="No items match"
+      // @@S org-2 end
       description="Nothing fits that query. Loosen a filter or clear them all to see everything again."
       action={<Button onClick={clearAll}>Clear filters</Button>}
       className="py-12"

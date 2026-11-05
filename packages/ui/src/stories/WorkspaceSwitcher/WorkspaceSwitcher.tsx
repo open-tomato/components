@@ -1,5 +1,7 @@
 // @@T tpl-1 begin
-import type { WorkspaceMarkProps } from '../../atoms/WorkspaceMark';
+// @@S ato-2 begin
+import type { MonogramProps } from '../../atoms/Monogram';
+// @@S ato-2 end
 import type { FC } from 'react';
 // @@T tpl-1 end
 
@@ -12,7 +14,9 @@ import {
   MenuSep,
   MenuTrigger,
 } from '../../atoms/Menu';
-import { WorkspaceMark } from '../../atoms/WorkspaceMark';
+// @@S ato-2 begin
+import { Monogram } from '../../atoms/Monogram';
+// @@S ato-2 end
 import { cn } from '../../lib';
 
 import {
@@ -39,9 +43,11 @@ export interface WorkspaceOption {
   /** Member count, shown mono under the name in the menu rows. */
   members?: number;
   // @@S tpl-1 begin
-  /** Mark fill for this group's identity block. */
+  /** Monogram fill for this group's identity block. */
   // @@S tpl-1 end
-  tone?: WorkspaceMarkProps['tone'];
+  // @@S ato-2 begin
+  tone?: MonogramProps['tone'];
+  // @@S ato-2 end
 }
 
 export interface WorkspaceSwitcherProps {
@@ -90,7 +96,9 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
   return (
     <Menu defaultOpen={defaultOpen} modal={false}>
       <MenuTrigger className={cn(workspaceSwitcherTrigger(), className)}>
-        <WorkspaceMark name={active.name} tone={active.tone} size="sm" />
+        {/* @@S ato-2 begin */}
+        <Monogram name={active.name} tone={active.tone} size="sm" />
+        {/* @@S ato-2 end */}
         {/* @@V tpl-1 begin */}
         <span className={workspaceSwitcherName()}>{active.name}</span>
         <Icon name="chevron-down" size={14} className={workspaceSwitcherChevron()} />
@@ -115,7 +123,9 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
           >
             {/* @@V tpl-1 begin */}
             <span className={workspaceRowBody()}>
-              <WorkspaceMark name={w.name} tone={w.tone} size="sm" />
+              {/* @@S ato-2 begin */}
+              <Monogram name={w.name} tone={w.tone} size="sm" />
+              {/* @@S ato-2 end */}
               <span className={workspaceRowText()}>
                 <span className={workspaceRowName()}>
                   {w.name}

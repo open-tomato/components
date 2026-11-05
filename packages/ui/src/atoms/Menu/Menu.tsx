@@ -19,22 +19,24 @@ import {
 } from './Menu.variants';
 // @@V ato-2 end
 
+// @@S ato-2 begin
 /**
  * Compound API:
  *
  *   <Menu>
  *     <MenuTrigger asChild><Button>Actions</Button></MenuTrigger>
  *     <MenuContent size="md" align="start">
- *       <MenuLabel>Session</MenuLabel>
- *       <MenuItem icon={<Eye />} onSelect={open}>Open session</MenuItem>
+ *       <MenuLabel>Group</MenuLabel>
+ *       <MenuItem icon={<Eye />} onSelect={open}>Open item</MenuItem>
  *       <MenuSep />
- *       <MenuItem tone="danger">Delete agent</MenuItem>
+ *       <MenuItem tone="danger">Delete item</MenuItem>
  *     </MenuContent>
  *   </Menu>
  *
  * Radix owns anchoring/flip, outside-click + Escape dismissal, and roving
  * arrow-key focus.
  */
+// @@S ato-2 end
 // eslint-disable-next-line react-refresh/only-export-components -- Radix re-export, still a component
 // @@T ato-2 begin
 export const Menu:
