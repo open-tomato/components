@@ -15,12 +15,14 @@ import { AppShell } from './AppShell';
  * SidebarQuickAccess, and the topbar composes WorkspaceSwitcher /
  * SearchSuggest / NotificationsBell / ThemeSwitcher / ProfileMenu.
  */
-const meta = {
+// @@T tpl-1 begin
+const meta: Meta<typeof AppShell> = {
+// @@T tpl-1 end
   title: 'Templates/AppShell',
   component: AppShell,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
-} satisfies Meta<typeof AppShell>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

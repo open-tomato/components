@@ -1,3 +1,7 @@
+// @@T tpl-1 begin
+import type { FC } from 'react';
+// @@T tpl-1 end
+
 import { Badge } from '../../atoms/Badge';
 import { cn, formatNumber } from '../../lib';
 // Deep member import — the built storybook's lazy-init chunking drops
@@ -26,7 +30,9 @@ export interface SidebarWeekSummaryProps {
  * caller aligns it to the bottom of the nav area (a flex spacer above);
  * bottom-anchoring is composition, not widget state.
  */
-export const SidebarWeekSummary = ({
+// @@T tpl-1 begin
+export const SidebarWeekSummary: FC<SidebarWeekSummaryProps> = ({
+// @@T tpl-1 end
   status,
   used,
   limit,

@@ -1,4 +1,7 @@
+// @@T tpl-1 begin
 import type { IconName } from '../../atoms/Icon';
+import type { FC } from 'react';
+// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
@@ -34,7 +37,9 @@ export interface SidebarQuickAccessProps {
  * real links opening in a new tab (Docs → the documentation site);
  * items with `onClick` are in-app NavItems (Settings → settings page).
  */
-export const SidebarQuickAccess = ({
+// @@T tpl-1 begin
+export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
+// @@T tpl-1 end
   items,
   collapsed = false,
   label = 'Quick access',

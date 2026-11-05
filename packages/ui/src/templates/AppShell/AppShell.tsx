@@ -1,4 +1,12 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+// @@T tpl-1 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type ReactNode,
+  type RefAttributes,
+} from 'react';
+// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { IconButton } from '../../atoms/IconButton';
@@ -36,7 +44,12 @@ import {
 
 export type AppShellProps = HTMLAttributes<HTMLDivElement>;
 
-export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(
+// @@T tpl-1 begin
+export const AppShell: ForwardRefExoticComponent<
+  AppShellProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLDivElement, AppShellProps>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(appShell(), className)} {...props} />
   ),
@@ -48,7 +61,12 @@ export interface AppShellSidebarProps
   extends HTMLAttributes<HTMLElement>,
   AppShellSidebarVariants {}
 
-export const AppShellSidebar = forwardRef<HTMLElement, AppShellSidebarProps>(
+// @@T tpl-1 begin
+export const AppShellSidebar: ForwardRefExoticComponent<
+  AppShellSidebarProps & RefAttributes<HTMLElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLElement, AppShellSidebarProps>(
   ({ className, collapsed, ...props }, ref) => (
     <aside
       ref={ref}
@@ -62,7 +80,12 @@ AppShellSidebar.displayName = 'AppShellSidebar';
 
 export type AppShellMainProps = HTMLAttributes<HTMLElement>;
 
-export const AppShellMain = forwardRef<HTMLElement, AppShellMainProps>(
+// @@T tpl-1 begin
+export const AppShellMain: ForwardRefExoticComponent<
+  AppShellMainProps & RefAttributes<HTMLElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLElement, AppShellMainProps>(
   ({ className, ...props }, ref) => (
     <main ref={ref} className={cn(appShellMain(), className)} {...props} />
   ),
@@ -81,7 +104,12 @@ export interface AppShellTopbarProps extends HTMLAttributes<HTMLElement> {
   sidebarCollapsed?: boolean;
 }
 
-export const AppShellTopbar = forwardRef<HTMLElement, AppShellTopbarProps>(
+// @@T tpl-1 begin
+export const AppShellTopbar: ForwardRefExoticComponent<
+  AppShellTopbarProps & RefAttributes<HTMLElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLElement, AppShellTopbarProps>(
   (
     { className, onToggleSidebar, sidebarCollapsed = false, children, ...props },
     ref,
@@ -112,7 +140,12 @@ export interface AppShellContentProps extends HTMLAttributes<HTMLDivElement> {
   footer?: ReactNode;
 }
 
-export const AppShellContent = forwardRef<HTMLDivElement, AppShellContentProps>(
+// @@T tpl-1 begin
+export const AppShellContent: ForwardRefExoticComponent<
+  AppShellContentProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLDivElement, AppShellContentProps>(
   ({ className, footer, children, ...props }, ref) => (
     <div ref={ref} className={cn(appShellContent(), className)} {...props}>
       {children}
