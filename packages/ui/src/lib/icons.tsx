@@ -1,4 +1,6 @@
-import type { SVGProps } from 'react';
+// @@T tpl-1 begin
+import type { JSX, SVGProps } from 'react';
+// @@T tpl-1 end
 
 /**
  * Internal stroke-icon helper — lucide-style paths for the glyphs
@@ -58,7 +60,9 @@ export interface StrokeIconProps extends SVGProps<SVGSVGElement> {
   size?: number;
 }
 
-export const StrokeIcon = ({ name, size = 16, ...props }: StrokeIconProps) => (
+// @@T tpl-1 begin
+export const StrokeIcon = ({ name, size = 16, ...props }: StrokeIconProps): JSX.Element => (
+// @@T tpl-1 end
   <svg
     width={size}
     height={size}

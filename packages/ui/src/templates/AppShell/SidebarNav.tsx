@@ -1,4 +1,7 @@
+// @@T tpl-1 begin
 import type { IconName } from '../../atoms/Icon';
+import type { FC } from 'react';
+// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
@@ -33,7 +36,9 @@ export interface SidebarNavProps {
  * (layout-dashboard), Sessions (terminal), Agents (bot), Roadmap (list),
  * Tools (cpu) — but the component takes whatever the config says.
  */
-export const SidebarNav = ({
+// @@T tpl-1 begin
+export const SidebarNav: FC<SidebarNavProps> = ({
+// @@T tpl-1 end
   items,
   activeId,
   onNavigate,

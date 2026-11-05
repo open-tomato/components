@@ -1,4 +1,12 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+// @@T tpl-1 begin
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type ForwardRefExoticComponent,
+  type ReactNode,
+  type RefAttributes,
+} from 'react';
+// @@T tpl-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -17,7 +25,12 @@ export interface NavItemProps
  * down; the item just reads the flag: hide the label, center the icon,
  * surface a title tooltip (caller passes `title` when collapsed).
  */
-export const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(
+// @@T tpl-1 begin
+export const NavItem: ForwardRefExoticComponent<
+  NavItemProps & RefAttributes<HTMLButtonElement>
+> = forwardRef<
+// @@T tpl-1 end
+  HTMLButtonElement, NavItemProps>(
   ({ className, active, collapsed, icon, children, ...props }, ref) => (
     <button
       ref={ref}

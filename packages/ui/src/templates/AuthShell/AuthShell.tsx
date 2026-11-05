@@ -1,4 +1,12 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import {
+// @@T tpl-1 begin
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type ReactNode,
+  type RefAttributes,
+// @@T tpl-1 end
+} from 'react';
 
 import { cn } from '../../lib';
 
@@ -22,7 +30,11 @@ export interface AuthShellProps
   brandHref?: string;
 }
 
-export const AuthShell = forwardRef<HTMLDivElement, AuthShellProps>(
+// @@T tpl-1 begin
+export const AuthShell: ForwardRefExoticComponent<
+  AuthShellProps & RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, AuthShellProps>(
+// @@T tpl-1 end
   ({ className, eyebrow, footer, width, brandHref, children, ...props }, ref) => (
     <div ref={ref} className={cn(authShell(), className)} {...props}>
       <BrandLockup href={brandHref} />
