@@ -9,12 +9,14 @@ import { AuthShell } from './AuthShell';
  * The pre-authentication shell: tinted backdrop, brand lockup, centred
  * card, footer line. Screens fill the card — see Pages/Auth/*.
  */
-const meta = {
+// @@T tpl-1 begin
+const meta: Meta<typeof AuthShell> = {
+// @@T tpl-1 end
   title: 'Templates/AuthShell',
   component: AuthShell,
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
-} satisfies Meta<typeof AuthShell>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
