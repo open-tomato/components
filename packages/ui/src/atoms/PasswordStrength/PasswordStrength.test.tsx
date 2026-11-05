@@ -3,8 +3,7 @@ import { describe, expect, it } from 'bun:test';
 
 import { PasswordStrength } from './PasswordStrength';
 
-const segments = (container: HTMLElement): Element[] =>
-  Array.from(container.querySelectorAll('span.h-1'));
+const segments = (container: HTMLElement): Element[] => Array.from(container.querySelectorAll('span.h-1'));
 
 describe('PasswordStrength', () => {
   it('renders the label and five empty segments at score 0', () => {
