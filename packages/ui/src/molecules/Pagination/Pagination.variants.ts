@@ -27,4 +27,9 @@ export const paginationButton: (props?: { active?: boolean | null } & ClassProp)
   },
 );
 
+// @@V mol-1 begin
+/** The row of page buttons. */
+export const paginationRoot: (props?: ClassProp) => string = cva('inline-flex items-center gap-1');
+// @@V mol-1 end
+
 export type PaginationButtonVariants = VariantProps<typeof paginationButton>;

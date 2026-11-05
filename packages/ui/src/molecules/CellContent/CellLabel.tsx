@@ -2,11 +2,16 @@
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
 // @@T mol-1 end
 
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V mol-1 begin
+import { cn, type ChartTone } from '../../lib';
+// @@V mol-1 end
 
 import {
   cellLabel,
   cellLabelGroup,
+  // @@V mol-1 begin
+  cellLabelTone,
+  // @@V mol-1 end
   type CellLabelVariants,
 } from './CellContent.variants';
 
@@ -52,7 +57,9 @@ export const CellLabel: ForwardRefExoticComponent<PropsWithoutRef<CellLabelProps
             key={item.text}
             className={cn(
               cellLabel({ bg }),
-              chartTone({ tone: item.tone ?? tone ?? 'accent' }),
+              // @@V mol-1 begin
+              cellLabelTone({ tone: item.tone ?? tone ?? 'accent' }),
+              // @@V mol-1 end
             )}
           >
             {item.text}

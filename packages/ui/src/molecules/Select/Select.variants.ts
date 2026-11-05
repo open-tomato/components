@@ -32,4 +32,18 @@ export const selectTrigger: (props?: { size?: 'sm' | 'md' | null } & ClassProp) 
   },
 );
 
+// @@V mol-1 begin
+/** The trigger's leading icon and trailing chevron: fixed width, muted. */
+export const selectAdornment: (props?: ClassProp) => string = cva('shrink-0 text-fg3');
+
+/** The trigger's current label: fills the row, truncates. */
+export const selectValue: (props?: ClassProp) => string = cva('min-w-0 flex-1 truncate text-left');
+
+/** An option's label inside the dropdown: fills the row, truncates. */
+export const selectItemLabel: (props?: ClassProp) => string = cva('min-w-0 flex-1 truncate');
+
+/** The checkmark on the selected option. */
+export const selectItemIndicator: (props?: ClassProp) => string = cva('shrink-0 text-primary');
+// @@V mol-1 end
+
 export type SelectTriggerVariants = VariantProps<typeof selectTrigger>;

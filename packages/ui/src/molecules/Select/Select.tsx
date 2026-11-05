@@ -9,7 +9,16 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-import { selectTrigger, type SelectTriggerVariants } from './Select.variants';
+// @@V mol-1 begin
+import {
+  selectAdornment,
+  selectItemIndicator,
+  selectItemLabel,
+  selectTrigger,
+  selectValue,
+  type SelectTriggerVariants,
+} from './Select.variants';
+// @@V mol-1 end
 
 export interface SelectOption {
   value: string;
@@ -61,12 +70,26 @@ export const Select: {
         )}
       >
         {sel?.icon != null && (
-          <span className="shrink-0 text-fg3">{sel.icon}</span>
+          <span
+            // @@V mol-1 begin
+            className={selectAdornment()}
+            // @@V mol-1 end
+          >
+            {sel.icon}
+          </span>
         )}
-        <span className="min-w-0 flex-1 truncate text-left">
+        <span
+          // @@V mol-1 begin
+          className={selectValue()}
+          // @@V mol-1 end
+        >
           {sel?.label ?? 'Select…'}
         </span>
-        <span className="shrink-0 text-fg3">
+        <span
+          // @@V mol-1 begin
+          className={selectAdornment()}
+          // @@V mol-1 end
+        >
           <StrokeIcon name="chevronsUpDown" size={15} />
         </span>
       </MenuTrigger>
@@ -79,8 +102,18 @@ export const Select: {
               className={menuItem({ tone: 'default' })}
             >
               {o.icon}
-              <span className="min-w-0 flex-1 truncate">{o.label}</span>
-              <DropdownMenu.ItemIndicator className="shrink-0 text-primary">
+              <span
+                // @@V mol-1 begin
+                className={selectItemLabel()}
+                // @@V mol-1 end
+              >
+                {o.label}
+              </span>
+              <DropdownMenu.ItemIndicator
+                // @@V mol-1 begin
+                className={selectItemIndicator()}
+                // @@V mol-1 end
+              >
                 <StrokeIcon name="check" size={15} />
               </DropdownMenu.ItemIndicator>
             </DropdownMenu.RadioItem>
