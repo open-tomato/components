@@ -48,14 +48,18 @@ const BotIcon = () => (
   </svg>
 );
 
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof FormField> = {
+// @@T org-1 end
   title: 'Organisms/FormKit',
   component: FormField,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   // Every story is render-based; these only satisfy the required props.
   args: { children: null },
-} satisfies Meta<typeof FormField>;
+// @@T org-1 begin
+};
+// @@T org-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -18,7 +18,9 @@ export interface CheckboxProps {
   className?: string;
 }
 
-export const Checkbox = ({
+// @@T org-1 begin
+export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   checked,
   onChange,
   label,
@@ -67,7 +69,9 @@ export interface CheckGroupProps extends CheckGroupVariants {
   className?: string;
 }
 
-export const CheckGroup = ({
+// @@T org-1 begin
+export const CheckGroup: { (props: CheckGroupProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   options,
   value,
   onChange,

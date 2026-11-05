@@ -16,7 +16,9 @@ export interface SliderProps {
   className?: string;
 }
 
-export const Slider = ({
+// @@T org-1 begin
+export const Slider: { (props: SliderProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   id,
   value,
   onChange,

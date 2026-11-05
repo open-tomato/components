@@ -29,7 +29,9 @@ export interface FormFieldProps {
  * so no control re-implements them. Swap the control in the middle and
  * everything else comes along unchanged (the original form-controls demo).
  */
-export const FormField = ({
+// @@T org-1 begin
+export const FormField: { (props: FormFieldProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   label,
   labelEnd,
   hint,

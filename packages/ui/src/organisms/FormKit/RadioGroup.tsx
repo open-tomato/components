@@ -19,7 +19,9 @@ export interface RadioGroupProps {
   className?: string;
 }
 
-export const RadioGroup = ({
+// @@T org-1 begin
+export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element; displayName: string } = ({
+// @@T org-1 end
   options,
   value,
   onChange,

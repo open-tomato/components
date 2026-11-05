@@ -14,12 +14,16 @@ import { FormField } from './FormField';
  * mode lets the chip take over; `allowNew` creates chips from free
  * text.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof ChipList> = {
+// @@T org-1 end
   title: 'Organisms/ChipList',
   component: ChipList,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof ChipList>;
+// @@T org-1 begin
+};
+// @@T org-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

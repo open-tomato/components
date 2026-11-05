@@ -7,6 +7,7 @@ import { Badge } from '../../atoms/Badge';
 import {
   VerboseOptionList,
   type VerboseOptionData,
+  type VerboseOptionListProps,
 } from './VerboseOption';
 
 /**
@@ -16,15 +17,21 @@ import {
  * description (+ optional mono meta line). The model picker below is
  * just data — the component is not tied to models.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<VerboseOptionListProps> = {
+// @@T org-1 end
   title: 'Organisms/VerboseOption',
   component: VerboseOptionList,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof VerboseOptionList>;
+// @@T org-1 begin
+};
+// @@T org-1 end
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T org-1 begin
+type Story = StoryObj<typeof VerboseOptionList>;
+// @@T org-1 end
 
 /** Original design MODELS seed (the original Agents demo) as VerboseOption data. */
 const MODELS: VerboseOptionData[] = [

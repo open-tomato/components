@@ -12,12 +12,16 @@ import { type AvatarSelectorTone } from './FormKit.variants';
  * AvatarPicker, the original AgentEditor demo; spec: the component spec
  * "AvatarSelector"). Controlled: the parent owns initials and tone.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof AvatarSelector> = {
+// @@T org-1 end
   title: 'Organisms/AvatarSelector',
   component: AvatarSelector,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof AvatarSelector>;
+// @@T org-1 begin
+};
+// @@T org-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

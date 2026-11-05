@@ -18,12 +18,16 @@ import {
  * under a mono header with the x/y-on indicator. the tools-page spec reuses the
  * single row for auto-start and the list for skill toggles.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof DecoratedToggleList> = {
+// @@T org-1 end
   title: 'Organisms/DecoratedToggle',
   component: DecoratedToggleList,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof DecoratedToggleList>;
+// @@T org-1 begin
+};
+// @@T org-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
