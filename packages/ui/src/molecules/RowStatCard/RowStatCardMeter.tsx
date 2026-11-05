@@ -4,7 +4,9 @@ import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type P
 
 import { cn } from '../../lib';
 
+// @@V mol-1 begin
 import {
+  rowStatCardMeter,
   rowStatCardMeterFill,
   rowStatCardMeterLabels,
   rowStatCardMeterMarkerLabel,
@@ -12,6 +14,7 @@ import {
   rowStatCardMeterTrack,
   type RowStatCardMeterFillVariants,
 } from './RowStatCard.variants';
+// @@V mol-1 end
 
 const clampRatio = (ratio: number): number => Math.max(0, Math.min(1, ratio));
 
@@ -54,7 +57,9 @@ export const RowStatCardMeter: ForwardRefExoticComponent<PropsWithoutRef<RowStat
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        // @@V mol-1 begin
+        className={cn(rowStatCardMeter(), className)}
+        // @@V mol-1 end
         {...props}
       >
         <div

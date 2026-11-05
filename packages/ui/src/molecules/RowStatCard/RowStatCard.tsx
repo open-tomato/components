@@ -4,14 +4,18 @@ import { forwardRef, type HTMLAttributes, type ReactNode, type ForwardRefExoticC
 
 import { cn } from '../../lib';
 
+// @@V mol-1 begin
 import {
   rowStatCard,
+  rowStatCardHeader,
   rowStatCardStatLabel,
+  rowStatCardStats,
   rowStatCardStatValue,
   rowStatCardSubtitle,
   rowStatCardTitle,
   type RowStatCardStatValueVariants,
 } from './RowStatCard.variants';
+// @@V mol-1 end
 
 export interface RowStat {
   /** Ministat label, on top (mono, uppercase). */
@@ -72,7 +76,11 @@ export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardP
 // @@T mol-1 end
   ({ className, title, subtitle, stats, action, footer, ...props }, ref) => (
     <div ref={ref} className={cn(rowStatCard(), className)} {...props}>
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div
+        // @@V mol-1 begin
+        className={rowStatCardHeader()}
+        // @@V mol-1 end
+      >
         <div>
           <div className={rowStatCardTitle()}>{title}</div>
           {subtitle != null && (
@@ -80,7 +88,11 @@ export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardP
           )}
         </div>
         {(stats != null || action != null) && (
-          <div className="flex items-center gap-4">
+          <div
+            // @@V mol-1 begin
+            className={rowStatCardStats()}
+            // @@V mol-1 end
+          >
             {stats?.map((stat) => (
               <div key={stat.title}>
                 <div className={rowStatCardStatLabel()}>{stat.title}</div>

@@ -57,7 +57,22 @@ export const rowStatCardStatValue: (props?: { tone?: 'neutral' | 'muted' | 'succ
   },
 );
 
+// @@V mol-1 begin
+/** Row 1: the title block left, the ministats (and action) right. */
+export const rowStatCardHeader: (props?: ClassProp) => string = cva(
+  'flex flex-wrap items-center justify-between gap-4',
+);
+
+/** The ministat columns plus the optional action, in one row. */
+export const rowStatCardStats: (props?: ClassProp) => string = cva('flex items-center gap-4');
+// @@V mol-1 end
+
 /* ── RowStatCardMeter (colocated indicator for row 2) ─────────────── */
+
+// @@V mol-1 begin
+/** The meter root: track above, caption row below. */
+export const rowStatCardMeter: (props?: ClassProp) => string = cva('flex flex-col gap-1.5');
+// @@V mol-1 end
 
 // @@T mol-1 begin
 export const rowStatCardMeterTrack: (props?: ClassProp) => string = cva(
