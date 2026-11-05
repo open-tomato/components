@@ -1,0 +1,51 @@
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'bun:test';
+
+import { fmtTokens, makeColumns, SESSIONS, STATUS } from './sessions';
+
+describe('fmtTokens', () => {
+  it.each([
+    [0, '—'],
+    [850, '850'],
+    [1500, '1.5k'],
+    [99_999, '100.0k'],
+    [123_456, '123k'],
+  ])('%d → %s', (n, out) => {
+    expect(fmtTokens(n)).toBe(out);
+  });
+});
+
+describe('session fixtures', () => {
+  it('ranks every status used by the dataset', () => {
+    expect(SESSIONS.length).toBeGreaterThan(0);
+    for (const s of SESSIONS) expect(STATUS[s.status]).toBeDefined();
+  });
+
+  it('builds six columns with the goal overflow mode', () => {
+    const cols = makeColumns('clamp');
+    expect(cols.map((c) => c.key)).toEqual(['status', 'name', 'goal', 'model', 'tokens', 'updated']);
+    expect(cols[2]?.overflow).toBe('clamp');
+  });
+
+  it('renders each column cell and footer for a row', () => {
+    const cols = makeColumns('wrap');
+    const row = SESSIONS.find((s) => s.name.includes(' · ')) ?? SESSIONS[0]!;
+    render(
+      <div>
+        {cols.map((c) => <div key={c.key}>{c.cell?.(row)}</div>)}
+      </div>,
+    );
+    expect(screen.getByText(STATUS[row.status].label)).toBeTruthy();
+    expect(screen.getByText(row.model)).toBeTruthy();
+    expect(screen.getByText(`${row.updated}m ago`)).toBeTruthy();
+    const footers = cols.map((c) => c.footer?.(SESSIONS)).filter(Boolean);
+    expect(footers).toContain(`${SESSIONS.length} sessions`);
+    expect(footers.some((f) => String(f).endsWith(' total'))).toBe(true);
+  });
+
+  it('sorts statuses by rank', () => {
+    const accessor = makeColumns('wrap')[0]?.sortAccessor;
+    expect(accessor?.({ ...SESSIONS[0]!, status: 'running' })).toBe(0);
+    expect(accessor?.({ ...SESSIONS[0]!, status: 'idle' })).toBe(4);
+  });
+});
