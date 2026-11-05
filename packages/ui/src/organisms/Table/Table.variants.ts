@@ -252,6 +252,116 @@ export const tableTip: (props?: import('class-variance-authority/types').ClassPr
   ],
 );
 
+// @@V org-2 begin
+/** The header label row: glyph and title side by side. */
+export const tableHeadLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'inline-flex w-full items-center gap-[5px]',
+);
+
+/** The header label's justification: end-aligned columns push right. */
+export const tableHeadJustify: (props?: ({ end?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  '',
+  {
+    variants: {
+      end: {
+        true: 'justify-end',
+        false: 'justify-start',
+      },
+    },
+    defaultVariants: { end: false },
+  },
+);
+
+/** SortGlyph's faint hint, brightened by the th's group/head hover. */
+export const sortGlyphHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'inline-flex opacity-25 transition-opacity group-hover/head:opacity-100',
+);
+
+/** SortGlyph's active arrow. */
+export const sortGlyphActive: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'inline-flex text-accent',
+);
+
+/** TableCell's single-line ellipsis body. */
+export const tableCellTruncate: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'truncate',
+);
+
+/** TableCell's line-clamped body (the line count is an inline style). */
+export const tableCellClamp: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical]',
+);
+
+/** TableCell's wrapping body. */
+export const tableCellWrap: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'flex',
+);
+
+/** TableCell's text alignment, from the column's `align`. */
+export const tableCellText: (props?: ({ align?: 'start' | 'center' | 'end' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  '',
+  {
+    variants: {
+      align: {
+        start: 'text-left',
+        center: 'text-center',
+        end: 'text-right',
+      },
+    },
+    defaultVariants: { align: 'start' },
+  },
+);
+
+/** TableCell's flex justification, from the column's `align`. */
+export const tableCellJustify: (props?: ({ align?: 'start' | 'center' | 'end' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  '',
+  {
+    variants: {
+      align: {
+        start: 'justify-start',
+        center: 'justify-center',
+        end: 'justify-end',
+      },
+    },
+    defaultVariants: { align: 'start' },
+  },
+);
+
+/** The row-checkbox button that hosts FormKit's checkbox box. */
+export const tableRowCheckbox: (props?: ({ disabled?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  'flex border-none bg-transparent p-0',
+  {
+    variants: {
+      disabled: {
+        true: 'cursor-not-allowed opacity-40',
+        false: 'cursor-pointer',
+      },
+    },
+    defaultVariants: { disabled: false },
+  },
+);
+
+/** The check / minus glyph inside a checked box. */
+export const tableRowCheckboxMark: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'text-on-primary',
+);
+
+/** The entity name in a row action's confirmation. */
+export const rowActionEntity: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'font-mono text-xs',
+);
+
+/** The `text` cell type. */
+export const cellTypeText: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'text-fg2',
+);
+
+/** The `relative-time` cell type. */
+export const cellTypeRelativeTime: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'font-mono text-[12.5px] text-fg3',
+);
+// @@V org-2 end
+
 export type TableFrameVariants = VariantProps<typeof tableFrame>;
 export type TableRowVariants = VariantProps<typeof tableRowEl>;
 export type TableRowDrop = NonNullable<TableRowVariants['drop']>;

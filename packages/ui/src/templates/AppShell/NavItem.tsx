@@ -11,7 +11,14 @@ import {
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { navItem, type NavItemVariants } from './AppShell.variants';
+// @@V tpl-1 begin
+import {
+  navItem,
+  navItemIcon,
+  navItemLabel,
+  type NavItemVariants,
+} from './AppShell.variants';
+// @@V tpl-1 end
 
 export interface NavItemProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'>,
@@ -45,8 +52,10 @@ export const NavItem: ForwardRefExoticComponent<
       )}
       {...props}
     >
-      {icon != null && <span className="shrink-0">{icon}</span>}
-      {!collapsed && <span className="truncate">{children}</span>}
+      {/* @@V tpl-1 begin */}
+      {icon != null && <span className={navItemIcon()}>{icon}</span>}
+      {!collapsed && <span className={navItemLabel()}>{children}</span>}
+      {/* @@V tpl-1 end */}
     </button>
   ),
 );

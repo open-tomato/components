@@ -1,6 +1,10 @@
 // @@T tpl-1 begin
 import type { JSX } from 'react';
 // @@T tpl-1 end
+// @@V tpl-1 begin
+
+import { fakeQr, fakeQrInk, fakeQrPaper } from './fake-qr.variants';
+// @@V tpl-1 end
 /**
  * Story fixture — a deterministic "QR-ish" 25×25 pattern that LOOKS like a
  * QR code without claiming to be one (seeded LCG, no Math.random, stable
@@ -33,9 +37,11 @@ const GRID = seedGrid();
 
 const Finder = ({ gx, gy, cell }: { gx: number; gy: number; cell: number }) => (
   <g>
-    <rect x={gx * cell} y={gy * cell} width={cell * 7} height={cell * 7} className="fill-fg1" />
-    <rect x={(gx + 1) * cell} y={(gy + 1) * cell} width={cell * 5} height={cell * 5} className="fill-surface-2" />
-    <rect x={(gx + 2) * cell} y={(gy + 2) * cell} width={cell * 3} height={cell * 3} className="fill-fg1" />
+    {/* @@V tpl-1 begin */}
+    <rect x={gx * cell} y={gy * cell} width={cell * 7} height={cell * 7} className={fakeQrInk()} />
+    <rect x={(gx + 1) * cell} y={(gy + 1) * cell} width={cell * 5} height={cell * 5} className={fakeQrPaper()} />
+    <rect x={(gx + 2) * cell} y={(gy + 2) * cell} width={cell * 3} height={cell * 3} className={fakeQrInk()} />
+    {/* @@V tpl-1 end */}
   </g>
 );
 
@@ -44,7 +50,9 @@ export const FakeQrCode = ({ size = 172 }: { size?: number }): JSX.Element => {
 // @@T tpl-1 end
   const cell = size / N;
   return (
-    <div className="rounded-md border border-border-soft bg-surface-2 p-2 shadow-xs">
+    // @@V tpl-1 begin
+    <div className={fakeQr()}>
+      {/* @@V tpl-1 end */}
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {GRID.flatMap((row, y) => row.map(
           (v, x) => v && (
@@ -54,7 +62,9 @@ export const FakeQrCode = ({ size = 172 }: { size?: number }): JSX.Element => {
               y={y * cell}
               width={cell}
               height={cell}
-              className="fill-fg1"
+              // @@V tpl-1 begin
+              className={fakeQrInk()}
+              // @@V tpl-1 end
             />
           ),
         ))}

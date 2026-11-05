@@ -5,6 +5,11 @@ import { cn } from '../../lib';
 import {
   avatarPreview,
   avatarSwatch,
+  // @@V org-1 begin
+  avatarInitialsInput,
+  avatarSelector,
+  avatarSwatchGrid,
+  // @@V org-1 end
   type AvatarSelectorTone,
 } from './FormKit.variants';
 
@@ -54,7 +59,9 @@ export const AvatarSelector: { (props: AvatarSelectorProps): import('react').JSX
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
-    <div className={cn('flex w-[60px] flex-col items-center gap-1.5', className)}>
+    // @@V org-1 begin
+    <div className={cn(avatarSelector(), className)}>
+      {/* @@V org-1 end */}
       <span className={avatarPreview({ tone })} aria-hidden>
         {initials || '?'}
       </span>
@@ -66,12 +73,16 @@ export const AvatarSelector: { (props: AvatarSelectorProps): import('react').JSX
         onChange={(e) => onInitialsChange?.(
           e.target.value.toUpperCase().slice(0, maxLength),
         )}
-        className="w-full rounded-sm border border-border-soft bg-surface-1 px-1.5 py-1 text-center font-mono text-xs text-fg2 outline-none focus-visible:border-border-focus"
+        // @@V org-1 begin
+        className={avatarInitialsInput()}
+        // @@V org-1 end
       />
       <div
         role="radiogroup"
         aria-label="Avatar color"
-        className="grid grid-cols-3 gap-1"
+        // @@V org-1 begin
+        className={avatarSwatchGrid()}
+        // @@V org-1 end
       >
         {tones.map((t) => (
           <button
