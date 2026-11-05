@@ -35,25 +35,27 @@ const Glyph = ({ name }: { name: string }) => (
   </svg>
 );
 
-/** The original demo's command registry (COMMANDS). */
+// @@S org-2 begin
+/** The demo command registry. */
 const COMMANDS: Command[] = [
   { id: 'go-overview', group: 'Go to', icon: <Glyph name="home" />, label: 'Overview', keys: 'dashboard home' },
-  { id: 'go-sessions', group: 'Go to', icon: <Glyph name="terminal" />, label: 'Sessions', keys: 'runs logs' },
-  { id: 'go-agents', group: 'Go to', icon: <Glyph name="bot" />, label: 'Agents', keys: 'definitions' },
+  { id: 'go-items', group: 'Go to', icon: <Glyph name="terminal" />, label: 'Items', keys: 'runs logs' },
+  { id: 'go-members', group: 'Go to', icon: <Glyph name="bot" />, label: 'Members', keys: 'people roles' },
   { id: 'go-roadmap', group: 'Go to', icon: <Glyph name="list" />, label: 'Roadmap', keys: 'tasks plan' },
-  { id: 'go-usage', group: 'Go to', icon: <Glyph name="zap" />, label: 'Usage', keys: 'tokens billing spend' },
+  { id: 'go-usage', group: 'Go to', icon: <Glyph name="zap" />, label: 'Usage', keys: 'quota billing cost' },
   { id: 'go-settings', group: 'Go to', icon: <Glyph name="settings" />, label: 'Settings', keys: 'preferences config' },
-  { id: 'new-session', group: 'Actions', icon: <Glyph name="plus" />, label: 'New session', hint: '⌘N', keys: 'create run start' },
-  { id: 'new-agent', group: 'Actions', icon: <Glyph name="bot" />, label: 'New agent', keys: 'create define' },
-  { id: 'new-workspace', group: 'Actions', icon: <Glyph name="leaf" />, label: 'New workspace', keys: 'create org team' },
+  { id: 'new-item', group: 'Actions', icon: <Glyph name="plus" />, label: 'New item', hint: '⌘N', keys: 'create run start' },
+  { id: 'new-member', group: 'Actions', icon: <Glyph name="bot" />, label: 'New member', keys: 'create define' },
+  { id: 'new-group', group: 'Actions', icon: <Glyph name="leaf" />, label: 'New group', keys: 'create org team' },
   { id: 'invite', group: 'Actions', icon: <Glyph name="user" />, label: 'Invite teammate', keys: 'add member people' },
   { id: 'theme', group: 'Actions', icon: <Glyph name="moon" />, label: 'Toggle theme', hint: '⌘⇧L', keys: 'dark light mode' },
-  { id: 'agent-refactor', group: 'Agents', icon: <Glyph name="bot" />, label: 'refactor-bot', hint: 'running', keys: 'split monolith' },
-  { id: 'agent-docs', group: 'Agents', icon: <Glyph name="bot" />, label: 'docs-writer', hint: 'waiting', keys: 'documentation' },
-  { id: 'agent-test', group: 'Agents', icon: <Glyph name="bot" />, label: 'test-runner', hint: 'done', keys: 'tests ci' },
+  { id: 'member-refactor', group: 'Members', icon: <Glyph name="bot" />, label: 'refactor-bot', hint: 'running', keys: 'split monolith' },
+  { id: 'member-docs', group: 'Members', icon: <Glyph name="bot" />, label: 'docs-writer', hint: 'waiting', keys: 'documentation' },
+  { id: 'member-test', group: 'Members', icon: <Glyph name="bot" />, label: 'test-runner', hint: 'done', keys: 'tests ci' },
 ];
 
-const RECENT = ['go-sessions', 'new-session', 'agent-refactor', 'theme'];
+const RECENT = ['go-items', 'new-item', 'member-refactor', 'theme'];
+// @@S org-2 end
 
 // @@T org-2 begin
 const meta: Meta<typeof CommandPalette> = {

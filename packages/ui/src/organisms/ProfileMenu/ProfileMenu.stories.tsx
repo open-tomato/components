@@ -7,15 +7,16 @@ import { Badge } from '../../atoms/Badge';
 
 import { ProfileMenu } from './ProfileMenu';
 
+// @@S org-2 begin
 /**
- * Touchable-avatar account menu (the original topbar screen "Profile" card;
- * app-shell spec: Top Bar). Header carries the user's identity
- * (avatar, name, email, role badge); the option list is My Profile /
- * Account Settings / Switch workspace / Logout, with logout swapping to
- * ConfirmPopover's inline flavour in-place. Spec-over-original divergence
- * (recorded): the original demo's extra "Help & docs" item is omitted — the
+ * Touchable-avatar account menu (app-shell spec: Top Bar). Header carries
+ * the user's identity (avatar, name, email, role badge); the option list is
+ * My Profile / Account Settings / Logout, with extra items passed through
+ * the `actions` slot and logout swapping to ConfirmPopover's inline flavour
+ * in-place. Fidelity note (recorded): a "Help & docs" item is omitted — the
  * spec's option list doesn't include it.
  */
+// @@S org-2 end
 // @@T org-2 begin
 const meta: Meta<typeof ProfileMenu> = {
   title: 'Organisms/ProfileMenu',
@@ -39,7 +40,7 @@ export const Default: Story = {
   args: { user: USER },
 };
 
-/** Menu open: identity header + the four spec'd options. */
+/** Menu open: identity header + the spec'd options. */
 export const MenuOpen: Story = {
   args: {
     user: USER,

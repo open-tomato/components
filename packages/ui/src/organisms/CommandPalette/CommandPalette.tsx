@@ -48,7 +48,9 @@ export interface Command {
   label: string;
   /** Trailing mono chip (a shortcut like ⌘N, or a status). */
   hint?: ReactNode;
-  /** Extra tokens the fuzzy filter also matches against. */
+  // @@S org-2 begin
+  /** Extra search terms the fuzzy filter also matches against. */
+  // @@S org-2 end
   keys?: string;
 }
 
@@ -96,7 +98,9 @@ const PalettePanel = ({
   onRun,
   commands,
   recent,
-  placeholder = 'Search commands, pages, agents…',
+  // @@S org-2 begin
+  placeholder = 'Search commands…',
+  // @@S org-2 end
 }: Omit<CommandPaletteProps, 'open'>) => {
   const [q, setQ] = useState('');
   const [active, setActive] = useState(0);
@@ -231,7 +235,9 @@ const PalettePanel = ({
                 className={paletteEmptyHint()}
                 // @@V org-2 end
               >
-                Try a page name, an action, or an agent.
+                {/* @@S org-2 begin */}
+                Try a page name or an action.
+                {/* @@S org-2 end */}
               </div>
             </div>
           )
