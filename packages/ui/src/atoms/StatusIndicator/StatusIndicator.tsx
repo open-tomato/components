@@ -1,4 +1,9 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type RefAttributes,
+} from 'react';
 
 import { cn } from '../../lib';
 
@@ -22,7 +27,12 @@ export interface StatusIndicatorProps
  * Spec-driven; no design artboard. `pulse` marks live
  * activity (running session, streaming agent).
  */
-export const StatusIndicator = forwardRef<HTMLSpanElement, StatusIndicatorProps>(
+// @@T ato-3 begin
+export const StatusIndicator: ForwardRefExoticComponent<
+  StatusIndicatorProps & RefAttributes<HTMLSpanElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLSpanElement, StatusIndicatorProps>(
   ({ className, tone, shape, size, pulse, label, ...props }, ref) => (
     <span
       ref={ref}
