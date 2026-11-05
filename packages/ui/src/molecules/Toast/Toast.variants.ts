@@ -45,5 +45,13 @@ export const toastIcon: (props?: ({tone?: 'success' | 'warning' | 'danger' | 'in
     defaultVariants: { tone: 'success' },
   });
 
+// @@V mol-2 begin
+/** The message text, filling the row between icon and dismiss. */
+export const toastBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex-1');
+
+/** The dismiss button, merged over the inline touchable. */
+export const toastClose: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('size-[22px] shrink-0 justify-center border-none bg-transparent text-cream-300');
+// @@V mol-2 end
+
 export type ToastVariants = VariantProps<typeof toast> &
   VariantProps<typeof toastIcon>;
