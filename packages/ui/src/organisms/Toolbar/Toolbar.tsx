@@ -12,6 +12,9 @@ import {
   toolbarControls,
   toolbarSummary,
   toolbarSurface,
+  // @@V org-2 begin
+  toolbarSep,
+  // @@V org-2 end
   type ToolbarSummaryVariants,
 } from './Toolbar.variants';
 
@@ -85,7 +88,9 @@ export const ToolbarSep: FC<{ className?: string }> = ({ className }) => (
 
   <div
     aria-hidden
-    className={cn('mx-0.5 w-px self-stretch bg-border-soft', className)}
+    // @@V org-2 begin
+    className={cn(toolbarSep(), className)}
+    // @@V org-2 end
   />
 );
 

@@ -11,7 +11,14 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-import { filterTrigger } from './Toolbar.variants';
+// @@V org-2 begin
+import {
+  filterCheck,
+  filterCount,
+  filterOptionLabel,
+  filterTrigger,
+} from './Toolbar.variants';
+// @@V org-2 end
 
 export interface FilterOption {
   value: string;
@@ -64,7 +71,11 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({
         {icon}
         {label}
         {active && (
-          <span className="inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-[5px] font-mono text-[11px] font-bold text-on-accent">
+          <span
+            // @@V org-2 begin
+            className={filterCount()}
+            // @@V org-2 end
+          >
             {selected.length}
           </span>
         )}
@@ -83,18 +94,19 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({
               trailing={
                 <span
                   aria-hidden
-                  className={cn(
-                    'inline-flex size-[17px] shrink-0 items-center justify-center rounded-[5px] border-[1.5px] transition-colors',
-                    on
-                      ? 'border-accent bg-accent text-on-accent'
-                      : 'border-border-strong bg-transparent',
-                  )}
+                  // @@V org-2 begin
+                  className={cn(filterCheck({ on }))}
+                  // @@V org-2 end
                 >
                   {on && <StrokeIcon name="check" size={12} />}
                 </span>
               }
             >
-              <span className="inline-flex items-center gap-2">
+              <span
+                // @@V org-2 begin
+                className={filterOptionLabel()}
+                // @@V org-2 end
+              >
                 {o.swatch}
                 {o.label}
               </span>
