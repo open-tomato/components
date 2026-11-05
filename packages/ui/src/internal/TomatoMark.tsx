@@ -5,11 +5,13 @@ import type { JSX } from 'react';
 
 import { tomatoMark, tomatoMarkBody, tomatoMarkLeaf } from './TomatoMark.variants';
 // @@V tpl-1 end
+// @@S tpl-1 begin
 /**
- * The mascot mark. Sanctioned in-app
- * appearances: EmptyState and the auth screens' BrandLockup
- * (templates/AuthShell) — everywhere else stays mascot-free.
+ * The brand mark svg. Sanctioned in-app
+ * appearances: EmptyState and the brand slot of the auth screens
+ * (templates/AuthShell) — everywhere else stays mark-free.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const TomatoMark = ({ size = 30 }: { size?: number }): JSX.Element => (
 // @@T tpl-1 end

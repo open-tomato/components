@@ -2,14 +2,16 @@
 import type { JSX, SVGProps } from 'react';
 // @@T tpl-1 end
 
+// @@S tpl-1 begin
 /**
  * Internal stroke-icon helper — lucide-style paths for the glyphs
  * components render THEMSELVES (sort arrows, drop glyphs, checkmarks, …).
  *
  * NOT part of the public API and never re-exported from the package root:
- * the real Icon component is a tracked follow-up (AGENTS.md), and consumer
+ * the real Icon component is a tracked follow-up (see the package notes), and consumer
  * icon slots stay ReactNode props. Import via '../../lib/icons' directly.
  */
+// @@S tpl-1 end
 // eslint-disable-next-line react-refresh/only-export-components -- internal data map, not HMR-relevant
 export const ICON_PATHS = {
   alertTriangle:

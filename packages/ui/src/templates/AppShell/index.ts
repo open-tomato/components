@@ -21,10 +21,12 @@ export {
   type SidebarQuickAccessItem,
   type SidebarQuickAccessProps,
 } from './SidebarQuickAccess';
+// @@S tpl-1 begin
 export {
-  SidebarWeekSummary,
-  type SidebarWeekSummaryProps,
-} from './SidebarWeekSummary';
+  SidebarQuota,
+  type SidebarQuotaProps,
+} from './SidebarQuota';
+// @@S tpl-1 end
 export {
   appShell,
   appShellContent,

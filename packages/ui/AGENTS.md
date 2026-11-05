@@ -260,7 +260,7 @@ owns this package does not re-derive them.
   passes it, so NO call site can name a dialog. Attribute-only; moves
   no pixel, so it costs no visual reseed.
 - **`aria-progressbar-name`** (1 node, every surface).
-  `SidebarWeekSummary` renders `Progress` with no accessible name.
+  `SidebarQuota` renders `Progress` with no accessible name.
   Also attribute-only.
 - **`color-contrast`.** `Badge.variants.ts` pairs each tone with a
   wash of itself (success 2.98:1, warning 2.22:1, danger 3.9:1) and

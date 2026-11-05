@@ -2,13 +2,14 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S tpl-1 begin
 /**
- * WorkspaceSwitcher — the topbar's workspace pill + recent-workspaces menu.
- * From the original TopbarLive screen WorkspaceSwitcher
- * (the original topbar screen "Workspace switcher" card); app-shell spec: Top Bar.
+ * Group switcher — the topbar's group pill + recent-groups menu.
+ * From the topbar demo screen's "group switcher" card; app-shell spec: Top Bar.
  * The trigger is fixed/max width (truncating), and the component carries
  * no topbar-scope dependency — it may later live in the sidebar.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const workspaceSwitcherTrigger: (props?: ClassProp) => string = cva([
 // @@T tpl-1 end
@@ -17,7 +18,9 @@ export const workspaceSwitcherTrigger: (props?: ClassProp) => string = cva([
   'font-body text-[13px] text-fg1 transition-colors hover:bg-surface-2',
 ]);
 
-/** A recent-workspace row (the menu's top section). */
+// @@S tpl-1 begin
+/** A recent-group row (the menu's top section). */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const workspaceRow: (
   props?: {
@@ -44,7 +47,9 @@ export const workspaceRow: (
 export type WorkspaceRowVariants = VariantProps<typeof workspaceRow>;
 // @@V tpl-1 begin
 
-/** The trigger's active-workspace name, truncating inside the pill. */
+// @@S tpl-1 begin
+/** The trigger's active-group name, truncating inside the pill. */
+// @@S tpl-1 end
 export const workspaceSwitcherName: (props?: ClassProp) => string = cva(
   'min-w-0 truncate font-semibold',
 );
@@ -55,7 +60,9 @@ export const workspaceSwitcherChevron: (props?: ClassProp) => string = cva('shri
 /** The open menu's fixed width. */
 export const workspaceSwitcherMenu: (props?: ClassProp) => string = cva('w-[300px]');
 
-/** The check mark trailing the active recent-workspace row. */
+// @@S tpl-1 begin
+/** The check mark trailing the active recent-group row. */
+// @@S tpl-1 end
 export const workspaceRowCheck: (props?: ClassProp) => string = cva('shrink-0 text-accent');
 
 /** A recent row's body: the mark beside the name and member count. */
@@ -66,7 +73,9 @@ export const workspaceRowBody: (props?: ClassProp) => string = cva(
 /** A recent row's text column. */
 export const workspaceRowText: (props?: ClassProp) => string = cva('min-w-0');
 
-/** A recent row's workspace name. */
+// @@S tpl-1 begin
+/** A recent row's group name. */
+// @@S tpl-1 end
 export const workspaceRowName: (props?: ClassProp) => string = cva(
   'block truncate text-[13px] font-semibold',
 );
@@ -76,7 +85,9 @@ export const workspaceRowMembers: (props?: ClassProp) => string = cva(
   'block font-mono text-[11px] font-normal text-fg3',
 );
 
-/** The "See all workspaces" row's trailing mono total. */
+// @@S tpl-1 begin
+/** The "See all groups" row's trailing mono total. */
+// @@S tpl-1 end
 export const workspaceSwitcherTotal: (props?: ClassProp) => string = cva(
   'font-mono text-[11px] text-fg3',
 );
