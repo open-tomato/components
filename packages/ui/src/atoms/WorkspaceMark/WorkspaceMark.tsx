@@ -11,7 +11,10 @@ export interface WorkspaceMarkProps
   name: string;
 }
 
-export const WorkspaceMark = forwardRef<HTMLSpanElement, WorkspaceMarkProps>(
+// @@T ato-2 begin
+export const WorkspaceMark:
+import('react').ForwardRefExoticComponent<WorkspaceMarkProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, WorkspaceMarkProps>(
+// @@T ato-2 end
   ({ className, name, tone, size, ...props }, ref) => (
     <span
       ref={ref}

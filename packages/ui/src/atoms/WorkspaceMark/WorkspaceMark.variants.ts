@@ -5,7 +5,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * squarer than Avatar (auth screens + topbar). Font size tracks a
  * 0.42 × box ratio; lg carries the fresh-workspace card's 10px radius.
  */
-export const workspaceMark = cva(
+// @@T ato-2 begin
+export const workspaceMark:
+(props?: ({ tone?: 'accent' | 'primary' | 'gold' | null; size?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-2 end
   'inline-flex shrink-0 items-center justify-center font-display font-bold text-on-accent',
   {
     variants: {
