@@ -23,12 +23,14 @@ import { ConfirmInline, ConfirmPopover } from './ConfirmPopover';
  * always names the action and its object — never a bare "are you sure?" —
  * and the confirm button names it again ("Yes, delete", never OK).
  */
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof ConfirmPopover> = {
+// @@T mol-3 end
   title: 'Molecules/ConfirmPopover',
   component: ConfirmPopover,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof ConfirmPopover>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

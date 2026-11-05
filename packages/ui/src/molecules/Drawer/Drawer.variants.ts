@@ -1,4 +1,8 @@
+import type { ClassProp } from 'class-variance-authority/types';
+
 import { cva, type VariantProps } from 'class-variance-authority';
+// @@T mol-3 begin
+// @@T mol-3 end
 
 /**
  * Drawer — Overlay + an edge-anchored, full-height panel with a flat outer
@@ -6,7 +10,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * decoration.
 
  */
-export const drawerPanel = cva(
+// @@T mol-3 begin
+export const drawerPanel: (props?: ({ side?: 'right' | 'left' | null | undefined; size?: 'sm' | 'md' | 'lg' | null | undefined } & ClassProp)) => string = cva(
   'flex h-dvh flex-col overflow-hidden bg-surface-1 shadow-lg',
   {
     variants: {
@@ -23,5 +28,6 @@ export const drawerPanel = cva(
     defaultVariants: { side: 'right', size: 'md' },
   },
 );
+// @@T mol-3 end
 
 export type DrawerPanelVariants = VariantProps<typeof drawerPanel>;

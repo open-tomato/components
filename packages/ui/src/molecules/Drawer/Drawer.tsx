@@ -1,4 +1,10 @@
-import { useId, type ReactNode } from 'react';
+// @@T mol-3 begin
+import {
+  useId,
+  type JSX,
+  type ReactNode,
+} from 'react';
+// @@T mol-3 end
 
 import { Overlay, type OverlayDismiss, type OverlayVariants } from '../../atoms/Overlay';
 import { cn } from '../../lib';
@@ -20,7 +26,9 @@ export interface DrawerProps extends DrawerPanelVariants {
   children: ReactNode;
 }
 
-export const Drawer = ({
+// @@T mol-3 begin
+export const Drawer: { (props: DrawerProps): JSX.Element; displayName: string } = ({
+// @@T mol-3 end
   open,
   onClose,
   title,
