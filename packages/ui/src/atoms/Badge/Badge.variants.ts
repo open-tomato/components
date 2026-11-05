@@ -1,12 +1,14 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S ato-1 begin
 /**
- * Badge — a status pill: the agent state, a priority, a count. Pure content;
+ * Badge — a status pill: an item state, a priority, a count. Pure content;
  * a tone, a size, an optional leading dot, nothing interactive.
  *
  * `whitespace-nowrap` is deliberate — a wrapping status pill would be
  * broken.
  */
+// @@S ato-1 end
 // @@T ato-1 begin
 export const badge: (props?: ({ tone?: 'accent' | 'info' | 'success' | 'danger' | 'neutral' | 'warning' | 'leaf' | null | undefined; size?: 'sm' | 'md' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T ato-1 end

@@ -109,7 +109,7 @@ const InlineDemo = () => {
             </span>
           )
           : (
-            'agent avatar'
+            'avatar'
           )}
         <br />
         drag an image on, or click
@@ -130,7 +130,7 @@ const RegionDemo = () => {
     <div className="w-[560px]">
       <DroppableRegion
         minHeight={150}
-        label="Drop files to attach to this session"
+        label="Drop files to attach to this item"
         hint="Any file · up to 8"
         accept={{ maxCount: 8 }}
         onDrop={(dropped) => setFiles((f) => [

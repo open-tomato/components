@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { Field } from '../../atoms/Field';
-import { TomatoMark } from '../../internal/TomatoMark';
 
 import { Wizard, type WizardProps, type WizardStep } from './Wizard';
 
@@ -12,19 +11,27 @@ interface Answers {
   model: string;
 }
 
-/** A compact workspace-setup step set. */
+// @@S mol-1 begin
+/** A compact setup step set. */
+// @@S mol-1 end
 const STEPS: WizardStep<Answers>[] = [
   {
     key: 'name',
-    title: 'Name your workspace',
+    // @@S mol-1 begin
+    title: 'Name your project',
+    // @@S mol-1 end
     short: 'Name',
-    blurb: 'This is where your agents, sessions and roadmap live. You can change it later.',
+    // @@S mol-1 begin
+    blurb: 'This is where your items and plans live. You can change it later.',
+    // @@S mol-1 end
     validate: (a) => /^[a-z0-9][a-z0-9-]{2,}$/.test(a.name)
       ? null
       : 'Lowercase letters, numbers and dashes — at least 3 characters.',
     render: ({ answers, set, error }) => (
       <Field
-        label="Workspace name"
+        // @@S mol-1 begin
+        label="Project name"
+        // @@S mol-1 end
         state={error
           ? 'error'
           : 'default'}
@@ -39,7 +46,9 @@ const STEPS: WizardStep<Answers>[] = [
     key: 'model',
     title: 'Pick a default model',
     short: 'Model',
-    blurb: 'Every new agent session starts here. Per-session overrides are always available.',
+    // @@S mol-1 begin
+    blurb: 'Every new item starts here. Per-item overrides are always available.',
+    // @@S mol-1 end
     validate: (a) => (a.model
       ? null
       : 'Choose a model to continue.'),
@@ -80,14 +89,18 @@ const STEPS: WizardStep<Answers>[] = [
     key: 'review',
     title: 'Review & create',
     short: 'Review',
-    blurb: 'One last look. We\'ll seed an empty workspace and drop you on the dashboard.',
+    // @@S mol-1 begin
+    blurb: 'One last look. We\'ll create an empty project and take you to the overview.',
+    // @@S mol-1 end
     validate: () => null,
     render: ({ answers }) => (
       <div className="flex flex-col overflow-hidden rounded-lg border border-border-soft">
         {[
-          ['Workspace', answers.name
+          // @@S mol-1 begin
+          ['Project', answers.name
             ? `example.dev/${answers.name}`
             : '—'],
+          // @@S mol-1 end
           ['Default model', answers.model || '—'],
         ].map(([k, v], i) => (
           <div
@@ -113,8 +126,10 @@ const STEPS: WizardStep<Answers>[] = [
 
 const Heading = () => (
   <>
-    <TomatoMark size={22} />
-    <span className="font-display text-sm font-bold text-fg1">New workspace</span>
+    {/* @@S mol-1 begin */}
+    <span aria-hidden className="size-[22px] rounded-full bg-primary" />
+    <span className="font-display text-sm font-bold text-fg1">New project</span>
+    {/* @@S mol-1 end */}
   </>
 );
 
@@ -131,6 +146,9 @@ const meta: Meta<typeof Wizard<Answers>> = {
     step: 0,
     answers: { name: '', model: 'sonnet-4.5' },
     heading: <Heading />,
+    // @@S mol-1 begin
+    submitLabel: 'Create',
+    // @@S mol-1 end
     onAnswer: () => {},
     onBack: () => {},
     onNext: () => {},

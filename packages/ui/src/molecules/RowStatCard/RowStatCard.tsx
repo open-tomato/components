@@ -39,8 +39,10 @@ export interface RowStatCardProps
   subtitle?: ReactNode;
   /** Row 1 right: the "invisible columns" of ministats. */
   stats?: RowStat[];
-  /** Row 1 far right: optional action (original BudgetBar's Adjust button). */
+  // @@S mol-1 begin
+  /** Row 1 far right: optional action (for example an adjust button). */
   action?: ReactNode;
+  // @@S mol-1 end
   /**
    * Row 2: optional contextual text, link, or graphical indicator —
    * pair with the colocated `RowStatCardMeter` for the budget meter.
@@ -58,19 +60,20 @@ const statTone = (
     : 'danger';
 };
 
+// @@S mol-1 begin
 /**
  * RowStatCard — full-width card with title/subtitle left and borderless
  * ministat columns right, plus an optional second row (text, link, or
- * indicator). Design source: original design `BudgetBar` (the original usage screen "Monthly
- * budget"); contract: "RowStatCard".
+ * indicator); contract: "RowStatCard".
  *
  * Interpretation decisions:
- * - `action` slot: the original design seats a button beside the readouts;
+ * - `action` slot: a button can sit beside the readouts;
  *   the spec's row-1 contract is title + ministats, so the button is an
  *   explicit optional slot rather than a ministat.
  * - automatic accent: a ministat's `trend` colors its value
  *   (up → success, down → danger); explicit `tone` overrides.
  */
+// @@S mol-1 end
 // @@T mol-1 begin
 export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, RowStatCardProps>(
 // @@T mol-1 end

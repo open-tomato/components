@@ -19,7 +19,9 @@ export interface HumanReadableValueProps
   extends HTMLAttributes<HTMLSpanElement>,
   FormattedSizeVariants {
   value: number;
-  /** Unit suffix (`tokens`, `runs`, …) — small, greyed, to the right. */
+  // @@S ato-3 begin
+  /** Unit suffix (`units`, `runs`, …) — small, greyed, to the right. */
+  // @@S ato-3 end
   unit?: string;
   /** Compact notation (`12.5K`). Default true — "human readable". */
   short?: boolean;

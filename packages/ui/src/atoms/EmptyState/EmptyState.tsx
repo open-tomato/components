@@ -1,6 +1,5 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
-import { TomatoMark } from '../../internal/TomatoMark';
 import { cn } from '../../lib';
 
 // @@V ato-1 begin
@@ -19,22 +18,30 @@ export interface EmptyStateProps
   EmptyStateVariants {
   title: string;
   description?: string;
+  // @@S ato-1 begin
+  /** Optional illustration slot, shown above the title inside a tinted circle. */
+  illustration?: ReactNode;
+  // @@S ato-1 end
   /** Optional call-to-action slot (typically a `<Button>`). */
   action?: ReactNode;
 }
 
 // @@T ato-1 begin
 export const EmptyState: import('react').ForwardRefExoticComponent<EmptyStateProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, EmptyStateProps>(
-  ({ className, size, align, title, description, action, ...props }, ref) => (
+  ({ className, size, align, title, description, action, illustration, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(emptyState({ size, align }), className)}
       {...props}
     >
       {/* @@V ato-1 begin */}
-      <span className={emptyStateMark()}>
-        <TomatoMark />
-      </span>
+      {/* @@S ato-1 begin */}
+      {illustration != null && (
+        <span className={emptyStateMark()}>
+          {illustration}
+        </span>
+      )}
+      {/* @@S ato-1 end */}
       <span className={emptyStateTitle()}>
         {title}
       </span>
