@@ -5,7 +5,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * a mono label (auth screens). Empty segments keep cream-300 in both
  * themes.
  */
-export const passwordStrengthSegment = cva(
+// @@T ato-2 begin
+export const passwordStrengthSegment:
+(props?: ({ fill?: 'empty' | 'danger' | 'gold' | 'success' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-2 end
   'h-1 flex-1 rounded-[2px] transition-colors',
   {
     variants: {

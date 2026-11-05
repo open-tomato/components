@@ -7,13 +7,15 @@ import { passwordStrength } from '../../lib';
 import { PasswordStrength } from './PasswordStrength';
 
 /** Five segments, danger → gold → success, with the mono verdict label. */
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof PasswordStrength> = {
+// @@T ato-2 end
   title: 'Atoms/PasswordStrength',
   component: PasswordStrength,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   decorators: [(Story) => <div className="w-72"><Story /></div>],
-} satisfies Meta<typeof PasswordStrength>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -64,7 +64,12 @@ export interface SortableProps<T> {
   className?: string;
 }
 
-export const Sortable = <T,>({
+// @@T ato-2 begin
+export const Sortable: {
+  <T>(props: SortableProps<T>): import('react').JSX.Element;
+  displayName: string;
+} = <T,>({
+// @@T ato-2 end
   group,
   items,
   getKey,

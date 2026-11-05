@@ -6,7 +6,10 @@ export interface ProviderGlyphProps {
 }
 
 /** The provider marks — Google's four-color G, GitHub's mono mark. */
-export const ProviderGlyph = ({ provider, size = 18 }: ProviderGlyphProps) => {
+// @@T ato-2 begin
+export const ProviderGlyph = ({ provider, size = 18 }: ProviderGlyphProps): import('react').JSX.Element => {
+// @@T ato-2 end
+
   if (provider === 'google') {
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" className="shrink-0" aria-hidden>

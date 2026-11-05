@@ -105,7 +105,9 @@ const WidgetRow = ({ w, accent }: { w: Widget; accent: string }) => (
   </div>
 );
 
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof Sortable> = {
+// @@T ato-2 end
   title: 'Atoms/Sortable',
   component: Sortable,
   parameters: { layout: 'padded' },
@@ -118,7 +120,7 @@ const meta = {
     renderItem: () => null,
     onReorder: () => {},
   },
-} satisfies Meta<typeof Sortable>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -17,7 +17,10 @@ export interface OAuthButtonProps
   label?: string;
 }
 
-export const OAuthButton = forwardRef<HTMLButtonElement, OAuthButtonProps>(
+// @@T ato-2 begin
+export const OAuthButton:
+import('react').ForwardRefExoticComponent<OAuthButtonProps & import('react').RefAttributes<HTMLButtonElement>> = forwardRef<HTMLButtonElement, OAuthButtonProps>(
+// @@T ato-2 end
   ({ className, provider, label, ...props }, ref) => (
     <button ref={ref} type="button" className={cn(oauthButton(), className)} {...props}>
       <ProviderGlyph provider={provider} size={18} />
