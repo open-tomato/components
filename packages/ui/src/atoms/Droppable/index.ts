@@ -20,13 +20,22 @@ export {
   type DropValidation,
   type UseDroppableOptions,
 } from './useDroppable';
+// @@V ato-1 begin
 export {
+  droppableFileInput,
   droppableInline,
+  droppableInlineGlyph,
   droppableInlineMedia,
+  droppableRegion,
+  droppableRegionHint,
   droppableRegionIcon,
+  droppableRegionLabel,
   droppableRegionOverlay,
   droppableZone,
+  droppableZoneHint,
   droppableZoneIcon,
+  droppableZoneLabel,
   type DroppableInlineVariants,
   type DroppableZoneVariants,
 } from './Droppable.variants';
+// @@V ato-1 end
