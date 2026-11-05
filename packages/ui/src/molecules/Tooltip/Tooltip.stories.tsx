@@ -56,7 +56,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     open: true,
-    label: '184,210 of 200,000 tokens',
+    // @@S mol-2 begin
+    label: '184,210 of 200,000 units',
+    // @@S mol-2 end
     children: <StatPill>⚡ 184k</StatPill>,
   },
 };
@@ -73,7 +75,9 @@ export const BottomSide: Story = {
 /** Closed by default — the interactive hover/focus shape. */
 export const HoverMe: Story = {
   args: {
-    label: 'Defined in 3 agents',
+    // @@S mol-2 begin
+    label: 'Defined in 3 groups',
+    // @@S mol-2 end
     children: <StatPill>read_file</StatPill>,
   },
 };
