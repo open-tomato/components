@@ -27,4 +27,11 @@ export const dividerLabel: (props?: ClassProp) => string = cva(
   'font-mono text-[10px] uppercase tracking-[0.1em] text-fg3',
 );
 
+// @@V ato-3 begin
+/** The plain rule, rendered when no label is given. */
+export const dividerPlain: (props?: ClassProp) => string = cva(
+  'h-px w-full bg-border-soft',
+);
+// @@V ato-3 end
+
 export type DividerVariants = VariantProps<typeof divider>;

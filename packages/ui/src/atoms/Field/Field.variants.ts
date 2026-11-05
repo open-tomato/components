@@ -51,4 +51,45 @@ export const fieldHelper: (props?: { state?: 'default' | 'error' | 'success' | '
     defaultVariants: { state: 'default' },
   });
 
+// @@V ato-3 begin
+/** The outer column; dims the whole field when disabled. */
+export const fieldRoot: (props?: { disabled?: boolean | null | undefined } & ClassProp) => string =
+  cva('flex flex-col gap-1.5', {
+    variants: {
+      disabled: {
+        true: 'opacity-60',
+        false: '',
+      },
+    },
+    defaultVariants: { disabled: false },
+  });
+
+/** The label above the control. */
+export const fieldLabel: (props?: ClassProp) => string = cva(
+  'text-[12.5px] font-semibold text-fg1',
+);
+
+/** The frame that positions the leading icon over the input. */
+export const fieldControl: (props?: ClassProp) => string = cva(
+  'relative flex items-center',
+);
+
+/** The leading icon slot inside the control. */
+export const fieldIcon: (props?: ClassProp) => string = cva(
+  'absolute left-[11px] text-fg3 pointer-events-none',
+);
+
+/** Left padding that clears the leading icon when one is present. */
+export const fieldIconPad: (props?: { icon?: boolean | null | undefined } & ClassProp) => string =
+  cva('', {
+    variants: {
+      icon: {
+        true: 'pl-8',
+        false: '',
+      },
+    },
+    defaultVariants: { icon: false },
+  });
+// @@V ato-3 end
+
 export type FieldVariants = VariantProps<typeof field>;
