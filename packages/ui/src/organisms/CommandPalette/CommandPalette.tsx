@@ -240,7 +240,8 @@ const PalettePanel = ({
   );
 };
 
-export const CommandPalette = ({
+// @@T org-2 begin
+export const CommandPalette: { (p: CommandPaletteProps): import('react').JSX.Element; displayName: string } = (({
   open,
   onClose,
   onRun,
@@ -265,6 +266,7 @@ export const CommandPalette = ({
       placeholder={placeholder}
     />
   </Overlay>
-);
+)) as { (p: CommandPaletteProps): import('react').JSX.Element; displayName: string };
+// @@T org-2 end
 
 CommandPalette.displayName = 'CommandPalette';
