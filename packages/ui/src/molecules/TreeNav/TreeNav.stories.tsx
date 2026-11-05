@@ -65,7 +65,9 @@ const FLAT: readonly TreeNavNode[] = [
   { key: '$/k:notes', label: 'Notes', children: [] },
 ];
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof TreeNav> = {
+// @@T mol-2 end
   title: 'Molecules/TreeNav',
   component: TreeNav,
   parameters: { layout: 'padded' },
@@ -77,7 +79,7 @@ const meta = {
     onSelect: () => undefined,
     onToggle: () => undefined,
   },
-} satisfies Meta<typeof TreeNav>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

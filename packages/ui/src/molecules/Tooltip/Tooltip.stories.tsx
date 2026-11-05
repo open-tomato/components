@@ -30,7 +30,9 @@ const StatPill = forwardRef<HTMLSpanElement, HTMLAttributes<HTMLSpanElement>>(
 );
 StatPill.displayName = 'StatPill';
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof Tooltip> = {
+// @@T mol-2 end
   title: 'Molecules/Tooltip',
   component: Tooltip,
   parameters: { layout: 'centered' },
@@ -45,7 +47,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Tooltip>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
