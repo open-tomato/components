@@ -3,7 +3,13 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-import { sortableRow } from './Sortable.variants';
+// @@V ato-2 begin
+import {
+  sortableRow,
+  sortableRowBody,
+  sortableRowGrip,
+} from './Sortable.variants';
+// @@V ato-2 end
 
 export interface SortableRowProps extends HTMLAttributes<HTMLDivElement> {
   /** Trailing slot (e.g. a status Tag). */
@@ -23,10 +29,14 @@ export const SortableRow: {
   ...props
 }) => (
   <div className={cn(sortableRow(), className)} {...props}>
-    <span className="shrink-0 cursor-grab text-fg3">
+    {/* @@V ato-2 begin */}
+    <span className={sortableRowGrip()}>
+      {/* @@V ato-2 end */}
       <StrokeIcon name="gripVertical" size={16} />
     </span>
-    <div className="min-w-0 flex-1">{children}</div>
+    {/* @@V ato-2 begin */}
+    <div className={sortableRowBody()}>{children}</div>
+    {/* @@V ato-2 end */}
     {trailing}
   </div>
 );

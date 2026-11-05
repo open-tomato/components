@@ -9,7 +9,14 @@ import {
 
 import { cn } from '../../lib';
 
-import { sortableContainer, sortableLine } from './Sortable.variants';
+// @@V ato-2 begin
+import {
+  sortableContainer,
+  sortableEmpty,
+  sortableItem,
+  sortableLine,
+} from './Sortable.variants';
+// @@V ato-2 end
 
 /**
  * Sortable — the INTERNAL half of the drag story Droppable defers.
@@ -176,7 +183,9 @@ export const Sortable: {
       style={style}
     >
       {items.length === 0 && overIndex == null && (
-        <div className="w-full px-3 py-[18px] text-center text-[12.5px] italic text-fg3">
+        // @@V ato-2 begin
+        <div className={sortableEmpty()}>
+          {/* @@V ato-2 end */}
           {emptyHint ?? 'Empty'}
         </div>
       )}
@@ -198,12 +207,9 @@ export const Sortable: {
               }}
               onDragEnd={clear}
               onDragOver={(e) => onItemDragOver(e, i)}
-              className={cn(
-                'cursor-grab transition-opacity',
-                dragging
-                  ? 'opacity-40'
-                  : 'opacity-100',
-              )}
+              // @@V ato-2 begin
+              className={sortableItem({ dragging })}
+              // @@V ato-2 end
             >
               {renderItem(it, { dragging })}
             </div>

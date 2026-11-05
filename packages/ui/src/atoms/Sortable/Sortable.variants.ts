@@ -61,3 +61,28 @@ export const sortableRow:
 ]);
 
 export type SortableContainerVariants = VariantProps<typeof sortableContainer>;
+
+// @@V ato-2 begin
+/** The italic hint shown while the list is empty. */
+export const sortableEmpty: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('w-full px-3 py-[18px] text-center text-[12.5px] italic text-fg3');
+
+/** One draggable item; dims while it is the dragged one. */
+export const sortableItem: (props?: ({ dragging?: boolean | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  'cursor-grab transition-opacity',
+  {
+    variants: {
+      dragging: {
+        true: 'opacity-40',
+        false: 'opacity-100',
+      },
+    },
+    defaultVariants: { dragging: false },
+  },
+);
+
+/** The grip handle at the row's start. */
+export const sortableRowGrip: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0 cursor-grab text-fg3');
+
+/** The row's content slot: takes the free width. */
+export const sortableRowBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1');
+// @@V ato-2 end

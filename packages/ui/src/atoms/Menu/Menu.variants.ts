@@ -63,3 +63,14 @@ export const menuItem:
 
 export type MenuVariants = VariantProps<typeof menu>;
 export type MenuItemVariants = VariantProps<typeof menuItem>;
+
+// @@V ato-2 begin
+/** Item label: takes the free width and truncates. */
+export const menuItemLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate');
+
+/** Section label (mono caps). */
+export const menuLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('px-2.5 pb-[3px] pt-[5px] font-mono text-[10.5px] uppercase tracking-[0.08em] text-fg3');
+
+/** Hairline separator between item groups. */
+export const menuSep: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mx-0.5 my-1 h-px bg-border-soft');
+// @@V ato-2 end
