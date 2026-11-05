@@ -13,7 +13,7 @@ import { AppShell } from './AppShell';
  * Since WS03d the harness chrome is the real components: the collapse
  * button lives on AppShellTopbar itself (app-shell spec), the nav
  * is the data-driven SidebarNav, the rail carries SidebarQuota +
- * SidebarQuickAccess, and the topbar composes WorkspaceSwitcher /
+ * SidebarQuickAccess, and the topbar composes the group switcher /
  * SearchSuggest / NotificationsBell / ThemeSwitcher / ProfileMenu.
  */
 // @@S tpl-1 end

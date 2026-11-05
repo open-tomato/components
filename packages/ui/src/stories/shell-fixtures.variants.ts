@@ -23,7 +23,9 @@ export const sidebarDemoWordmark: (props?: ClassProp) => string = cva('wordmark 
 /** The wordmark's "open" half. */
 export const sidebarDemoWordmarkOpen: (props?: ClassProp) => string = cva('wordmark-open');
 
-/** The wordmark's "tomato" half. */
+// @@S tpl-1 begin
+/** The wordmark's accent half. */
+// @@S tpl-1 end
 export const sidebarDemoWordmarkTomato: (props?: ClassProp) => string = cva('wordmark-tomato');
 
 /** A flex spacer that pushes what follows to the far end. */

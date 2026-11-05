@@ -14,26 +14,38 @@ describe('createServerCache', () => {
 
   describe('get', () => {
     it('calls fetchFn on a cache miss and stores the result with the correct TTL', async () => {
-      const fetchFn = vi.fn().mockResolvedValue({ name: 'agent' });
+      // @@S tpl-1 begin
+      const fetchFn = vi.fn().mockResolvedValue({ name: 'item' });
+      // @@S tpl-1 end
       const setSpy = vi.spyOn(redis, 'set');
 
-      const result = await cache.get('agents:1', 300, fetchFn);
+      // @@S tpl-1 begin
+      const result = await cache.get('items:1', 300, fetchFn);
+      // @@S tpl-1 end
 
       expect(fetchFn).toHaveBeenCalledOnce();
-      expect(result).toEqual({ name: 'agent' });
+      // @@S tpl-1 begin
+      expect(result).toEqual({ name: 'item' });
+      // @@S tpl-1 end
       expect(setSpy).toHaveBeenCalledWith(
-        'agents:1',
-        JSON.stringify({ name: 'agent' }),
+        // @@S tpl-1 begin
+        'items:1',
+        JSON.stringify({ name: 'item' }),
+        // @@S tpl-1 end
         'EX',
         300,
       );
     });
 
     it('returns the cached value on a hit without calling fetchFn', async () => {
-      await redis.set('agents:1', JSON.stringify({ name: 'cached' }), 'EX', 300);
+      // @@S tpl-1 begin
+      await redis.set('items:1', JSON.stringify({ name: 'cached' }), 'EX', 300);
+      // @@S tpl-1 end
       const fetchFn = vi.fn();
 
-      const result = await cache.get('agents:1', 300, fetchFn);
+      // @@S tpl-1 begin
+      const result = await cache.get('items:1', 300, fetchFn);
+      // @@S tpl-1 end
 
       expect(fetchFn).not.toHaveBeenCalled();
       expect(result).toEqual({ name: 'cached' });
@@ -65,14 +77,20 @@ describe('createServerCache', () => {
 
   describe('invalidatePattern', () => {
     it('removes all keys matching the pattern', async () => {
-      await redis.set('agents:1', 'a', 'EX', 60);
-      await redis.set('agents:2', 'b', 'EX', 60);
+      // @@S tpl-1 begin
+      await redis.set('items:1', 'a', 'EX', 60);
+      await redis.set('items:2', 'b', 'EX', 60);
+      // @@S tpl-1 end
       await redis.set('other:1', 'c', 'EX', 60);
 
-      await cache.invalidatePattern('agents:*');
+      // @@S tpl-1 begin
+      await cache.invalidatePattern('items:*');
+      // @@S tpl-1 end
 
-      expect(await redis.get('agents:1')).toBeNull();
-      expect(await redis.get('agents:2')).toBeNull();
+      // @@S tpl-1 begin
+      expect(await redis.get('items:1')).toBeNull();
+      expect(await redis.get('items:2')).toBeNull();
+      // @@S tpl-1 end
       expect(await redis.get('other:1')).toBe('c');
     });
 
@@ -83,9 +101,13 @@ describe('createServerCache', () => {
     it('uses SCAN and never KEYS', async () => {
       const scanSpy = vi.spyOn(redis, 'scan');
       const keysSpy = vi.spyOn(redis, 'keys');
-      await redis.set('agents:1', 'a', 'EX', 60);
+      // @@S tpl-1 begin
+      await redis.set('items:1', 'a', 'EX', 60);
+      // @@S tpl-1 end
 
-      await cache.invalidatePattern('agents:*');
+      // @@S tpl-1 begin
+      await cache.invalidatePattern('items:*');
+      // @@S tpl-1 end
 
       // `KEYS` walks the whole keyspace in one blocking operation on a
       // single-threaded server, stalling every other client. It is the reason this

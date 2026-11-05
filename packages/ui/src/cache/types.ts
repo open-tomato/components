@@ -116,15 +116,17 @@ export interface ServerCache {
    */
   invalidate(key: string): Promise<void>;
 
+  // @@S tpl-1 begin
   /**
-   * Removes all keys matching a glob-style prefix pattern (e.g. `"agents:*"`).
+   * Removes all keys matching a glob-style prefix pattern (e.g. `"items:*"`).
    * No-ops gracefully when no keys match.
    *
    * Implementations must iterate with a cursor (`SCAN`) rather than `KEYS`, which
    * walks the whole keyspace in one blocking operation on a single-threaded server.
    *
-   * @param prefix - Glob-style pattern, e.g. `"agents:*"`.
+   * @param prefix - Glob-style pattern, e.g. `"items:*"`.
    */
+  // @@S tpl-1 end
   invalidatePattern(prefix: string): Promise<void>;
 
   /**

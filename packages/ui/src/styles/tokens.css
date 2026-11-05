@@ -16,7 +16,7 @@
        them before any other rule). ----------------------------------------- */
 
 /* ============================================================================
-   BASE TOKENS — raw values, not used directly by components
+   BASE VALUES — raw values, not used directly by components
    ========================================================================== */
 :root {
   /* --- Brand red scale (deep cherry / oxblood) --------------------------- */
@@ -153,7 +153,7 @@
 }
 
 /* ============================================================================
-   SEMANTIC TOKENS — what components actually reference
+   SEMANTIC VALUES — what components actually reference
    ============================================================================
    Component code should NEVER reach for --red-500 or --cream-100 directly. Use
    --bg, --fg1, --primary, etc. so dark mode flips correctly.

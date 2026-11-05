@@ -55,7 +55,7 @@ import {
 // @@S tpl-1 begin
 /**
  * Story harness for the AppShell stories. The chrome is the REAL library
- * components — WorkspaceSwitcher, SearchSuggest, NotificationsBell,
+ * components — the group switcher, SearchSuggest, NotificationsBell,
  * ThemeSwitcher, ProfileMenu in the topbar; SidebarNav +
  * SidebarQuota + SidebarQuickAccess in the rail — this file only
  * supplies demo data, placeholder page content and the LiveShell wiring.
@@ -69,29 +69,39 @@ import {
 // eslint-disable-next-line react-refresh/only-export-components -- story fixture module mixing demo components and nav data; fast refresh does not apply
 export const NAV_PRIMARY: SidebarNavConfigItem[] = [
   { id: 'overview', label: 'Overview', icon: 'layout-dashboard' },
-  { id: 'sessions', label: 'Sessions', icon: 'terminal' },
-  { id: 'agents', label: 'Agents', icon: 'bot' },
+  // @@S tpl-1 begin
+  { id: 'items', label: 'Items', icon: 'terminal' },
+  { id: 'teams', label: 'Teams', icon: 'bot' },
+  // @@S tpl-1 end
   { id: 'roadmap', label: 'Roadmap', icon: 'list' },
   { id: 'tools', label: 'Tools', icon: 'cpu' },
   { id: 'usage', label: 'Usage', icon: 'zap' },
 ];
 
-const WORKSPACES: WorkspaceOption[] = [
+// @@S tpl-1 begin
+const GROUPS: WorkspaceOption[] = [
+  // @@S tpl-1 end
   { id: 'og', name: 'open-garden', members: 12, tone: 'accent' },
-  { id: 'rt', name: 'ripe-tomatoes', members: 6, tone: 'primary' },
+  // @@S tpl-1 begin
+  { id: 'rt', name: 'bright-orchard', members: 6, tone: 'primary' },
+  // @@S tpl-1 end
   { id: 'vp', name: 'vine-patch', members: 3, tone: 'gold' },
 ];
 
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · agent-7d2f' },
+  // @@S tpl-1 begin
+  { kind: 'agent', label: 'auth-refactor', sub: 'running · run-7d2f' },
+  // @@S tpl-1 end
   { kind: 'session', label: 'settings page draft', sub: '12m ago · sam · sonnet-4-5' },
-  { kind: 'task', label: 'Add per-tool spend chart to usage page', sub: 'roadmap · high' },
+  // @@S tpl-1 begin
+  { kind: 'task', label: 'Add per-tool cost chart to usage page', sub: 'roadmap · high' },
+  // @@S tpl-1 end
   { kind: 'tool', label: 'github-issues', sub: 'MCP · connected' },
   { kind: 'doc', label: 'Composting context between runs', sub: 'docs/experiments' },
 ];
 
 const NOTIFICATIONS: NotificationItem[] = [
-  { id: 1, unread: true, level: 'ok', title: 'auth-refactor finished', body: '8 files updated · 12.3k tokens', time: '2m ago' },
+  { id: 1, unread: true, level: 'ok', title: 'auth-refactor finished', body: '8 files updated · 12.3k units', time: '2m ago' },
   { id: 2, unread: true, level: 'warn', title: 'perf-investigate is waiting', body: 'Token budget paused at 0/200k.', time: '14m ago' },
   { id: 3, unread: false, level: 'info', icon: 'git-branch', title: 'docs-typos opened PR #214', body: '23 typos across docs/.', time: 'yesterday' },
 ];
@@ -121,8 +131,10 @@ export const SidebarDemo = ({
       {!collapsed && (
         // @@V tpl-1 begin
         <span className={sidebarDemoWordmark()}>
-          <span className={sidebarDemoWordmarkOpen()}>open</span>{' '}
-          <span className={sidebarDemoWordmarkTomato()}>tomato</span>
+          {/* @@S tpl-1 begin */}
+          <span className={sidebarDemoWordmarkOpen()}>acme</span>{' '}
+          <span className={sidebarDemoWordmarkTomato()}>labs</span>
+          {/* @@S tpl-1 end */}
           {/* @@V tpl-1 end */}
         </span>
       )}
@@ -139,7 +151,7 @@ export const SidebarDemo = ({
     {/* @@S tpl-1 begin */}
     <SidebarQuota
       title="this week"
-      unit="tokens"
+      unit="units"
       status="healthy"
       used={1_200_000}
       limit={4_000_000}
@@ -170,7 +182,9 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
   const [theme, setTheme] = useState<ThemeName>('light');
   return (
     <>
-      <WorkspaceSwitcher workspaces={WORKSPACES} activeId="og" />
+      {/* @@S tpl-1 begin */}
+      <WorkspaceSwitcher workspaces={GROUPS} activeId="og" />
+      {/* @@S tpl-1 end */}
       {/* @@V tpl-1 begin */}
       <div className={topbarDemoTitle()}>
         {title}

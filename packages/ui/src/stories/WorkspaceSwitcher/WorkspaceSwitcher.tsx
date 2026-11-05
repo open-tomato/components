@@ -38,7 +38,9 @@ export interface WorkspaceOption {
   name: string;
   /** Member count, shown mono under the name in the menu rows. */
   members?: number;
-  /** WorkspaceMark fill for this workspace's identity block. */
+  // @@S tpl-1 begin
+  /** Mark fill for this group's identity block. */
+  // @@S tpl-1 end
   tone?: WorkspaceMarkProps['tone'];
 }
 
@@ -47,7 +49,9 @@ export interface WorkspaceSwitcherProps {
   workspaces: WorkspaceOption[];
   activeId: string;
   onSwitch?: (id: string) => void;
-  /** "See all workspaces" — links to settings → workspaces. */
+  // @@S tpl-1 begin
+  /** "See all groups" — links to the groups settings page. */
+  // @@S tpl-1 end
   onSeeAll?: () => void;
   onNew?: () => void;
   /** Render with the menu open (docs/stories). */
@@ -55,14 +59,16 @@ export interface WorkspaceSwitcherProps {
   className?: string;
 }
 
+// @@S tpl-1 begin
 /**
- * WorkspaceSwitcher (the original TopbarLive demo; app-shell spec): the
- * active workspace as a max-width pill; the menu lists the 5 most recent
- * workspaces (check mark on the active one) and links out to settings →
- * workspaces instead of offering in-place search. Hidden entirely for
- * single-workspace users (the spec's default), and scope-free — no topbar
- * dependency, so it can move to the sidebar later.
+ * Group switcher (topbar demo; app-shell spec): the active group as a
+ * max-width pill; the menu lists the 5 most recent groups (check mark on the
+ * active one) and links out to the groups settings page instead of offering
+ * in-place search. Hidden entirely for single-group users (the spec's
+ * default), and scope-free — no topbar dependency, so it can move to the
+ * sidebar later.
  */
+// @@S tpl-1 end
 // @@T tpl-1 begin
 export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
 // @@T tpl-1 end
@@ -74,7 +80,9 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
   defaultOpen = false,
   className,
 }: WorkspaceSwitcherProps) => {
-  // Spec: users with one workspace never see the switcher.
+  // @@S tpl-1 begin
+  // Spec: users with one group never see the switcher.
+  // @@S tpl-1 end
   const [first] = workspaces;
   if (workspaces.length < 2 || first == null) return null;
   const active = workspaces.find((w) => w.id === activeId) ?? first;
@@ -89,7 +97,9 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
       </MenuTrigger>
       <MenuContent className={workspaceSwitcherMenu()}>
         {/* @@V tpl-1 end */}
-        <MenuLabel>Recent workspaces</MenuLabel>
+        {/* @@S tpl-1 begin */}
+        <MenuLabel>Recent groups</MenuLabel>
+        {/* @@S tpl-1 end */}
         {recent.map((w) => (
           <MenuItem
             key={w.id}
@@ -132,14 +142,18 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
           )}
           onSelect={() => onSeeAll?.()}
         >
-          See all workspaces
+          {/* @@S tpl-1 begin */}
+          See all groups
+          {/* @@S tpl-1 end */}
         </MenuItem>
         <MenuItem
           tone="accent"
           icon={<Icon name="plus" size={15} />}
           onSelect={() => onNew?.()}
         >
-          New workspace
+          {/* @@S tpl-1 begin */}
+          New group
+          {/* @@S tpl-1 end */}
         </MenuItem>
       </MenuContent>
     </Menu>

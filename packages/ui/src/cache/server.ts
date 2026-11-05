@@ -11,6 +11,7 @@ const SCAN_BATCH = 100;
 /** Maximum keys per `DEL`, so one invalidation cannot issue an unbounded command. */
 const DELETE_CHUNK = 100;
 
+// @@S tpl-1 begin
 /**
  * Creates a Redis-backed {@link ServerCache} instance.
  *
@@ -29,9 +30,10 @@ const DELETE_CHUNK = 100;
  * const redis = new Redis(process.env.REDIS_URL!)
  * const cache = createServerCache(redis)
  *
- * const agents = await cache.get('agents:list', 300, () => db.select(...))
+ * const items = await cache.get('items:list', 300, () => db.select(...))
  * ```
  */
+// @@S tpl-1 end
 export function createServerCache(redis: Redis): ServerCache {
   return {
     /**
@@ -74,8 +76,9 @@ export function createServerCache(redis: Redis): ServerCache {
       await redis.del(key);
     },
 
+    // @@S tpl-1 begin
     /**
-     * Removes all keys matching a glob-style pattern (e.g. `"agents:*"`).
+     * Removes all keys matching a glob-style pattern (e.g. `"items:*"`).
      * No-ops gracefully when no keys match the pattern.
      *
      * Uses `SCAN`, never `KEYS`. `KEYS` walks the ENTIRE keyspace in a single
@@ -104,8 +107,9 @@ export function createServerCache(redis: Redis): ServerCache {
      * is harmless — a key written after invalidation started is newer than the
      * invalidation, so keeping it is correct.
      *
-     * @param prefix - Glob-style pattern, e.g. `"agents:*"`.
+     * @param prefix - Glob-style pattern, e.g. `"items:*"`.
      */
+    // @@S tpl-1 end
     async invalidatePattern(prefix: string): Promise<void> {
       const matched: string[] = [];
       let cursor = '0';
