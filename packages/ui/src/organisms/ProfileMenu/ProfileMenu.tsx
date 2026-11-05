@@ -15,6 +15,21 @@ import {
 // Deep member import, not the ConfirmPopover barrel (built-storybook lazy-init chunking hazard).
 import { ConfirmInline } from '../../molecules/ConfirmPopover/ConfirmPopover';
 
+// @@V org-2 begin
+import {
+  profileMenuContent,
+  profileMenuEmail,
+  profileMenuHeader,
+  profileMenuIdentity,
+  profileMenuItems,
+  profileMenuLogout,
+  profileMenuName,
+  profileMenuRole,
+  profileMenuSep,
+  profileMenuTrigger,
+} from './ProfileMenu.variants';
+// @@V org-2 end
+
 export interface ProfileMenuUser {
   name: string;
   email: string;
@@ -76,24 +91,55 @@ export const ProfileMenu: {
     >
       <MenuTrigger
         aria-label={`Account — ${user.name}`}
-        className="cursor-pointer rounded-full border-none bg-transparent p-0"
+        // @@V org-2 begin
+        className={profileMenuTrigger()}
+        // @@V org-2 end
       >
         <Avatar name={user.name} size="md" status="none" />
       </MenuTrigger>
-      <MenuContent align="end" className="w-[260px] p-0">
-        <div className="flex items-center gap-2.5 border-b border-border-soft p-3.5">
+      <MenuContent
+        align="end"
+        // @@V org-2 begin
+        className={profileMenuContent()}
+        // @@V org-2 end
+      >
+        <div
+          // @@V org-2 begin
+          className={profileMenuHeader()}
+          // @@V org-2 end
+        >
           <Avatar name={user.name} size="lg" status="none" />
-          <div className="min-w-0">
-            <div className="text-sm font-bold text-fg1">{user.name}</div>
-            <div className="truncate font-mono text-xs text-fg3">
+          <div
+            // @@V org-2 begin
+            className={profileMenuIdentity()}
+            // @@V org-2 end
+          >
+            <div
+              // @@V org-2 begin
+              className={profileMenuName()}
+              // @@V org-2 end
+            >{user.name}</div>
+            <div
+              // @@V org-2 begin
+              className={profileMenuEmail()}
+              // @@V org-2 end
+            >
               {user.email}
             </div>
-            <div className="mt-1">
+            <div
+              // @@V org-2 begin
+              className={profileMenuRole()}
+              // @@V org-2 end
+            >
               <Badge tone="info" size="sm">{user.role}</Badge>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-px p-1.5">
+        <div
+          // @@V org-2 begin
+          className={profileMenuItems()}
+          // @@V org-2 end
+        >
           <MenuItem
             icon={<Icon name="user" size={15} />}
             onSelect={() => onProfile?.()}
@@ -113,8 +159,16 @@ export const ProfileMenu: {
             Switch workspace
           </MenuItem>
         </div>
-        <MenuSep className="my-0" />
-        <div className="p-1.5">
+        <MenuSep
+          // @@V org-2 begin
+          className={profileMenuSep()}
+          // @@V org-2 end
+        />
+        <div
+          // @@V org-2 begin
+          className={profileMenuLogout()}
+          // @@V org-2 end
+        >
           {confirming
             ? (
               <ConfirmInline

@@ -31,6 +31,13 @@ export const smallStatCard: (props?: { size?: 'md' | 'sm' | null | undefined } &
   },
 );
 
+// @@V mol-3 begin
+/** Top line: title left, trend or decoration right. */
+export const smallStatCardHeader: (props?: ClassProp) => string = cva(
+  'flex items-center justify-between gap-2',
+);
+// @@V mol-3 end
+
 // @@T mol-3 begin
 export const smallStatCardTitle: (props?: ClassProp) => string = cva(
 // @@T mol-3 end

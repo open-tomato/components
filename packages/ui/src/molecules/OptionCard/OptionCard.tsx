@@ -3,12 +3,17 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
+// @@V mol-3 begin
 import {
   optionCard,
+  optionCardBody,
+  optionCardDescription,
   optionCardIndicator,
   optionCardTitle,
+  optionCardTitleRow,
   type OptionCardVariants,
 } from './OptionCard.variants';
+// @@V mol-3 end
 
 export interface OptionCardProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'title'>,
@@ -36,19 +41,18 @@ export const OptionCard: import('react').ForwardRefExoticComponent<
       {...props}
     >
       {leading}
-      <span className="flex min-w-0 flex-1 flex-col">
-        <span className="flex items-center gap-2">
+      {/* @@V mol-3 begin */}
+      <span className={optionCardBody()}>
+        <span className={optionCardTitleRow()}>
+          {/* @@V mol-3 end */}
           <span className={optionCardTitle({ align })}>{title}</span>
           {meta}
         </span>
         {description != null && (
           <span
-            className={cn(
-              'text-xs leading-normal text-fg3',
-              align === 'start'
-                ? 'mt-1'
-                : 'mt-0.5',
-            )}
+            // @@V mol-3 begin
+            className={optionCardDescription({ align: align ?? 'center' })}
+            // @@V mol-3 end
           >
             {description}
           </span>

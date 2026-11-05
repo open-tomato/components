@@ -6,6 +6,10 @@ import { BranchInline } from './BranchInline';
 import {
   entityCellStack,
   entityMeta,
+  // @@V mol-3 begin
+  entityMetaSeparator,
+  sessionCellAgent,
+  // @@V mol-3 end
   type SessionStatus,
 } from './KnownEntities.variants';
 import { SessionInline } from './SessionInline';
@@ -35,10 +39,12 @@ export const SessionCell: import('react').ForwardRefExoticComponent<
     <div ref={ref} className={cn(entityCellStack(), className)} {...props}>
       <SessionInline name={name} status={status} />
       <span className={entityMeta()}>
-        <span className="shrink-0">{agentInstanceId}</span>
+        {/* @@V mol-3 begin */}
+        <span className={sessionCellAgent()}>{agentInstanceId}</span>
         {branch != null && (
           <>
-            <span className="text-border-strong">·</span>
+            <span className={entityMetaSeparator()}>·</span>
+            {/* @@V mol-3 end */}
             <BranchInline name={branch} />
           </>
         )}

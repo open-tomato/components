@@ -4,14 +4,19 @@ import { forwardRef, type HTMLAttributes } from 'react';
 
 import { Badge, type BadgeProps } from '../../atoms/Badge';
 import { Icon } from '../../atoms/Icon';
-import { chartTone, cn, type ChartTone } from '../../lib';
+// @@V mol-3 begin
+import { cn, type ChartTone } from '../../lib';
 
 import {
   entityMeta,
+  entityMetaText,
   entityTile,
   entityTitle,
   entityTitleName,
+  entityTone,
+  toolTitleStack,
 } from './KnownEntities.variants';
+// @@V mol-3 end
 
 export interface ToolTitleProps extends HTMLAttributes<HTMLDivElement> {
   /** Tool display name — bold top line. */
@@ -52,14 +57,16 @@ export const ToolTitle: import('react').ForwardRefExoticComponent<
     ref,
   ) => (
     <div ref={ref} className={cn(entityTitle(), className)} {...props}>
-      <span className={cn(entityTile({ size: 'md' }), chartTone({ tone }))}>
+      {/* @@V mol-3 begin */}
+      <span className={cn(entityTile({ size: 'md' }), entityTone({ tone }))}>
         <Icon name={icon} size={16} />
       </span>
-      <div className="flex min-w-0 flex-col gap-1">
+      <div className={toolTitleStack()}>
         <span className={entityTitleName()}>{name}</span>
         <span className={entityMeta()}>
           <Badge tone={badgeTone} size="sm">{type}</Badge>
-          <span className="truncate">{slug}</span>
+          <span className={entityMetaText()}>{slug}</span>
+          {/* @@V mol-3 end */}
         </span>
       </div>
     </div>

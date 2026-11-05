@@ -7,7 +7,15 @@ import { Icon } from '../../atoms/Icon';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { navItem } from './AppShell.variants';
+// @@V tpl-1 begin
+import {
+  navItem,
+  navItemIcon,
+  navItemLabel,
+  quickAccessLink,
+  sidebarQuickAccess,
+} from './AppShell.variants';
+// @@V tpl-1 end
 import { NavItem } from './NavItem';
 
 export interface SidebarQuickAccessItem {
@@ -47,13 +55,9 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
 }: SidebarQuickAccessProps) => (
   <nav
     aria-label={label}
-    className={cn(
-      'flex flex-col gap-0.5 border-t border-border-soft',
-      collapsed
-        ? 'p-2'
-        : 'px-3 pb-3 pt-2',
-      className,
-    )}
+    // @@V tpl-1 begin
+    className={cn(sidebarQuickAccess({ collapsed }), className)}
+    // @@V tpl-1 end
   >
     {items.map((item) => item.href != null
       ? (
@@ -68,15 +72,19 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
           className={cn(
             touchable({ rounded: 'md', noBrightness: false }),
             navItem({ active: false, collapsed }),
+            // @@V tpl-1 begin
             // tokens.css ships unlayered `a` element rules that beat
             // Tailwind utilities — win with `!` (see AGENTS.md gotcha).
-            '!text-fg2 !no-underline',
+            quickAccessLink(),
+            // @@V tpl-1 end
           )}
         >
-          <span className="shrink-0">
+          {/* @@V tpl-1 begin */}
+          <span className={navItemIcon()}>
             <Icon name={item.icon} size={18} />
           </span>
-          {!collapsed && <span className="truncate">{item.label}</span>}
+          {!collapsed && <span className={navItemLabel()}>{item.label}</span>}
+          {/* @@V tpl-1 end */}
         </a>
       )
       : (

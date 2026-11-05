@@ -30,4 +30,12 @@ export const drawerPanel: (props?: ({ side?: 'right' | 'left' | null | undefined
 );
 // @@T mol-3 end
 
+// @@V mol-3 begin
+/** The scrolling body row. */
+export const drawerBody: (props?: ClassProp | undefined) => string = cva('flex-1 overflow-y-auto p-5 text-sm leading-relaxed text-fg2');
+
+/** The footer row holding the actions. */
+export const drawerFooter: (props?: ClassProp | undefined) => string = cva('flex shrink-0 justify-end gap-2.5 border-t border-border-soft bg-surface-sunk px-5 py-3.5');
+// @@V mol-3 end
+
 export type DrawerPanelVariants = VariantProps<typeof drawerPanel>;

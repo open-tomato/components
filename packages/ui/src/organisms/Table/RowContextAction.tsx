@@ -16,6 +16,10 @@ import {
 // Deep member import, not the ConfirmPopover barrel (built-storybook lazy-init chunking hazard).
 import { ConfirmInline } from '../../molecules/ConfirmPopover/ConfirmPopover';
 
+// @@V org-2 begin
+import { rowActionEntity } from './Table.variants';
+// @@V org-2 end
+
 /**
  * Context action (spec: "TableRow modifiers →
  * Context action"): an `ellipsis-vertical` icon button opening a row
@@ -107,7 +111,11 @@ export const RowContextAction: {
                   {' '}
                   {entityType}
                   {' '}
-                  <strong className="font-mono text-xs">{entityName}</strong>
+                  <strong
+                    // @@V org-2 begin
+                    className={rowActionEntity()}
+                    // @@V org-2 end
+                  >{entityName}</strong>
                   {' '}
                   — do you want to proceed?
                 </>

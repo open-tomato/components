@@ -7,6 +7,16 @@ import {
   verboseCap,
   verboseControl,
   verboseOption,
+  // @@V org-1 begin
+  verboseBadge,
+  verboseDescription,
+  verboseLabel,
+  verboseMeta,
+  verboseOptionList,
+  verboseRadioDot,
+  verboseText,
+  verboseTitleRow,
+  // @@V org-1 end
 } from './FormKit.variants';
 
 /**
@@ -61,33 +71,39 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
     onClick={() => onSelect?.()}
     className={cn(verboseOption({ selected }), className)}
   >
+    {/* @@V org-1 begin */}
     <span className={verboseControl({ mode, selected })} aria-hidden>
       {selected && (
         mode === 'radio'
-          ? <span className="absolute inset-[3px] rounded-full bg-surface-2" />
+          ? <span className={verboseRadioDot()} />
           : <Icon name="check" size={11} strokeWidth={3} />
       )}
     </span>
-    <span className="min-w-0 flex-1">
-      <span className="flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[13px] font-semibold text-fg1">
+    <span className={verboseText()}>
+      <span className={verboseTitleRow()}>
+        <span className={verboseLabel()}>
+          {/* @@V org-1 end */}
           {label}
         </span>
+        {/* @@V org-1 begin */}
         {badges?.map((badge, i) => typeof badge === 'string' || typeof badge === 'number'
           ? (
                
             <span key={i} className={verboseCap()}>{badge}</span>
           )
              
-          : <span key={i} className="inline-flex">{badge}</span>)}
+          : <span key={i} className={verboseBadge()}>{badge}</span>)}
+        {/* @@V org-1 end */}
       </span>
+      {/* @@V org-1 begin */}
       {description != null && (
-        <span className="mt-1 block text-xs font-normal leading-[1.45] text-fg3">
+        <span className={verboseDescription()}>
           {description}
         </span>
       )}
       {meta != null && (
-        <span className="mt-1 block font-mono text-[11px] font-normal text-fg3">
+        <span className={verboseMeta()}>
+          {/* @@V org-1 end */}
           {meta}
         </span>
       )}
@@ -154,7 +170,9 @@ export const VerboseOptionList: { (props: VerboseOptionListProps): import('react
         ? 'radiogroup'
         : 'group'}
       aria-label={ariaLabel}
-      className={cn('flex flex-col gap-1.5', className)}
+      // @@V org-1 begin
+      className={cn(verboseOptionList(), className)}
+      // @@V org-1 end
     >
       {options.map((o) => (
         <VerboseOption

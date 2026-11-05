@@ -4,6 +4,16 @@ import { useRef, type CSSProperties, type ReactElement, type ReactNode } from 'r
 
 import { cn } from '../../lib';
 
+// @@V org-2 begin
+import {
+  tableCellClamp,
+  tableCellJustify,
+  tableCellText,
+  tableCellTruncate,
+  tableCellWrap,
+} from './Table.variants';
+// @@V org-2 end
+
 export type CellOverflow = 'wrap' | 'truncate' | 'clamp';
 export type CellAlign = 'start' | 'center' | 'end';
 
@@ -21,17 +31,6 @@ export interface TableCellProps {
   onTip?: (tip: TableTip) => void;
   offTip?: () => void;
 }
-
-const ALIGN_TEXT: Record<CellAlign, string> = {
-  start: 'text-left',
-  center: 'text-center',
-  end: 'text-right',
-};
-const ALIGN_JUSTIFY: Record<CellAlign, string> = {
-  start: 'justify-start',
-  center: 'justify-center',
-  end: 'justify-end',
-};
 
 /**
  * The overflow-aware cell — the td-ellipsis fix from the original table demo. text-overflow
@@ -78,7 +77,9 @@ export const TableCell: {
         ref={ref}
         onMouseEnter={enter}
         onMouseLeave={offTip}
-        className={cn('truncate', ALIGN_TEXT[align])}
+        // @@V org-2 begin
+        className={cn(tableCellTruncate(), tableCellText({ align }))}
+        // @@V org-2 end
       >
         {children}
       </div>
@@ -92,10 +93,9 @@ export const TableCell: {
         ref={ref}
         onMouseEnter={enter}
         onMouseLeave={offTip}
-        className={cn(
-          'overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical]',
-          ALIGN_TEXT[align],
-        )}
+        // @@V org-2 begin
+        className={cn(tableCellClamp(), tableCellText({ align }))}
+        // @@V org-2 end
         style={style}
       >
         {children}
@@ -104,7 +104,15 @@ export const TableCell: {
   }
 
   return (
-    <div className={cn('flex', ALIGN_JUSTIFY[align], ALIGN_TEXT[align])}>
+    <div
+      // @@V org-2 begin
+      className={cn(
+        tableCellWrap(),
+        tableCellJustify({ align }),
+        tableCellText({ align }),
+      )}
+      // @@V org-2 end
+    >
       {children}
     </div>
   );

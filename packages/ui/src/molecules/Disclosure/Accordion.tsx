@@ -13,7 +13,19 @@ import {
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { accordionTrigger, disclosureFrame } from './Disclosure.variants';
+// @@V mol-3 begin
+import {
+  accordionBody,
+  accordionChevron,
+  accordionContent,
+  accordionHeading,
+  accordionItem,
+  accordionTitle,
+  accordionTrigger,
+  accordionTriggerGroup,
+  disclosureFrame,
+} from './Disclosure.variants';
+// @@V mol-3 end
 
 /**
  * Accordion — disclosure as a vertical stack. `mode` picks the selection
@@ -35,33 +47,32 @@ export const Accordion: { (props: AccordionProps): JSX.Element; displayName: str
   defaultValue,
   className,
   children,
-}: AccordionProps) => {
-  const frame = cn(disclosureFrame(), className);
-  return mode === 'single'
-    ? (
-      <RadixAccordion.Root
-        type="single"
-        collapsible
-        defaultValue={typeof defaultValue === 'string'
-          ? defaultValue
-          : undefined}
-        className={frame}
-      >
-        {children}
-      </RadixAccordion.Root>
-    )
-    : (
-      <RadixAccordion.Root
-        type="multiple"
-        defaultValue={Array.isArray(defaultValue)
-          ? defaultValue
-          : undefined}
-        className={frame}
-      >
-        {children}
-      </RadixAccordion.Root>
-    );
-};
+// @@V mol-3 begin
+}: AccordionProps) => (mode === 'single'
+  ? (
+    <RadixAccordion.Root
+      type="single"
+      collapsible
+      defaultValue={typeof defaultValue === 'string'
+        ? defaultValue
+        : undefined}
+      className={cn(disclosureFrame(), className)}
+    >
+      {children}
+    </RadixAccordion.Root>
+  )
+  : (
+    <RadixAccordion.Root
+      type="multiple"
+      defaultValue={Array.isArray(defaultValue)
+        ? defaultValue
+        : undefined}
+      className={cn(disclosureFrame(), className)}
+    >
+      {children}
+    </RadixAccordion.Root>
+  ));
+// @@V mol-3 end
 
 Accordion.displayName = 'Accordion';
 
@@ -78,19 +89,22 @@ export const AccordionItem: ForwardRefExoticComponent<
   ({ className, title, children, ...props }, ref) => (
     <RadixAccordion.Item
       ref={ref}
-      className={cn('border-b border-border-soft last:border-b-0', className)}
+      // @@V mol-3 begin
+      className={cn(accordionItem(), className)}
+      // @@V mol-3 end
       {...props}
     >
+      {/* @@V mol-3 begin */}
       <RadixAccordion.Header asChild>
-        <h3 className="m-0">
+        <h3 className={accordionHeading()}>
           <RadixAccordion.Trigger
             className={cn(
               touchable({ noBrightness: false, rounded: 'none' }),
               accordionTrigger(),
-              'group',
+              accordionTriggerGroup(),
             )}
           >
-            <span className="min-w-0 flex-1 text-[14.5px] font-semibold text-fg1">
+            <span className={accordionTitle()}>
               {title}
             </span>
             <svg
@@ -102,7 +116,7 @@ export const AccordionItem: ForwardRefExoticComponent<
               strokeWidth="1.75"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="shrink-0 text-fg3 group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary"
+              className={accordionChevron()}
               aria-hidden
             >
               <path d="M6 9l6 6 6-6" />
@@ -110,11 +124,12 @@ export const AccordionItem: ForwardRefExoticComponent<
           </RadixAccordion.Trigger>
         </h3>
       </RadixAccordion.Header>
-      <RadixAccordion.Content className="overflow-hidden">
-        <p className="m-0 px-[17px] pb-4 text-[13.5px] leading-relaxed text-fg2">
+      <RadixAccordion.Content className={accordionContent()}>
+        <p className={accordionBody()}>
           {children}
         </p>
       </RadixAccordion.Content>
+      {/* @@V mol-3 end */}
     </RadixAccordion.Item>
   ),
 );

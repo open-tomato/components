@@ -77,4 +77,51 @@ export const paletteKbd: (props?: ({ size?: 'sm' | 'md' | null | undefined; surf
   },
 );
 
+// @@V org-2 begin
+/** The Overlay root: the panel anchors to the top instead of centering. */
+export const paletteOverlay: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('items-start');
+
+/** The search row: icon, input and the esc hint. */
+export const paletteSearchRow: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex shrink-0 items-center gap-[11px] border-b border-border-soft px-[18px] py-[15px]');
+
+/** A muted, non-shrinking icon wrapper (the search glyph and the run marker). */
+export const paletteIconSlot: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0 text-fg3');
+
+/** The bare search input. */
+export const paletteSearchInput: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex-1 border-none bg-transparent font-body text-base text-fg1 outline-none placeholder:text-fg3');
+
+/** The scrolling results list. */
+export const paletteList: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex-1 overflow-y-auto p-[7px]');
+
+/** The empty-state block shown when nothing matches. */
+export const paletteEmpty: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex flex-col items-center gap-2 px-5 py-11 text-center');
+
+/** The empty-state glyph wrapper. */
+export const paletteEmptyIcon: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-fg3');
+
+/** The empty-state headline. */
+export const paletteEmptyTitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-sm font-semibold text-fg1');
+
+/** The empty-state suggestion line. */
+export const paletteEmptyHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-[12.5px] text-fg3');
+
+/** A results group. */
+export const paletteGroup: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mb-1');
+
+/** The mono group heading. */
+export const paletteGroupLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('px-2.5 pb-1 pt-[7px] font-mono text-[10.5px] uppercase tracking-[0.08em] text-fg3');
+
+/** A result row's label. */
+export const paletteItemLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate text-sm font-medium text-fg1');
+
+/** The footer key-hint bar. */
+export const paletteFooter: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex shrink-0 items-center gap-4 border-t border-border-soft bg-surface-sunk px-4 py-[9px] text-[11.5px] text-fg3');
+
+/** The footer result count, pushed to the right. */
+export const paletteCount: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('ml-auto font-mono');
+
+/** A footer key legend entry: the kbd chip plus its label. */
+export const keyHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('inline-flex items-center gap-1.5');
+// @@V org-2 end
+
 export type PaletteItemVariants = VariantProps<typeof paletteItem>;
