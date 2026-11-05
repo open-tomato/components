@@ -1,4 +1,6 @@
-import { useRef, type CSSProperties, type ReactNode } from 'react';
+// @@T org-2 begin
+import { useRef, type CSSProperties, type ReactElement, type ReactNode } from 'react';
+// @@T org-2 end
 
 import { cn } from '../../lib';
 
@@ -38,14 +40,19 @@ const ALIGN_JUSTIFY: Record<CellAlign, string> = {
  * wrapped in a div, and a tooltip is surfaced only when the text is
  * genuinely clipped (scrollWidth / scrollHeight probe on hover).
  */
-export const TableCell = ({
+// @@T org-2 begin
+export const TableCell: {
+  (props: TableCellProps): ReactElement | null;
+  displayName?: string;
+} = ({
   mode = 'wrap',
   lines = 2,
   align = 'start',
   children,
   onTip,
   offTip,
-}: TableCellProps) => {
+}: TableCellProps): ReactElement | null => {
+// @@T org-2 end
   const ref = useRef<HTMLDivElement>(null);
   const enter = () => {
     if (mode === 'wrap' || !onTip) return;

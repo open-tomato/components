@@ -12,19 +12,30 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * divided` carries the original demo's attached-mode divider (a table follows
  * inside the same surface).
  */
-export const toolbarSurface = cva([
-  'overflow-hidden rounded-lg bg-surface-1',
-  'border border-border-soft shadow-xs',
-]);
+// @@T org-2 begin
+export const toolbarSurface: (props?: import('class-variance-authority/types').ClassProp) => string = cva(
+// @@T org-2 end
+  [
+    'overflow-hidden rounded-lg bg-surface-1',
+    'border border-border-soft shadow-xs',
+  ],
+);
 
 /** Row 1 — search + filter dropdowns + view controls, on the sunk band. */
-export const toolbarControls = cva([
-  'flex flex-wrap items-center gap-2.5 px-4 py-[13px]',
-  'border-b border-border-soft bg-surface-sunk',
-]);
+// @@T org-2 begin
+export const toolbarControls: (props?: import('class-variance-authority/types').ClassProp) => string = cva(
+// @@T org-2 end
+  [
+    'flex flex-wrap items-center gap-2.5 px-4 py-[13px]',
+    'border-b border-border-soft bg-surface-sunk',
+  ],
+);
 
 /** Row 2 — result count, active-filter chips, clear-all. */
-export const toolbarSummary = cva(
+// @@T org-2 begin
+export const toolbarSummary: (props?: ({ divided?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+
   'flex flex-wrap items-center gap-2 px-4 py-[11px]',
   {
     variants: {
@@ -38,7 +49,10 @@ export const toolbarSummary = cva(
 );
 
 /** The filter trigger — accent-tinted while any value is selected. */
-export const filterTrigger = cva(
+// @@T org-2 begin
+export const filterTrigger: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+
   [
     'inline-flex h-[38px] items-center gap-2 px-3 rounded-md border',
     'text-[13.5px] font-semibold cursor-pointer',
@@ -59,7 +73,10 @@ export const filterTrigger = cva(
 );
 
 /** The search field control (the original toolbar demo SearchInput). */
-export const searchInput = cva(
+// @@T org-2 begin
+export const searchInput: (props?: ({ clearable?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
+
   [
     'h-[38px] w-full rounded-md bg-surface-1 border border-border-strong',
     'font-body text-sm text-fg1 placeholder:text-fg3',

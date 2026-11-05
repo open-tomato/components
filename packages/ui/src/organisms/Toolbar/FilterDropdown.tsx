@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type FC, type ReactNode } from 'react';
 
 import {
   Menu,
@@ -39,7 +39,10 @@ const PANEL_WIDTH = 224;
  * any value is selected; toggling keeps the menu open (multi-select), the
  * Clear item closes it.
  */
-export const FilterDropdown = ({
+// @@T org-2 begin
+export const FilterDropdown: FC<FilterDropdownProps> = ({
+// @@T org-2 end
+
   label,
   icon,
   options,
@@ -47,7 +50,7 @@ export const FilterDropdown = ({
   onToggle,
   onClear,
   className,
-}: FilterDropdownProps) => {
+}) => {
   const active = selected.length > 0;
   return (
     <Menu modal={false}>

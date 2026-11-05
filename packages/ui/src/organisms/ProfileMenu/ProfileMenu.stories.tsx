@@ -16,12 +16,14 @@ import { ProfileMenu } from './ProfileMenu';
  * (recorded): the original demo's extra "Help & docs" item is omitted — the
  * spec's option list doesn't include it.
  */
-const meta = {
+// @@T org-2 begin
+const meta: Meta<typeof ProfileMenu> = {
   title: 'Organisms/ProfileMenu',
   component: ProfileMenu,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof ProfileMenu>;
+};
+// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

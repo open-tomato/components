@@ -1,4 +1,9 @@
-import { forwardRef, type InputHTMLAttributes } from 'react';
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type InputHTMLAttributes,
+  type RefAttributes,
+} from 'react';
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -13,7 +18,10 @@ export interface SearchInputProps
 }
 
 /** The toolbar's search field — icon, controlled text, inline clear. */
-export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
+// @@T org-2 begin
+export const SearchInput: ForwardRefExoticComponent<SearchInputProps & RefAttributes<HTMLInputElement>> = forwardRef<HTMLInputElement, SearchInputProps>(
+// @@T org-2 end
+
   (
     { className, value, onChange, placeholder = 'Search sessions…', ...props },
     ref,

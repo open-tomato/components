@@ -1,4 +1,6 @@
-import { useState, type CSSProperties, type ReactNode } from 'react';
+// @@T org-2 begin
+import { useState, type CSSProperties, type ReactElement, type ReactNode } from 'react';
+// @@T org-2 end
 
 import { cn } from '../../lib';
 
@@ -124,7 +126,11 @@ const ColGroup = <Row,>({
   </colgroup>
 );
 
-export const Table = <Row,>({
+// @@T org-2 begin
+export const Table: {
+  <Row>(props: TableProps<Row>): ReactElement;
+  displayName?: string;
+} = <Row,>({
   columns,
   data,
   getRowId,
@@ -143,7 +149,8 @@ export const Table = <Row,>({
   onReorder,
   isRowReorderable,
   className,
-}: TableProps<Row>) => {
+}: TableProps<Row>): ReactElement => {
+// @@T org-2 end
   const [sort, setSort] = useState<SortState>(initialSort ?? NO_SORT);
   const [tip, setTip] = useState<TableTip | null>(null);
   const reorder = useRowReorder({ data, onReorder });

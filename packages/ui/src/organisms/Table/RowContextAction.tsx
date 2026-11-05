@@ -1,6 +1,8 @@
 import type { IconName } from '../../atoms/Icon';
 
-import { useState } from 'react';
+// @@T org-2 begin
+import { useState, type ReactElement } from 'react';
+// @@T org-2 end
 
 import { Icon } from '../../atoms/Icon';
 import { IconButton } from '../../atoms/IconButton';
@@ -54,14 +56,19 @@ export interface RowContextActionProps extends RowContextActionsConfig {
   defaultOpen?: boolean;
 }
 
-export const RowContextAction = ({
+// @@T org-2 begin
+export const RowContextAction: {
+  (props: RowContextActionProps): ReactElement;
+  displayName?: string;
+} = ({
   actions,
   destructive,
   entityType,
   entityName,
   label,
   defaultOpen = false,
-}: RowContextActionProps) => {
+}: RowContextActionProps): ReactElement => {
+// @@T org-2 end
   const [open, setOpen] = useState(defaultOpen);
   const [confirming, setConfirming] = useState(false);
 

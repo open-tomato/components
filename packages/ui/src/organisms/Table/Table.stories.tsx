@@ -9,9 +9,13 @@ import { renderCellContent } from './cellTypes';
 import { RowContextAction } from './RowContextAction';
 import { Table } from './Table';
 
-const TypedTable = Table<Session>;
+// @@T org-2 begin
+const TypedTable: typeof Table<Session> = Table<Session>;
+// @@T org-2 end
 
-const meta = {
+// @@T org-2 begin
+const meta: Meta<typeof TypedTable> = {
+// @@T org-2 end
   title: 'Organisms/Table',
   component: TypedTable,
   parameters: { layout: 'padded' },
@@ -26,7 +30,7 @@ const meta = {
     getRowId: (r: Session) => r.id,
     initialSort: { key: 'updated', dir: 'asc' },
   },
-} satisfies Meta<typeof TypedTable>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

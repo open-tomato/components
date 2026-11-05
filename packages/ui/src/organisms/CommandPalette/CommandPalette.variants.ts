@@ -12,14 +12,20 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** The floating panel — top-anchored, not centered. */
-export const palettePanel = cva([
-  'flex max-h-[70vh] w-[min(560px,calc(100vw-40px))] flex-col self-start',
-  'mt-[11vh] overflow-hidden rounded-xl bg-surface-1',
-  'border border-border-soft shadow-lg',
-]);
+// @@T org-2 begin
+export const palettePanel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+// @@T org-2 end
+  [
+    'flex max-h-[70vh] w-[min(560px,calc(100vw-40px))] flex-col self-start',
+    'mt-[11vh] overflow-hidden rounded-xl bg-surface-1',
+    'border border-border-soft shadow-lg',
+  ],
+);
 
 /** A result row; active carries the sunk fill + primary inset bar. */
-export const paletteItem = cva(
+// @@T org-2 begin
+export const paletteItem: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   [
     'flex w-full cursor-pointer items-center gap-[11px] rounded-md',
     'border-none px-[11px] py-[9px] text-left',
@@ -36,7 +42,9 @@ export const paletteItem = cva(
 );
 
 /** The row's leading icon puck. */
-export const paletteItemIcon = cva(
+// @@T org-2 begin
+export const paletteItemIcon: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   'inline-flex size-[30px] shrink-0 items-center justify-center rounded-sm',
   {
     variants: {
@@ -50,7 +58,9 @@ export const paletteItemIcon = cva(
 );
 
 /** The mono kbd chip (esc hint, shortcut hints, footer keys). */
-export const paletteKbd = cva(
+// @@T org-2 begin
+export const paletteKbd: (props?: ({ size?: 'sm' | 'md' | null | undefined; surface?: 'sunk' | 'raised' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-2 end
   'rounded-md border border-border-soft font-mono text-fg3',
   {
     variants: {

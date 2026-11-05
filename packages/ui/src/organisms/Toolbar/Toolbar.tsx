@@ -1,4 +1,10 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+import {
+  forwardRef,
+  type FC,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type RefAttributes,
+} from 'react';
 
 import { cn } from '../../lib';
 
@@ -29,7 +35,10 @@ import {
 
 export type ToolbarProps = HTMLAttributes<HTMLDivElement>;
 
-export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(
+// @@T org-2 begin
+export const Toolbar: ForwardRefExoticComponent<ToolbarProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarProps>(
+// @@T org-2 end
+
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(toolbarSurface(), className)} {...props} />
   ),
@@ -39,7 +48,10 @@ Toolbar.displayName = 'Toolbar';
 
 export type ToolbarControlsProps = HTMLAttributes<HTMLDivElement>;
 
-export const ToolbarControls = forwardRef<HTMLDivElement, ToolbarControlsProps>(
+// @@T org-2 begin
+export const ToolbarControls: ForwardRefExoticComponent<ToolbarControlsProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarControlsProps>(
+// @@T org-2 end
+
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(toolbarControls(), className)} {...props} />
   ),
@@ -51,7 +63,10 @@ export interface ToolbarSummaryProps
   extends HTMLAttributes<HTMLDivElement>,
   ToolbarSummaryVariants {}
 
-export const ToolbarSummary = forwardRef<HTMLDivElement, ToolbarSummaryProps>(
+// @@T org-2 begin
+export const ToolbarSummary: ForwardRefExoticComponent<ToolbarSummaryProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarSummaryProps>(
+// @@T org-2 end
+
   ({ className, divided, ...props }, ref) => (
     <div
       ref={ref}
@@ -64,7 +79,10 @@ export const ToolbarSummary = forwardRef<HTMLDivElement, ToolbarSummaryProps>(
 ToolbarSummary.displayName = 'ToolbarSummary';
 
 /** The vertical hairline between control clusters. */
-export const ToolbarSep = ({ className }: { className?: string }) => (
+// @@T org-2 begin
+export const ToolbarSep: FC<{ className?: string }> = ({ className }) => (
+// @@T org-2 end
+
   <div
     aria-hidden
     className={cn('mx-0.5 w-px self-stretch bg-border-soft', className)}

@@ -55,7 +55,8 @@ const COMMANDS: Command[] = [
 
 const RECENT = ['go-sessions', 'new-session', 'agent-refactor', 'theme'];
 
-const meta = {
+// @@T org-2 begin
+const meta: Meta<typeof CommandPalette> = {
   title: 'Organisms/CommandPalette',
   component: CommandPalette,
   parameters: { layout: 'fullscreen' },
@@ -75,7 +76,8 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof CommandPalette>;
+};
+// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

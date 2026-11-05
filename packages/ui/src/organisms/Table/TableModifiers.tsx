@@ -1,4 +1,6 @@
-import { forwardRef } from 'react';
+// @@T org-2 begin
+import { forwardRef, type ForwardRefExoticComponent, type RefAttributes } from 'react';
+// @@T org-2 end
 
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
@@ -32,7 +34,9 @@ export interface TableRowCheckboxProps {
   className?: string;
 }
 
-export const TableRowCheckbox = forwardRef<
+// @@T org-2 begin
+export const TableRowCheckbox: ForwardRefExoticComponent<TableRowCheckboxProps & RefAttributes<HTMLButtonElement>> = forwardRef<
+// @@T org-2 end
   HTMLButtonElement,
   TableRowCheckboxProps
 >(
@@ -92,7 +96,10 @@ export interface TableSortHandleProps {
  * — no keyboard path yet, mirroring the existing Sortable atom. See the
  * useRowReorder docblock for the planned keyboard fallback.
  */
-export const TableSortHandle = forwardRef<HTMLSpanElement, TableSortHandleProps>(
+// @@T org-2 begin
+export const TableSortHandle: ForwardRefExoticComponent<TableSortHandleProps & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, TableSortHandleProps>(
+// @@T org-2 end
+
   ({ disabled = false, className }, ref) => (
     <span
       ref={ref}
