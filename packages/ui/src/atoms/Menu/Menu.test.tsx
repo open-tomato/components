@@ -12,7 +12,7 @@ const setup = (
   <Menu open modal={false}>
     <MenuTrigger>Actions</MenuTrigger>
     <MenuContent {...content}>
-      <MenuLabel>Session</MenuLabel>
+      <MenuLabel>Group</MenuLabel>
       <MenuItem icon={<i data-testid="ic" />} trailing={<kbd>K</kbd>} onSelect={onSelect}>
         Open
       </MenuItem>
@@ -26,7 +26,7 @@ describe('Menu', () => {
   it('renders label, items, icon, trailing and separator when open', () => {
     setup();
     expect(screen.getByRole('menu')).toBeTruthy();
-    expect(screen.getByText('Session')).toBeTruthy();
+    expect(screen.getByText('Group')).toBeTruthy();
     expect(screen.getByRole('menuitem', { name: /Open/ })).toBeTruthy();
     expect(screen.getByRole('menuitem', { name: 'Delete' })).toBeTruthy();
     expect(screen.getByTestId('ic')).toBeTruthy();

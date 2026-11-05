@@ -52,8 +52,10 @@ export const menuItem:
       tone: {
         default: 'text-fg1 [&_svg]:text-fg3',
         danger: 'text-danger [&_svg]:text-danger',
-        // The "See all… / New workspace" style affirmative rows in the
-        // topbar menus.
+        // @@S ato-2 begin
+        // The "See all… / New group" style affirmative rows in
+        // header menus.
+        // @@S ato-2 end
         accent: 'text-accent [&_svg]:text-accent',
       },
     },
