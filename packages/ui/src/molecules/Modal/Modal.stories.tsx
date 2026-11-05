@@ -11,8 +11,9 @@ const DemoBody = () => (
   <div className="flex flex-col gap-3">
     <p className="m-0">
       This stops <strong className="text-fg1">refactor-bot</strong> and removes
-      its session history. Running tool calls are cancelled at the next
-      checkpoint.
+      {/* @@S mol-2 begin */}
+      its history. Running tool calls are cancelled at the next checkpoint.
+      {/* @@S mol-2 end */}
     </p>
     <div className="flex items-center gap-2.5 rounded-md border border-danger-tint bg-danger-wash px-3 py-[11px]">
       <svg
@@ -55,7 +56,9 @@ const meta: Meta<typeof Modal> = {
     footer: (
       <>
         <Button variant="ghost">Cancel</Button>
-        <Button variant="danger">Delete agent</Button>
+        {/* @@S mol-2 begin */}
+        <Button variant="danger">Delete item</Button>
+        {/* @@S mol-2 end */}
       </>
     ),
   },
@@ -93,7 +96,9 @@ export const BodyOnly: Story = {
  * of the actions.
  */
 export const FooterStatus: Story = {
-  args: { footerStatus: '2 sessions affected' },
+  // @@S mol-2 begin
+  args: { footerStatus: '2 items affected' },
+  // @@S mol-2 end
 };
 
 /** The status slot renders the footer row even without actions. */

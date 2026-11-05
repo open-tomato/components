@@ -40,7 +40,9 @@ export const Default: Story = {
 /** Header `action` slot — filters, legends, buttons on the right. */
 export const WithAction: Story = {
   args: {
-    title: 'Spend by agent',
+    // @@S mol-2 begin
+    title: 'Usage by group',
+    // @@S mol-2 end
     subtitle: '8 active',
     action: (
       <Button variant="secondary" size="sm">
@@ -51,13 +53,17 @@ export const WithAction: Story = {
   },
 };
 
+// @@S mol-2 begin
 /**
  * `padded={false}` — full-bleed body for row lists (original Section's
- * `padded` prop, used by the "Top sessions by spend" card).
+ * `padded` prop, used by the "Top items by usage" card).
  */
+// @@S mol-2 end
 export const FullBleed: Story = {
   args: {
-    title: 'Top sessions by spend',
+    // @@S mol-2 begin
+    title: 'Top items by usage',
+    // @@S mol-2 end
     subtitle: 'Click through for the full transcript',
     padded: false,
     children: (
