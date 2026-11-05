@@ -13,12 +13,15 @@ import { PasskeyPrompt } from './PasskeyPrompt';
  * affordance. A TwoFactorPage step candidate between the method pick
  * and the done splash; app wiring is WS08 scope.
  */
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof PasskeyPrompt> = {
+// @@T mol-2 end
+
   title: 'Molecules/PasskeyPrompt',
   component: PasskeyPrompt,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof PasskeyPrompt>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

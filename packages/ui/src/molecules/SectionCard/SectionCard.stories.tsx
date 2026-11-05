@@ -4,7 +4,10 @@ import { Button } from '../../atoms';
 
 import { SectionCard } from './SectionCard';
 
-const meta = {
+// @@T mol-2 begin
+const meta: Meta<typeof SectionCard> = {
+// @@T mol-2 end
+
   title: 'Molecules/SectionCard',
   component: SectionCard,
   parameters: { layout: 'padded' },
@@ -16,7 +19,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof SectionCard>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

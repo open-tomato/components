@@ -25,7 +25,9 @@ export interface ModalProps extends ModalPanelVariants {
   children: ReactNode;
 }
 
-export const Modal = ({
+// @@T mol-2 begin
+export const Modal: { (props: ModalProps): import('react').JSX.Element; displayName?: string } = ({
+// @@T mol-2 end
   open,
   onClose,
   title,
@@ -37,7 +39,9 @@ export const Modal = ({
   backdrop,
   className,
   children,
-}: ModalProps) => {
+// @@T mol-2 begin
+}: ModalProps): import('react').JSX.Element => {
+// @@T mol-2 end
   const titleId = useId();
   return (
     <Overlay
