@@ -2,7 +2,9 @@ import type { CSSProperties } from 'react';
 
 import { cn } from '../../lib';
 
-import { sliderInput } from './FormKit.variants';
+// @@V org-1 begin
+import { slider, sliderInput, sliderReadout } from './FormKit.variants';
+// @@V org-1 end
 
 export interface SliderProps {
   id?: string;
@@ -32,7 +34,9 @@ export const Slider: { (props: SliderProps): import('react').JSX.Element; displa
   // --pct drives the track's filled/unfilled gradient — genuinely dynamic.
   const style = { '--pct': `${pct}%` } as CSSProperties;
   return (
-    <div className={cn('flex items-center gap-[13px]', className)}>
+    // @@V org-1 begin
+    <div className={cn(slider(), className)}>
+      {/* @@V org-1 end */}
       <input
         id={id}
         type="range"
@@ -44,7 +48,9 @@ export const Slider: { (props: SliderProps): import('react').JSX.Element; displa
         className={sliderInput()}
         style={style}
       />
-      <span className="min-w-16 text-right font-mono text-[13px] font-semibold text-fg1">
+      {/* @@V org-1 begin */}
+      <span className={sliderReadout()}>
+        {/* @@V org-1 end */}
         {format
           ? format(value)
           : value}

@@ -12,6 +12,10 @@ import {
   tableFoot,
   tableFrame,
   tableHead,
+  // @@V org-2 begin
+  tableHeadJustify,
+  tableHeadLabel,
+  // @@V org-2 end
   tableModCell,
   tableModHead,
   tableRowEl,
@@ -262,12 +266,12 @@ export const Table: {
                     })}
                   >
                     <span
+                      // @@V org-2 begin
                       className={cn(
-                        'inline-flex w-full items-center gap-[5px]',
-                        col.align === 'end'
-                          ? 'justify-end'
-                          : 'justify-start',
+                        tableHeadLabel(),
+                        tableHeadJustify({ end: col.align === 'end' }),
                       )}
+                      // @@V org-2 end
                     >
                       {col.align === 'end' && (
                         <SortGlyph

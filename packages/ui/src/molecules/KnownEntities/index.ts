@@ -10,6 +10,16 @@ export {
   entityTitle,
   entityTitleName,
   entityTitleSub,
+  // @@V mol-3 begin
+  entityTone,
+  toolTitleStack,
+  modelCellDot,
+  branchInlineName,
+  sessionCellAgent,
+  entityMetaSeparator,
+  entityMetaText,
+  taskCellTag,
+  // @@V mol-3 end
   modelCellName,
   modelFooter,
   modelFooterName,

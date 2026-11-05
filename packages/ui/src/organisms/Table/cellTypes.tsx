@@ -35,6 +35,9 @@ import { ToolTitle, type ToolTitleProps } from '../../molecules/KnownEntities/To
 import { UserInline, type UserInlineProps } from '../../molecules/KnownEntities/UserInline';
 
 import { RowContextAction, type RowContextActionProps } from './RowContextAction';
+// @@V org-2 begin
+import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
+// @@V org-2 end
 
 /**
  * Self-describing column types (spec: "Known
@@ -108,14 +111,24 @@ const registry: CellRegistry = {
   'quota-progress': (d) => <QuotaProgress {...d} />,
   'amount-over-time': (d) => <AmountOverTime {...d} />,
   // @@S mol-1 end
-  'text': (d) => <span className="text-fg2">{d.text}</span>,
+  'text': (d) => (
+    <span
+      // @@V org-2 begin
+      className={cellTypeText()}
+      // @@V org-2 end
+    >{d.text}</span>
+  ),
   'badge': (d) => (
     <Badge tone={d.tone} size="sm" dot={d.dot}>
       {d.label}
     </Badge>
   ),
   'relative-time': (d) => (
-    <span className="font-mono text-[12.5px] text-fg3">
+    <span
+      // @@V org-2 begin
+      className={cellTypeRelativeTime()}
+      // @@V org-2 end
+    >
       <FormattedRelativeTime date={d.date} now={d.now} locale={d.locale} />
     </span>
   ),

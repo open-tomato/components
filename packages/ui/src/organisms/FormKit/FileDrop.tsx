@@ -8,7 +8,16 @@ import { StrokeIcon } from '../../lib/icons';
 // Concrete files, not the Droppable barrel, to keep static-build chunks
 // acyclic (the React #130 lesson from Stage 4).
 
-import { fileChip } from './FormKit.variants';
+// @@V org-1 begin
+import {
+  fileChip,
+  fileChipIcon,
+  fileChipName,
+  fileChipRemove,
+  fileChipSize,
+  fileChipText,
+} from './FormKit.variants';
+// @@V org-1 end
 
 /** The slice of File the control needs — parents may store just this. */
 export interface FileValue {
@@ -46,14 +55,16 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
   if (value != null) {
     return (
       <div className={cn(fileChip(), className)}>
-        <span className="inline-flex size-[34px] shrink-0 items-center justify-center rounded-sm bg-[color-mix(in_oklab,var(--accent)_13%,var(--surface-1))] text-accent">
+        {/* @@V org-1 begin */}
+        <span className={fileChipIcon()}>
           {icon ?? <StrokeIcon name="fileText" size={17} />}
         </span>
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-[13px] font-semibold text-fg1">
+        <span className={fileChipText()}>
+          <span className={fileChipName()}>
             {value.name}
           </span>
-          <span className="block font-mono text-[11.5px] text-fg3">
+          <span className={fileChipSize()}>
+            {/* @@V org-1 end */}
             {fmtBytes(value.size)}
           </span>
         </span>
@@ -61,10 +72,12 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
           type="button"
           aria-label="Remove file"
           onClick={() => onChange(null)}
+          // @@V org-1 begin
           className={cn(
             touchable({ inline: true, rounded: 'sm', noBrightness: false }),
-            'size-[30px] shrink-0 justify-center border border-border-soft bg-transparent text-fg3',
+            fileChipRemove(),
           )}
+          // @@V org-1 end
         >
           <StrokeIcon name="trash" size={15} />
         </button>

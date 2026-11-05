@@ -3,7 +3,17 @@ import type { ReactNode } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { radioCircle, radioOption } from './FormKit.variants';
+// @@V org-1 begin
+import {
+  radioCircle,
+  radioDot,
+  radioGroup,
+  radioHint,
+  radioLabel,
+  radioOption,
+  radioText,
+} from './FormKit.variants';
+// @@V org-1 end
 
 export interface RadioOption {
   value: string;
@@ -31,7 +41,9 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
   <div
     role="radiogroup"
     aria-label={ariaLabel}
-    className={cn('flex flex-col gap-[9px]', className)}
+    // @@V org-1 begin
+    className={cn(radioGroup(), className)}
+    // @@V org-1 end
   >
     {options.map((o) => {
       const on = value === o.value;
@@ -47,17 +59,19 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
             radioOption({ checked: on }),
           )}
         >
+          {/* @@V org-1 begin */}
           <span className={radioCircle({ checked: on })}>
-            {on && <span className="size-[9px] rounded-full bg-primary" />}
+            {on && <span className={radioDot()} />}
           </span>
-          <span className="min-w-0">
-            <span className="block text-[13.5px] font-semibold text-fg1">
+          <span className={radioText()}>
+            <span className={radioLabel()}>
               {o.label}
             </span>
             {o.hint != null && (
-              <span className="mt-px block text-xs text-fg3">{o.hint}</span>
+              <span className={radioHint()}>{o.hint}</span>
             )}
           </span>
+          {/* @@V org-1 end */}
         </button>
       );
     })}

@@ -51,4 +51,31 @@ export const authFooter: (props?: ClassProp) => string = cva(
   'mt-[18px] flex items-center gap-1.5 text-[13px] text-fg3',
 );
 
+// @@V tpl-1 begin
+/** AuthHeading's display title. */
+export const authHeadingTitle: (props?: ClassProp) => string = cva(
+  '!m-0 font-display !text-[26px] font-bold !tracking-[-0.02em] !leading-[normal] text-balance text-fg1',
+);
+
+/** AuthHeading's supporting line under the title. */
+export const authHeadingSub: (props?: ClassProp) => string = cva(
+  'mt-1.5 text-sm leading-normal text-pretty text-fg2',
+);
+
+/** BrandLockup's link: mark + wordmark in a row above the card. */
+export const brandLockup: (props?: ClassProp) => string = cva(
+  'mb-6 inline-flex items-center gap-2.5 text-inherit !no-underline',
+);
+
+/** BrandLockup's wordmark ("open tomato"). */
+export const brandLockupWordmark: (props?: ClassProp) => string = cva(
+  'font-display text-[19px] font-extrabold tracking-[-0.02em]',
+);
+
+/** BrandLockup's wordmark halves, each on its own theme-aware token. */
+export const brandLockupWordmarkOpen: (props?: ClassProp) => string = cva('text-wordmark-open');
+
+export const brandLockupWordmarkTomato: (props?: ClassProp) => string = cva('text-wordmark-tomato');
+// @@V tpl-1 end
+
 export type AuthCardVariants = VariantProps<typeof authCard>;
