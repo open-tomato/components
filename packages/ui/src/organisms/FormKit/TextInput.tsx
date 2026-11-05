@@ -7,7 +7,16 @@ import {
 
 import { cn } from '../../lib';
 
-import { textInput, type TextInputVariants } from './FormKit.variants';
+// @@V org-1 begin
+import {
+  textInput,
+  textInputPad,
+  textInputPrefix,
+  textInputSuffix,
+  textInputWrap,
+  type TextInputVariants,
+} from './FormKit.variants';
+// @@V org-1 end
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size' | 'prefix'>,
@@ -43,14 +52,15 @@ export const TextInput: import('react').ForwardRefExoticComponent<TextInputProps
         }
         : undefined;
     return (
-      <span className="relative flex items-center">
+      // @@V org-1 begin
+      <span className={textInputWrap()}>
         {stringPrefix != null && (
-          <span className="pointer-events-none absolute left-3 font-mono text-[13px] text-fg3">
+          <span className={textInputPrefix({ kind: 'text' })}>
             {stringPrefix}
           </span>
         )}
         {prefix != null && stringPrefix == null && (
-          <span className="pointer-events-none absolute left-3 inline-flex items-center text-fg3">
+          <span className={textInputPrefix({ kind: 'icon' })}>
             {prefix}
           </span>
         )}
@@ -61,16 +71,18 @@ export const TextInput: import('react').ForwardRefExoticComponent<TextInputProps
           onChange={(e) => onChange(e.target.value)}
           className={cn(
             textInput({ invalid }),
-            // icon slot: 12px inset + 14px glyph + 8px gap
-            prefix != null && stringPrefix == null && 'pl-[34px]',
-            suffix != null && 'pr-[34px]',
+            textInputPad({
+              iconPrefix: prefix != null && stringPrefix == null,
+              suffix: suffix != null,
+            }),
             className,
           )}
           style={style}
           {...props}
         />
         {suffix != null && (
-          <span className="absolute right-3 inline-flex items-center text-fg3">
+          <span className={textInputSuffix()}>
+            {/* @@V org-1 end */}
             {suffix}
           </span>
         )}
