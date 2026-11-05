@@ -6,6 +6,10 @@ import { useState } from 'react';
 
 import { TomatoMark } from '../internal/TomatoMark';
 import { cn } from '../lib';
+// @@S mol-3 begin
+import { EntityKindsProvider } from '../molecules/KnownEntities/EntityKinds';
+import { type EntityKinds } from '../molecules/KnownEntities/entityKindsContext';
+// @@S mol-3 end
 import {
   NotificationsBell,
   type NotificationItem,
@@ -78,13 +82,24 @@ const WORKSPACES: WorkspaceOption[] = [
   { id: 'vp', name: 'vine-patch', members: 3, tone: 'gold' },
 ];
 
+// @@S mol-3 begin
+/** A neutral demo map for the suggestion kinds — the kit ships none. */
+const SUGGESTION_KINDS: EntityKinds = {
+  worker: { icon: 'bot', tone: 'primary' },
+  run: { icon: 'terminal', tone: 'accent' },
+  task: { icon: 'list', tone: 'gold' },
+  connector: { icon: 'cpu', tone: 'info' },
+  doc: { icon: 'book', tone: 'success' },
+};
+
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · agent-7d2f' },
-  { kind: 'session', label: 'settings page draft', sub: '12m ago · sam · sonnet-4-5' },
-  { kind: 'task', label: 'Add per-tool spend chart to usage page', sub: 'roadmap · high' },
-  { kind: 'tool', label: 'github-issues', sub: 'MCP · connected' },
+  { kind: 'worker', label: 'auth-refactor', sub: 'running · worker-7d2f' },
+  { kind: 'run', label: 'settings page draft', sub: '12m ago · sam' },
+  { kind: 'task', label: 'Add per-connector usage chart to usage page', sub: 'roadmap · high' },
+  { kind: 'connector', label: 'github-issues', sub: 'MCP · connected' },
   { kind: 'doc', label: 'Composting context between runs', sub: 'docs/experiments' },
 ];
+// @@S mol-3 end
 
 const NOTIFICATIONS: NotificationItem[] = [
   { id: 1, unread: true, level: 'ok', title: 'auth-refactor finished', body: '8 files updated · 12.3k tokens', time: '2m ago' },
@@ -168,12 +183,18 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
         {title}
       </div>
       <div className={shellDemoSpacer()} />
-      <SearchSuggest
-        suggestions={SUGGESTIONS}
-        className={topbarDemoSearch()}
-        // @@V tpl-1 end
-        hotkey={false}
-      />
+      {/* @@S mol-3 begin */}
+      <EntityKindsProvider kinds={SUGGESTION_KINDS}>
+        {/* @@S mol-3 end */}
+        <SearchSuggest
+          suggestions={SUGGESTIONS}
+          className={topbarDemoSearch()}
+          // @@V tpl-1 end
+          hotkey={false}
+        />
+        {/* @@S mol-3 begin */}
+      </EntityKindsProvider>
+      {/* @@S mol-3 end */}
       <NotificationsBell notifications={NOTIFICATIONS} />
       <ThemeSwitcher theme={theme} onToggle={setTheme} />
       <ProfileMenu user={USER} />

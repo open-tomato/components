@@ -3,19 +3,38 @@ import type { ComponentProps } from 'react';
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, mock } from 'bun:test';
 
+import { EntityKindsProvider } from '../../molecules/KnownEntities/EntityKinds';
+import { type EntityKinds } from '../../molecules/KnownEntities/entityKindsContext';
+
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
+// @@S mol-3 begin
+const KINDS: EntityKinds = {
+  worker: { icon: 'bot', tone: 'primary' },
+  run: { icon: 'terminal', tone: 'accent' },
+  task: { icon: 'list', tone: 'gold' },
+  connector: { icon: 'cpu', tone: 'info' },
+  doc: { icon: 'book', tone: 'success' },
+};
+
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · agent-7d2f' },
-  { kind: 'session', label: 'settings page draft', sub: '12m ago' },
-  { kind: 'task', label: 'Add spend chart', sub: 'roadmap · high' },
-  { kind: 'tool', label: 'github-issues', sub: 'MCP · connected', icon: 'cpu' },
+  { kind: 'worker', label: 'auth-refactor', sub: 'running · worker-7d2f' },
+  { kind: 'run', label: 'settings page draft', sub: '12m ago' },
+  { kind: 'task', label: 'Add usage chart', sub: 'roadmap · high' },
+  { kind: 'connector', label: 'github-issues', sub: 'MCP · connected', icon: 'cpu' },
   { kind: 'doc', label: 'Composting context' },
 ];
+// @@S mol-3 end
 
 const renderOpen = async (props: Partial<ComponentProps<typeof SearchSuggest>> = {}) => {
   await act(async () => {
-    render(<SearchSuggest suggestions={SUGGESTIONS} {...props} />);
+    // @@S mol-3 begin
+    render(
+      <EntityKindsProvider kinds={KINDS}>
+        <SearchSuggest suggestions={SUGGESTIONS} {...props} />
+      </EntityKindsProvider>,
+    );
+    // @@S mol-3 end
   });
   return screen.getByRole('combobox');
 };
@@ -30,20 +49,38 @@ describe('SearchSuggest', () => {
     expect(screen.getByText('⌘K')).toBeTruthy();
   });
 
+  // @@S mol-3 begin
+  it('defaults the placeholder to "Search…"', async () => {
+    await renderOpen();
+    expect(screen.getByPlaceholderText('Search…')).toBeTruthy();
+  });
+  // @@S mol-3 end
+
   it('renders the placeholder', async () => {
     await renderOpen({ placeholder: 'Find' });
     expect(screen.getByPlaceholderText('Find')).toBeTruthy();
   });
 
+  // @@S mol-3 begin
   it('renders all five kinds when defaultOpen', async () => {
     await renderOpen({ defaultOpen: true });
     expect(screen.getAllByRole('option').length).toBe(5);
-    for (const k of ['agent', 'session', 'task', 'tool', 'doc']) {
+    for (const k of ['worker', 'run', 'task', 'connector', 'doc']) {
       expect(screen.getByText(k)).toBeTruthy();
     }
     expect(screen.getByText('suggested')).toBeTruthy();
-    expect(screen.getByText('running · agent-7d2f')).toBeTruthy();
+    expect(screen.getByText('running · worker-7d2f')).toBeTruthy();
   });
+
+  it('renders no pill for a suggestion without a kind', async () => {
+    await act(async () => {
+      render(<SearchSuggest suggestions={[{ label: 'plain' }]} defaultOpen />);
+    });
+    expect(screen.getByText('plain')).toBeTruthy();
+    expect(screen.getAllByRole('option').length).toBe(1);
+    expect(screen.getByRole('option').textContent).toBe('plain');
+  });
+  // @@S mol-3 end
 
   it('opens on focus', async () => {
     const input = await renderOpen();

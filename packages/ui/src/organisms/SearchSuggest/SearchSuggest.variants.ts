@@ -2,16 +2,18 @@
 import type { ClassProp } from 'class-variance-authority/types';
 // @@V org-1 end
 
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
+// @@S mol-3 begin
 /**
- * SearchSuggest — the topbar's ⌘K search box with an anchored suggestion
- * list. From the original TopbarLive screen SearchSuggest
- * (the original topbar screen "Search · suggest" card); app-shell spec: Top Bar.
+ * SearchSuggest — a ⌘K search box with an anchored suggestion list (app-shell
+ * spec: Top Bar).
  *
- * Five suggestion kinds, each with its own accent (original kindColor map):
- * agent→primary, session→accent, task→gold, tool→info, doc→green.
+ * A suggestion's `kind` is a key into the `EntityKinds` map the implementor
+ * supplies; the puck and the pill take their accent from the kind's tone
+ * (the shared chart palette, painted through `currentColor`).
  */
+// @@S mol-3 end
 // @@T org-1 begin
 export const searchSuggestBox: (props?: ({ open?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -60,46 +62,20 @@ export const searchSuggestRow: (props?: ({ active?: boolean | null | undefined }
   },
 );
 
-/** The 28px leading puck, tinted by the suggestion's kind. */
-// @@T org-1 begin
-export const searchSuggestPuck: (props?: ({ kind?: 'agent' | 'session' | 'task' | 'tool' | 'doc' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-1 end
+// @@S mol-3 begin
+/** The 28px leading puck; its accent comes from the kind's tone (currentColor). */
+export const searchSuggestPuck: (props?: ClassProp | undefined) => string = cva([
   'flex size-7 shrink-0 items-center justify-center rounded-sm',
-  {
-    variants: {
-      kind: {
-        agent: 'bg-[color-mix(in_oklab,var(--primary)_14%,transparent)] text-primary',
-        session: 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)] text-accent',
-        task: 'bg-[color-mix(in_oklab,var(--gold-500)_14%,transparent)] text-gold-500',
-        tool: 'bg-[color-mix(in_oklab,var(--info)_14%,transparent)] text-info',
-        doc: 'bg-[color-mix(in_oklab,var(--green-500)_14%,transparent)] text-green-500',
-      },
-    },
-    defaultVariants: { kind: 'agent' },
-  },
-);
+  'bg-[color-mix(in_oklab,currentColor_14%,transparent)]',
+]);
 
 /** The trailing kind pill — same accent as the puck, mono uppercase. */
-// @@T org-1 begin
-export const searchSuggestKindPill: (props?: ({ kind?: 'agent' | 'session' | 'task' | 'tool' | 'doc' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-1 end
-  [
-    'rounded-full px-[7px] py-0.5 font-mono text-[10px] font-semibold',
-    'uppercase tracking-[0.08em]',
-  ],
-  {
-    variants: {
-      kind: {
-        agent: 'bg-[color-mix(in_oklab,var(--primary)_14%,transparent)] text-primary',
-        session: 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)] text-accent',
-        task: 'bg-[color-mix(in_oklab,var(--gold-500)_14%,transparent)] text-gold-500',
-        tool: 'bg-[color-mix(in_oklab,var(--info)_14%,transparent)] text-info',
-        doc: 'bg-[color-mix(in_oklab,var(--green-500)_14%,transparent)] text-green-500',
-      },
-    },
-    defaultVariants: { kind: 'agent' },
-  },
-);
+export const searchSuggestKindPill: (props?: ClassProp | undefined) => string = cva([
+  'rounded-full px-[7px] py-0.5 font-mono text-[10px] font-semibold',
+  'uppercase tracking-[0.08em]',
+  'bg-[color-mix(in_oklab,currentColor_14%,transparent)]',
+]);
+// @@S mol-3 end
 
 // @@V org-1 begin
 /* ── Ad-hoc classes moved in by stream V ────────── */
@@ -107,7 +83,9 @@ export const searchSuggestKindPill: (props?: ({ kind?: 'agent' | 'session' | 'ta
 /** The root wrapper — anchors the suggestion panel. */
 export const searchSuggestRoot: (props?: ClassProp | undefined) => string = cva('relative w-[340px]');
 
-/** The leading lens icon. */
+// @@S mol-3 begin
+/** The leading magnifier icon. */
+// @@S mol-3 end
 export const searchSuggestLens: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
 
 /** The combobox input inside the box. */
@@ -137,5 +115,3 @@ export const searchSuggestAll: (props?: ClassProp | undefined) => string = cva('
 /** The search-all row's query label. */
 export const searchSuggestAllLabel: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate');
 // @@V org-1 end
-
-export type SearchSuggestKindVariants = VariantProps<typeof searchSuggestPuck>;

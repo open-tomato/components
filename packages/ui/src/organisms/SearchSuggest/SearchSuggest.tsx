@@ -12,7 +12,11 @@ import {
 } from 'react';
 
 import { Icon } from '../../atoms/Icon';
-import { cn } from '../../lib';
+import { cn, chartTone } from '../../lib';
+import { devWarn } from '../../lib/dev';
+// Deep member import, not the KnownEntities barrel (same chunking note as
+// below).
+import { useEntityKinds } from '../../molecules/KnownEntities/entityKindsContext';
 // Deep member import, not the CommandPalette barrel — the built
 // storybook's lazy-init chunking can drop barrel member inits (see the
 // matching note in Table/cellTypes.tsx).
@@ -39,21 +43,17 @@ import {
   // @@V org-1 end
 } from './SearchSuggest.variants';
 
-export type SearchSuggestionKind =
-  | 'agent'
-  | 'session'
-  | 'task'
-  | 'tool'
-  | 'doc';
-
+// @@S mol-3 begin
 export interface SearchSuggestion {
-  kind: SearchSuggestionKind;
+  /** Key into the `EntityKinds` map: supplies the glyph and accent, and is shown in the pill. */
+  kind?: string;
   label: string;
-  /** Mono context line under the label ("running · agent-7d2f"). */
+  /** Mono context line under the label ("running · worker-7d2f"). */
   sub?: string;
   /** Overrides the kind's default glyph. */
   icon?: IconName;
 }
+// @@S mol-3 end
 
 export interface SearchSuggestProps {
   suggestions: SearchSuggestion[];
@@ -66,28 +66,23 @@ export interface SearchSuggestProps {
   onSearch?: (query: string) => void;
   /** Global ⌘K / Ctrl-K focuses the input (scope switch). Default on. */
   hotkey?: boolean;
+  // @@S mol-3 begin
+  /** Input placeholder. Default "Search…". */
+  // @@S mol-3 end
   placeholder?: string;
   /** Render with the panel open (docs/stories). */
   defaultOpen?: boolean;
   className?: string;
 }
 
-/** Kind → default Lucide glyph (original SUGGESTIONS seed). */
-const KIND_ICON: Record<SearchSuggestionKind, IconName> = {
-  agent: 'bot',
-  session: 'terminal',
-  task: 'list',
-  tool: 'cpu',
-  doc: 'book',
-};
-
 const VISIBLE_LIMIT = 5;
 
+// @@S mol-3 begin
 /**
- * SearchSuggest (the original TopbarLive demo; app-shell spec: Top Bar):
- * lens-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
- * across five kinds (agent/session/task/tool/doc) each with its own
- * accent. Keyboard-driven: ↑↓ move the active row, Enter opens it, and
+ * SearchSuggest (app-shell spec: Top Bar):
+ * magnifier-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
+ * across the kinds of the `EntityKinds` map (supplied through
+ * `EntityKindsProvider`), each with its own glyph and accent. Keyboard-driven: ↑↓ move the active row, Enter opens it, and
  * Enter with no match falls through to `onSearch` — as does the explicit
  * "Search all" row.
  *
@@ -101,6 +96,7 @@ const VISIBLE_LIMIT = 5;
  * for no shared behavior win; what IS shared is reused directly (the
  * `paletteKbd` chip chrome for the ⌘K/↵ hints).
  */
+// @@S mol-3 end
 // @@T org-1 begin
 export const SearchSuggest: FC<SearchSuggestProps> = ({
 // @@T org-1 end
@@ -108,10 +104,15 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
   onSelect,
   onSearch,
   hotkey = true,
-  placeholder = 'Search sessions, agents, tools…',
+  // @@S mol-3 begin
+  placeholder = 'Search…',
+  // @@S mol-3 end
   defaultOpen = false,
   className,
 }: SearchSuggestProps) => {
+  // @@S mol-3 begin
+  const kinds = useEntityKinds();
+  // @@S mol-3 end
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(defaultOpen);
   const [idx, setIdx] = useState(0);
@@ -236,40 +237,58 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
                 all surfaces.
               </div>
             )}
-            {shown.map((s, i) => (
-              <button
-                key={`${s.kind}-${s.label}`}
-                type="button"
-                role="option"
-                id={optId(i)}
-                aria-selected={i === idx}
-                tabIndex={-1}
-                onMouseEnter={() => setIdx(i)}
-                onClick={() => select(s)}
-                className={searchSuggestRow({ active: i === idx })}
-              >
-                <span className={searchSuggestPuck({ kind: s.kind })}>
-                  <Icon name={s.icon ?? KIND_ICON[s.kind]} size={14} />
-                </span>
-                {/* @@V org-1 begin */}
-                <span className={searchSuggestText()}>
-                  <span className={searchSuggestLabel()}>
-                    {/* @@V org-1 end */}
-                    {s.label}
+            {shown.map((s, i) => {
+              // @@S mol-3 begin
+              const found = s.kind != null
+                ? kinds[s.kind]
+                : undefined;
+              if (s.kind != null && found == null) {
+                devWarn(`SearchSuggest: kind "${s.kind}" is not in the EntityKinds map — supply it through EntityKindsProvider`);
+              }
+              const glyph = s.icon ?? found?.icon;
+              const accent = chartTone({ tone: found?.tone });
+              // @@S mol-3 end
+              return (
+                <button
+                  key={`${s.kind ?? ''}-${s.label}`}
+                  type="button"
+                  role="option"
+                  id={optId(i)}
+                  aria-selected={i === idx}
+                  tabIndex={-1}
+                  onMouseEnter={() => setIdx(i)}
+                  onClick={() => select(s)}
+                  className={searchSuggestRow({ active: i === idx })}
+                >
+                  {/* @@S mol-3 begin */}
+                  <span className={cn(searchSuggestPuck(), accent)}>
+                    {glyph != null && <Icon name={glyph} size={14} />}
                   </span>
-                  {s.sub != null && (
-                    // @@V org-1 begin
-                    <span className={searchSuggestSub()}>
+                  {/* @@S mol-3 end */}
+                  {/* @@V org-1 begin */}
+                  <span className={searchSuggestText()}>
+                    <span className={searchSuggestLabel()}>
                       {/* @@V org-1 end */}
-                      {s.sub}
+                      {s.label}
+                    </span>
+                    {s.sub != null && (
+                      // @@V org-1 begin
+                      <span className={searchSuggestSub()}>
+                        {/* @@V org-1 end */}
+                        {s.sub}
+                      </span>
+                    )}
+                  </span>
+                  {/* @@S mol-3 begin */}
+                  {s.kind != null && (
+                    <span className={cn(searchSuggestKindPill(), accent)}>
+                      {s.kind}
                     </span>
                   )}
-                </span>
-                <span className={searchSuggestKindPill({ kind: s.kind })}>
-                  {s.kind}
-                </span>
-              </button>
-            ))}
+                  {/* @@S mol-3 end */}
+                </button>
+              );
+            })}
           </div>
           {needle !== '' && (
             // @@V org-1 begin

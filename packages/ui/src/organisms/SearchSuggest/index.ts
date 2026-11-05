@@ -1,7 +1,6 @@
 export {
   SearchSuggest,
   type SearchSuggestion,
-  type SearchSuggestionKind,
   type SearchSuggestProps,
 } from './SearchSuggest';
 export {
@@ -23,5 +22,4 @@ export {
   searchSuggestSub,
   searchSuggestText,
   // @@V org-1 end
-  type SearchSuggestKindVariants,
 } from './SearchSuggest.variants';
