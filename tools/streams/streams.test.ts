@@ -65,6 +65,11 @@ describe('origin words', () => {
     expect(hitsIn('import { Button } from \'@open-tomato/components\';')).toEqual([]);
     expect(hitsIn('const hubris = loophole;')).toEqual([]);
   });
+
+  it('ignores a proper noun that holds an origin word as a part', () => {
+    expect(hitsIn('  github: \'Continue with GitHub\',')).toEqual([]);
+    expect(hitsIn('the Hub page')).toContain('hub');
+  });
 });
 
 describe('make-plans', () => {
