@@ -1,4 +1,6 @@
-import { useState } from 'react';
+// @@T org-2 begin
+import { useState, type ReactElement } from 'react';
+// @@T org-2 end
 
 import { Avatar } from '../../atoms/Avatar';
 import { Badge } from '../../atoms/Badge';
@@ -47,7 +49,11 @@ export interface ProfileMenuProps {
  * Spec-over-original divergence (recorded): the original demo also lists "Help &
  * docs"; the spec's option list does not, so it is omitted.
  */
-export const ProfileMenu = ({
+// @@T org-2 begin
+export const ProfileMenu: {
+  (props: ProfileMenuProps): ReactElement;
+  displayName?: string;
+} = ({
   user,
   onProfile,
   onAccountSettings,
@@ -55,7 +61,8 @@ export const ProfileMenu = ({
   onLogout,
   logoutMessage = 'Log out of Acme?',
   defaultOpen = false,
-}: ProfileMenuProps) => {
+}: ProfileMenuProps): ReactElement => {
+  // @@T org-2 end
   const [open, setOpen] = useState(defaultOpen);
   const [confirming, setConfirming] = useState(false);
   return (
