@@ -3,7 +3,9 @@ import { forwardRef, Fragment, type HTMLAttributes } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-import { breadcrumbItem } from './Breadcrumb.variants';
+// @@V mol-2 begin
+import { breadcrumb, breadcrumbItem, breadcrumbSeparator } from './Breadcrumb.variants';
+// @@V mol-2 end
 
 export interface SelectionItem {
   key: string;
@@ -27,7 +29,9 @@ const Chevron = () => (
     strokeWidth="1.75"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="shrink-0 text-fg3"
+    // @@V mol-2 begin
+    className={breadcrumbSeparator()}
+    // @@V mol-2 end
     aria-hidden
   >
     <path d="M9 18l6-6-6-6" />
@@ -42,7 +46,9 @@ export const Breadcrumb: import('react').ForwardRefExoticComponent<BreadcrumbPro
     <nav
       ref={ref}
       aria-label="Breadcrumb"
-      className={cn('flex flex-wrap items-center gap-1', className)}
+      // @@V mol-2 begin
+      className={cn(breadcrumb(), className)}
+      // @@V mol-2 end
       {...props}
     >
       {items.map((item, i) => (

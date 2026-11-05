@@ -3,6 +3,16 @@ import type { ReactNode } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
+// @@V mol-2 begin
+import {
+  overlayHeader,
+  overlayHeaderClose,
+  overlayHeaderEyebrow,
+  overlayHeaderText,
+  overlayHeaderTitle,
+} from './Modal.variants';
+// @@V mol-2 end
+
 /**
  * The header row Modal and Drawer share:
  * optional eyebrow, display title, and the close affordance.
@@ -18,27 +28,31 @@ export interface OverlayHeaderProps {
 // @@T mol-2 begin
 export const OverlayHeader: { (props: OverlayHeaderProps): import('react').JSX.Element; displayName?: string } = ({ title, eyebrow, onClose, id }: OverlayHeaderProps): import('react').JSX.Element => (
 // @@T mol-2 end
-  <div className="flex shrink-0 items-start gap-4 border-b border-border-soft px-5 py-[18px]">
-    <div className="min-w-0 flex-1">
+  // @@V mol-2 begin
+  <div className={overlayHeader()}>
+    <div className={overlayHeaderText()}>
       {eyebrow != null && (
-        <div className="mb-1 font-mono text-[11px] uppercase tracking-[0.08em] text-fg3">
+        <div className={overlayHeaderEyebrow()}>
           {eyebrow}
         </div>
       )}
       <h3
         id={id}
-        className="m-0 font-display text-[19px] font-bold tracking-[-0.01em] text-fg1"
+        className={overlayHeaderTitle()}
       >
         {title}
       </h3>
     </div>
+    {/* @@V mol-2 end */}
     <button
       type="button"
       aria-label="Close"
       onClick={onClose}
       className={cn(
         touchable({ inline: true, rounded: 'md', noBrightness: false }),
-        'size-8 shrink-0 justify-center bg-surface-1 border border-border-soft text-fg2',
+        // @@V mol-2 begin
+        overlayHeaderClose(),
+        // @@V mol-2 end
       )}
     >
       <svg

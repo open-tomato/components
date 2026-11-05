@@ -6,7 +6,15 @@ import { cn } from '../../lib';
 // imports create a chunk cycle in the static Storybook build (React #130).
 import { ToneIcon } from '../Banner/ToneIcon';
 
-import { toast, toastIcon, type ToastVariants } from './Toast.variants';
+// @@V mol-2 begin
+import {
+  toast,
+  toastBody,
+  toastClose,
+  toastIcon,
+  type ToastVariants,
+} from './Toast.variants';
+// @@V mol-2 end
 
 export interface ToastProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -28,16 +36,20 @@ export const Toast: import('react').ForwardRefExoticComponent<ToastProps & impor
       <span className={toastIcon({ tone })}>
         <ToneIcon tone={tone ?? 'success'} size={16} />
       </span>
-      <span className="flex-1">{children}</span>
+      {/* @@V mol-2 begin */}
+      <span className={toastBody()}>{children}</span>
+      {/* @@V mol-2 end */}
       {onClose != null && (
         <button
           type="button"
           aria-label="Dismiss"
           onClick={onClose}
+          // @@V mol-2 begin
           className={cn(
             touchable({ inline: true, rounded: 'sm', noBrightness: false }),
-            'size-[22px] shrink-0 justify-center border-none bg-transparent text-cream-300',
+            toastClose(),
           )}
+          // @@V mol-2 end
         >
           <svg
             width="14"

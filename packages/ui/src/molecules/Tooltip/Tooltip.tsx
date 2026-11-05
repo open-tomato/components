@@ -4,7 +4,9 @@ import * as RadixTooltip from '@radix-ui/react-tooltip';
 
 import { cn } from '../../lib';
 
-import { tooltip } from './Tooltip.variants';
+// @@V mol-2 begin
+import { tooltip, tooltipArrow } from './Tooltip.variants';
+// @@V mol-2 end
 
 export interface TooltipProps {
   /** The tooltip text. */
@@ -30,7 +32,9 @@ export const Tooltip: { (props: TooltipProps): import('react').JSX.Element; disp
           className={cn(tooltip(), className)}
         >
           {label}
-          <RadixTooltip.Arrow width={10} height={5} className="fill-char-800" />
+          {/* @@V mol-2 begin */}
+          <RadixTooltip.Arrow width={10} height={5} className={tooltipArrow()} />
+          {/* @@V mol-2 end */}
         </RadixTooltip.Content>
       </RadixTooltip.Portal>
     </RadixTooltip.Root>

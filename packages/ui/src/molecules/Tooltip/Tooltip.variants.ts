@@ -17,4 +17,9 @@ export const tooltip: (props?: import('class-variance-authority/types').ClassPro
     ],
   );
 
+// @@V mol-2 begin
+/** The arrow, filled to match the dark chrome. */
+export const tooltipArrow: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('fill-char-800');
+// @@V mol-2 end
+
 export type TooltipVariants = VariantProps<typeof tooltip>;

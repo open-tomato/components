@@ -55,5 +55,10 @@ export const sectionCardFooter: (props?: ({divider?: boolean | null | undefined;
   defaultVariants: { divider: false },
 });
 
+// @@V mol-2 begin
+/** The header's right-side action slot. */
+export const sectionCardAction: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex gap-2');
+// @@V mol-2 end
+
 export type SectionCardBodyVariants = VariantProps<typeof sectionCardBody>;
 export type SectionCardFooterVariants = VariantProps<typeof sectionCardFooter>;

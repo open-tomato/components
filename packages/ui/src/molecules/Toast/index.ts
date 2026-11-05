@@ -1,2 +1,10 @@
 export { Toast, type ToastProps } from './Toast';
-export { toast, toastIcon, type ToastVariants } from './Toast.variants';
+// @@V mol-2 begin
+export {
+  toast,
+  toastBody,
+  toastClose,
+  toastIcon,
+  type ToastVariants,
+} from './Toast.variants';
+// @@V mol-2 end

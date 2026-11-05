@@ -59,4 +59,21 @@ export const bannerAction: (props?: ({tone?: 'info' | 'success' | 'danger' | 'ne
   },
 );
 
+// @@V mol-2 begin
+/** The text column holding title and body. */
+export const bannerContent: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1');
+
+/** The optional bold title line. */
+export const bannerTitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mb-0.5 text-[13.5px] font-bold text-fg1');
+
+/** The body copy under the title. */
+export const bannerBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-[13px] leading-normal text-fg2');
+
+/** The dismiss button, merged over the inline touchable. */
+export const bannerDismiss: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('size-[26px] shrink-0 justify-center self-start border-none bg-transparent text-fg3');
+
+/** The tone icon's svg, shared by Banner and Toast through ToneIcon. */
+export const toneIcon: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0');
+// @@V mol-2 end
+
 export type BannerVariants = VariantProps<typeof banner>;
