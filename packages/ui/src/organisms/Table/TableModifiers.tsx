@@ -4,9 +4,13 @@ import { forwardRef, type ForwardRefExoticComponent, type RefAttributes } from '
 
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
-import { checkboxBox } from '../FormKit';
+// @@V org-2 begin
+import { checkboxBox } from '../FormKit/FormKit.variants';
+// @@V org-2 end
 
-import { tableSortHandle } from './Table.variants';
+// @@V org-2 begin
+import { tableRowCheckbox, tableRowCheckboxMark, tableSortHandle } from './Table.variants';
+// @@V org-2 end
 
 /**
  * TableRow modifier controls (spec: "TableRow
@@ -54,17 +58,17 @@ export const TableRowCheckbox: ForwardRefExoticComponent<TableRowCheckboxProps &
       aria-label={label}
       disabled={disabled}
       onClick={() => onChange(!(checked || indeterminate))}
-      className={cn(
-        'flex border-none bg-transparent p-0',
-        disabled
-          ? 'cursor-not-allowed opacity-40'
-          : 'cursor-pointer',
-        className,
-      )}
+      // @@V org-2 begin
+      className={cn(tableRowCheckbox({ disabled }), className)}
+      // @@V org-2 end
     >
       <span className={checkboxBox({ checked: checked || indeterminate })}>
         {(checked || indeterminate) && (
-          <span className="text-on-primary">
+          <span
+            // @@V org-2 begin
+            className={tableRowCheckboxMark()}
+            // @@V org-2 end
+          >
             <Icon
               name={indeterminate
                 ? 'minus'

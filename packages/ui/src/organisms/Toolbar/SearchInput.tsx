@@ -9,7 +9,14 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-import { searchInput } from './Toolbar.variants';
+// @@V org-2 begin
+import {
+  searchClear,
+  searchField,
+  searchIcon,
+  searchInput,
+} from './Toolbar.variants';
+// @@V org-2 end
 
 export interface SearchInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {
@@ -27,12 +34,15 @@ export const SearchInput: ForwardRefExoticComponent<SearchInputProps & RefAttrib
     ref,
   ) => (
     <div
-      className={cn(
-        'relative flex min-w-[190px] flex-[1_1_230px] items-center',
-        className,
-      )}
+      // @@V org-2 begin
+      className={cn(searchField(), className)}
+      // @@V org-2 end
     >
-      <span className="pointer-events-none absolute left-3 text-fg3">
+      <span
+        // @@V org-2 begin
+        className={searchIcon()}
+        // @@V org-2 end
+      >
         <StrokeIcon name="search" size={16} />
       </span>
       <input
@@ -51,7 +61,9 @@ export const SearchInput: ForwardRefExoticComponent<SearchInputProps & RefAttrib
           onClick={() => onChange('')}
           className={cn(
             touchable({ inline: true, rounded: 'sm', noBrightness: false }),
-            'absolute right-2 size-6 justify-center border-none bg-transparent text-fg3',
+            // @@V org-2 begin
+            searchClear(),
+            // @@V org-2 end
           )}
         >
           <StrokeIcon name="x" size={15} />

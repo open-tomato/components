@@ -96,3 +96,49 @@ export const searchInput: (props?: ({ clearable?: boolean | null | undefined } &
 
 export type ToolbarSummaryVariants = VariantProps<typeof toolbarSummary>;
 export type FilterTriggerVariants = VariantProps<typeof filterTrigger>;
+
+// @@V org-2 begin
+/** The filter trigger's count badge, shown while any value is selected. */
+export const filterCount: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-[5px] font-mono text-[11px] font-bold text-on-accent',
+);
+
+/** A filter option's trailing checkbox, filled while the option is on. */
+export const filterCheck: (props?: ({ on?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+  'inline-flex size-[17px] shrink-0 items-center justify-center rounded-[5px] border-[1.5px] transition-colors',
+  {
+    variants: {
+      on: {
+        true: 'border-accent bg-accent text-on-accent',
+        false: 'border-border-strong bg-transparent',
+      },
+    },
+    defaultVariants: { on: false },
+  },
+);
+
+/** A filter option's label row: swatch and label side by side. */
+export const filterOptionLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'inline-flex items-center gap-2',
+);
+
+/** The search field's wrapper, which positions the icon and clear button. */
+export const searchField: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'relative flex min-w-[190px] flex-[1_1_230px] items-center',
+);
+
+/** The search field's leading magnifier icon. */
+export const searchIcon: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'pointer-events-none absolute left-3 text-fg3',
+);
+
+/** The search field's inline clear button. */
+export const searchClear: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'absolute right-2 size-6 justify-center border-none bg-transparent text-fg3',
+);
+
+/** The vertical hairline between control clusters. */
+export const toolbarSep: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
+  'mx-0.5 w-px self-stretch bg-border-soft',
+);
+// @@V org-2 end

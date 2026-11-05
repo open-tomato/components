@@ -4,6 +4,10 @@ import type { ReactElement } from 'react';
 
 import { StrokeIcon } from '../../lib/icons';
 
+// @@V org-2 begin
+import { sortGlyphActive, sortGlyphHint } from './Table.variants';
+// @@V org-2 end
+
 export interface SortGlyphProps {
   sortable?: boolean;
   active: boolean;
@@ -23,12 +27,20 @@ export const SortGlyph: {
   if (!sortable) return null;
   if (!active)
     return (
-      <span className="inline-flex opacity-25 transition-opacity group-hover/head:opacity-100">
+      <span
+        // @@V org-2 begin
+        className={sortGlyphHint()}
+        // @@V org-2 end
+      >
         <StrokeIcon name="chevronDown" size={13} />
       </span>
     );
   return (
-    <span className="inline-flex text-accent">
+    <span
+      // @@V org-2 begin
+      className={sortGlyphActive()}
+      // @@V org-2 end
+    >
       <StrokeIcon name={dir === 'asc'
         ? 'arrowUp'
         : 'arrowDown'} size={13} />
