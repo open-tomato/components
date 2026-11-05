@@ -4,13 +4,15 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S ato-3 begin
 /**
- * Avatar — the identity mark: an agent or a person. Initials on a brand
- * fill, with size, shape and an optional presence indicator.
+ * Avatar — the identity mark: a person or any named entity. Initials on a
+ * brand fill, with size, shape and an optional presence indicator.
  *
  * `status` drives a bottom-right presence dot with a surface border
  * (avatarStatus below) rather than a ring on the avatar itself.
  */
+// @@S ato-3 end
 // @@T ato-3 begin
 export const avatar: (
   props?: {
