@@ -20,12 +20,14 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
   </div>
 );
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof AgentCell> = {
+// @@T mol-3 end
   title: 'Molecules/KnownEntities',
   component: AgentCell,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof AgentCell>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

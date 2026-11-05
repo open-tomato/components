@@ -26,7 +26,11 @@ export interface SessionCellProps extends HTMLAttributes<HTMLDivElement> {
  * "Known Entities"; rendered reference: the
  * Sessions table session column).
  */
-export const SessionCell = forwardRef<HTMLDivElement, SessionCellProps>(
+// @@T mol-3 begin
+export const SessionCell: import('react').ForwardRefExoticComponent<
+  SessionCellProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, SessionCellProps>(
+// @@T mol-3 end
   ({ className, name, status, agentInstanceId, branch, ...props }, ref) => (
     <div ref={ref} className={cn(entityCellStack(), className)} {...props}>
       <SessionInline name={name} status={status} />

@@ -79,7 +79,11 @@ const iconFor = (file: FileChange): IconName => {
  * Interpretation decision: zero deltas render dimmed (`+0`/`-0` at half
  * opacity) so the columns stay scannable without shouting zeros.
  */
-export const FilesChanged = forwardRef<HTMLElement, FilesChangedProps>(
+// @@T mol-3 begin
+export const FilesChanged: import('react').ForwardRefExoticComponent<
+  FilesChangedProps & import('react').RefAttributes<HTMLElement>
+> = forwardRef<HTMLElement, FilesChangedProps>(
+// @@T mol-3 end
   ({ className, files, title = 'Files changed', locale, ...props }, ref) => {
     const additions = files.reduce((acc, f) => acc + f.additions, 0);
     const deletions = files.reduce((acc, f) => acc + f.deletions, 0);

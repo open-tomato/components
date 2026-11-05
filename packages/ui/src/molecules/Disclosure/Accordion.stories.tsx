@@ -30,7 +30,9 @@ const Items = () => (
   </>
 );
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof Accordion> = {
+// @@T mol-3 end
   title: 'Molecules/Accordion',
   component: Accordion,
   parameters: { layout: 'padded' },
@@ -46,7 +48,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Accordion>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

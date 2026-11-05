@@ -17,7 +17,9 @@ const TOKENS_30D = [
   37, 16, 14, 42, 47, 45, 41, 18, 46, 52,
 ];
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof SmallStatCard> = {
+// @@T mol-3 end
   title: 'Molecules/SmallStatCard',
   component: SmallStatCard,
   parameters: { layout: 'centered' },
@@ -29,7 +31,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof SmallStatCard>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -57,7 +57,9 @@ const DemoBody = () => (
   </div>
 );
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof Drawer> = {
+// @@T mol-3 end
   title: 'Molecules/Drawer',
   component: Drawer,
   parameters: { layout: 'fullscreen' },
@@ -87,7 +89,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Drawer>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

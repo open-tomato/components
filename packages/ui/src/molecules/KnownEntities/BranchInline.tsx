@@ -14,7 +14,11 @@ export interface BranchInlineProps extends HTMLAttributes<HTMLSpanElement> {
  * `branch-inline` — the `git-branch` Lucide glyph + branch name (spec:
  * "Known Entities").
  */
-export const BranchInline = forwardRef<HTMLSpanElement, BranchInlineProps>(
+// @@T mol-3 begin
+export const BranchInline: import('react').ForwardRefExoticComponent<
+  BranchInlineProps & import('react').RefAttributes<HTMLSpanElement>
+> = forwardRef<HTMLSpanElement, BranchInlineProps>(
+// @@T mol-3 end
   ({ className, name, ...props }, ref) => (
     <span ref={ref} className={cn(branchInline(), className)} {...props}>
       <Icon name="git-branch" size={10} />

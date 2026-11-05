@@ -17,7 +17,11 @@ export interface UserInlineProps extends HTMLAttributes<HTMLSpanElement> {
  * "Known Entities"; rendered reference: the
  * Sessions table "by" column).
  */
-export const UserInline = forwardRef<HTMLSpanElement, UserInlineProps>(
+// @@T mol-3 begin
+export const UserInline: import('react').ForwardRefExoticComponent<
+  UserInlineProps & import('react').RefAttributes<HTMLSpanElement>
+> = forwardRef<HTMLSpanElement, UserInlineProps>(
+// @@T mol-3 end
   ({ className, handle, name, ...props }, ref) => (
     <span ref={ref} className={cn(userInline(), className)} {...props}>
       <Avatar name={name ?? handle} size="sm" status="none" />

@@ -8,13 +8,15 @@ import { StrokeIcon } from '../../lib/icons';
 import { OptionCard } from './OptionCard';
 
 /** One selectable card for both auth pickers — workspace choice and 2FA method. */
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof OptionCard> = {
+// @@T mol-3 end
   title: 'Molecules/OptionCard',
   component: OptionCard,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   decorators: [(Story) => <div className="w-[440px]"><Story /></div>],
-} satisfies Meta<typeof OptionCard>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

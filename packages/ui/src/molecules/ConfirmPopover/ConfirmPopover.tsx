@@ -4,6 +4,9 @@ import {
   useEffect,
   useRef,
   useState,
+  // @@T mol-3 begin
+  type JSX,
+  // @@T mol-3 end
   type ReactNode,
 } from 'react';
 
@@ -54,7 +57,9 @@ export interface ConfirmInlineProps {
   className?: string;
 }
 
-export const ConfirmInline = ({
+// @@T mol-3 begin
+export const ConfirmInline: { (props: ConfirmInlineProps): JSX.Element; displayName: string } = ({
+// @@T mol-3 end
   message,
   confirmLabel,
   cancelLabel = 'Cancel',
@@ -150,7 +155,9 @@ export interface ConfirmPopoverProps
  * dismissal, and focus return; focus lands on Cancel first (it is the
  * panel's first focusable), so Enter never destroys by accident.
  */
-export const ConfirmPopover = ({
+// @@T mol-3 begin
+export const ConfirmPopover: { (props: ConfirmPopoverProps): JSX.Element; displayName: string } = ({
+// @@T mol-3 end
   message,
   confirmLabel,
   cancelLabel,

@@ -29,7 +29,11 @@ export interface AgentCellProps extends HTMLAttributes<HTMLDivElement> {
  * Sessions table agent·model column — a 24px accent-tinted bot tile next
  * to name over model).
  */
-export const AgentCell = forwardRef<HTMLDivElement, AgentCellProps>(
+// @@T mol-3 begin
+export const AgentCell: import('react').ForwardRefExoticComponent<
+  AgentCellProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, AgentCellProps>(
+// @@T mol-3 end
   ({ className, name, model, tone = 'primary', icon = 'bot', ...props }, ref) => (
     <div ref={ref} className={cn(entityCell(), className)} {...props}>
       <span className={cn(entityTile({ size: 'sm' }), chartTone({ tone }))}>

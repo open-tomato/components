@@ -22,7 +22,11 @@ export interface TaskCellProps
  * Tasks/Roadmap table task column — greyed mono tags separated by
  * middots).
  */
-export const TaskCell = forwardRef<HTMLDivElement, TaskCellProps>(
+// @@T mol-3 begin
+export const TaskCell: import('react').ForwardRefExoticComponent<
+  TaskCellProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, TaskCellProps>(
+// @@T mol-3 end
   ({ className, title, tags, ...props }, ref) => (
     <div ref={ref} className={cn(entityCellStack(), className)} {...props}>
       <span className={taskCellTitle()}>{title}</span>

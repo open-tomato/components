@@ -55,7 +55,11 @@ export interface SmallStatCardProps
  * - Numeric values format via the shared human-readable formatter; any
  *   ReactNode value renders verbatim for currency/custom cases.
  */
-export const SmallStatCard = forwardRef<HTMLDivElement, SmallStatCardProps>(
+// @@T mol-3 begin
+export const SmallStatCard: import('react').ForwardRefExoticComponent<
+  SmallStatCardProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, SmallStatCardProps>(
+// @@T mol-3 end
   (
     {
       className,

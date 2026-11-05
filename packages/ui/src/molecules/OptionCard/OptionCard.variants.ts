@@ -1,10 +1,17 @@
+// @@T mol-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T mol-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
  * OptionCard — one selectable card for both auth pickers: workspace choice
  * (centered, 20px radio) and 2FA method choice (top-aligned, 18px radio).
  */
-export const optionCard = cva(
+// @@T mol-3 begin
+export const optionCard: (props?: { selected?: boolean | null | undefined; align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva(
+// @@T mol-3 end
+
   [
     'flex w-full cursor-pointer gap-3 rounded-lg border p-3.5 text-left',
     'bg-surface-1 border-border-soft transition-colors',
@@ -25,7 +32,10 @@ export const optionCard = cva(
 );
 
 /** Workspace titles are display-face 15px; 2FA method titles body 14px. */
-export const optionCardTitle = cva('font-bold text-fg1', {
+// @@T mol-3 begin
+export const optionCardTitle: (props?: { align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva('font-bold text-fg1', {
+// @@T mol-3 end
+
   variants: {
     align: {
       center: 'font-display text-[15px]',
@@ -35,7 +45,9 @@ export const optionCardTitle = cva('font-bold text-fg1', {
   defaultVariants: { align: 'center' },
 });
 
-export const optionCardIndicator = cva(
+// @@T mol-3 begin
+export const optionCardIndicator: (props?: { selected?: boolean | null | undefined; align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva(
+// @@T mol-3 end
   'flex shrink-0 items-center justify-center rounded-full border-2',
   {
     variants: {

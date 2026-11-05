@@ -2,6 +2,11 @@ import * as RadixAccordion from '@radix-ui/react-accordion';
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
+  // @@T mol-3 begin
+  type ForwardRefExoticComponent,
+  type JSX,
+  type RefAttributes,
+  // @@T mol-3 end
   type ReactNode,
 } from 'react';
 
@@ -23,7 +28,9 @@ export type AccordionProps = {
   children: ReactNode;
 };
 
-export const Accordion = ({
+// @@T mol-3 begin
+export const Accordion: { (props: AccordionProps): JSX.Element; displayName: string } = ({
+// @@T mol-3 end
   mode = 'single',
   defaultValue,
   className,
@@ -63,7 +70,11 @@ export interface AccordionItemProps
   title: ReactNode;
 }
 
-export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
+// @@T mol-3 begin
+export const AccordionItem: ForwardRefExoticComponent<
+  AccordionItemProps & RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, AccordionItemProps>(
+// @@T mol-3 end
   ({ className, title, children, ...props }, ref) => (
     <RadixAccordion.Item
       ref={ref}

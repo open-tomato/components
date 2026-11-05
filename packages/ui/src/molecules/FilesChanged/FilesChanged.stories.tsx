@@ -10,7 +10,9 @@ const SESSION_FILES: FileChange[] = [
   { path: 'package.json', additions: 2, deletions: 1 },
 ];
 
-const meta = {
+// @@T mol-3 begin
+const meta: Meta<typeof FilesChanged> = {
+// @@T mol-3 end
   title: 'Molecules/FilesChanged',
   component: FilesChanged,
   parameters: { layout: 'padded' },
@@ -22,7 +24,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof FilesChanged>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
