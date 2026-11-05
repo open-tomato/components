@@ -6,6 +6,9 @@ import type { FC } from 'react';
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
 
+// @@V tpl-1 begin
+import { sidebarNav } from './AppShell.variants';
+// @@V tpl-1 end
 import { NavItem } from './NavItem';
 
 /**
@@ -48,13 +51,9 @@ export const SidebarNav: FC<SidebarNavProps> = ({
 }: SidebarNavProps) => (
   <nav
     aria-label={label}
-    className={cn(
-      'flex flex-col gap-0.5 pt-1',
-      collapsed
-        ? 'px-2'
-        : 'px-3',
-      className,
-    )}
+    // @@V tpl-1 begin
+    className={cn(sidebarNav({ collapsed }), className)}
+    // @@V tpl-1 end
   >
     {items.map((item) => (
       <NavItem

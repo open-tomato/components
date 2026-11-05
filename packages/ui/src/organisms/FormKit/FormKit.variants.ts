@@ -4,20 +4,21 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S org-1 begin
 /**
  * The form kit — every input is the SAME envelope (label + control +
  * hint/error) wrapped around a single interactive control; each control just
- * reads `value` and calls `onChange`. Mirrors
- * the original form-controls demo (+ the .otx-field-control
- * and .otx-range CSS from the original demo shell).
+ * reads `value` and calls `onChange`.
  *
- * Naming reconciliation: the original form-controls demo calls the envelope `Field`, but
- * the library already ships the original children demo Field atom (label + built-in
- * input), so the envelope is `FormField` here. The original demo's `Toggle` is the
+ * Naming: the library already ships a Field atom (label + built-in
+ * input), so the envelope is named `FormField` here. A toggle is the
  * shipped Switch atom — FormKit composes it rather than re-implementing.
  */
+// @@S org-1 end
 
-/** The focus ring every text-like control shares (.otx-field-control). */
+// @@S org-1 begin
+/** The focus ring every text-like control shares. */
+// @@S org-1 end
 const CONTROL_FOCUS = [
   'outline-none focus-visible:border-border-focus',
   'focus-visible:shadow-[0_0_0_2px_var(--bg),0_0_0_4px_color-mix(in_oklab,var(--leaf)_55%,transparent)]',
@@ -131,7 +132,9 @@ export const radioCircle: (props?: ({ checked?: boolean | null | undefined } & C
   },
 );
 
-/** The range input (.otx-range) — track fill driven by --pct. */
+// @@S org-1 begin
+/** The range input — track fill driven by --pct. */
+// @@S org-1 end
 // @@T org-1 begin
 export const sliderInput: (props?: ClassProp | undefined) => string = cva([
 // @@T org-1 end
@@ -168,13 +171,14 @@ export const fileChip: (props?: ClassProp | undefined) => string = cva([
 
 /* ── WS03d additions ("FormKit additions") ────────── */
 
+// @@S org-1 begin
 /**
- * VerboseOption — generalized from the original design ModelOption
- * (the original AgentEditor screen): a bordered option
+ * VerboseOption: a bordered option
  * row with radio/checkbox semantics that tints accent when selected.
- * Original uses the accent scale for selection (vs the primary-toned
- * RadioGroup above) — kept as rendered truth of the source screens.
+ * It uses the accent scale for selection (vs the primary-toned
+ * RadioGroup above) — kept as rendered truth of the design source.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const verboseOption: (props?: ({ selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -225,12 +229,13 @@ export const verboseCap: (props?: ClassProp | undefined) => string = cva([
   'px-[7px] py-px font-mono text-[10px] text-fg3',
 ]);
 
+// @@S org-1 begin
 /**
- * DecoratedToggle — generalized from the original design ToolPicker rows
- * (the original AgentEditor demo): a bordered row (decoration + title/description +
+ * DecoratedToggle: a bordered row (decoration + title/description +
  * switch) that tints accent when on. The ROW is the switch control; the
  * Switch atom's track/thumb cvas render decoratively inside it.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const decoratedToggle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -299,11 +304,12 @@ export const chipListPanel: (props?: ClassProp | undefined) => string = cva([
   'rounded-md border border-border-soft bg-surface-1 p-1 shadow-lg',
 ]);
 
+// @@S org-1 begin
 /**
  * AvatarSelector — big avatar preview + initials input + color-swatch
- * grid (original design AvatarPicker, the original AgentEditor demo). Tones cover the original
- * AVATAR_COLORS palette.
+ * grid. Tones cover the avatar color palette.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const avatarPreview: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined } & ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -350,6 +356,222 @@ export const avatarSwatch: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'i
   },
 );
 
+// @@V org-1 begin
+/* ── Ad-hoc classes moved in by stream V ────────── */
+
+/* AvatarSelector */
+
+/** AvatarSelector root column. */
+export const avatarSelector: (props?: ClassProp | undefined) => string = cva('flex w-[60px] flex-col items-center gap-1.5');
+
+/** AvatarSelector initials input. */
+export const avatarInitialsInput: (props?: ClassProp | undefined) => string = cva('w-full rounded-sm border border-border-soft bg-surface-1 px-1.5 py-1 text-center font-mono text-xs text-fg2 outline-none focus-visible:border-border-focus');
+
+/** AvatarSelector 3-column swatch grid. */
+export const avatarSwatchGrid: (props?: ClassProp | undefined) => string = cva('grid grid-cols-3 gap-1');
+
+/* Checkbox */
+
+/** Checkbox row, merged over touchable. */
+export const checkboxRow: (props?: ClassProp | undefined) => string = cva('w-full items-start gap-2.5 border-none bg-transparent p-0.5 text-left');
+
+/** Checkbox check glyph wrapper. */
+export const checkboxMark: (props?: ClassProp | undefined) => string = cva('text-on-primary');
+
+/** Checkbox label/hint column. */
+export const checkboxText: (props?: ClassProp | undefined) => string = cva('min-w-0');
+
+/** Checkbox label line. */
+export const checkboxLabel: (props?: ClassProp | undefined) => string = cva('block text-[13.5px] font-medium text-fg1');
+
+/** Checkbox hint line. */
+export const checkboxHint: (props?: ClassProp | undefined) => string = cva('mt-px block text-xs text-fg3');
+
+/* ChipList */
+
+/** ChipList root — anchors the suggestion panel. */
+export const chipList: (props?: ClassProp | undefined) => string = cva('relative');
+
+/** ChipList selected-chip row. */
+export const chipListChips: (props?: ClassProp | undefined) => string = cva('flex flex-wrap gap-1.5');
+
+/** ChipList bare input inside the box. */
+export const chipListInput: (props?: ClassProp | undefined) => string = cva('w-full border-none bg-transparent font-body text-[14.5px] text-fg1 outline-none placeholder:text-fg3');
+
+/** ChipList "No matches." row. */
+export const chipListEmpty: (props?: ClassProp | undefined) => string = cva('px-2.5 py-2 text-[13px] text-fg3');
+
+/** ChipList suggestion label. */
+export const chipListOptionLabel: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate');
+
+/** ChipList "new" tag on a creatable row. */
+export const chipListNewTag: (props?: ClassProp | undefined) => string = cva('shrink-0 font-mono text-[10px] uppercase tracking-[0.08em] text-accent');
+
+/* DecoratedToggle */
+
+/** DecoratedToggle leading decoration, accent when on. */
+export const decoratedToggleDecoration: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva('shrink-0', {
+  variants: {
+    checked: {
+      false: 'text-fg2',
+      true: 'text-accent',
+    },
+  },
+  defaultVariants: { checked: false },
+});
+
+/** DecoratedToggle title/description column. */
+export const decoratedToggleText: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1');
+
+/** DecoratedToggle title + meta row. */
+export const decoratedToggleTitleRow: (props?: ClassProp | undefined) => string = cva('flex flex-wrap items-center gap-2');
+
+/** DecoratedToggle title. */
+export const decoratedToggleTitle: (props?: ClassProp | undefined) => string = cva('font-mono text-[13px] font-semibold text-fg1');
+
+/** DecoratedToggle description. */
+export const decoratedToggleDescription: (props?: ClassProp | undefined) => string = cva('block text-xs font-normal text-fg3');
+
+/** DecoratedToggle switch track, merged over switchTrack. */
+export const decoratedToggleSwitch: (props?: ClassProp | undefined) => string = cva('shrink-0');
+
+/** DecoratedToggleList header separator dot. */
+export const decoratedToggleHeaderDot: (props?: ClassProp | undefined) => string = cva('text-fg2');
+
+/** DecoratedToggleList row column. */
+export const decoratedToggleList: (props?: ClassProp | undefined) => string = cva('flex flex-col gap-1.5');
+
+/* FileDrop */
+
+/** FileDrop chip icon tile. */
+export const fileChipIcon: (props?: ClassProp | undefined) => string = cva('inline-flex size-[34px] shrink-0 items-center justify-center rounded-sm bg-[color-mix(in_oklab,var(--accent)_13%,var(--surface-1))] text-accent');
+
+/** FileDrop chip name/size column. */
+export const fileChipText: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1');
+
+/** FileDrop chip file name. */
+export const fileChipName: (props?: ClassProp | undefined) => string = cva('block truncate text-[13px] font-semibold text-fg1');
+
+/** FileDrop chip file size. */
+export const fileChipSize: (props?: ClassProp | undefined) => string = cva('block font-mono text-[11.5px] text-fg3');
+
+/** FileDrop remove button, merged over touchable. */
+export const fileChipRemove: (props?: ClassProp | undefined) => string = cva('size-[30px] shrink-0 justify-center border border-border-soft bg-transparent text-fg3');
+
+/* FormField */
+
+/** FormField envelope column. */
+export const formField: (props?: ClassProp | undefined) => string = cva('flex flex-col gap-[7px]');
+
+/** FormField label row (label + labelEnd). */
+export const formFieldLabelRow: (props?: ClassProp | undefined) => string = cva('flex items-center justify-between gap-2');
+
+/** FormField label. */
+export const formFieldLabel: (props?: ClassProp | undefined) => string = cva('inline-flex items-center gap-1 text-[13px] font-semibold text-fg1');
+
+/** FormField required asterisk. */
+export const formFieldRequired: (props?: ClassProp | undefined) => string = cva('text-danger');
+
+/** FormField hint, above or below the control. */
+export const formFieldHint: (props?: ({ placement?: 'above' | 'below' | null | undefined } & ClassProp) | undefined) => string = cva('', {
+  variants: {
+    placement: {
+      above: '-mt-0.5 text-xs leading-normal text-fg3',
+      below: 'text-xs text-fg3',
+    },
+  },
+  defaultVariants: { placement: 'below' },
+});
+
+/** FormField error message. */
+export const formFieldError: (props?: ClassProp | undefined) => string = cva('inline-flex items-center gap-[5px] text-xs text-danger');
+
+/* RadioGroup */
+
+/** RadioGroup option column. */
+export const radioGroup: (props?: ClassProp | undefined) => string = cva('flex flex-col gap-[9px]');
+
+/** RadioGroup selected dot. */
+export const radioDot: (props?: ClassProp | undefined) => string = cva('size-[9px] rounded-full bg-primary');
+
+/** RadioGroup label/hint column. */
+export const radioText: (props?: ClassProp | undefined) => string = cva('min-w-0');
+
+/** RadioGroup option label. */
+export const radioLabel: (props?: ClassProp | undefined) => string = cva('block text-[13.5px] font-semibold text-fg1');
+
+/** RadioGroup option hint. */
+export const radioHint: (props?: ClassProp | undefined) => string = cva('mt-px block text-xs text-fg3');
+
+/* Slider */
+
+/** Slider row (track + readout). */
+export const slider: (props?: ClassProp | undefined) => string = cva('flex items-center gap-[13px]');
+
+/** Slider mono readout. */
+export const sliderReadout: (props?: ClassProp | undefined) => string = cva('min-w-16 text-right font-mono text-[13px] font-semibold text-fg1');
+
+/* TextInput */
+
+/** TextInput wrapper anchoring the slots. */
+export const textInputWrap: (props?: ClassProp | undefined) => string = cva('relative flex items-center');
+
+/** TextInput leading slot: a mono text prefix or an icon. */
+export const textInputPrefix: (props?: ({ kind?: 'text' | 'icon' | null | undefined } & ClassProp) | undefined) => string = cva('pointer-events-none absolute left-3', {
+  variants: {
+    kind: {
+      text: 'font-mono text-[13px] text-fg3',
+      icon: 'inline-flex items-center text-fg3',
+    },
+  },
+  defaultVariants: { kind: 'text' },
+});
+
+/** TextInput padding that clears an icon prefix or a suffix (12px inset + 14px glyph + 8px gap). */
+export const textInputPad: (props?: ({ iconPrefix?: boolean | null | undefined; suffix?: boolean | null | undefined } & ClassProp) | undefined) => string = cva('', {
+  variants: {
+    iconPrefix: {
+      false: '',
+      true: 'pl-[34px]',
+    },
+    suffix: {
+      false: '',
+      true: 'pr-[34px]',
+    },
+  },
+  defaultVariants: { iconPrefix: false, suffix: false },
+});
+
+/** TextInput trailing slot. */
+export const textInputSuffix: (props?: ClassProp | undefined) => string = cva('absolute right-3 inline-flex items-center text-fg3');
+
+/* VerboseOption */
+
+/** VerboseOption radio dot. */
+export const verboseRadioDot: (props?: ClassProp | undefined) => string = cva('absolute inset-[3px] rounded-full bg-surface-2');
+
+/** VerboseOption text column. */
+export const verboseText: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1');
+
+/** VerboseOption label + badges row. */
+export const verboseTitleRow: (props?: ClassProp | undefined) => string = cva('flex flex-wrap items-center gap-2');
+
+/** VerboseOption label. */
+export const verboseLabel: (props?: ClassProp | undefined) => string = cva('font-mono text-[13px] font-semibold text-fg1');
+
+/** VerboseOption non-string badge wrapper. */
+export const verboseBadge: (props?: ClassProp | undefined) => string = cva('inline-flex');
+
+/** VerboseOption description. */
+export const verboseDescription: (props?: ClassProp | undefined) => string = cva('mt-1 block text-xs font-normal leading-[1.45] text-fg3');
+
+/** VerboseOption meta line. */
+export const verboseMeta: (props?: ClassProp | undefined) => string = cva('mt-1 block font-mono text-[11px] font-normal text-fg3');
+
+/** VerboseOptionList column. */
+export const verboseOptionList: (props?: ClassProp | undefined) => string = cva('flex flex-col gap-1.5');
+// @@V org-1 end
+
 export type VerboseOptionVariants = VariantProps<typeof verboseOption>;
 export type VerboseControlVariants = VariantProps<typeof verboseControl>;
 export type DecoratedToggleVariants = VariantProps<typeof decoratedToggle>;
@@ -361,3 +583,7 @@ export type AvatarSelectorTone = NonNullable<
 export type TextInputVariants = VariantProps<typeof textInput>;
 export type TextareaVariants = VariantProps<typeof textarea>;
 export type CheckGroupVariants = VariantProps<typeof checkGroup>;
+// @@V org-1 begin
+export type FormFieldHintVariants = VariantProps<typeof formFieldHint>;
+export type TextInputPrefixVariants = VariantProps<typeof textInputPrefix>;
+// @@V org-1 end

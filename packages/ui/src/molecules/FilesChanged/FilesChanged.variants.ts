@@ -47,4 +47,18 @@ export const filesChangedDelta: (props?: { kind?: 'additions' | 'deletions' | nu
   defaultVariants: { zero: false },
 });
 
+// @@V mol-3 begin
+/** The header's count + totals row. */
+export const filesChangedTotals: (props?: ClassProp | undefined) => string = cva('flex items-baseline gap-3');
+
+/** The divided list of changed files. */
+export const filesChangedList: (props?: ClassProp | undefined) => string = cva('divide-y divide-border-soft');
+
+/** One changed file's row. */
+export const filesChangedRow: (props?: ClassProp | undefined) => string = cva('flex items-center gap-2.5 px-[18px] py-2');
+
+/** The file-type glyph at the start of a row. */
+export const filesChangedIcon: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
+// @@V mol-3 end
+
 export type FilesChangedDeltaVariants = VariantProps<typeof filesChangedDelta>;

@@ -64,4 +64,23 @@ export const optionCardIndicator: (props?: { selected?: boolean | null | undefin
   },
 );
 
+// @@V mol-3 begin
+/** The text column: title row over the description. */
+export const optionCardBody: (props?: ClassProp | undefined) => string = cva('flex min-w-0 flex-1 flex-col');
+
+/** The title with its meta companion. */
+export const optionCardTitleRow: (props?: ClassProp | undefined) => string = cva('flex items-center gap-2');
+
+/** The greyed description; top-aligned (2FA) cards sit it a little lower. */
+export const optionCardDescription: (props?: { align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva('text-xs leading-normal text-fg3', {
+  variants: {
+    align: {
+      center: 'mt-0.5',
+      start: 'mt-1',
+    },
+  },
+  defaultVariants: { align: 'center' },
+});
+// @@V mol-3 end
+
 export type OptionCardVariants = VariantProps<typeof optionCard>;

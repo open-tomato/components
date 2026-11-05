@@ -4,6 +4,10 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@V mol-3 begin
+import { chartTone, type ChartTone } from '../../lib';
+// @@V mol-3 end
+
 /**
  * Known entities — contract-typed display templates for the domain
  * entities that recur across tables, cards and menus (spec:
@@ -125,6 +129,35 @@ export const taskCellTitle: (props?: ClassProp) => string = cva(
 // @@T mol-3 end
   'truncate text-sm font-medium leading-tight text-fg1',
 );
+
+// @@V mol-3 begin
+/**
+ * The entity accent: the shared chart palette (`chartTone` in `src/lib`),
+ * bound here so the components read every class from their variants file.
+ */
+export const entityTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
+
+/** tool-title — the name over badge + slug column. */
+export const toolTitleStack: (props?: ClassProp | undefined) => string = cva('flex min-w-0 flex-col gap-1');
+
+/** model-cell — the accent dot shown when no icon is given. */
+export const modelCellDot: (props?: ClassProp | undefined) => string = cva('block size-2 rounded-full bg-current');
+
+/** branch-inline — the branch name beside the glyph. */
+export const branchInlineName: (props?: ClassProp | undefined) => string = cva('min-w-0 truncate');
+
+/** session-cell — the agent instance id, kept whole on the meta line. */
+export const sessionCellAgent: (props?: ClassProp | undefined) => string = cva('shrink-0');
+
+/** The middot between items of a meta line. */
+export const entityMetaSeparator: (props?: ClassProp | undefined) => string = cva('text-border-strong');
+
+/** A truncating text item of a meta line (task tag, tool slug). */
+export const entityMetaText: (props?: ClassProp | undefined) => string = cva('truncate');
+
+/** task-cell — one tag, with its leading middot. */
+export const taskCellTag: (props?: ClassProp | undefined) => string = cva('flex min-w-0 items-center gap-1.5');
+// @@V mol-3 end
 
 export type EntityTileVariants = VariantProps<typeof entityTile>;
 

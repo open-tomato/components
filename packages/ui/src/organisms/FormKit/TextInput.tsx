@@ -7,25 +7,36 @@ import {
 
 import { cn } from '../../lib';
 
-import { textInput, type TextInputVariants } from './FormKit.variants';
+// @@V org-1 begin
+import {
+  textInput,
+  textInputPad,
+  textInputPrefix,
+  textInputSuffix,
+  textInputWrap,
+  type TextInputVariants,
+} from './FormKit.variants';
+// @@V org-1 end
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size' | 'prefix'>,
   TextInputVariants {
   value: string;
   onChange: (value: string) => void;
+  // @@S org-1 begin
   /**
-   * Leading slot. A string keeps the original demo's mono-prefix treatment ("@");
-   * a ReactNode renders as a 14px leading icon slot — extension sourced from
-   * the auth screens (the original Auth screen), not the
-   * original form-kit chapter.
+   * Leading slot. A string keeps the mono-prefix treatment ("@");
+   * a ReactNode renders as a 14px leading icon slot (an icon, say).
    */
+  // @@S org-1 end
   prefix?: ReactNode;
   /** Trailing slot — interactive (the auth eye-toggle is a real button). */
   suffix?: ReactNode;
 }
 
-/** Left padding per prefix character (the original demo's 12 + len * 7.5). */
+// @@S org-1 begin
+/** Left padding per prefix character (12 + len * 7.5). */
+// @@S org-1 end
 const PREFIX_PAD_BASE = 12;
 const PREFIX_PAD_PER_CHAR = 7.5;
 
@@ -43,14 +54,15 @@ export const TextInput: import('react').ForwardRefExoticComponent<TextInputProps
         }
         : undefined;
     return (
-      <span className="relative flex items-center">
+      // @@V org-1 begin
+      <span className={textInputWrap()}>
         {stringPrefix != null && (
-          <span className="pointer-events-none absolute left-3 font-mono text-[13px] text-fg3">
+          <span className={textInputPrefix({ kind: 'text' })}>
             {stringPrefix}
           </span>
         )}
         {prefix != null && stringPrefix == null && (
-          <span className="pointer-events-none absolute left-3 inline-flex items-center text-fg3">
+          <span className={textInputPrefix({ kind: 'icon' })}>
             {prefix}
           </span>
         )}
@@ -61,16 +73,18 @@ export const TextInput: import('react').ForwardRefExoticComponent<TextInputProps
           onChange={(e) => onChange(e.target.value)}
           className={cn(
             textInput({ invalid }),
-            // icon slot: 12px inset + 14px glyph + 8px gap
-            prefix != null && stringPrefix == null && 'pl-[34px]',
-            suffix != null && 'pr-[34px]',
+            textInputPad({
+              iconPrefix: prefix != null && stringPrefix == null,
+              suffix: suffix != null,
+            }),
             className,
           )}
           style={style}
           {...props}
         />
         {suffix != null && (
-          <span className="absolute right-3 inline-flex items-center text-fg3">
+          <span className={textInputSuffix()}>
+            {/* @@V org-1 end */}
             {suffix}
           </span>
         )}

@@ -28,6 +28,23 @@ import {
   type SidebarNavConfigItem,
 } from '../templates/AppShell';
 
+// @@V tpl-1 begin
+import {
+  liveShellFrame,
+  placeholderPage,
+  placeholderPageCard,
+  placeholderPageGrid,
+  placeholderPageHeading,
+  placeholderPagePanel,
+  shellDemoSpacer,
+  sidebarDemoBrand,
+  sidebarDemoWordmark,
+  sidebarDemoWordmarkOpen,
+  sidebarDemoWordmarkTomato,
+  topbarDemoSearch,
+  topbarDemoTitle,
+} from './shell-fixtures.variants';
+// @@V tpl-1 end
 import {
   WorkspaceSwitcher,
   type WorkspaceOption,
@@ -92,18 +109,17 @@ export const SidebarDemo = ({
 // @@T tpl-1 end
   <>
     <div
-      className={cn(
-        'flex h-[60px] shrink-0 items-center gap-2.5 border-b border-border-soft',
-        collapsed
-          ? 'justify-center p-0'
-          : 'justify-start px-[18px]',
-      )}
+      // @@V tpl-1 begin
+      className={cn(sidebarDemoBrand({ collapsed }))}
+      // @@V tpl-1 end
     >
       <TomatoMark size={26} />
       {!collapsed && (
-        <span className="wordmark !text-[17px]">
-          <span className="wordmark-open">open</span>{' '}
-          <span className="wordmark-tomato">tomato</span>
+        // @@V tpl-1 begin
+        <span className={sidebarDemoWordmark()}>
+          <span className={sidebarDemoWordmarkOpen()}>open</span>{' '}
+          <span className={sidebarDemoWordmarkTomato()}>tomato</span>
+          {/* @@V tpl-1 end */}
         </span>
       )}
     </div>
@@ -113,7 +129,9 @@ export const SidebarDemo = ({
       onNavigate={onNavigate}
       collapsed={collapsed}
     />
-    <div className="flex-1" />
+    {/* @@V tpl-1 begin */}
+    <div className={shellDemoSpacer()} />
+    {/* @@V tpl-1 end */}
     <SidebarWeekSummary
       status="healthy"
       used={1_200_000}
@@ -145,13 +163,15 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
   return (
     <>
       <WorkspaceSwitcher workspaces={WORKSPACES} activeId="og" />
-      <div className="font-display text-lg font-bold capitalize tracking-[-0.015em] text-fg1">
+      {/* @@V tpl-1 begin */}
+      <div className={topbarDemoTitle()}>
         {title}
       </div>
-      <div className="flex-1" />
+      <div className={shellDemoSpacer()} />
       <SearchSuggest
         suggestions={SUGGESTIONS}
-        className="w-[220px]"
+        className={topbarDemoSearch()}
+        // @@V tpl-1 end
         hotkey={false}
       />
       <NotificationsBell notifications={NOTIFICATIONS} />
@@ -169,17 +189,19 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
  * only need page-shaped filler for the shell to hold.
  */
 const PlaceholderPage = ({ id }: { id: string }) => (
-  <section aria-label={`${id} placeholder`} className="flex flex-col gap-4">
-    <div className="h-8 w-44 rounded-md bg-surface-sunk" />
-    <div className="grid grid-cols-3 gap-4">
+  // @@V tpl-1 begin
+  <section aria-label={`${id} placeholder`} className={placeholderPage()}>
+    <div className={placeholderPageHeading()} />
+    <div className={placeholderPageGrid()}>
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="h-[120px] rounded-lg border border-border-soft bg-surface-1 shadow-xs"
+          className={placeholderPageCard()}
         />
       ))}
     </div>
-    <div className="h-[260px] rounded-lg border border-border-soft bg-surface-1 shadow-xs" />
+    <div className={placeholderPagePanel()} />
+    {/* @@V tpl-1 end */}
   </section>
 );
 
@@ -203,7 +225,9 @@ export const LiveShell = ({
   const [page, setPage] = useState(initialPage);
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   return (
-    <div className="flex h-[560px] overflow-hidden rounded-xl border border-border-strong bg-bg shadow-lg">
+    // @@V tpl-1 begin
+    <div className={liveShellFrame()}>
+      {/* @@V tpl-1 end */}
       <AppShell>
         <AppShellSidebar collapsed={collapsed}>
           <SidebarDemo active={page} onNavigate={setPage} collapsed={collapsed} />

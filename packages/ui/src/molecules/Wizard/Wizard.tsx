@@ -44,8 +44,12 @@ export interface WizardProps<A> {
   steps: readonly WizardStep<A>[];
   step: number;
   answers: A;
-  /** Header brand row content (e.g. mark + "New workspace"). */
+  // @@S mol-1 begin
+  /** Header brand row content (e.g. a mark + a title). */
   heading?: ReactNode;
+  /** Label of the primary action on the last step. */
+  submitLabel?: ReactNode;
+  // @@S mol-1 end
   onAnswer: (key: string, value: unknown) => void;
   onBack: () => void;
   onNext: () => void;
@@ -61,6 +65,9 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
   step,
   answers,
   heading,
+  // @@S mol-1 begin
+  submitLabel = 'Finish',
+  // @@S mol-1 end
   onAnswer,
   onBack,
   onNext,
@@ -180,7 +187,9 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
               : onNext}
           >
             {isLast
-              ? 'Create workspace'
+              // @@S mol-1 begin
+              ? submitLabel
+              // @@S mol-1 end
               : 'Continue'}
           </Button>
         </div>

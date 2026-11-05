@@ -24,6 +24,19 @@ import {
   searchSuggestPanel,
   searchSuggestPuck,
   searchSuggestRow,
+  // @@V org-1 begin
+  searchSuggestAll,
+  searchSuggestAllLabel,
+  searchSuggestEmpty,
+  searchSuggestFooter,
+  searchSuggestHeader,
+  searchSuggestInput,
+  searchSuggestLabel,
+  searchSuggestLens,
+  searchSuggestRoot,
+  searchSuggestSub,
+  searchSuggestText,
+  // @@V org-1 end
 } from './SearchSuggest.variants';
 
 export type SearchSuggestionKind =
@@ -36,7 +49,9 @@ export type SearchSuggestionKind =
 export interface SearchSuggestion {
   kind: SearchSuggestionKind;
   label: string;
-  /** Mono context line under the label ("running · agent-7d2f"). */
+  // @@S org-1 begin
+  /** Mono context line under the label ("running · job-7d2f"). */
+  // @@S org-1 end
   sub?: string;
   /** Overrides the kind's default glyph. */
   icon?: IconName;
@@ -59,7 +74,9 @@ export interface SearchSuggestProps {
   className?: string;
 }
 
-/** Kind → default Lucide glyph (original SUGGESTIONS seed). */
+// @@S org-1 begin
+/** Kind → default Lucide glyph. */
+// @@S org-1 end
 const KIND_ICON: Record<SearchSuggestionKind, IconName> = {
   agent: 'bot',
   session: 'terminal',
@@ -70,10 +87,10 @@ const KIND_ICON: Record<SearchSuggestionKind, IconName> = {
 
 const VISIBLE_LIMIT = 5;
 
+// @@S org-1 begin
 /**
- * SearchSuggest (the original TopbarLive demo; app-shell spec: Top Bar):
- * lens-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
- * across five kinds (agent/session/task/tool/doc) each with its own
+ * SearchSuggest: search-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
+ * across five kinds (see `SearchSuggestionKind`) each with its own
  * accent. Keyboard-driven: ↑↓ move the active row, Enter opens it, and
  * Enter with no match falls through to `onSearch` — as does the explicit
  * "Search all" row.
@@ -82,12 +99,13 @@ const VISIBLE_LIMIT = 5;
  * shared internals. Both follow the same keyboard model (active-index
  * list, ↑↓/Enter, hand-rolled rows), but SearchSuggest is an inline
  * ARIA combobox — focus stays in the input, the panel anchors to it,
- * substring filtering (original behavior) — while CommandPalette is a modal
+ * substring filtering — while CommandPalette is a modal
  * Overlay running commands with fuzzy matching and focus capture.
  * Merging them would couple an input-anchored popup to a portal overlay
  * for no shared behavior win; what IS shared is reused directly (the
  * `paletteKbd` chip chrome for the ⌘K/↵ hints).
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const SearchSuggest: FC<SearchSuggestProps> = ({
 // @@T org-1 end
@@ -95,7 +113,9 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
   onSelect,
   onSearch,
   hotkey = true,
-  placeholder = 'Search sessions, agents, tools…',
+  // @@S org-1 begin
+  placeholder = 'Search…',
+  // @@S org-1 end
   defaultOpen = false,
   className,
 }: SearchSuggestProps) => {
@@ -169,9 +189,13 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
   const optId = (i: number) => `${baseId}-opt-${i}`;
 
   return (
-    <div ref={wrapRef} className={cn('relative w-[340px]', className)}>
+    // @@V org-1 begin
+    <div ref={wrapRef} className={cn(searchSuggestRoot(), className)}>
+      {/* @@V org-1 end */}
       <div className={searchSuggestBox({ open })}>
-        <Icon name="search" size={14} className="shrink-0 text-fg3" />
+        {/* @@V org-1 begin */}
+        <Icon name="search" size={14} className={searchSuggestLens()} />
+        {/* @@V org-1 end */}
         <input
           ref={inputRef}
           role="combobox"
@@ -190,14 +214,18 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
-          className="min-w-0 flex-1 border-none bg-transparent font-body text-[13px] text-fg1 outline-none placeholder:text-fg3"
+          // @@V org-1 begin
+          className={searchSuggestInput()}
+          // @@V org-1 end
         />
         <kbd className={paletteKbd({ size: 'sm' })}>⌘K</kbd>
       </div>
 
       {open && (
         <div className={searchSuggestPanel()}>
-          <div className="flex justify-between px-3 pb-1.5 pt-2 font-mono text-[10px] uppercase tracking-[0.08em] text-fg3">
+          {/* @@V org-1 begin */}
+          <div className={searchSuggestHeader()}>
+            {/* @@V org-1 end */}
             <span>
               {needle
                 ? `matches · ${filtered.length}`
@@ -207,7 +235,9 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
           </div>
           <div id={listId} role="listbox" aria-label="Suggestions">
             {shown.length === 0 && (
-              <div className="px-3.5 py-4 text-[13px] text-fg3">
+              // @@V org-1 begin
+              <div className={searchSuggestEmpty()}>
+                {/* @@V org-1 end */}
                 No quick matches. Press{' '}
                 <kbd className={paletteKbd({ size: 'sm' })}>↵</kbd> to search
                 all surfaces.
@@ -228,12 +258,16 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
                 <span className={searchSuggestPuck({ kind: s.kind })}>
                   <Icon name={s.icon ?? KIND_ICON[s.kind]} size={14} />
                 </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px] font-semibold">
+                {/* @@V org-1 begin */}
+                <span className={searchSuggestText()}>
+                  <span className={searchSuggestLabel()}>
+                    {/* @@V org-1 end */}
                     {s.label}
                   </span>
                   {s.sub != null && (
-                    <span className="block font-mono text-[11px] text-fg3">
+                    // @@V org-1 begin
+                    <span className={searchSuggestSub()}>
+                      {/* @@V org-1 end */}
                       {s.sub}
                     </span>
                   )}
@@ -245,14 +279,20 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
             ))}
           </div>
           {needle !== '' && (
-            <div className="border-t border-border-soft p-1.5">
+            // @@V org-1 begin
+            <div className={searchSuggestFooter()}>
+              {/* @@V org-1 end */}
               <button
                 type="button"
                 onClick={searchAll}
-                className="flex w-full cursor-pointer items-center gap-2.5 rounded-md border-none bg-transparent px-2.5 py-2 text-left text-[13px] font-medium text-accent hover:bg-surface-sunk"
+                // @@V org-1 begin
+                className={searchSuggestAll()}
+                // @@V org-1 end
               >
                 <Icon name="search" size={15} />
-                <span className="min-w-0 flex-1 truncate">
+                {/* @@V org-1 begin */}
+                <span className={searchSuggestAllLabel()}>
+                  {/* @@V org-1 end */}
                   Search all for &ldquo;<b>{q}</b>&rdquo;
                 </span>
                 <kbd className={paletteKbd({ size: 'sm' })}>↵</kbd>

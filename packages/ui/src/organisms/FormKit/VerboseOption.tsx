@@ -7,16 +7,26 @@ import {
   verboseCap,
   verboseControl,
   verboseOption,
+  // @@V org-1 begin
+  verboseBadge,
+  verboseDescription,
+  verboseLabel,
+  verboseMeta,
+  verboseOptionList,
+  verboseRadioDot,
+  verboseText,
+  verboseTitleRow,
+  // @@V org-1 end
 } from './FormKit.variants';
 
+// @@S org-1 begin
 /**
- * VerboseOption / VerboseOptionList — generalized from the original design
- * ModelOption (the original AgentEditor screen; spec:
- * "ModelOption"): a rich option row — name, badge
+ * VerboseOption / VerboseOptionList: a rich option row — name, badge
  * slot, short description — behaving as a radio or checkbox, tinting
- * accent when selected. Deliberately NOT tied to the model use case:
- * the model picker is just `options` data.
+ * accent when selected. Deliberately NOT tied to one use case:
+ * a model picker, say, is just `options` data.
  */
+// @@S org-1 end
 
 export interface VerboseOptionProps {
   /** Control semantics: exclusive pick vs independent toggle. */
@@ -26,13 +36,17 @@ export interface VerboseOptionProps {
   onSelect?: () => void;
   /** The option's name (raw: mono semibold model id). */
   label: ReactNode;
+  // @@S org-1 begin
   /**
    * Badge slot next to the name — Badges, or plain strings rendered as
-   * the original capability pills ("fast", "web", "code", …).
+   * capability pills ("fast", "web", "code", …).
    */
+  // @@S org-1 end
   badges?: ReactNode[];
   description?: ReactNode;
-  /** Extra mono line under the description (original `verbose` cost line). */
+  // @@S org-1 begin
+  /** Extra mono line under the description (a cost line, say). */
+  // @@S org-1 end
   meta?: ReactNode;
   disabled?: boolean;
   className?: string;
@@ -61,33 +75,39 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
     onClick={() => onSelect?.()}
     className={cn(verboseOption({ selected }), className)}
   >
+    {/* @@V org-1 begin */}
     <span className={verboseControl({ mode, selected })} aria-hidden>
       {selected && (
         mode === 'radio'
-          ? <span className="absolute inset-[3px] rounded-full bg-surface-2" />
+          ? <span className={verboseRadioDot()} />
           : <Icon name="check" size={11} strokeWidth={3} />
       )}
     </span>
-    <span className="min-w-0 flex-1">
-      <span className="flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[13px] font-semibold text-fg1">
+    <span className={verboseText()}>
+      <span className={verboseTitleRow()}>
+        <span className={verboseLabel()}>
+          {/* @@V org-1 end */}
           {label}
         </span>
+        {/* @@V org-1 begin */}
         {badges?.map((badge, i) => typeof badge === 'string' || typeof badge === 'number'
           ? (
                
             <span key={i} className={verboseCap()}>{badge}</span>
           )
              
-          : <span key={i} className="inline-flex">{badge}</span>)}
+          : <span key={i} className={verboseBadge()}>{badge}</span>)}
+        {/* @@V org-1 end */}
       </span>
+      {/* @@V org-1 begin */}
       {description != null && (
-        <span className="mt-1 block text-xs font-normal leading-[1.45] text-fg3">
+        <span className={verboseDescription()}>
           {description}
         </span>
       )}
       {meta != null && (
-        <span className="mt-1 block font-mono text-[11px] font-normal text-fg3">
+        <span className={verboseMeta()}>
+          {/* @@V org-1 end */}
           {meta}
         </span>
       )}
@@ -154,7 +174,9 @@ export const VerboseOptionList: { (props: VerboseOptionListProps): import('react
         ? 'radiogroup'
         : 'group'}
       aria-label={ariaLabel}
-      className={cn('flex flex-col gap-1.5', className)}
+      // @@V org-1 begin
+      className={cn(verboseOptionList(), className)}
+      // @@V org-1 end
     >
       {options.map((o) => (
         <VerboseOption

@@ -1,6 +1,17 @@
 import type { Column } from '../organisms/Table';
 
 import { Badge } from '../atoms/Badge';
+// @@V tpl-1 begin
+
+import {
+  sessionGoal,
+  sessionModel,
+  sessionName,
+  sessionSuffix,
+  sessionTokens,
+  sessionUpdated,
+} from './sessions.variants';
+// @@V tpl-1 end
 
 /**
  * The agent-sessions demo dataset shared by the Table/Toolbar stories —
@@ -138,8 +149,10 @@ export const makeColumns = (
     overflow: 'truncate',
     cell: (r) => (
       <span>
-        <span className="font-semibold">{r.name.split(' · ')[0]}</span>
-        <span className="font-mono text-xs text-fg3">
+        {/* @@V tpl-1 begin */}
+        <span className={sessionName()}>{r.name.split(' · ')[0]}</span>
+        <span className={sessionSuffix()}>
+          {/* @@V tpl-1 end */}
           {' '}
           · {r.name.split(' · ')[1]}
         </span>
@@ -151,7 +164,9 @@ export const makeColumns = (
     header: 'Goal',
     overflow: goalMode,
     clampLines: 2,
-    cell: (r) => <span className="text-fg2">{r.goal}</span>,
+    // @@V tpl-1 begin
+    cell: (r) => <span className={sessionGoal()}>{r.goal}</span>,
+    // @@V tpl-1 end
   },
   {
     key: 'model',
@@ -159,7 +174,9 @@ export const makeColumns = (
     width: 116,
     sortable: true,
     cell: (r) => (
-      <span className="font-mono text-[12.5px] text-fg2">{r.model}</span>
+      // @@V tpl-1 begin
+      <span className={sessionModel()}>{r.model}</span>
+      // @@V tpl-1 end
     ),
   },
   {
@@ -169,9 +186,9 @@ export const makeColumns = (
     align: 'end',
     sortable: true,
     cell: (r) => (
-      <span className={r.tokens === 0
-        ? 'font-mono text-fg3'
-        : 'font-mono'}>
+      // @@V tpl-1 begin
+      <span className={sessionTokens({ empty: r.tokens === 0 })}>
+        {/* @@V tpl-1 end */}
         {fmtTokens(r.tokens)}
       </span>
     ),
@@ -184,7 +201,9 @@ export const makeColumns = (
     align: 'end',
     sortable: true,
     cell: (r) => (
-      <span className="font-mono text-[12.5px] text-fg3">{r.updated}m ago</span>
+      // @@V tpl-1 begin
+      <span className={sessionUpdated()}>{r.updated}m ago</span>
+      // @@V tpl-1 end
     ),
   },
 ];

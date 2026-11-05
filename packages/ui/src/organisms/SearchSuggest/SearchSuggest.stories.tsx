@@ -7,14 +7,15 @@ import { Badge } from '../../atoms/Badge';
 
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
+// @@S org-1 begin
 /**
- * The topbar's ⌘K search box with anchored suggestions (the original topbar screen
- * "Search · suggest" card; app-shell spec: Top Bar). Five kinds —
- * agent, session, task, tool, doc — each with its own accent puck + pill.
+ * A ⌘K search box with anchored suggestions. Five kinds, each with its
+ * own accent puck + pill.
  * Keyboard-driven; Enter with no match falls through to the full search
  * page. Sibling of CommandPalette, not a variant of it — see the
  * component docblock for the recorded relationship decision.
  */
+// @@S org-1 end
 // @@T org-1 begin
 const meta: Meta<typeof SearchSuggest> = {
 // @@T org-1 end
@@ -27,25 +28,30 @@ const meta: Meta<typeof SearchSuggest> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Original design SUGGESTIONS seed — one of each kind. */
+// @@S org-1 begin
+/** Sample suggestions — one of each kind. */
+// @@S org-1 end
 const SUGGESTIONS: SearchSuggestion[] = [
-  { kind: 'agent', label: 'auth-refactor', sub: 'running · agent-7d2f' },
-  { kind: 'session', label: 'settings page draft', sub: '12m ago · sam · sonnet-4-5' },
-  { kind: 'task', label: 'Add per-tool spend chart to usage page', sub: 'roadmap · high' },
+  { kind: 'agent', label: 'auth-refactor', sub: 'running · stage-7d2f' },
+  { kind: 'session', label: 'settings page draft', sub: '12m ago · sam · model-a' },
+  { kind: 'task', label: 'Add per-tool usage chart to overview page', sub: 'roadmap · high' },
   { kind: 'tool', label: 'github-issues', sub: 'MCP · connected' },
   { kind: 'doc', label: 'Composting context between runs', sub: 'docs/experiments' },
 ];
 
-/** Resting input: lens icon left, ⌘K chip right. */
+// @@S org-1 begin
+/** Resting input: search icon left, ⌘K chip right. */
+// @@S org-1 end
 export const Default: Story = {
   args: { suggestions: SUGGESTIONS },
 };
 
+// @@S org-1 begin
 /**
- * Panel open with the five kinds, each carrying its own accent (agent→
- * primary, session→accent, task→gold, tool→info, doc→green) on both the
- * icon puck and the trailing kind pill.
+ * Panel open with the five kinds, each carrying its own accent on both
+ * the icon puck and the trailing kind pill.
  */
+// @@S org-1 end
 export const Open: Story = {
   args: {
     suggestions: SUGGESTIONS,

@@ -19,6 +19,23 @@ import {
   notificationDot,
   notificationPuck,
   notificationRow,
+  // @@V org-1 begin
+  notificationBody,
+  notificationCount,
+  notificationFooter,
+  notificationHeader,
+  notificationItemTitle,
+  notificationList,
+  notificationMarkAll,
+  notificationPopover,
+  notificationRowInner,
+  notificationText,
+  notificationTime,
+  notificationTitle,
+  notificationTitleRow,
+  notificationTrigger,
+  notificationUnreadMark,
+  // @@V org-1 end
 } from './NotificationsBell.variants';
 
 export type NotificationLevel = 'ok' | 'warn' | 'err' | 'info';
@@ -86,7 +103,9 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
     <Menu defaultOpen={defaultOpen} modal={false}>
       <MenuTrigger asChild>
         <IconButton
-          className="relative"
+          // @@V org-1 begin
+          className={notificationTrigger()}
+          // @@V org-1 end
           label={unread > 0
             ? `${label} — ${unread} unread`
             : label}
@@ -98,13 +117,15 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
           )}
         />
       </MenuTrigger>
-      <MenuContent align="end" className="w-[380px] p-0">
-        <div className="flex items-center justify-between border-b border-border-soft px-4 py-3">
+      {/* @@V org-1 begin */}
+      <MenuContent align="end" className={notificationPopover()}>
+        <div className={notificationHeader()}>
           <div>
-            <div className="font-display text-[15px] font-bold text-fg1">
+            <div className={notificationTitle()}>
               Notifications
             </div>
-            <div className="font-mono text-[11px] text-fg3">
+            <div className={notificationCount()}>
+              {/* @@V org-1 end */}
               {unread} unread · {notifications.length} total
             </div>
           </div>
@@ -119,13 +140,17 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
           >
             <button
               type="button"
-              className="cursor-pointer rounded-sm border-none bg-transparent text-xs font-semibold text-accent outline-none data-[disabled]:cursor-not-allowed data-[disabled]:text-fg3 data-[highlighted]:underline"
+              // @@V org-1 begin
+              className={notificationMarkAll()}
+              // @@V org-1 end
             >
               Mark all read
             </button>
           </DropdownMenu.Item>
         </div>
-        <div className="max-h-[360px] overflow-y-auto p-1.5">
+        {/* @@V org-1 begin */}
+        <div className={notificationList()}>
+          {/* @@V org-1 end */}
           {groups.map((g) => (
             <div key={g.level}>
               <MenuLabel>{g.level}</MenuLabel>
@@ -135,40 +160,44 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
                   className={notificationRow({ unread: n.unread ?? false })}
                   onSelect={() => onOpenItem?.(n)}
                 >
-                  <span className="flex w-full items-start gap-2.5">
+                  {/* @@V org-1 begin */}
+                  <span className={notificationRowInner()}>
                     <span className={notificationPuck({ level: n.level })}>
                       <Icon name={n.icon ?? LEVEL_ICON[n.level]} size={14} />
                     </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="flex items-baseline justify-between gap-2">
-                        <span className="truncate text-[13px] font-semibold text-fg1">
+                    <span className={notificationText()}>
+                      <span className={notificationTitleRow()}>
+                        <span className={notificationItemTitle()}>
                           {n.title}
                         </span>
                         {n.time != null && (
-                          <span className="shrink-0 font-mono text-[10px] font-normal text-fg3">
+                          <span className={notificationTime()}>
                             {n.time}
                           </span>
                         )}
                       </span>
                       {n.body != null && (
-                        <span className="mt-0.5 block whitespace-normal text-xs font-normal leading-[1.45] text-fg3">
+                        <span className={notificationBody()}>
                           {n.body}
                         </span>
                       )}
                     </span>
                     {n.unread && (
                       <span
-                        className="mt-2 size-2 shrink-0 rounded-full bg-accent"
+                        className={notificationUnreadMark()}
                         aria-hidden
                       />
                     )}
                   </span>
+                  {/* @@V org-1 end */}
                 </MenuItem>
               ))}
             </div>
           ))}
         </div>
-        <div className="border-t border-border-soft p-1.5">
+        {/* @@V org-1 begin */}
+        <div className={notificationFooter()}>
+          {/* @@V org-1 end */}
           <MenuItem
             tone="accent"
             icon={<Icon name="inbox" size={15} />}

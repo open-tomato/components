@@ -9,11 +9,15 @@ import { FormattedDuration } from '../../atoms/Formatted/FormattedDuration';
 import { FormattedRelativeTime } from '../../atoms/Formatted/FormattedRelativeTime';
 import { cn, type DateInput } from '../../lib';
 
-import { spendOverTime, spendOverTimeMeta } from './CellContent.variants';
+// @@S mol-1 begin
+import { amountOverTime, amountOverTimeMeta } from './CellContent.variants';
+// @@S mol-1 end
 
-export interface SpendOverTimeProps extends HTMLAttributes<HTMLDivElement> {
-  /** Spend amount. */
-  cost: number;
+// @@S mol-1 begin
+export interface AmountOverTimeProps extends HTMLAttributes<HTMLDivElement> {
+  /** Monetary amount. */
+  amount: number;
+  // @@S mol-1 end
   /** ISO 4217 code (defaults to USD). */
   currency?: string;
   /** Elapsed run time, in seconds. */
@@ -28,30 +32,39 @@ export interface SpendOverTimeProps extends HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
+// @@S mol-1 begin
 /**
- * SpendOverTime — FormattedCurrency over a smaller greyed
+ * AmountOverTime — FormattedCurrency over a smaller greyed
  * `FormattedDuration · FormattedRelativeTime` line (spec:
- * "CellContent → spend-over-time"; rendered
- * reference: the Sessions table spend·time column — `$0.42` over
- * `7m 17s · 12:04`). The spec prose separates the two with `-`; the original
- * design renders a middot, and the middot wins as the DS-wide separator
- * (same treatment as the session-cell meta line).
+ * "CellContent → amount-over-time"; typical use: an amount·time column —
+ * `$0.42` over `7m 17s · 12:04`). The spec prose separates the two with
+ * `-`; the design renders a middot, and the middot wins as the DS-wide
+ * separator (same treatment as the entity-cell meta line).
  */
+// @@S mol-1 end
 // @@T mol-1 begin
-export const SpendOverTime: ForwardRefExoticComponent<PropsWithoutRef<SpendOverTimeProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, SpendOverTimeProps>(
+// @@S mol-1 begin
+export const AmountOverTime: ForwardRefExoticComponent<PropsWithoutRef<AmountOverTimeProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, AmountOverTimeProps>(
+// @@S mol-1 end
 // @@T mol-1 end
   (
-    { className, cost, currency = 'usd', seconds, date, now, locale, ...props },
+    // @@S mol-1 begin
+    { className, amount, currency = 'usd', seconds, date, now, locale, ...props },
+    // @@S mol-1 end
     ref,
   ) => (
-    <div ref={ref} className={cn(spendOverTime(), className)} {...props}>
+    // @@S mol-1 begin
+    <div ref={ref} className={cn(amountOverTime(), className)} {...props}>
       <FormattedCurrency
-        value={cost}
+        value={amount}
+        // @@S mol-1 end
         currency={currency}
         locale={locale}
         size="sm"
       />
-      <span className={spendOverTimeMeta()}>
+      {/* @@S mol-1 begin */}
+      <span className={amountOverTimeMeta()}>
+        {/* @@S mol-1 end */}
         <FormattedDuration seconds={seconds} />
         {' · '}
         <FormattedRelativeTime date={date} now={now} locale={locale} />
@@ -60,4 +73,6 @@ export const SpendOverTime: ForwardRefExoticComponent<PropsWithoutRef<SpendOverT
   ),
 );
 
-SpendOverTime.displayName = 'SpendOverTime';
+// @@S mol-1 begin
+AmountOverTime.displayName = 'AmountOverTime';
+// @@S mol-1 end

@@ -10,13 +10,14 @@ import {
   type VerboseOptionListProps,
 } from './VerboseOption';
 
+// @@S org-1 begin
 /**
- * Rich option rows generalized from the original design ModelOption
- * (the original AgentEditor demo; spec: the component spec): radio or checkbox
+ * Rich option rows: radio or checkbox
  * semantics, accent tone change when selected, name + badges + short
  * description (+ optional mono meta line). The model picker below is
  * just data — the component is not tied to models.
  */
+// @@S org-1 end
 // @@T org-1 begin
 const meta: Meta<VerboseOptionListProps> = {
 // @@T org-1 end
@@ -33,7 +34,9 @@ export default meta;
 type Story = StoryObj<typeof VerboseOptionList>;
 // @@T org-1 end
 
-/** Original design MODELS seed (the original Agents demo) as VerboseOption data. */
+// @@S org-1 begin
+/** Model choices as VerboseOption data. */
+// @@S org-1 end
 const MODELS: VerboseOptionData[] = [
   {
     value: 'haiku-4-5',
@@ -74,17 +77,21 @@ const RadioDemo = ({ verbose }: { verbose?: boolean }) => {
   );
 };
 
+// @@S org-1 begin
 /**
  * Spec: radio behavior — exclusive pick, selected row tints accent with
- * the filled radio glyph. Badges mix real Badges with the original mono
+ * the filled radio glyph. Badges mix real Badges with the mono
  * capability pills (plain strings).
  */
+// @@S org-1 end
 export const Radio: Story = {
   args: { options: MODELS, value: 'sonnet-4-5', onChange: () => {} },
   render: () => <RadioDemo />,
 };
 
-/** The original `verbose` flag: an extra mono meta line (cost) per option. */
+// @@S org-1 begin
+/** The `verbose` flag: an extra mono meta line (cost) per option. */
+// @@S org-1 end
 export const RadioVerbose: Story = {
   args: { options: MODELS, value: 'sonnet-4-5', onChange: () => {} },
   render: () => <RadioDemo verbose />,

@@ -42,3 +42,42 @@ export const workspaceRow: (
 );
 
 export type WorkspaceRowVariants = VariantProps<typeof workspaceRow>;
+// @@V tpl-1 begin
+
+/** The trigger's active-workspace name, truncating inside the pill. */
+export const workspaceSwitcherName: (props?: ClassProp) => string = cva(
+  'min-w-0 truncate font-semibold',
+);
+
+/** The trigger's trailing chevron. */
+export const workspaceSwitcherChevron: (props?: ClassProp) => string = cva('shrink-0 text-fg3');
+
+/** The open menu's fixed width. */
+export const workspaceSwitcherMenu: (props?: ClassProp) => string = cva('w-[300px]');
+
+/** The check mark trailing the active recent-workspace row. */
+export const workspaceRowCheck: (props?: ClassProp) => string = cva('shrink-0 text-accent');
+
+/** A recent row's body: the mark beside the name and member count. */
+export const workspaceRowBody: (props?: ClassProp) => string = cva(
+  'flex min-w-0 items-center gap-2.5',
+);
+
+/** A recent row's text column. */
+export const workspaceRowText: (props?: ClassProp) => string = cva('min-w-0');
+
+/** A recent row's workspace name. */
+export const workspaceRowName: (props?: ClassProp) => string = cva(
+  'block truncate text-[13px] font-semibold',
+);
+
+/** A recent row's mono member count under the name. */
+export const workspaceRowMembers: (props?: ClassProp) => string = cva(
+  'block font-mono text-[11px] font-normal text-fg3',
+);
+
+/** The "See all workspaces" row's trailing mono total. */
+export const workspaceSwitcherTotal: (props?: ClassProp) => string = cva(
+  'font-mono text-[11px] text-fg3',
+);
+// @@V tpl-1 end

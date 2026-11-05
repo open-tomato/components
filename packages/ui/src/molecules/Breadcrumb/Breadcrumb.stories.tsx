@@ -4,9 +4,13 @@ import { Breadcrumb } from './Breadcrumb';
 
 const PATH = [
   { key: 'ws', label: 'ripe-tomatoes' },
-  { key: 'ag', label: 'Agents' },
+  // @@S mol-2 begin
+  { key: 'ag', label: 'Projects' },
+  // @@S mol-2 end
   { key: 'bot', label: 'refactor-bot' },
-  { key: 's', label: 'Session #4128' },
+  // @@S mol-2 begin
+  { key: 's', label: 'Item #4128' },
+  // @@S mol-2 end
 ];
 
 // @@T mol-2 begin

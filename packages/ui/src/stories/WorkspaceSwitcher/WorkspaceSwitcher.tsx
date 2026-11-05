@@ -21,6 +21,17 @@ import { cn } from '../../lib';
 
 import {
   workspaceRow,
+  // @@V tpl-1 begin
+  workspaceRowBody,
+  workspaceRowCheck,
+  workspaceRowMembers,
+  workspaceRowName,
+  workspaceRowText,
+  workspaceSwitcherChevron,
+  workspaceSwitcherMenu,
+  workspaceSwitcherName,
+  workspaceSwitcherTotal,
+  // @@V tpl-1 end
   workspaceSwitcherTrigger,
 } from './WorkspaceSwitcher.variants';
 
@@ -80,10 +91,12 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
         {/* @@S ato-2 begin */}
         <Monogram name={active.name} tone={active.tone} size="sm" />
         {/* @@S ato-2 end */}
-        <span className="min-w-0 truncate font-semibold">{active.name}</span>
-        <Icon name="chevron-down" size={14} className="shrink-0 text-fg3" />
+        {/* @@V tpl-1 begin */}
+        <span className={workspaceSwitcherName()}>{active.name}</span>
+        <Icon name="chevron-down" size={14} className={workspaceSwitcherChevron()} />
       </MenuTrigger>
-      <MenuContent className="w-[300px]">
+      <MenuContent className={workspaceSwitcherMenu()}>
+        {/* @@V tpl-1 end */}
         <MenuLabel>Recent workspaces</MenuLabel>
         {recent.map((w) => (
           <MenuItem
@@ -92,20 +105,24 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
             onSelect={() => onSwitch?.(w.id)}
             trailing={
               w.id === activeId
-                ? <Icon name="check" size={14} className="shrink-0 text-accent" />
+                // @@V tpl-1 begin
+                ? <Icon name="check" size={14} className={workspaceRowCheck()} />
+                // @@V tpl-1 end
                 : undefined
             }
           >
-            <span className="flex min-w-0 items-center gap-2.5">
+            {/* @@V tpl-1 begin */}
+            <span className={workspaceRowBody()}>
               {/* @@S ato-2 begin */}
               <Monogram name={w.name} tone={w.tone} size="sm" />
               {/* @@S ato-2 end */}
-              <span className="min-w-0">
-                <span className="block truncate text-[13px] font-semibold">
+              <span className={workspaceRowText()}>
+                <span className={workspaceRowName()}>
                   {w.name}
                 </span>
                 {w.members != null && (
-                  <span className="block font-mono text-[11px] font-normal text-fg3">
+                  <span className={workspaceRowMembers()}>
+                    {/* @@V tpl-1 end */}
                     {w.members} members
                   </span>
                 )}
@@ -117,7 +134,9 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
         <MenuItem
           icon={<Icon name="layers" size={15} />}
           trailing={(
-            <span className="font-mono text-[11px] text-fg3">
+            // @@V tpl-1 begin
+            <span className={workspaceSwitcherTotal()}>
+              {/* @@V tpl-1 end */}
               {workspaces.length} total
             </span>
           )}

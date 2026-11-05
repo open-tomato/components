@@ -3,17 +3,29 @@ import type { ReactNode } from 'react';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
+// @@V org-1 begin
+import {
+  formField,
+  formFieldError,
+  formFieldHint,
+  formFieldLabel,
+  formFieldLabelRow,
+  formFieldRequired,
+} from './FormKit.variants';
+// @@V org-1 end
+
 export interface FormFieldProps {
   label?: ReactNode;
   /** Right-aligned companion on the label row (auth's "Forgot?" link). */
   labelEnd?: ReactNode;
   /** Shown under the control when there's no error. */
   hint?: ReactNode;
+  // @@S org-1 begin
   /**
-   * 'above' renders the hint between label and control — the auth screens'
-   * layout (the original Shared screen Field). Default
-   * 'below' keeps the original form-kit chapter's placement.
+   * 'above' renders the hint between label and control, as auth-style
+   * forms do. Default 'below' puts the hint under the control.
    */
+  // @@S org-1 end
   hintPlacement?: 'below' | 'above';
   /** Replaces the below-hint and turns the message danger-toned. */
   error?: ReactNode;
@@ -23,12 +35,14 @@ export interface FormFieldProps {
   children: ReactNode;
 }
 
+// @@S org-1 begin
 /**
  * The shared envelope — Field is to inputs what Touchable is to buttons:
  * it owns labelling, the hint/error slot and the controlled-value posture,
  * so no control re-implements them. Swap the control in the middle and
- * everything else comes along unchanged (the original form-controls demo).
+ * everything else comes along unchanged.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const FormField: { (props: FormFieldProps): import('react').JSX.Element; displayName: string } = ({
 // @@T org-1 end
@@ -42,35 +56,37 @@ export const FormField: { (props: FormFieldProps): import('react').JSX.Element; 
   className,
   children,
 }: FormFieldProps) => (
-  <div className={cn('flex flex-col gap-[7px]', className)}>
+  // @@V org-1 begin
+  <div className={cn(formField(), className)}>
     {(label != null || labelEnd != null) && (
-      <span className="flex items-center justify-between gap-2">
+      <span className={formFieldLabelRow()}>
         <label
           htmlFor={htmlFor}
-          className="inline-flex items-center gap-1 text-[13px] font-semibold text-fg1"
+          className={formFieldLabel()}
         >
           {label}
-          {required && <span className="text-danger">*</span>}
+          {required && <span className={formFieldRequired()}>*</span>}
         </label>
         {labelEnd}
       </span>
     )}
     {hintPlacement === 'above' && hint != null && (
-      <span className="-mt-0.5 text-xs leading-normal text-fg3">{hint}</span>
+      <span className={formFieldHint({ placement: 'above' })}>{hint}</span>
     )}
     {children}
     {error != null
       ? (
-        <span className="inline-flex items-center gap-[5px] text-xs text-danger">
+        <span className={formFieldError()}>
           <StrokeIcon name="alertTriangle" size={13} />
           {error}
         </span>
       )
       : (
         hintPlacement === 'below' &&
-      hint != null && <span className="text-xs text-fg3">{hint}</span>
+      hint != null && <span className={formFieldHint({ placement: 'below' })}>{hint}</span>
       )}
   </div>
+  // @@V org-1 end
 );
 
 FormField.displayName = 'FormField';

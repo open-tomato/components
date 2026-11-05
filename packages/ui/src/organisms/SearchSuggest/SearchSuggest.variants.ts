@@ -1,13 +1,17 @@
+// @@V org-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@V org-1 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S org-1 begin
 /**
- * SearchSuggest — the topbar's ⌘K search box with an anchored suggestion
- * list. From the original TopbarLive screen SearchSuggest
- * (the original topbar screen "Search · suggest" card); app-shell spec: Top Bar.
+ * SearchSuggest — a ⌘K search box with an anchored suggestion list.
  *
- * Five suggestion kinds, each with its own accent (original kindColor map):
- * agent→primary, session→accent, task→gold, tool→info, doc→green.
+ * Five suggestion kinds, each with its own accent, in order: primary,
+ * accent, gold, info, green.
  */
+// @@S org-1 end
 // @@T org-1 begin
 export const searchSuggestBox: (props?: ({ open?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -37,7 +41,9 @@ export const searchSuggestPanel: (props?: import('class-variance-authority/types
   'rounded-lg border border-border-soft bg-surface-2 shadow-lg',
 ]);
 
-/** A suggestion row; active mirrors the original hover/keyboard sink. */
+// @@S org-1 begin
+/** A suggestion row; active marks the hovered or keyboard-selected row. */
+// @@S org-1 end
 // @@T org-1 begin
 export const searchSuggestRow: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T org-1 end
@@ -96,5 +102,44 @@ export const searchSuggestKindPill: (props?: ({ kind?: 'agent' | 'session' | 'ta
     defaultVariants: { kind: 'agent' },
   },
 );
+
+// @@V org-1 begin
+/* ── Ad-hoc classes moved in by stream V ────────── */
+
+/** The root wrapper — anchors the suggestion panel. */
+export const searchSuggestRoot: (props?: ClassProp | undefined) => string = cva('relative w-[340px]');
+
+// @@S org-1 begin
+/** The leading search icon. */
+// @@S org-1 end
+export const searchSuggestLens: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
+
+/** The combobox input inside the box. */
+export const searchSuggestInput: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1 border-none bg-transparent font-body text-[13px] text-fg1 outline-none placeholder:text-fg3');
+
+/** The panel header: match count + keyboard hints. */
+export const searchSuggestHeader: (props?: ClassProp | undefined) => string = cva('flex justify-between px-3 pb-1.5 pt-2 font-mono text-[10px] uppercase tracking-[0.08em] text-fg3');
+
+/** The no-match message. */
+export const searchSuggestEmpty: (props?: ClassProp | undefined) => string = cva('px-3.5 py-4 text-[13px] text-fg3');
+
+/** A row's text column. */
+export const searchSuggestText: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1');
+
+/** A row's label. */
+export const searchSuggestLabel: (props?: ClassProp | undefined) => string = cva('block truncate text-[13px] font-semibold');
+
+/** A row's mono context line. */
+export const searchSuggestSub: (props?: ClassProp | undefined) => string = cva('block font-mono text-[11px] text-fg3');
+
+/** The panel footer holding the search-all row. */
+export const searchSuggestFooter: (props?: ClassProp | undefined) => string = cva('border-t border-border-soft p-1.5');
+
+/** The explicit search-all row. */
+export const searchSuggestAll: (props?: ClassProp | undefined) => string = cva('flex w-full cursor-pointer items-center gap-2.5 rounded-md border-none bg-transparent px-2.5 py-2 text-left text-[13px] font-medium text-accent hover:bg-surface-sunk');
+
+/** The search-all row's query label. */
+export const searchSuggestAllLabel: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate');
+// @@V org-1 end
 
 export type SearchSuggestKindVariants = VariantProps<typeof searchSuggestPuck>;

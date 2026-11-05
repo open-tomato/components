@@ -4,6 +4,9 @@ import { Avatar } from '../../atoms/Avatar';
 import { cn } from '../../lib';
 
 import {
+  // @@V mol-3 begin
+  entityCellStack,
+  // @@V mol-3 end
   entityTitle,
   entityTitleName,
   entityTitleSub,
@@ -29,7 +32,9 @@ export const AgentTitle: import('react').ForwardRefExoticComponent<
   ({ className, name, subtitle, ...props }, ref) => (
     <div ref={ref} className={cn(entityTitle(), className)} {...props}>
       <Avatar name={name} size="md" shape="rounded" status="none" />
-      <div className="flex min-w-0 flex-col gap-[3px]">
+      {/* @@V mol-3 begin */}
+      <div className={entityCellStack()}>
+        {/* @@V mol-3 end */}
         <span className={entityTitleName()}>{name}</span>
         {subtitle != null && (
           <span className={entityTitleSub()}>{subtitle}</span>

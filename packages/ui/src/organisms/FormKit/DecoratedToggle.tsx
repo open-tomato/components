@@ -3,22 +3,35 @@ import type { ReactNode } from 'react';
 import { switchThumb, switchTrack } from '../../atoms/Switch/Switch.variants';
 import { cn } from '../../lib';
 
-import { decoratedToggle, decoratedToggleHeader } from './FormKit.variants';
+// @@V org-1 begin
+import {
+  decoratedToggle,
+  decoratedToggleDecoration,
+  decoratedToggleDescription,
+  decoratedToggleHeader,
+  decoratedToggleHeaderDot,
+  decoratedToggleList,
+  decoratedToggleSwitch,
+  decoratedToggleText,
+  decoratedToggleTitle,
+  decoratedToggleTitleRow,
+} from './FormKit.variants';
+// @@V org-1 end
 
+// @@S org-1 begin
 /**
- * DecoratedToggle / DecoratedToggleList — generalized from the original design
- * ToolPicker (the original AgentEditor screen; spec:
- * "ToolPicker"): bordered rows of decoration +
+ * DecoratedToggle / DecoratedToggleList: bordered rows of decoration +
  * title/description + switch that tint accent when on, grouped under a
- * mono header carrying an x/y-on indicator. Not tied to the tool use
- * case — the tools-page spec reuses it for auto-start and skill toggles.
+ * mono header carrying an x/y-on indicator. Not tied to one use case:
+ * the same rows serve option pickers, auto-start flags and skill toggles.
  *
- * A11y note: the original row is a label wrapping a separate Switch (two
+ * A11y note: the common pattern is a label wrapping a separate Switch (two
  * click targets, double-fire risk). Here the ROW ITSELF is the switch
  * control (`role="switch"`); the Switch atom's track/thumb cvas render
  * decoratively inside it, so there is exactly one focusable control per
  * row and the whole box is its hit area.
  */
+// @@S org-1 end
 
 export interface DecoratedToggleProps {
   /** Leading decoration — icon, avatar… — vertically centered. */
@@ -53,34 +66,31 @@ export const DecoratedToggle: { (props: DecoratedToggleProps): import('react').J
     onClick={() => onChange?.(!checked)}
     className={cn(decoratedToggle({ checked }), className)}
   >
+    {/* @@V org-1 begin */}
     {decoration != null && (
       <span
-        className={cn(
-          'shrink-0',
-          checked
-            ? 'text-accent'
-            : 'text-fg2',
-        )}
+        className={decoratedToggleDecoration({ checked })}
         aria-hidden
       >
         {decoration}
       </span>
     )}
-    <span className="min-w-0 flex-1">
-      <span className="flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[13px] font-semibold text-fg1">
+    <span className={decoratedToggleText()}>
+      <span className={decoratedToggleTitleRow()}>
+        <span className={decoratedToggleTitle()}>
           {title}
         </span>
         {meta}
       </span>
       {description != null && (
-        <span className="block text-xs font-normal text-fg3">
+        <span className={decoratedToggleDescription()}>
           {description}
         </span>
       )}
     </span>
     <span
-      className={cn(switchTrack({ size: 'sm' }), 'shrink-0')}
+      className={cn(switchTrack({ size: 'sm' }), decoratedToggleSwitch())}
+      // @@V org-1 end
       data-on={checked
         ? ''
         : undefined}
@@ -132,10 +142,14 @@ export const DecoratedToggleList: { (props: DecoratedToggleListProps): import('r
     <div className={className}>
       <div className={decoratedToggleHeader()}>
         <span>{title}</span>
-        <span className="text-fg2">·</span>
+        {/* @@V org-1 begin */}
+        <span className={decoratedToggleHeaderDot()}>·</span>
+        {/* @@V org-1 end */}
         <span>{on}/{options.length}</span>
       </div>
-      <div className="flex flex-col gap-1.5" role="group">
+      {/* @@V org-1 begin */}
+      <div className={decoratedToggleList()} role="group">
+        {/* @@V org-1 end */}
         {options.map((o) => (
           <DecoratedToggle
             key={o.id}

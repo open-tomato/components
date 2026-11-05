@@ -57,7 +57,9 @@ type Story = StoryObj<typeof FormattedValue>;
  * the contract self-describing tables and generated cards format through.
  */
 export const Default: Story = {
-  args: { type: 'number', value: 8240, unit: 'tokens', locale: LOCALE },
+  // @@S ato-3 begin
+  args: { type: 'number', value: 8240, unit: 'units', locale: LOCALE },
+  // @@S ato-3 end
 };
 
 /** Spec: value + small greyed unit suffix; `short` compacts (default). */
@@ -66,10 +68,14 @@ export const HumanReadable: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="short (default)">
-        <HumanReadableValue value={8240} unit="tokens" locale={LOCALE} />
+        {/* @@S ato-3 begin */}
+        <HumanReadableValue value={8240} unit="units" locale={LOCALE} />
+        {/* @@S ato-3 end */}
       </Row>
       <Row label="short=false">
-        <HumanReadableValue value={8240} unit="tokens" short={false} locale={LOCALE} />
+        {/* @@S ato-3 begin */}
+        <HumanReadableValue value={8240} unit="units" short={false} locale={LOCALE} />
+        {/* @@S ato-3 end */}
       </Row>
       <Row label="no unit">
         <HumanReadableValue value={128} locale={LOCALE} />
@@ -249,7 +255,9 @@ export const Dispatch: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="type=number">
-        <FormattedValue type="number" value={8240} unit="tokens" locale={LOCALE} />
+        {/* @@S ato-3 begin */}
+        <FormattedValue type="number" value={8240} unit="units" locale={LOCALE} />
+        {/* @@S ato-3 end */}
       </Row>
       <Row label="type=currency">
         <FormattedValue type="currency" value={12.4} currency="usd" locale={LOCALE} />

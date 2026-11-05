@@ -6,6 +6,13 @@ import { StrokeIcon } from '../../lib/icons';
 
 import {
   checkboxBox,
+  // @@V org-1 begin
+  checkboxHint,
+  checkboxLabel,
+  checkboxMark,
+  checkboxRow,
+  checkboxText,
+  // @@V org-1 end
   checkGroup,
   type CheckGroupVariants,
 } from './FormKit.variants';
@@ -32,25 +39,29 @@ export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; di
     role="checkbox"
     aria-checked={checked}
     onClick={() => onChange(!checked)}
+    // @@V org-1 begin
     className={cn(
       touchable({ rounded: 'sm', noBrightness: false }),
-      'w-full items-start gap-2.5 border-none bg-transparent p-0.5 text-left',
+      checkboxRow(),
       className,
     )}
+    // @@V org-1 end
   >
+    {/* @@V org-1 begin */}
     <span className={checkboxBox({ checked })}>
       {checked && (
-        <span className="text-on-primary">
+        <span className={checkboxMark()}>
           <StrokeIcon name="check" size={13} />
         </span>
       )}
     </span>
-    <span className="min-w-0">
-      <span className="block text-[13.5px] font-medium text-fg1">{label}</span>
+    <span className={checkboxText()}>
+      <span className={checkboxLabel()}>{label}</span>
       {hint != null && (
-        <span className="mt-px block text-xs text-fg3">{hint}</span>
+        <span className={checkboxHint()}>{hint}</span>
       )}
     </span>
+    {/* @@V org-1 end */}
   </button>
 );
 

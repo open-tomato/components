@@ -11,10 +11,32 @@ import { Overlay } from '../../atoms/Overlay';
 import { StrokeIcon } from '../../lib/icons';
 
 import {
+  // @@V org-2 begin
+  paletteCount,
+  paletteEmpty,
+  paletteEmptyHint,
+  paletteEmptyIcon,
+  paletteEmptyTitle,
+  paletteFooter,
+  paletteGroup,
+  paletteGroupLabel,
+  paletteIconSlot,
+  // @@V org-2 end
   paletteItem,
   paletteItemIcon,
+  // @@V org-2 begin
+  paletteItemLabel,
+  // @@V org-2 end
   paletteKbd,
+  // @@V org-2 begin
+  paletteList,
+  paletteOverlay,
+  // @@V org-2 end
   palettePanel,
+  // @@V org-2 begin
+  paletteSearchInput,
+  paletteSearchRow,
+  // @@V org-2 end
 } from './CommandPalette.variants';
 import { KeyHint } from './KeyHint';
 
@@ -148,8 +170,16 @@ const PalettePanel = ({
   return (
     <div className={palettePanel()}>
       {/* search row — the form kit's field, lightly dressed */}
-      <div className="flex shrink-0 items-center gap-[11px] border-b border-border-soft px-[18px] py-[15px]">
-        <span className="shrink-0 text-fg3">
+      <div
+        // @@V org-2 begin
+        className={paletteSearchRow()}
+        // @@V org-2 end
+      >
+        <span
+          // @@V org-2 begin
+          className={paletteIconSlot()}
+          // @@V org-2 end
+        >
           <StrokeIcon name="search" size={19} />
         </span>
         <input
@@ -161,31 +191,63 @@ const PalettePanel = ({
           }}
           onKeyDown={onKey}
           placeholder={placeholder}
-          className="flex-1 border-none bg-transparent font-body text-base text-fg1 outline-none placeholder:text-fg3"
+          // @@V org-2 begin
+          className={paletteSearchInput()}
+          // @@V org-2 end
         />
         <kbd className={paletteKbd()}>esc</kbd>
       </div>
 
       {/* results — the Menu behavior, keyboard-driven */}
-      <div ref={listRef} className="flex-1 overflow-y-auto p-[7px]">
+      <div
+        ref={listRef}
+        // @@V org-2 begin
+        className={paletteList()}
+        // @@V org-2 end
+      >
         {flat.length === 0
           ? (
-            <div className="flex flex-col items-center gap-2 px-5 py-11 text-center">
-              <span className="text-fg3">
+            <div
+              // @@V org-2 begin
+              className={paletteEmpty()}
+              // @@V org-2 end
+            >
+              <span
+                // @@V org-2 begin
+                className={paletteEmptyIcon()}
+                // @@V org-2 end
+              >
                 <StrokeIcon name="search" size={26} />
               </span>
-              <div className="text-sm font-semibold text-fg1">
+              <div
+                // @@V org-2 begin
+                className={paletteEmptyTitle()}
+                // @@V org-2 end
+              >
                 No commands for &ldquo;{q}&rdquo;
               </div>
-              <div className="text-[12.5px] text-fg3">
+              <div
+                // @@V org-2 begin
+                className={paletteEmptyHint()}
+                // @@V org-2 end
+              >
                 Try a page name, an action, or an agent.
               </div>
             </div>
           )
           : (
             groups.map((g) => (
-              <div key={g.group} className="mb-1">
-                <div className="px-2.5 pb-1 pt-[7px] font-mono text-[10.5px] uppercase tracking-[0.08em] text-fg3">
+              <div
+                key={g.group}
+                // @@V org-2 begin
+                className={paletteGroup()}
+                // @@V org-2 end
+              >
+                <div
+                  // @@V org-2 begin
+                  className={paletteGroupLabel()}
+                  // @@V org-2 end
+                >
                   {g.group}
                 </div>
                 {g.items.map((c) => {
@@ -204,7 +266,11 @@ const PalettePanel = ({
                       <span className={paletteItemIcon({ active: on })}>
                         {c.icon}
                       </span>
-                      <span className="min-w-0 flex-1 truncate text-sm font-medium text-fg1">
+                      <span
+                        // @@V org-2 begin
+                        className={paletteItemLabel()}
+                        // @@V org-2 end
+                      >
                         {c.label}
                       </span>
                       {c.hint != null && (
@@ -213,7 +279,11 @@ const PalettePanel = ({
                         </span>
                       )}
                       {on && (
-                        <span className="shrink-0 text-fg3">
+                        <span
+                          // @@V org-2 begin
+                          className={paletteIconSlot()}
+                          // @@V org-2 end
+                        >
                           <StrokeIcon name="cornerDownRight" size={15} />
                         </span>
                       )}
@@ -226,11 +296,19 @@ const PalettePanel = ({
       </div>
 
       {/* footer key hints */}
-      <div className="flex shrink-0 items-center gap-4 border-t border-border-soft bg-surface-sunk px-4 py-[9px] text-[11.5px] text-fg3">
+      <div
+        // @@V org-2 begin
+        className={paletteFooter()}
+        // @@V org-2 end
+      >
         <KeyHint k="↑↓" label="navigate" />
         <KeyHint k="↵" label="run" />
         <KeyHint k="esc" label="close" />
-        <span className="ml-auto font-mono">
+        <span
+          // @@V org-2 begin
+          className={paletteCount()}
+          // @@V org-2 end
+        >
           {flat.length} result{flat.length === 1
             ? ''
             : 's'}
@@ -256,7 +334,9 @@ export const CommandPalette: { (p: CommandPaletteProps): import('react').JSX.Ele
     backdrop="blur"
     dismiss="both"
     label="Command palette"
-    className="items-start"
+    // @@V org-2 begin
+    className={paletteOverlay()}
+    // @@V org-2 end
   >
     <PalettePanel
       onClose={onClose}

@@ -4,17 +4,28 @@ import type { FC } from 'react';
 
 import { TomatoMark } from '../../internal/TomatoMark';
 
+// @@V tpl-1 begin
+import {
+  brandLockup,
+  brandLockupWordmark,
+  brandLockupWordmarkOpen,
+  brandLockupWordmarkTomato,
+} from './AuthShell.variants';
+// @@V tpl-1 end
+
 /** Mark + wordmark, linking out of the auth flow. Wordmark colors are theme-aware tokens. */
 // @@T tpl-1 begin
 export const BrandLockup: FC<{ href?: string }> = ({ href = '#' }: { href?: string }) => (
 // @@T tpl-1 end
-  <a href={href} className="mb-6 inline-flex items-center gap-2.5 text-inherit !no-underline">
+  // @@V tpl-1 begin
+  <a href={href} className={brandLockup()}>
     <TomatoMark size={28} />
-    <span className="font-display text-[19px] font-extrabold tracking-[-0.02em]">
-      <span className="text-wordmark-open">open</span>{' '}
-      <span className="text-wordmark-tomato">tomato</span>
+    <span className={brandLockupWordmark()}>
+      <span className={brandLockupWordmarkOpen()}>open</span>{' '}
+      <span className={brandLockupWordmarkTomato()}>tomato</span>
     </span>
   </a>
+  // @@V tpl-1 end
 );
 
 BrandLockup.displayName = 'BrandLockup';

@@ -22,7 +22,9 @@ type Story = StoryObj<typeof meta>;
 
 /** Defaults: success on dark chrome, dismissible. */
 export const Default: Story = {
-  args: { children: 'Agent created', onClose: () => {} },
+  // @@S mol-2 begin
+  args: { children: 'Item created', onClose: () => {} },
+  // @@S mol-2 end
 };
 
 export const Warning: Story = {
@@ -34,5 +36,7 @@ export const Danger: Story = {
 };
 
 export const Info: Story = {
-  args: { tone: 'info', children: 'Session queued' },
+  // @@S mol-2 begin
+  args: { tone: 'info', children: 'Item queued' },
+  // @@S mol-2 end
 };
