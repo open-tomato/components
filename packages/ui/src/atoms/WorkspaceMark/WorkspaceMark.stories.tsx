@@ -3,12 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { WorkspaceMark } from './WorkspaceMark';
 
 /** Workspace identity block — initials on a brand fill, squarer than Avatar. */
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof WorkspaceMark> = {
+// @@T ato-2 end
   title: 'Atoms/WorkspaceMark',
   component: WorkspaceMark,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof WorkspaceMark>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

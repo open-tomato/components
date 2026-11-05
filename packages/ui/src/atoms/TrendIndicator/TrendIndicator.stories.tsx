@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { TrendIndicator } from './TrendIndicator';
 
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof TrendIndicator> = {
+// @@T ato-2 end
   title: 'Atoms/TrendIndicator',
   component: TrendIndicator,
   parameters: { layout: 'centered' },
@@ -12,7 +14,7 @@ const meta = {
     showValue: { control: 'boolean' },
     showZero: { control: 'boolean' },
   },
-} satisfies Meta<typeof TrendIndicator>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

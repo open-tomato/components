@@ -8,7 +8,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * The off state carries its own fill/border (surface-sunk +
  * border-strong).
  */
-export const switchTrack = cva(
+// @@T ato-2 begin
+export const switchTrack:
+(props?: { size?: 'sm' | 'md' | null; tone?: 'accent' | 'primary' | null } & import('class-variance-authority/types').ClassProp) => string = cva(
+// @@T ato-2 end
   [
     'group relative inline-flex items-center rounded-full transition-colors',
     'border shadow-inset data-[on]:shadow-none',
@@ -37,7 +40,10 @@ export const switchTrack = cva(
  * The knob (demo: track height minus 4px, surface-2, sm shadow, slides
  * `width − knob − insets` when on).
  */
-export const switchThumb = cva(
+// @@T ato-2 begin
+export const switchThumb:
+(props?: { size?: 'sm' | 'md' | null } & import('class-variance-authority/types').ClassProp) => string = cva(
+// @@T ato-2 end
   'pointer-events-none absolute left-[1px] top-1/2 -translate-y-1/2 rounded-full bg-surface-2 shadow-sm transition-[left] duration-150',
   {
     variants: {

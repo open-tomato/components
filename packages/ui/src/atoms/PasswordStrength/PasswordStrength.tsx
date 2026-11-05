@@ -13,12 +13,17 @@ export interface PasswordStrengthProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
 }
 
-export const PasswordStrength = ({
+// @@T ato-2 begin
+export const PasswordStrength: {
+  (props: PasswordStrengthProps): import('react').JSX.Element;
+  displayName: string;
+} = ({
+// @@T ato-2 end
   className,
   score,
   label,
   ...props
-}: PasswordStrengthProps) => (
+}) => (
   <div className={cn('flex items-center gap-1.5', className)} {...props}>
     {[1, 2, 3, 4, 5].map((i) => (
       <span

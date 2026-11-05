@@ -11,12 +11,17 @@ export interface SortableRowProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /** A plain drag-handle row — the convenient default renderItem chrome. */
-export const SortableRow = ({
+// @@T ato-2 begin
+export const SortableRow: {
+  (props: SortableRowProps): import('react').JSX.Element;
+  displayName: string;
+} = ({
+// @@T ato-2 end
   className,
   trailing,
   children,
   ...props
-}: SortableRowProps) => (
+}) => (
   <div className={cn(sortableRow(), className)} {...props}>
     <span className="shrink-0 cursor-grab text-fg3">
       <StrokeIcon name="gripVertical" size={16} />

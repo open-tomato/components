@@ -17,7 +17,10 @@ export interface SwitchProps
   onChange?: (checked: boolean) => void;
 }
 
-export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
+// @@T ato-2 begin
+export const Switch:
+import('react').ForwardRefExoticComponent<SwitchProps & import('react').RefAttributes<HTMLButtonElement>> = forwardRef<HTMLButtonElement, SwitchProps>(
+// @@T ato-2 end
   ({ className, size, tone, checked = false, onChange, ...props }, ref) => (
     <button
       ref={ref}

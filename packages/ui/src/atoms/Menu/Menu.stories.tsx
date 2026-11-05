@@ -43,7 +43,9 @@ const DemoItems = () => (
   </>
 );
 
-const meta = {
+// @@T ato-2 begin
+const meta: Meta<typeof MenuContent> = {
+// @@T ato-2 end
   title: 'Atoms/Menu',
   component: MenuContent,
   parameters: { layout: 'centered' },
@@ -66,10 +68,12 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof MenuContent>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-2 begin
+type Story = StoryObj<typeof MenuContent>;
+// @@T ato-2 end
 
 /** Defaults: md width, start-aligned under its trigger. */
 export const Default: Story = {

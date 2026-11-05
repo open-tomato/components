@@ -6,7 +6,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * The auto column tracks minmax(180px,1fr).
  */
-export const grid = cva('grid', {
+// @@T ato-2 begin
+export const grid:
+(props?: ({ cols?: 'auto' | '1' | '2' | '3' | '4' | null; gap?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('grid', {
+// @@T ato-2 end
   variants: {
     cols: {
       '1': 'grid-cols-1',
