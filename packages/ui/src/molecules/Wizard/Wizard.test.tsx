@@ -11,7 +11,9 @@ const steps: WizardStep<Answers>[] = [
     title: 'Name it',
     short: 'Name',
     blurb: 'Pick a name',
-    validate: (a) => (a.name ? null : 'Name required'),
+    validate: (a) => (a.name
+      ? null
+      : 'Name required'),
     render: ({ answers, set, error }) => (
       <div>
         <input aria-label="name" value={answers.name} onChange={(e) => set('name', e.target.value)} />
