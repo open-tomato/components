@@ -8,7 +8,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * Five suggestion kinds, each with its own accent (original kindColor map):
  * agent→primary, session→accent, task→gold, tool→info, doc→green.
  */
-export const searchSuggestBox = cva(
+// @@T org-1 begin
+export const searchSuggestBox: (props?: ({ open?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex items-center gap-2 rounded-md border px-3 py-1.5',
     'transition-colors',
@@ -28,13 +30,17 @@ export const searchSuggestBox = cva(
 );
 
 /** The anchored suggestion panel. */
-export const searchSuggestPanel = cva([
+// @@T org-1 begin
+export const searchSuggestPanel: (props?: import('class-variance-authority/types').ClassProp) => string = cva([
+// @@T org-1 end
   'absolute inset-x-0 top-[calc(100%+6px)] z-popover overflow-hidden',
   'rounded-lg border border-border-soft bg-surface-2 shadow-lg',
 ]);
 
 /** A suggestion row; active mirrors the original hover/keyboard sink. */
-export const searchSuggestRow = cva(
+// @@T org-1 begin
+export const searchSuggestRow: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'flex w-full cursor-pointer items-center gap-3 px-3 py-[9px]',
     'border-none text-left text-fg1',
@@ -51,7 +57,9 @@ export const searchSuggestRow = cva(
 );
 
 /** The 28px leading puck, tinted by the suggestion's kind. */
-export const searchSuggestPuck = cva(
+// @@T org-1 begin
+export const searchSuggestPuck: (props?: ({ kind?: 'agent' | 'session' | 'task' | 'tool' | 'doc' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   'flex size-7 shrink-0 items-center justify-center rounded-sm',
   {
     variants: {
@@ -68,7 +76,9 @@ export const searchSuggestPuck = cva(
 );
 
 /** The trailing kind pill — same accent as the puck, mono uppercase. */
-export const searchSuggestKindPill = cva(
+// @@T org-1 begin
+export const searchSuggestKindPill: (props?: ({ kind?: 'agent' | 'session' | 'task' | 'tool' | 'doc' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T org-1 end
   [
     'rounded-full px-[7px] py-0.5 font-mono text-[10px] font-semibold',
     'uppercase tracking-[0.08em]',

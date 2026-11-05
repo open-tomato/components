@@ -15,12 +15,14 @@ import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
  * page. Sibling of CommandPalette, not a variant of it — see the
  * component docblock for the recorded relationship decision.
  */
-const meta = {
+// @@T org-1 begin
+const meta: Meta<typeof SearchSuggest> = {
+// @@T org-1 end
   title: 'Organisms/SearchSuggest',
   component: SearchSuggest,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof SearchSuggest>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
