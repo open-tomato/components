@@ -7,19 +7,19 @@ import { SmallStatCard } from './SmallStatCard';
 
 describe('SmallStatCard', () => {
   it('formats the value and renders the goal suffix', () => {
-    render(<SmallStatCard title="tokens used" value={1_070_000} goal={4_000_000} locale="en-US" />);
-    expect(screen.getByText('tokens used')).toBeTruthy();
+    render(<SmallStatCard title="units used" value={1_070_000} goal={4_000_000} locale="en-US" />);
+    expect(screen.getByText('units used')).toBeTruthy();
     expect(screen.getByText('1.1M')).toBeTruthy();
     expect(screen.getByText('/ 4M')).toBeTruthy();
   });
 
   it('renders goal before unit', () => {
-    render(<SmallStatCard title="budget" value={5} goal={10} unit="tokens" locale="en-US" />);
-    expect(screen.getByText('/ 10 tokens')).toBeTruthy();
+    render(<SmallStatCard title="budget" value={5} goal={10} unit="units" locale="en-US" />);
+    expect(screen.getByText('/ 10 units')).toBeTruthy();
   });
 
   it('renders a signed trend', () => {
-    render(<SmallStatCard title="sessions" value={247} trend={0.12} locale="en-US" />);
+    render(<SmallStatCard title="items" value={247} trend={0.12} locale="en-US" />);
     expect(screen.getByText('247')).toBeTruthy();
     expect(screen.getByText(/12%/)).toBeTruthy();
   });
@@ -42,13 +42,13 @@ describe('SmallStatCard', () => {
       <SmallStatCard
         title="live now"
         value={3}
-        unit="sessions"
+        unit="items"
         decoration={<span>deco</span>}
         locale="en-US"
       />,
     );
     expect(screen.getByText('deco')).toBeTruthy();
-    expect(screen.getByText('sessions')).toBeTruthy();
+    expect(screen.getByText('items')).toBeTruthy();
   });
 
   it('renders a node value verbatim', () => {
@@ -62,10 +62,10 @@ describe('SmallStatCard', () => {
         title="errors"
         value={4}
         locale="en-US"
-        footer={<a href="#sessions">View all sessions</a>}
+        footer={<a href="#items">View all items</a>}
       />,
     );
-    expect(screen.getByRole('link', { name: 'View all sessions' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'View all items' })).toBeTruthy();
     render(
       <SmallStatCard
         title="budget"
