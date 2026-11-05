@@ -89,7 +89,10 @@ export interface IconProps
  * fallback is a same-size placeholder, so nothing shifts while the chunk
  * arrives, and the caller-facing API stays fully synchronous.
  */
-export const Icon = forwardRef<HTMLSpanElement, IconProps>(
+// @@T ato-2 begin
+export const Icon:
+import('react').ForwardRefExoticComponent<IconProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, IconProps>(
+// @@T ato-2 end
   (
     {
       className,

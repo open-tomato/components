@@ -5,7 +5,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * The wrapper owns the semantic chrome: an accent (foreground tone) and an
  * optional soft background tile behind the glyph.
  */
-export const icon = cva('inline-flex shrink-0 items-center justify-center', {
+// @@T ato-2 begin
+export const icon:
+(props?: ({ accent?: 'accent' | 'info' | 'success' | 'danger' | 'muted' | 'inherit' | 'warning' | null; bg?: 'accent' | 'info' | 'success' | 'danger' | 'none' | 'warning' | 'soft' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('inline-flex shrink-0 items-center justify-center', {
+// @@T ato-2 end
   variants: {
     accent: {
       inherit: 'text-current',

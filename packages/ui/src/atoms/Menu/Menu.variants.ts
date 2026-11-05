@@ -9,7 +9,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * and a fixed Content inside it would detach from the anchor. `z-popover`
  * stays on the content (the wrapper carries no z-index of its own).
  */
-export const menu = cva(
+// @@T ato-2 begin
+export const menu:
+(props?: ({ align?: 'start' | 'end' | null; size?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-2 end
   [
     'z-popover flex flex-col gap-px p-1.5 rounded-md',
     'bg-surface-1 border border-border-soft shadow-lg overflow-y-auto',
@@ -34,7 +37,10 @@ export const menu = cva(
 );
 
 /** Item chrome (incl. hover/focus treatment). */
-export const menuItem = cva(
+// @@T ato-2 begin
+export const menuItem:
+(props?: ({ tone?: 'accent' | 'danger' | 'default' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+// @@T ato-2 end
   [
     'flex w-full items-center gap-[9px] px-2.5 py-2 text-left',
     'rounded-sm text-[13.5px] font-medium cursor-pointer select-none',
