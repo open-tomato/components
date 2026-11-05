@@ -8,7 +8,19 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { Stepper } from '../Stepper';
 
-import { wizardPanel } from './Wizard.variants';
+import {
+  wizardPanel,
+  // @@V mol-1 begin
+  wizardBlurb,
+  wizardBody,
+  wizardBrandRow,
+  wizardClose,
+  wizardCounter,
+  wizardFooter,
+  wizardHeader,
+  wizardTitle,
+  // @@V mol-1 end
+} from './Wizard.variants';
 
 export interface WizardStep<A> {
   key: string;
@@ -70,17 +82,27 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
     >
       <div aria-labelledby={titleId} className={wizardPanel()}>
         {/* header: brand row + the read-only stepper rail */}
-        <div className="shrink-0 border-b border-border-soft px-[22px] pb-4 pt-[18px]">
-          <div className="mb-4 flex items-center gap-2.5">
+        <div
+          // @@V mol-1 begin
+          className={wizardHeader()}
+          // @@V mol-1 end
+        >
+          <div
+            // @@V mol-1 begin
+            className={wizardBrandRow()}
+            // @@V mol-1 end
+          >
             {heading}
             <button
               type="button"
               aria-label="Close"
               onClick={onClose}
+              // @@V mol-1 begin
               className={cn(
                 touchable({ inline: true, rounded: 'md', noBrightness: false }),
-                'ml-auto size-[30px] shrink-0 justify-center border border-border-soft bg-surface-1 text-fg2',
+                wizardClose(),
               )}
+              // @@V mol-1 end
             >
               <svg
                 width="16"
@@ -104,15 +126,25 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
         </div>
 
         {/* body: the current step */}
-        <div className="flex-1 overflow-y-auto px-[22px] pb-5 pt-[22px]">
+        <div
+          // @@V mol-1 begin
+          className={wizardBody()}
+          // @@V mol-1 end
+        >
           <h3
             id={titleId}
-            className="m-0 mb-1.5 font-display text-[22px] font-bold tracking-[-0.01em] text-fg1"
+            // @@V mol-1 begin
+            className={wizardTitle()}
+            // @@V mol-1 end
           >
             {current.title}
           </h3>
           {current.blurb != null && (
-            <p className="m-0 mb-5 text-[13.5px] leading-relaxed text-fg2">
+            <p
+              // @@V mol-1 begin
+              className={wizardBlurb()}
+              // @@V mol-1 end
+            >
               {current.blurb}
             </p>
           )}
@@ -120,11 +152,19 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
         </div>
 
         {/* footer: controlled nav */}
-        <div className="flex shrink-0 items-center gap-3 border-t border-border-soft bg-surface-sunk px-[22px] py-3.5">
+        <div
+          // @@V mol-1 begin
+          className={wizardFooter()}
+          // @@V mol-1 end
+        >
           <Button variant="secondary" disabled={step === 0} onClick={onBack}>
             Back
           </Button>
-          <span className="ml-auto font-mono text-[11.5px] text-fg3">
+          <span
+            // @@V mol-1 begin
+            className={wizardCounter()}
+            // @@V mol-1 end
+          >
             {step + 1} / {steps.length}
             {current.optional
               ? ' · optional'

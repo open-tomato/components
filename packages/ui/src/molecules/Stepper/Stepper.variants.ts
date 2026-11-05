@@ -96,3 +96,23 @@ export const stepperConnector: (props?: { done?: boolean | null; tone?: 'primary
 });
 
 export type StepperDotVariants = VariantProps<typeof stepperDot>;
+
+// @@V mol-1 begin
+export const stepperRoot: (props?: { size?: 'md' | 'sm' | null } & ClassProp) => string = cva('flex w-full items-center', {
+  variants: {
+    size: {
+      md: '',
+      sm: 'gap-2',
+    },
+  },
+  defaultVariants: { size: 'md' },
+});
+
+export const stepperButton: (props?: ClassProp) => string = cva(
+  'gap-2 rounded-none border-none bg-transparent p-0',
+);
+
+export const stepperStatic: (props?: ClassProp) => string = cva(
+  'inline-flex items-center gap-2',
+);
+// @@V mol-1 end

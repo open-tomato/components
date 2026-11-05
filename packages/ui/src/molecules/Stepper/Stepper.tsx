@@ -11,6 +11,11 @@ import {
   stepperConnector,
   stepperDot,
   stepperLabel,
+  // @@V mol-1 begin
+  stepperButton,
+  stepperRoot,
+  stepperStatic,
+  // @@V mol-1 end
 } from './Stepper.variants';
 
 export interface StepperProps
@@ -50,7 +55,9 @@ export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & 
   ) => (
     <div
       ref={ref}
-      className={cn('flex w-full items-center', size === 'sm' && 'gap-2', className)}
+      // @@V mol-1 begin
+      className={cn(stepperRoot({ size }), className)}
+      // @@V mol-1 end
       {...props}
     >
       {items.map((item, i) => {
@@ -84,16 +91,24 @@ export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & 
                 <button
                   type="button"
                   onClick={() => onChange(i)}
+                  // @@V mol-1 begin
                   className={cn(
                     touchable({ inline: true, noBrightness: false }),
-                    'gap-2 rounded-none border-none bg-transparent p-0',
+                    stepperButton(),
                   )}
+                  // @@V mol-1 end
                 >
                   {content}
                 </button>
               )
               : (
-                <span className="inline-flex items-center gap-2">{content}</span>
+                <span
+                  // @@V mol-1 begin
+                  className={stepperStatic()}
+                  // @@V mol-1 end
+                >
+                  {content}
+                </span>
               )}
             {i < items.length - 1 && (
               <span className={stepperConnector({ done: i < index, tone, size })} />
