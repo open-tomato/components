@@ -1,24 +1,32 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'bun:test';
 
+// @@S mol-1 begin
+import { AmountOverTime } from './AmountOverTime';
+// @@S mol-1 end
 import { CellBar } from './CellBar';
 import { CellDecoration } from './CellDecoration';
 import { CellDoubleLine } from './CellDoubleLine';
 import { CellLabel } from './CellLabel';
 import { CellStatus } from './CellStatus';
 import { CellValue } from './CellValue';
-import { SpendOverTime } from './SpendOverTime';
-import { TokensConsumption, TokensProgress } from './TokensConsumption';
+// @@S mol-1 begin
+import { QuotaProgress, QuotaUsage } from './QuotaUsage';
+// @@S mol-1 end
 
 const NOW = new Date(2026, 6, 22, 15, 0, 0);
 
 describe('CellValue', () => {
   it('renders a numeric value with its unit', () => {
     const { container } = render(
-      <CellValue value={12500} unit="tokens" locale="en-US" />,
+      // @@S mol-1 begin
+      <CellValue value={12500} unit="units" locale="en-US" />,
+      // @@S mol-1 end
     );
     expect(container.textContent).toContain('12.5');
-    expect(container.textContent).toContain('tokens');
+    // @@S mol-1 begin
+    expect(container.textContent).toContain('units');
+    // @@S mol-1 end
   });
 
   it('renders children when no value is given', () => {
@@ -113,11 +121,12 @@ describe('CellBar', () => {
   });
 });
 
-describe('SpendOverTime', () => {
-  it('renders cost over duration and relative time', () => {
+// @@S mol-1 begin
+describe('AmountOverTime', () => {
+  it('renders amount over duration and relative time', () => {
     const { container } = render(
-      <SpendOverTime
-        cost={0.42}
+      <AmountOverTime
+        amount={0.42}
         seconds={437}
         date={new Date(2026, 6, 22, 12, 4, 0)}
         now={NOW}
@@ -129,26 +138,27 @@ describe('SpendOverTime', () => {
   });
 });
 
-describe('TokensConsumption', () => {
+describe('QuotaUsage', () => {
   it('renders the full used number over a short quota', () => {
     const { container } = render(
-      <TokensConsumption used={8240} quota={50000} locale="en-US" />,
+      <QuotaUsage used={8240} quota={50000} locale="en-US" />,
     );
     expect(container.textContent).toContain('8,240');
     expect(container.textContent).toContain('50');
   });
 });
 
-describe('TokensProgress', () => {
+describe('QuotaProgress', () => {
   it('renders a meter with the default label', () => {
-    render(<TokensProgress used={100} quota={1000} locale="en-US" />);
-    expect(screen.getByRole('meter', { name: '100 of 1000 tokens' })).toBeTruthy();
+    render(<QuotaProgress used={100} quota={1000} locale="en-US" />);
+    expect(screen.getByRole('meter', { name: '100 of 1000' })).toBeTruthy();
   });
 
   it('handles a zero quota with and without usage', () => {
-    render(<TokensProgress used={5} quota={0} label="over" />);
+    render(<QuotaProgress used={5} quota={0} label="over" />);
     expect(screen.getByRole('meter', { name: 'over' })).toBeTruthy();
-    render(<TokensProgress used={0} quota={0} label="none" />);
+    render(<QuotaProgress used={0} quota={0} label="none" />);
     expect(screen.getByRole('meter', { name: 'none' }).getAttribute('aria-valuenow')).toBe('0');
   });
 });
+// @@S mol-1 end

@@ -15,9 +15,13 @@ export const usageBarTrack: (props?: { size?: 'md' | 'sm' | null; track?: boolea
 // @@T mol-1 end
   variants: {
     size: {
-      /** Original ToolBars stroke (simple rows). */
+      // @@S mol-1 begin
+      /** Simple-row stroke. */
+      // @@S mol-1 end
       md: 'h-2.5 rounded-[5px]',
-      /** Original AgentRanking stroke (multi rows, mini cells). */
+      // @@S mol-1 begin
+      /** Multi-row stroke (mini cells). */
+      // @@S mol-1 end
       sm: 'h-[5px] rounded-[3px]',
     },
     /** Gray background — the progress variant's required track. */
