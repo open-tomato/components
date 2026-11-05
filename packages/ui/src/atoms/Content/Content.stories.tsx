@@ -4,7 +4,9 @@ import { ContentTiles } from '../../stories/fixtures';
 
 import { Content } from './Content';
 
-const meta = {
+// @@T ato-1 begin
+const meta: Meta<typeof Content> = {
+// @@T ato-1 end
   title: 'Atoms/Content',
   component: Content,
   parameters: { layout: 'padded' },
@@ -16,10 +18,12 @@ const meta = {
     justify: { control: 'select', options: ['start', 'center', 'between', 'end'] },
   },
   args: { children: <ContentTiles /> },
-} satisfies Meta<typeof Content>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// @@T ato-1 begin
+type Story = StoryObj<typeof Content>;
+// @@T ato-1 end
 
 /** Defaults: column, md gap, stretch. */
 export const Default: Story = {};
