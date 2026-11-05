@@ -6,6 +6,9 @@ import { cn, formatNumber } from '../../lib';
 import {
   smallStatCard,
   smallStatCardFooter,
+  // @@V mol-3 begin
+  smallStatCardHeader,
+  // @@V mol-3 end
   smallStatCardNumber,
   smallStatCardSuffix,
   smallStatCardTitle,
@@ -91,7 +94,9 @@ export const SmallStatCard: import('react').ForwardRefExoticComponent<
         className={cn(smallStatCard({ size }), className)}
         {...props}
       >
-        <div className="flex items-center justify-between gap-2">
+        {/* @@V mol-3 begin */}
+        <div className={smallStatCardHeader()}>
+          {/* @@V mol-3 end */}
           <span className={smallStatCardTitle()}>{title}</span>
           {trend != null
             ? <TrendIndicator trend={trend} showValue locale={locale} />

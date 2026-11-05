@@ -6,11 +6,17 @@ import { Icon } from '../../atoms';
 import { formatNumber } from '../../lib';
 import { SectionCard } from '../SectionCard';
 
+// @@V mol-3 begin
 import {
   filesChangedDelta,
+  filesChangedIcon,
+  filesChangedList,
   filesChangedPath,
+  filesChangedRow,
   filesChangedSummary,
+  filesChangedTotals,
 } from './FilesChanged.variants';
+// @@V mol-3 end
 
 export interface FileChange {
   /** File path (mono, truncates from the middle of the card). */
@@ -95,7 +101,9 @@ export const FilesChanged: import('react').ForwardRefExoticComponent<
         className={className}
         padded={false}
         action={
-          <div className="flex items-baseline gap-3">
+          // @@V mol-3 begin
+          <div className={filesChangedTotals()}>
+            {/* @@V mol-3 end */}
             <span className={filesChangedSummary()}>
               {files.length === 1
                 ? '1 file'
@@ -111,13 +119,15 @@ export const FilesChanged: import('react').ForwardRefExoticComponent<
         }
         {...props}
       >
-        <ul className="divide-y divide-border-soft">
+        {/* @@V mol-3 begin */}
+        <ul className={filesChangedList()}>
           {files.map((file) => (
             <li
               key={file.path}
-              className="flex items-center gap-2.5 px-[18px] py-2"
+              className={filesChangedRow()}
             >
-              <Icon name={iconFor(file)} size={14} className="shrink-0 text-fg3" />
+              <Icon name={iconFor(file)} size={14} className={filesChangedIcon()} />
+              {/* @@V mol-3 end */}
               <span className={filesChangedPath()} title={file.path}>
                 {file.path}
               </span>

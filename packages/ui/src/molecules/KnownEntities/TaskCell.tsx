@@ -5,6 +5,11 @@ import { cn } from '../../lib';
 import {
   entityCellStack,
   entityMeta,
+  // @@V mol-3 begin
+  entityMetaSeparator,
+  entityMetaText,
+  taskCellTag,
+  // @@V mol-3 end
   taskCellTitle,
 } from './KnownEntities.variants';
 
@@ -33,9 +38,11 @@ export const TaskCell: import('react').ForwardRefExoticComponent<
       {tags != null && tags.length > 0 && (
         <span className={entityMeta()}>
           {tags.map((tag, i) => (
-            <span key={tag} className="flex min-w-0 items-center gap-1.5">
-              {i > 0 && <span className="text-border-strong">·</span>}
-              <span className="truncate">{tag}</span>
+            // @@V mol-3 begin
+            <span key={tag} className={taskCellTag()}>
+              {i > 0 && <span className={entityMetaSeparator()}>·</span>}
+              <span className={entityMetaText()}>{tag}</span>
+              {/* @@V mol-3 end */}
             </span>
           ))}
         </span>

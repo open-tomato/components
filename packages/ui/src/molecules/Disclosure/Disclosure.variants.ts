@@ -44,4 +44,30 @@ export const tabsTrigger: (props?: ClassProp) => string = cva(
 );
 // @@T mol-3 end
 
+// @@V mol-3 begin
+/** An accordion item's row, divided from the next one. */
+export const accordionItem: (props?: ClassProp | undefined) => string = cva('border-b border-border-soft last:border-b-0');
+
+/** The heading wrapping an accordion trigger. */
+export const accordionHeading: (props?: ClassProp | undefined) => string = cva('m-0');
+
+/** The group hook the trigger's chevron reads its open state from. */
+export const accordionTriggerGroup: (props?: ClassProp | undefined) => string = cva('group');
+
+/** The accordion trigger's title text. */
+export const accordionTitle: (props?: ClassProp | undefined) => string = cva('min-w-0 flex-1 text-[14.5px] font-semibold text-fg1');
+
+/** The chevron that turns when its item opens. */
+export const accordionChevron: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3 group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary');
+
+/** The collapsing content region of an accordion item. */
+export const accordionContent: (props?: ClassProp | undefined) => string = cva('overflow-hidden');
+
+/** The body text inside an accordion item. */
+export const accordionBody: (props?: ClassProp | undefined) => string = cva('m-0 px-[17px] pb-4 text-[13.5px] leading-relaxed text-fg2');
+
+/** The panel of one tab. */
+export const tabsContent: (props?: ClassProp | undefined) => string = cva('min-h-24 px-[18px] pb-5 pt-[18px] outline-none');
+// @@V mol-3 end
+
 export type DisclosureFrameVariants = VariantProps<typeof disclosureFrame>;

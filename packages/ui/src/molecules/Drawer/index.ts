@@ -1,2 +1,9 @@
 export { Drawer, type DrawerProps } from './Drawer';
-export { drawerPanel, type DrawerPanelVariants } from './Drawer.variants';
+export {
+  drawerPanel,
+  // @@V mol-3 begin
+  drawerBody,
+  drawerFooter,
+  // @@V mol-3 end
+  type DrawerPanelVariants,
+} from './Drawer.variants';
