@@ -22,11 +22,13 @@ export interface StatusIndicatorProps
   label?: string;
 }
 
+// @@S ato-3 begin
 /**
  * StatusIndicator — a small circle / rounded-square inline status dot.
  * Spec-driven; no design artboard. `pulse` marks live
- * activity (running session, streaming agent).
+ * activity (a running job, a streaming process).
  */
+// @@S ato-3 end
 // @@T ato-3 begin
 export const StatusIndicator: ForwardRefExoticComponent<
   StatusIndicatorProps & RefAttributes<HTMLSpanElement>
