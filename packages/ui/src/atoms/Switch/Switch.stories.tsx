@@ -20,25 +20,37 @@ type Story = StoryObj<typeof meta>;
 
 /** Defaults: md accent, off. */
 export const Default: Story = {
-  args: { 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };
 
 export const Checked: Story = {
-  args: { checked: true, 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { checked: true, 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };
 
 export const PrimaryTone: Story = {
-  args: { checked: true, tone: 'primary', 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { checked: true, tone: 'primary', 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };
 
 export const SmallSize: Story = {
-  args: { size: 'sm', checked: true, 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { size: 'sm', checked: true, 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };
 
 export const Disabled: Story = {
-  args: { disabled: true, 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { disabled: true, 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };
 
 export const CheckedDisabled: Story = {
-  args: { checked: true, disabled: true, 'aria-label': 'Enable agent' },
+  // @@S ato-2 begin
+  args: { checked: true, disabled: true, 'aria-label': 'Enable feature' },
+  // @@S ato-2 end
 };

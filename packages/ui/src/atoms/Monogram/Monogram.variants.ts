@@ -1,12 +1,16 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// @@S ato-2 begin
 /**
- * WorkspaceMark — a workspace's identity block: initials on a brand fill,
- * squarer than Avatar (auth screens + topbar). Font size tracks a
- * 0.42 × box ratio; lg carries the fresh-workspace card's 10px radius.
+ * Monogram — an identity block: initials on a brand fill, squarer than
+ * Avatar (auth screens + topbar). Font size tracks a 0.42 × box ratio; lg
+ * carries a 10px radius.
  */
+// @@S ato-2 end
 // @@T ato-2 begin
-export const workspaceMark:
+// @@S ato-2 begin
+export const monogram:
+// @@S ato-2 end
 (props?: ({ tone?: 'accent' | 'primary' | 'gold' | null; size?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 // @@T ato-2 end
   'inline-flex shrink-0 items-center justify-center font-display font-bold text-on-accent',
@@ -27,4 +31,6 @@ export const workspaceMark:
   },
 );
 
-export type WorkspaceMarkVariants = VariantProps<typeof workspaceMark>;
+// @@S ato-2 begin
+export type MonogramVariants = VariantProps<typeof monogram>;
+// @@S ato-2 end
