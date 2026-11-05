@@ -1,39 +1,27 @@
-export { AgentCell, type AgentCellProps } from './AgentCell';
-export { AgentTitle, type AgentTitleProps } from './AgentTitle';
-export { BranchInline, type BranchInlineProps } from './BranchInline';
+// @@S mol-3 begin
+export { Entity, type EntityLayout, type EntityProps } from './Entity';
 export {
-  branchInline,
+  EntityKindsContext,
+  useEntityKinds,
+  type EntityKind,
+  type EntityKinds,
+} from './entityKindsContext';
+export { EntityKindsProvider, type EntityKindsProviderProps } from './EntityKinds';
+export {
+  ACTIVITY_STATUS_TONE,
   entityCell,
   entityCellStack,
+  entityInlineName,
   entityMeta,
   entityTile,
   entityTitle,
   entityTitleName,
-  entityTitleSub,
-  // @@V mol-3 begin
   entityTone,
-  toolTitleStack,
-  modelCellDot,
-  branchInlineName,
-  sessionCellAgent,
-  entityMetaSeparator,
-  entityMetaText,
-  taskCellTag,
-  // @@V mol-3 end
-  modelCellName,
   modelFooter,
   modelFooterName,
-  SESSION_STATUS_TONE,
-  sessionInlineName,
-  taskCellTitle,
-  userInline,
-  userInlineHandle,
+  toolTitleStack,
+  type ActivityStatus,
   type EntityTileVariants,
-  type SessionStatus,
 } from './KnownEntities.variants';
-export { ModelCell, ModelFooter, type ModelCellProps, type ModelFooterProps } from './ModelCell';
-export { SessionCell, type SessionCellProps } from './SessionCell';
-export { SessionInline, type SessionInlineProps } from './SessionInline';
-export { TaskCell, type TaskCellProps } from './TaskCell';
-export { ToolTitle, type ToolTitleProps } from './ToolTitle';
-export { UserInline, type UserInlineProps } from './UserInline';
+export { ModelFooter, type ModelFooterProps } from './ModelFooter';
+// @@S mol-3 end

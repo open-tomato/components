@@ -7,7 +7,9 @@ import { StrokeIcon } from '../../lib/icons';
 
 import { OptionCard } from './OptionCard';
 
-/** One selectable card for both auth pickers — workspace choice and 2FA method. */
+// @@S mol-3 begin
+/** One selectable card for both pickers — group choice and 2FA method. */
+// @@S mol-3 end
 // @@T mol-3 begin
 const meta: Meta<typeof OptionCard> = {
 // @@T mol-3 end
@@ -21,14 +23,18 @@ const meta: Meta<typeof OptionCard> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Workspace picker row — centered, WorkspaceMark leading, role badge. */
+// @@S mol-3 begin
+/** Group picker row — centered, mark leading, role badge. */
+// @@S mol-3 end
 export const Workspace: Story = {
   args: {
     selected: true,
     leading: <WorkspaceMark name="open-garden" />,
     title: 'open-garden',
     meta: <Badge tone="neutral">member</Badge>,
-    description: 'Main workspace · invited by sam · 12 members',
+    // @@S mol-3 begin
+    description: 'Main group · invited by sam · 12 members',
+    // @@S mol-3 end
   },
 };
 

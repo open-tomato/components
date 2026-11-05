@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { useState } from 'react';
 
+// @@S mol-3 begin
+import { StatusIndicator } from '../../atoms/StatusIndicator';
+import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
+// @@S mol-3 end
 import { makeColumns, SESSIONS, type Session } from '../../stories/sessions';
 
 import { renderCellContent } from './cellTypes';
@@ -200,22 +204,30 @@ const CONFIG_COLUMNS: Column<SessionRow>[] = [
   {
     key: 'session',
     header: 'Session',
-    cell: (r) => renderCellContent('session-cell', {
-      name: r.name,
-      status: r.status,
-      agentInstanceId: r.id,
-      branch: `feat/${r.name}`,
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-cell', {
+      leading: (
+        <StatusIndicator
+          tone={ACTIVITY_STATUS_TONE[r.status]}
+          pulse={r.status === 'running'}
+          label={r.status}
+        />
+      ),
+      title: r.name,
+      subtitle: `${r.id} · feat/${r.name}`,
     }),
+    // @@S mol-3 end
   },
   {
     key: 'agent',
     header: 'Agent · Model',
     width: 170,
-    cell: (r) => renderCellContent('agent-cell', {
-      name: r.agent,
-      model: r.model,
-      tone: r.tone,
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-cell', {
+      title: r.agent,
+      subtitle: r.model,
     }),
+    // @@S mol-3 end
   },
   {
     key: 'status',
@@ -252,7 +264,9 @@ const CONFIG_COLUMNS: Column<SessionRow>[] = [
     key: 'by',
     header: 'By',
     width: 96,
-    cell: (r) => renderCellContent('user-inline', { handle: r.by }),
+    // @@S mol-3 begin
+    cell: (r) => renderCellContent('entity-inline', { title: r.by }),
+    // @@S mol-3 end
   },
   {
     key: 'menu',
@@ -272,8 +286,8 @@ const ConfigTable = Table<SessionRow>;
 /**
  * The self-describing Sessions table: every column resolves its renderer
  * from the `{entity}-{variant}` type registry, mirroring the JSON table
- * config in the sessions-page spec (session-cell / agent-cell / badge /
- * tokens-progress / spend-over-time / user-inline / context-menu).
+ * config in the sessions-page spec (entity-cell / badge /
+ * tokens-progress / spend-over-time / entity-inline / context-menu).
  * Fidelity source: the original sessions screen table region, captured
  * light+dark during the one-time port fidelity check. Spec-over-original
  * divergences: the tokens bar colors by consumption thresholds, not

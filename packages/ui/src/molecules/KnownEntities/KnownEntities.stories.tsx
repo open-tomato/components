@@ -1,15 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ReactNode } from 'react';
 
-import { AgentCell } from './AgentCell';
-import { AgentTitle } from './AgentTitle';
-import { BranchInline } from './BranchInline';
-import { ModelCell, ModelFooter } from './ModelCell';
-import { SessionCell } from './SessionCell';
-import { SessionInline } from './SessionInline';
-import { TaskCell } from './TaskCell';
-import { ToolTitle } from './ToolTitle';
-import { UserInline } from './UserInline';
+import { Avatar } from '../../atoms/Avatar';
+import { Badge } from '../../atoms/Badge';
+import { StatusIndicator } from '../../atoms/StatusIndicator';
+
+import { Entity } from './Entity';
+import { EntityKindsProvider } from './EntityKinds';
+import { type EntityKinds } from './entityKindsContext';
+import { ACTIVITY_STATUS_TONE, type ActivityStatus } from './KnownEntities.variants';
+import { ModelFooter } from './ModelFooter';
+
+// @@S mol-3 begin
+/** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
+const DEMO_KINDS: EntityKinds = {
+  worker: { icon: 'bot', tone: 'primary' },
+  specialist: { icon: 'bot', tone: 'gold' },
+  tool: { icon: 'plug', tone: 'primary' },
+  skill: { icon: 'wand-sparkles', tone: 'accent' },
+  model: { icon: 'cpu', tone: 'primary' },
+  branch: { icon: 'git-branch', tone: 'muted', title: 'main' },
+  task: {},
+};
+
+const Status = ({ status }: { status: ActivityStatus }) => (
+  <StatusIndicator
+    tone={ACTIVITY_STATUS_TONE[status]}
+    pulse={status === 'running'}
+    label={status}
+  />
+);
+// @@S mol-3 end
 
 const Row = ({ label, children }: { label: string; children: ReactNode }) => (
   <div className="flex items-center gap-3 text-sm text-fg2">
@@ -21,71 +42,92 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
 );
 
 // @@T mol-3 begin
-const meta: Meta<typeof AgentCell> = {
+const meta: Meta<typeof Entity> = {
 // @@T mol-3 end
   title: 'Molecules/KnownEntities',
-  component: AgentCell,
+  component: Entity,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  // @@S mol-3 begin
+  decorators: [
+    (Story) => (
+      <EntityKindsProvider kinds={DEMO_KINDS}>
+        <Story />
+      </EntityKindsProvider>
+    ),
+  ],
+  // @@S mol-3 end
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const BASE_ARGS = { name: 'the-refactorer', model: 'sonnet-4-5' } as const;
+// @@S mol-3 begin
+const BASE_ARGS = { title: 'the-refactorer' } as const;
 
 /**
- * Spec: `agent-cell` — smaller agent-title, model as subtitle; the tile
- * accent comes from the shared chart palette.
+ * Spec: the `cell` layout — a compact tile, the title over a subtitle; the
+ * `title` layout is the larger variant. The tile accent comes from the
+ * kind's tone (shared chart palette).
  */
 export const Agent: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="agent-cell">
-        <AgentCell name="the-refactorer" model="sonnet-4-5" tone="primary" />
+      <Row label="cell">
+        <Entity layout="cell" kind="worker" title="the-refactorer" subtitle="sonnet-4-5" />
       </Row>
-      <Row label="agent-cell, gold">
-        <AgentCell name="the-profiler" model="opus-4-5" tone="gold" />
+      <Row label="cell, gold">
+        <Entity layout="cell" kind="specialist" title="the-profiler" subtitle="opus-4-5" />
       </Row>
-      <Row label="agent-title">
-        <AgentTitle name="the-refactorer" subtitle="runner · agent-7d2f" />
+      <Row label="title">
+        <Entity
+          layout="title"
+          leading={<Avatar name="the-refactorer" size="md" shape="rounded" status="none" />}
+          title="the-refactorer"
+          subtitle="runner · worker-7d2f"
+        />
       </Row>
-      <Row label="agent-title, bare">
-        <AgentTitle name="the-gardener" />
+      <Row label="title, bare">
+        <Entity
+          layout="title"
+          leading={<Avatar name="the-gardener" size="md" shape="rounded" status="none" />}
+          title="the-gardener"
+        />
       </Row>
     </div>
   ),
 };
 
 /**
- * Spec: `session-inline` (status dot + name; running pulses) and
- * `session-cell` (inline on top, `{agent instance id} · {branch-inline}`
- * greyed below).
+ * Spec: the `inline` layout with a status mark in `leading` (running
+ * pulses) and the `cell` layout with the status mark beside a title over
+ * `{instance id} · {branch}` greyed below.
  */
 export const Session: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="session-inline">
-        <SessionInline name="auth-refactor" status="running" />
+      <Row label="inline">
+        <Entity layout="inline" leading={<Status status="running" />} title="auth-refactor" />
       </Row>
       <Row label="failed">
-        <SessionInline name="rate-limit-bug" status="failed" />
+        <Entity layout="inline" leading={<Status status="failed" />} title="rate-limit-bug" />
       </Row>
-      <Row label="session-cell">
-        <SessionCell
-          name="auth-refactor"
-          status="done"
-          agentInstanceId="agent-7d2f"
-          branch="feat/jwt-sessions"
+      <Row label="cell">
+        <Entity
+          layout="cell"
+          leading={<Status status="done" />}
+          title="auth-refactor"
+          subtitle="worker-7d2f · feat/jwt-login"
         />
       </Row>
       <Row label="no branch">
-        <SessionCell
-          name="perf-investigate"
-          status="waiting"
-          agentInstanceId="agent-93af"
+        <Entity
+          layout="cell"
+          leading={<Status status="waiting" />}
+          title="perf-investigate"
+          subtitle="worker-93af"
         />
       </Row>
     </div>
@@ -93,19 +135,19 @@ export const Session: Story = {
 };
 
 /**
- * Spec: `model-cell` — accent dot (or tiny icon) + model name;
- * `model-footer` — small icon + name inheriting the footer color, no
- * accent of its own (shown here inside a greyed footer-colored line).
+ * Spec: an inline entity — accent icon + name; `ModelFooter` — small icon
+ * + name inheriting the footer color, no accent of its own (shown here
+ * inside a greyed footer-colored line).
  */
 export const Model: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="model-cell, dot">
-        <ModelCell name="sonnet-4-5" tone="accent" />
+      <Row label="inline, no icon">
+        <Entity layout="inline" title="sonnet-4-5" />
       </Row>
-      <Row label="model-cell, icon">
-        <ModelCell name="opus-4-5" tone="primary" icon="cpu" />
+      <Row label="inline, icon">
+        <Entity layout="inline" kind="model" title="opus-4-5" />
       </Row>
       <Row label="model-footer">
         <span className="font-mono text-[11px] text-fg3">
@@ -117,66 +159,78 @@ export const Model: Story = {
 };
 
 /**
- * Spec: `branch-inline` (git-branch glyph + name) and `user-inline`
- * (small avatar + handle).
+ * Spec: an inline entity with the branch glyph from its kind (the title
+ * falls back to the kind's default text), and one with an avatar in
+ * `leading`.
  */
 export const Inline: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="branch-inline">
-        <BranchInline name="feat/jwt-sessions" />
+      <Row label="branch">
+        <Entity layout="inline" kind="branch" title="feat/jwt-login" />
       </Row>
-      <Row label="user-inline">
-        <UserInline handle="sam" name="Sam Lin" />
+      <Row label="default text">
+        <Entity layout="inline" kind="branch" />
+      </Row>
+      <Row label="user">
+        <Entity
+          layout="inline"
+          leading={<Avatar name="Sam Lin" size="sm" status="none" />}
+          title="sam"
+        />
       </Row>
     </div>
   ),
 };
 
-/** Spec: `task-cell` — title over inline text tags. */
+/** Spec: a `cell` entity — title over inline text tags. */
 export const Task: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="task-cell">
-        <TaskCell
+      <Row label="cell">
+        <Entity
+          layout="cell"
+          kind="task"
           title="Migrate dashboard to new sidebar layout"
-          tags={['ui · feat', 'OT-21', '2 sub']}
+          subtitle="ui · feat · OT-21 · 2 sub"
         />
       </Row>
-      <Row label="no tags">
-        <TaskCell title="Cache agent run logs locally for replay" />
+      <Row label="no subtitle">
+        <Entity layout="cell" kind="task" title="Cache run logs locally for replay" />
       </Row>
     </div>
   ),
 };
 
 /**
- * Spec: `tool-title` — icon tile; bold name over a type badge + slug id.
+ * Spec: a `title` entity — icon tile; bold name over a subtitle and a
+ * type badge in `trailing`.
  */
 export const Tool: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="tool-title">
-        <ToolTitle
-          name="GitHub Search"
-          type="MCP"
-          slug="gh-search"
-          icon="plug"
-          tone="primary"
+      <Row label="title">
+        <Entity
+          layout="title"
+          kind="tool"
+          title="Repo Search"
+          subtitle="gh-search"
+          trailing={<Badge tone="neutral" size="sm">MCP</Badge>}
         />
       </Row>
-      <Row label="skill tool">
-        <ToolTitle
-          name="Component from design"
-          type="skill"
-          slug="component-from-design"
-          icon="wand-sparkles"
-          badgeTone="info"
+      <Row label="skill">
+        <Entity
+          layout="title"
+          kind="skill"
+          title="Component from design"
+          subtitle="component-from-design"
+          trailing={<Badge tone="info" size="sm">skill</Badge>}
         />
       </Row>
     </div>
   ),
 };
+// @@S mol-3 end

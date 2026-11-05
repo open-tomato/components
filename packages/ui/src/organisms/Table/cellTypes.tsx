@@ -15,20 +15,10 @@ import { CellStatus, type CellStatusProps } from '../../molecules/CellContent/Ce
 import { CellValue, type CellValueProps } from '../../molecules/CellContent/CellValue';
 import { SpendOverTime, type SpendOverTimeProps } from '../../molecules/CellContent/SpendOverTime';
 import { TokensProgress, type TokensProgressProps } from '../../molecules/CellContent/TokensConsumption';
-import { AgentCell, type AgentCellProps } from '../../molecules/KnownEntities/AgentCell';
-import { AgentTitle, type AgentTitleProps } from '../../molecules/KnownEntities/AgentTitle';
-import { BranchInline, type BranchInlineProps } from '../../molecules/KnownEntities/BranchInline';
-import {
-  ModelCell,
-  ModelFooter,
-  type ModelCellProps,
-  type ModelFooterProps,
-} from '../../molecules/KnownEntities/ModelCell';
-import { SessionCell, type SessionCellProps } from '../../molecules/KnownEntities/SessionCell';
-import { SessionInline, type SessionInlineProps } from '../../molecules/KnownEntities/SessionInline';
-import { TaskCell, type TaskCellProps } from '../../molecules/KnownEntities/TaskCell';
-import { ToolTitle, type ToolTitleProps } from '../../molecules/KnownEntities/ToolTitle';
-import { UserInline, type UserInlineProps } from '../../molecules/KnownEntities/UserInline';
+// @@S mol-3 begin
+import { Entity, type EntityProps } from '../../molecules/KnownEntities/Entity';
+import { ModelFooter, type ModelFooterProps } from '../../molecules/KnownEntities/ModelFooter';
+// @@S mol-3 end
 
 import { RowContextAction, type RowContextActionProps } from './RowContextAction';
 // @@V org-2 begin
@@ -54,16 +44,12 @@ import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
 
 export interface CellTypeDataMap {
   /* known entities */
-  'agent-title': AgentTitleProps;
-  'agent-cell': AgentCellProps;
-  'session-inline': SessionInlineProps;
-  'session-cell': SessionCellProps;
-  'model-cell': ModelCellProps;
+  // @@S mol-3 begin
+  'entity-inline': EntityProps;
+  'entity-cell': EntityProps;
+  'entity-title': EntityProps;
   'model-footer': ModelFooterProps;
-  'branch-inline': BranchInlineProps;
-  'user-inline': UserInlineProps;
-  'task-cell': TaskCellProps;
-  'tool-title': ToolTitleProps;
+  // @@S mol-3 end
   /* cell-content kit */
   'value': CellValueProps;
   'double-line': CellDoubleLineProps;
@@ -86,16 +72,12 @@ type CellRegistry = {
 };
 
 const registry: CellRegistry = {
-  'agent-title': (d) => <AgentTitle {...d} />,
-  'agent-cell': (d) => <AgentCell {...d} />,
-  'session-inline': (d) => <SessionInline {...d} />,
-  'session-cell': (d) => <SessionCell {...d} />,
-  'model-cell': (d) => <ModelCell {...d} />,
+  // @@S mol-3 begin
+  'entity-inline': (d) => <Entity {...d} layout="inline" />,
+  'entity-cell': (d) => <Entity {...d} layout="cell" />,
+  'entity-title': (d) => <Entity {...d} layout="title" />,
   'model-footer': (d) => <ModelFooter {...d} />,
-  'branch-inline': (d) => <BranchInline {...d} />,
-  'user-inline': (d) => <UserInline {...d} />,
-  'task-cell': (d) => <TaskCell {...d} />,
-  'tool-title': (d) => <ToolTitle {...d} />,
+  // @@S mol-3 end
   'value': (d) => <CellValue {...d} />,
   'double-line': (d) => <CellDoubleLine {...d} />,
   'status': (d) => <CellStatus {...d} />,
@@ -134,16 +116,12 @@ const registry: CellRegistry = {
  * the consuming app's job at its config boundary.
  */
 const REQUIRED_KEYS: Record<KnownCellType, string[]> = {
-  'agent-title': ['name'],
-  'agent-cell': ['name', 'model'],
-  'session-inline': ['name', 'status'],
-  'session-cell': ['name', 'status', 'agentInstanceId'],
-  'model-cell': ['name'],
+  // @@S mol-3 begin
+  'entity-inline': [],
+  'entity-cell': [],
+  'entity-title': [],
   'model-footer': ['name'],
-  'branch-inline': ['name'],
-  'user-inline': ['handle'],
-  'task-cell': ['title'],
-  'tool-title': ['name', 'type', 'slug'],
+  // @@S mol-3 end
   'value': [],
   'double-line': ['title'],
   // status/value: every key is optional (tone defaults to ok).

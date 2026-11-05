@@ -1,101 +1,131 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'bun:test';
+import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it } from 'bun:test';
 
 import {
-  AgentCell,
-  AgentTitle,
-  BranchInline,
-  ModelCell,
+  ACTIVITY_STATUS_TONE,
+  Entity,
+  EntityKindsProvider,
   ModelFooter,
-  SessionCell,
-  SessionInline,
-  TaskCell,
-  ToolTitle,
-  UserInline,
+  useEntityKinds,
+  type EntityKinds,
 } from '.';
 
-describe('KnownEntities', () => {
-  it('AgentCell renders name and model', () => {
-    render(<AgentCell name="Planner" model="sonnet-4-5" tone="accent" icon="cpu" />);
-    expect(screen.getByText('Planner')).toBeTruthy();
-    expect(screen.getByText('sonnet-4-5')).toBeTruthy();
-  });
+afterEach(cleanup);
 
-  it('AgentCell uses default tone and icon', () => {
-    render(<AgentCell name="Bot" model="m" />);
-    expect(screen.getByText('Bot')).toBeTruthy();
-  });
+const KINDS: EntityKinds = {
+  worker: { icon: 'bot', tone: 'primary', title: 'Default worker', subtitle: 'idle' },
+  plain: {},
+};
 
-  it('AgentTitle renders with and without subtitle', () => {
-    const { rerender } = render(<AgentTitle name="Planner" subtitle="runner" />);
-    expect(screen.getByText('runner')).toBeTruthy();
-    rerender(<AgentTitle name="Planner" />);
-    expect(screen.queryByText('runner')).toBeNull();
-    expect(screen.getAllByText('Planner').length).toBeGreaterThan(0);
-  });
-
-  it('BranchInline renders the branch name', () => {
-    render(<BranchInline name="feat/x" />);
-    expect(screen.getByText('feat/x')).toBeTruthy();
-  });
-
-  it('ModelCell renders dot or icon, and ModelFooter its name', () => {
-    const { container, rerender } = render(<ModelCell name="opus" />);
-    expect(screen.getByText('opus')).toBeTruthy();
-    expect(container.querySelector('[aria-hidden]')).not.toBeNull();
-    rerender(<ModelCell name="opus" icon="cpu" tone="primary" />);
-    expect(container.querySelector('.rounded-full')).toBeNull();
-    rerender(<ModelFooter name="haiku" />);
-    expect(screen.getByText('haiku')).toBeTruthy();
-    rerender(<ModelFooter name="haiku" icon="bot" />);
-    expect(screen.getByText('haiku')).toBeTruthy();
-  });
-
-  it('SessionInline renders every status', () => {
-    for (const status of ['running', 'waiting', 'done', 'failed', 'idle'] as const) {
-      const { unmount } = render(<SessionInline name={`s-${status}`} status={status} />);
-      expect(screen.getByText(`s-${status}`)).toBeTruthy();
+describe('Entity', () => {
+  it('renders every layout with its title and subtitle', () => {
+    for (const layout of ['inline', 'cell', 'title'] as const) {
+      const { unmount } = render(<Entity layout={layout} title={`t-${layout}`} subtitle="sub" />);
+      expect(screen.getByText(`t-${layout}`)).toBeTruthy();
+      if (layout !== 'inline') expect(screen.getByText('sub')).toBeTruthy();
       unmount();
     }
   });
 
-  it('SessionCell renders instance id with and without branch', () => {
-    const { rerender } = render(
-      <SessionCell name="Run" status="running" agentInstanceId="agent-1" branch="main" />,
+  it('defaults to the inline layout, rendered as a span', () => {
+    const { container } = render(<Entity title="x" />);
+    expect(container.firstElementChild?.tagName).toBe('SPAN');
+  });
+
+  it('renders the cell and title layouts as a div', () => {
+    const { container } = render(<Entity layout="cell" title="x" />);
+    expect(container.firstElementChild?.tagName).toBe('DIV');
+  });
+
+  it('renders the leading, subtitle and trailing slots', () => {
+    render(
+      <Entity
+        layout="title"
+        leading={<i data-testid="lead" />}
+        title="Name"
+        subtitle="slug"
+        trailing={<b>badge</b>}
+      />,
     );
-    expect(screen.getByText('agent-1')).toBeTruthy();
-    expect(screen.getByText('main')).toBeTruthy();
-    rerender(<SessionCell name="Run" status="done" agentInstanceId="agent-1" />);
-    expect(screen.queryByText('main')).toBeNull();
+    expect(screen.getByTestId('lead')).toBeTruthy();
+    expect(screen.getByText('slug')).toBeTruthy();
+    expect(screen.getByText('badge')).toBeTruthy();
   });
 
-  it('TaskCell renders title and tags', () => {
-    const { rerender } = render(<TaskCell title="Fix it" tags={['ui', 'feat']} />);
-    expect(screen.getByText('Fix it')).toBeTruthy();
-    expect(screen.getByText('ui')).toBeTruthy();
-    expect(screen.getByText('feat')).toBeTruthy();
-    rerender(<TaskCell title="Fix it" tags={[]} />);
-    expect(screen.queryByText('ui')).toBeNull();
-    rerender(<TaskCell title="Fix it" />);
-    expect(screen.getByText('Fix it')).toBeTruthy();
+  it('shows the trailing slot of an inline entity', () => {
+    render(<Entity title="Name" trailing={<b>badge</b>} />);
+    expect(screen.getByText('badge')).toBeTruthy();
   });
 
-  it('ToolTitle renders name, type badge and slug', () => {
-    render(<ToolTitle name="Search" type="MCP" slug="gh-search" badgeTone="info" icon="bot" tone="primary" />);
-    expect(screen.getByText('Search')).toBeTruthy();
-    expect(screen.getByText('MCP')).toBeTruthy();
-    expect(screen.getByText('gh-search')).toBeTruthy();
+  it('takes icon and default texts from the kind map', () => {
+    const { container } = render(
+      <EntityKindsProvider kinds={KINDS}>
+        <Entity layout="cell" kind="worker" />
+      </EntityKindsProvider>,
+    );
+    expect(screen.getByText('Default worker')).toBeTruthy();
+    expect(screen.getByText('idle')).toBeTruthy();
+    expect(container.querySelector('.text-primary')).not.toBeNull();
   });
 
-  it('ToolTitle works with defaults', () => {
-    render(<ToolTitle name="T" type="API" slug="t" />);
-    expect(screen.getByText('API')).toBeTruthy();
+  it('lets explicit texts and leading beat the kind defaults', () => {
+    const { container } = render(
+      <EntityKindsProvider kinds={KINDS}>
+        <Entity layout="inline" kind="worker" title="Mine" leading={<i data-testid="own" />} />
+      </EntityKindsProvider>,
+    );
+    expect(screen.getByText('Mine')).toBeTruthy();
+    expect(screen.queryByText('Default worker')).toBeNull();
+    expect(screen.getByTestId('own')).toBeTruthy();
+    expect(container.querySelector('.text-primary')).toBeNull();
   });
 
-  it('UserInline renders the handle', () => {
-    const { rerender } = render(<UserInline handle="sam" />);
-    expect(screen.getByText('sam')).toBeTruthy();
-    rerender(<UserInline handle="sam" name="Sam Example" />);
-    expect(screen.getByText('sam')).toBeTruthy();
+  it('renders a kind without an icon with no glyph', () => {
+    const { container } = render(
+      <EntityKindsProvider kinds={KINDS}>
+        <Entity kind="plain" title="Plain" />
+      </EntityKindsProvider>,
+    );
+    expect(container.querySelector('.text-primary')).toBeNull();
+  });
+
+  it('renders an unknown kind from its own texts without a provider', () => {
+    render(<Entity kind="missing" title="Still shown" />);
+    expect(screen.getByText('Still shown')).toBeTruthy();
+  });
+});
+
+describe('useEntityKinds', () => {
+  it('is empty without a provider and the supplied map within one', () => {
+    const Probe = () => <span>{Object.keys(useEntityKinds()).join(',')}</span>;
+    const { container, rerender } = render(<Probe />);
+    expect(container.textContent).toBe('');
+    rerender(
+      <EntityKindsProvider kinds={KINDS}>
+        <Probe />
+      </EntityKindsProvider>,
+    );
+    expect(container.textContent).toBe('worker,plain');
+  });
+});
+
+describe('ACTIVITY_STATUS_TONE', () => {
+  it('maps the five statuses to indicator tones', () => {
+    expect(ACTIVITY_STATUS_TONE).toEqual({
+      running: 'ok',
+      waiting: 'warn',
+      done: 'info',
+      failed: 'err',
+      idle: 'disabled',
+    });
+  });
+});
+
+describe('ModelFooter', () => {
+  it('renders its name with the default and a custom icon', () => {
+    const { rerender } = render(<ModelFooter name="haiku" />);
+    expect(screen.getByText('haiku')).toBeTruthy();
+    rerender(<ModelFooter name="haiku" icon="bot" />);
+    expect(screen.getByText('haiku')).toBeTruthy();
   });
 });
