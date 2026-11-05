@@ -118,7 +118,9 @@ const Heading = () => (
   </>
 );
 
-const meta = {
+// @@T mol-1 begin
+const meta: Meta<typeof Wizard<Answers>> = {
+// @@T mol-1 end
   title: 'Molecules/Wizard',
   component: Wizard,
   parameters: { layout: 'fullscreen' },
@@ -143,7 +145,9 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Wizard<Answers>>;
+// @@T mol-1 begin
+};
+// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

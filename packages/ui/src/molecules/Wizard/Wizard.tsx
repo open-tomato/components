@@ -1,4 +1,6 @@
-import { useId, type ReactNode } from 'react';
+// @@T mol-1 begin
+import { useId, type ReactElement, type ReactNode } from 'react';
+// @@T mol-1 end
 
 import { Button } from '../../atoms/Button';
 import { Overlay } from '../../atoms/Overlay';
@@ -39,7 +41,9 @@ export interface WizardProps<A> {
   onFinish: () => void;
 }
 
-export const Wizard = <A,>({
+// @@T mol-1 begin
+export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayName: string } = <A,>({
+// @@T mol-1 end
   open,
   steps,
   step,

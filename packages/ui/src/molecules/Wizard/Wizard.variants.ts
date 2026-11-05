@@ -1,3 +1,7 @@
+// @@T mol-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -7,7 +11,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * No new behavior — only composition.
 
  */
-export const wizardPanel = cva(
+// @@T mol-1 begin
+export const wizardPanel: (props?: ClassProp) => string = cva(
+// @@T mol-1 end
   [
     'flex max-h-[calc(100vh-80px)] w-[min(560px,calc(100vw-48px))] flex-col',
     'overflow-hidden rounded-xl border border-border-soft bg-surface-1 shadow-lg',
