@@ -22,7 +22,11 @@ export interface OptionCardProps
   meta?: ReactNode;
 }
 
-export const OptionCard = forwardRef<HTMLButtonElement, OptionCardProps>(
+// @@T mol-3 begin
+export const OptionCard: import('react').ForwardRefExoticComponent<
+  OptionCardProps & import('react').RefAttributes<HTMLButtonElement>
+> = forwardRef<HTMLButtonElement, OptionCardProps>(
+// @@T mol-3 end
   ({ className, selected, align, leading, title, description, meta, ...props }, ref) => (
     <button
       ref={ref}

@@ -33,7 +33,11 @@ export interface ToolTitleProps extends HTMLAttributes<HTMLDivElement> {
  * bold name on top, a tool-type badge + the slug id below (spec:
  * "Known Entities").
  */
-export const ToolTitle = forwardRef<HTMLDivElement, ToolTitleProps>(
+// @@T mol-3 begin
+export const ToolTitle: import('react').ForwardRefExoticComponent<
+  ToolTitleProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, ToolTitleProps>(
+// @@T mol-3 end
   (
     {
       className,

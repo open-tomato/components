@@ -27,7 +27,11 @@ export interface ModelCellProps extends HTMLAttributes<HTMLSpanElement> {
  * Entities"; used by the Overview "Top 5 sessions by spend" model
  * column).
  */
-export const ModelCell = forwardRef<HTMLSpanElement, ModelCellProps>(
+// @@T mol-3 begin
+export const ModelCell: import('react').ForwardRefExoticComponent<
+  ModelCellProps & import('react').RefAttributes<HTMLSpanElement>
+> = forwardRef<HTMLSpanElement, ModelCellProps>(
+// @@T mol-3 end
   ({ className, name, tone = 'accent', icon, ...props }, ref) => (
     <span ref={ref} className={cn(entityCell(), className)} {...props}>
       <span className={chartTone({ tone })}>
@@ -60,7 +64,11 @@ export interface ModelFooterProps extends HTMLAttributes<HTMLSpanElement> {
  * "Known Entities"; sits inside SectionCard footers, which set the
  * greyed footer color).
  */
-export const ModelFooter = forwardRef<HTMLSpanElement, ModelFooterProps>(
+// @@T mol-3 begin
+export const ModelFooter: import('react').ForwardRefExoticComponent<
+  ModelFooterProps & import('react').RefAttributes<HTMLSpanElement>
+> = forwardRef<HTMLSpanElement, ModelFooterProps>(
+// @@T mol-3 end
   ({ className, name, icon = 'cpu', ...props }, ref) => (
     <span ref={ref} className={cn(modelFooter(), className)} {...props}>
       <Icon name={icon} size={12} />

@@ -21,7 +21,11 @@ export interface AgentTitleProps extends HTMLAttributes<HTMLDivElement> {
  * on the right (spec: "Known Entities"; used by the
  * session-detail runner metadata card).
  */
-export const AgentTitle = forwardRef<HTMLDivElement, AgentTitleProps>(
+// @@T mol-3 begin
+export const AgentTitle: import('react').ForwardRefExoticComponent<
+  AgentTitleProps & import('react').RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, AgentTitleProps>(
+// @@T mol-3 end
   ({ className, name, subtitle, ...props }, ref) => (
     <div ref={ref} className={cn(entityTitle(), className)} {...props}>
       <Avatar name={name} size="md" shape="rounded" status="none" />

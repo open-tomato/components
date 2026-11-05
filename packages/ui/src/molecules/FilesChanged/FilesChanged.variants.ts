@@ -1,3 +1,7 @@
+// @@T mol-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T mol-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -6,7 +10,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * artboard); chrome mirrors the original-design Section rows (mono paths, soft
  * row rhythm).
  */
-export const filesChangedSummary = cva('font-mono text-xs', {
+// @@T mol-3 begin
+export const filesChangedSummary: (props?: { kind?: 'additions' | 'deletions' | 'count' | null | undefined } & ClassProp) => string = cva('font-mono text-xs', {
+// @@T mol-3 end
+
   variants: {
     kind: {
       additions: 'font-semibold text-success',
@@ -17,11 +24,16 @@ export const filesChangedSummary = cva('font-mono text-xs', {
   defaultVariants: { kind: 'count' },
 });
 
-export const filesChangedPath = cva(
+// @@T mol-3 begin
+export const filesChangedPath: (props?: ClassProp) => string = cva(
+// @@T mol-3 end
   'min-w-0 flex-1 truncate font-mono text-xs text-fg1',
 );
 
-export const filesChangedDelta = cva('text-right font-mono text-xs', {
+// @@T mol-3 begin
+export const filesChangedDelta: (props?: { kind?: 'additions' | 'deletions' | null | undefined; zero?: boolean | null | undefined } & ClassProp) => string = cva('text-right font-mono text-xs', {
+// @@T mol-3 end
+
   variants: {
     kind: {
       additions: 'text-success',

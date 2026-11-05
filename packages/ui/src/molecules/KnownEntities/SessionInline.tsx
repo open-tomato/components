@@ -23,7 +23,11 @@ export interface SessionInlineProps extends HTMLAttributes<HTMLSpanElement> {
  * Sessions table session column top line). Status→tone: running→ok
  * (pulsing), waiting→warn, done→info, failed→err, idle→disabled.
  */
-export const SessionInline = forwardRef<HTMLSpanElement, SessionInlineProps>(
+// @@T mol-3 begin
+export const SessionInline: import('react').ForwardRefExoticComponent<
+  SessionInlineProps & import('react').RefAttributes<HTMLSpanElement>
+> = forwardRef<HTMLSpanElement, SessionInlineProps>(
+// @@T mol-3 end
   ({ className, name, status, ...props }, ref) => (
     <span ref={ref} className={cn(entityCell(), className)} {...props}>
       <StatusIndicator
