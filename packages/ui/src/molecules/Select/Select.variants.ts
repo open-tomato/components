@@ -1,3 +1,7 @@
+// @@T mol-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -9,7 +13,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * listbox/option) — selection state is still announced via aria-checked
  * on the items.
  */
-export const selectTrigger = cva(
+// @@T mol-1 begin
+export const selectTrigger: (props?: { size?: 'sm' | 'md' | null } & ClassProp) => string = cva(
+// @@T mol-1 end
   [
     'inline-flex min-w-0 items-center gap-2 px-[11px] rounded-md',
     'bg-surface-1 border border-border-strong text-fg1',

@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ReactNode, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { cn } from '../../lib';
 
@@ -65,7 +67,9 @@ const statTone = (
  * - automatic accent: a ministat's `trend` colors its value
  *   (up → success, down → danger); explicit `tone` overrides.
  */
-export const RowStatCard = forwardRef<HTMLDivElement, RowStatCardProps>(
+// @@T mol-1 begin
+export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, RowStatCardProps>(
+// @@T mol-1 end
   ({ className, title, subtitle, stats, action, footer, ...props }, ref) => (
     <div ref={ref} className={cn(rowStatCard(), className)} {...props}>
       <div className="flex flex-wrap items-center justify-between gap-4">

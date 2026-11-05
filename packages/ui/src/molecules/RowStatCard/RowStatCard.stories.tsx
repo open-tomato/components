@@ -5,7 +5,9 @@ import { Button } from '../../atoms';
 import { RowStatCard } from './RowStatCard';
 import { RowStatCardMeter } from './RowStatCardMeter';
 
-const meta = {
+// @@T mol-1 begin
+const meta: Meta<typeof RowStatCard> = {
+// @@T mol-1 end
   title: 'Molecules/RowStatCard',
   component: RowStatCard,
   parameters: { layout: 'padded' },
@@ -17,7 +19,9 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof RowStatCard>;
+// @@T mol-1 begin
+};
+// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

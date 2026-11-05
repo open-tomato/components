@@ -1,6 +1,8 @@
 import type { SelectionItem } from '../Breadcrumb';
 
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -15,7 +17,9 @@ export interface SegmentedProps
   size?: 'sm' | 'md';
 }
 
-export const Segmented = forwardRef<HTMLDivElement, SegmentedProps>(
+// @@T mol-1 begin
+export const Segmented: ForwardRefExoticComponent<PropsWithoutRef<SegmentedProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, SegmentedProps>(
+// @@T mol-1 end
   ({ className, items, index, onChange, size = 'md', ...props }, ref) => (
     <div
       ref={ref}

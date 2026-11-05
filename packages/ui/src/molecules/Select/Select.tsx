@@ -1,5 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { type CSSProperties, type ReactNode } from 'react';
+// @@T mol-1 begin
+import { type CSSProperties, type JSX, type ReactNode } from 'react';
+// @@T mol-1 end
 
 import { Menu, MenuContent, MenuTrigger } from '../../atoms/Menu';
 import { menuItem } from '../../atoms/Menu/Menu.variants';
@@ -28,7 +30,12 @@ export interface SelectProps extends SelectTriggerVariants {
 /** Minimum dropdown width. */
 const MIN_PANEL_WIDTH = 160;
 
-export const Select = ({
+// @@T mol-1 begin
+export const Select: {
+  (props: SelectProps): JSX.Element;
+  displayName?: string;
+} = ({
+// @@T mol-1 end
   value,
   options,
   onChange,
@@ -36,7 +43,9 @@ export const Select = ({
   width = 200,
   ariaLabel,
   className,
-}: SelectProps) => {
+// @@T mol-1 begin
+}: SelectProps): JSX.Element => {
+// @@T mol-1 end
   const sel = options.find((o) => o.value === value) ?? options[0];
   const panelStyle: CSSProperties = {
     width: Math.max(width, MIN_PANEL_WIDTH),
