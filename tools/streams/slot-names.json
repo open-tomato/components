@@ -64,6 +64,7 @@
   ],
   "atRecombination": [
     "Delete `src/internal/TomatoMark.tsx` once no file imports it; stories that drew it fill the new slots with a neutral placeholder.",
-    "Remove the `--wordmark-tomato` tokens, their theme mapping and the `.wordmark` rule once no file uses them (Badge's variants and the shell fixtures did)."
+    "Remove the `--wordmark-tomato` tokens, their theme mapping and the `.wordmark` rule once no file uses them (Badge's variants and the shell fixtures did).",
+    "Rename the packages: `packages/ui/package.json` from `@ar/ui` to `@open-tomato/components`, the package that ships, and the private root `package.json` from `agentic-research` to `components-workspace`; run `bun install` so `bun.lock` follows, and update the name in `packages/ui/README.md`, `AGENTS.md` and `CLAUDE.md`. `NOTICE` keeps its mentions, because it credits the source."
   ]
 }
