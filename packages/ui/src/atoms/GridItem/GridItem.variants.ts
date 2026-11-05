@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -6,7 +10,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * need it.
 
  */
-export const gridItem = cva('', {
+// @@T ato-3 begin
+export const gridItem: (
+  props?: {
+    span?: '1' | '2' | '3' | 'full' | null | undefined;
+    align?: 'auto' | 'start' | 'center' | 'stretch' | null | undefined;
+  } & ClassProp,
+) => string = cva('', {
+// @@T ato-3 end
   variants: {
     span: {
       '1': 'col-span-1',

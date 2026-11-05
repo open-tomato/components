@@ -1,3 +1,7 @@
+// @@T ato-3 begin
+import type { ClassProp } from 'class-variance-authority/types';
+// @@T ato-3 end
+
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -11,7 +15,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * props, not classes. Enter/exit transitions are deferred with the rest
  * of the motion pass.
  */
-export const overlay = cva('fixed inset-0 z-overlay flex', {
+// @@T ato-3 begin
+export const overlay: (
+  props?: {
+    position?: 'center' | 'right' | 'left' | 'bottom' | null | undefined;
+    backdrop?: 'dim' | 'blur' | 'none' | null | undefined;
+  } & ClassProp,
+) => string = cva('fixed inset-0 z-overlay flex', {
+// @@T ato-3 end
   variants: {
     position: {
       center: 'items-center justify-center p-6',

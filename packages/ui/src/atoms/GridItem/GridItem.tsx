@@ -1,4 +1,11 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T ato-3 begin
+import {
+  forwardRef,
+  type ForwardRefExoticComponent,
+  type HTMLAttributes,
+  type RefAttributes,
+} from 'react';
+// @@T ato-3 end
 
 import { cn } from '../../lib';
 
@@ -8,7 +15,12 @@ export interface GridItemProps
   extends HTMLAttributes<HTMLDivElement>,
   GridItemVariants {}
 
-export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
+// @@T ato-3 begin
+export const GridItem: ForwardRefExoticComponent<
+  GridItemProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+// @@T ato-3 end
+  HTMLDivElement, GridItemProps>(
   ({ className, span, align, ...props }, ref) => (
     <div
       ref={ref}

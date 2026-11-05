@@ -12,7 +12,9 @@ const SpanTile = ({ label }: { label: string }) => (
   </span>
 );
 
-const meta = {
+// @@T ato-3 begin
+const meta: Meta<typeof GridItem> = {
+// @@T ato-3 end
   title: 'Atoms/GridItem',
   component: GridItem,
   parameters: { layout: 'padded' },
@@ -30,7 +32,7 @@ const meta = {
       </Grid>
     ),
   ],
-} satisfies Meta<typeof GridItem>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
