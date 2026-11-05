@@ -33,4 +33,12 @@ export const chip: (
   },
 );
 
+// @@V ato-3 begin
+/** The leading icon slot (accent-colored). */
+export const chipIcon: (props?: ClassProp | undefined) => string = cva('text-accent shrink-0');
+
+/** The round remove affordance on the trailing side. */
+export const chipRemove: (props?: ClassProp | undefined) => string = cva('size-[17px] justify-center border-none bg-[color-mix(in_oklab,var(--accent)_22%,transparent)] text-accent');
+// @@V ato-3 end
+
 export type ChipVariants = VariantProps<typeof chip>;

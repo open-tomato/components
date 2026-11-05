@@ -9,7 +9,9 @@ import {
 import { cn } from '../../lib';
 import { Touchable } from '../Touchable';
 
-import { chip } from './Chip.variants';
+// @@V ato-3 begin
+import { chip, chipIcon, chipRemove } from './Chip.variants';
+// @@V ato-3 end
 
 export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   /** Optional leading icon (13px, accent-colored). */
@@ -30,7 +32,9 @@ export const Chip: ForwardRefExoticComponent<
       className={cn(chip({ removable: onRemove != null }), className)}
       {...props}
     >
-      {icon != null && <span className="text-accent shrink-0">{icon}</span>}
+      {/* @@V ato-3 begin */}
+      {icon != null && <span className={chipIcon()}>{icon}</span>}
+      {/* @@V ato-3 end */}
       {children}
       {onRemove != null && (
         <Touchable
@@ -38,7 +42,9 @@ export const Chip: ForwardRefExoticComponent<
           rounded="full"
           aria-label="Remove"
           onClick={onRemove}
-          className="size-[17px] justify-center border-none bg-[color-mix(in_oklab,var(--accent)_22%,transparent)] text-accent"
+          // @@V ato-3 begin
+          className={chipRemove()}
+          // @@V ato-3 end
         >
           <svg
             width="11"
