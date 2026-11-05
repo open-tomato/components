@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { chartTone, cn, type ChartTone } from '../../lib';
 
@@ -35,7 +37,9 @@ export interface UsageBarProps
  * The >100% treatment is a spec-driven design (not in the original
  * artboards): see `usageBarOverflowFill` in the variants file.
  */
-export const UsageBar = forwardRef<HTMLDivElement, UsageBarProps>(
+// @@T mol-1 begin
+export const UsageBar: ForwardRefExoticComponent<PropsWithoutRef<UsageBarProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, UsageBarProps>(
+// @@T mol-1 end
   ({ className, ratio, tone, size, track, label, ...props }, ref) => {
     const isOver = ratio > 1;
     const safeRatio = Math.max(0, ratio);

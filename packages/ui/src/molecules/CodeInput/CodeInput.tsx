@@ -1,4 +1,6 @@
-import { useRef, type KeyboardEvent } from 'react';
+// @@T mol-1 begin
+import { useRef, type JSX, type KeyboardEvent } from 'react';
+// @@T mol-1 end
 
 import { cn } from '../../lib';
 
@@ -16,7 +18,12 @@ export interface CodeInputProps {
 }
 
 /** Digits fill left-to-right; typing advances, backspace on empty retreats. */
-export const CodeInput = ({
+// @@T mol-1 begin
+export const CodeInput: {
+  (props: CodeInputProps): JSX.Element;
+  displayName?: string;
+} = ({
+// @@T mol-1 end
   length = 6,
   value,
   onChange,

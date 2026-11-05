@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -35,7 +37,9 @@ const pageButton = (active = false) => cn(
   paginationButton({ active }),
 );
 
-export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
+// @@T mol-1 begin
+export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, PaginationProps>(
+// @@T mol-1 end
   ({ className, count, index, onChange, ...props }, ref) => (
     <div
       ref={ref}

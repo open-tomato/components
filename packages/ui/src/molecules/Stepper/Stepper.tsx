@@ -1,6 +1,8 @@
 import type { SelectionItem } from '../Breadcrumb';
 
-import { forwardRef, Fragment, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, Fragment, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -39,7 +41,9 @@ const Check = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
-export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
+// @@T mol-1 begin
+export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, StepperProps>(
+// @@T mol-1 end
   (
     { className, items, index, onChange, tone = 'primary', size = 'md', ...props },
     ref,

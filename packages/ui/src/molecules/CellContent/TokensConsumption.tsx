@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { cn, formatNumber } from '../../lib';
 
@@ -25,10 +27,9 @@ export interface TokensConsumptionProps
  * tokens-consumption"; rendered reference: the Sessions table tokens
  * column in the original Sessions screen).
  */
-export const TokensConsumption = forwardRef<
-  HTMLSpanElement,
-  TokensConsumptionProps
->(({ className, used, quota, locale, ...props }, ref) => (
+// @@T mol-1 begin
+export const TokensConsumption: ForwardRefExoticComponent<PropsWithoutRef<TokensConsumptionProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, TokensConsumptionProps>(({ className, used, quota, locale, ...props }, ref) => (
+// @@T mol-1 end
   <span
     ref={ref}
     className={cn(tokensConsumption(), className)}
@@ -57,7 +58,9 @@ export interface TokensProgressProps extends TokensConsumptionProps {
  * red, else accent); the spec keys the color to consumption thresholds —
  * the spec wins.
  */
-export const TokensProgress = forwardRef<HTMLDivElement, TokensProgressProps>(
+// @@T mol-1 begin
+export const TokensProgress: ForwardRefExoticComponent<PropsWithoutRef<TokensProgressProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, TokensProgressProps>(
+// @@T mol-1 end
   ({ className, used, quota, locale, label, ...props }, ref) => {
     const ratio = quota > 0
       ? used / quota

@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { cn } from '../../lib';
 
@@ -38,7 +40,9 @@ export interface RowStatCardMeterProps
  * (original design BudgetBar's track + forecast tick + caption row). Colocated:
  * story coverage lives on RowStatCard.
  */
-export const RowStatCardMeter = forwardRef<HTMLDivElement, RowStatCardMeterProps>(
+// @@T mol-1 begin
+export const RowStatCardMeter: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardMeterProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, RowStatCardMeterProps>(
+// @@T mol-1 end
   (
     { className, value, startLabel, endLabel, marker, tone, label, ...props },
     ref,

@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 // Deep imports, not the Formatted barrel — see CellValue.tsx (the built
 // storybook's lazy-init chunking can drop barrel member inits).
@@ -35,7 +37,9 @@ export interface SpendOverTimeProps extends HTMLAttributes<HTMLDivElement> {
  * design renders a middot, and the middot wins as the DS-wide separator
  * (same treatment as the session-cell meta line).
  */
-export const SpendOverTime = forwardRef<HTMLDivElement, SpendOverTimeProps>(
+// @@T mol-1 begin
+export const SpendOverTime: ForwardRefExoticComponent<PropsWithoutRef<SpendOverTimeProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, SpendOverTimeProps>(
+// @@T mol-1 end
   (
     { className, cost, currency = 'usd', seconds, date, now, locale, ...props },
     ref,

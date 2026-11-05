@@ -1,4 +1,6 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+// @@T mol-1 begin
+import { forwardRef, type HTMLAttributes, type ReactNode, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
+// @@T mol-1 end
 
 import { cn } from '../../lib';
 
@@ -23,7 +25,9 @@ export interface CellDoubleLineProps
  * parent cell (see the kit's tooltip-ownership decision in
  * CellContent.variants.ts).
  */
-export const CellDoubleLine = forwardRef<HTMLDivElement, CellDoubleLineProps>(
+// @@T mol-1 begin
+export const CellDoubleLine: ForwardRefExoticComponent<PropsWithoutRef<CellDoubleLineProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, CellDoubleLineProps>(
+// @@T mol-1 end
   ({ className, title, subtitle, ...props }, ref) => (
     <div ref={ref} className={cn(cellDoubleLine(), className)} {...props}>
       <span className={cellDoubleLineTitle()}>{title}</span>

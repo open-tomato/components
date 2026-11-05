@@ -1,3 +1,7 @@
+// @@T mol-1 begin
+import type { ClassProp } from 'class-variance-authority/types';
+
+// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -5,11 +9,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * options, in a sunken track.
 
  */
-export const segmented = cva(
+// @@T mol-1 begin
+export const segmented: (props?: ClassProp) => string = cva(
+// @@T mol-1 end
   'inline-flex gap-[3px] p-[3px] bg-surface-sunk rounded-md border border-border-soft',
 );
 
-export const segmentedItem = cva('rounded-sm font-body text-[13.5px]', {
+// @@T mol-1 begin
+export const segmentedItem: (props?: { active?: boolean | null; size?: 'sm' | 'md' | null } & ClassProp) => string = cva('rounded-sm font-body text-[13.5px]', {
+// @@T mol-1 end
   variants: {
     active: {
       false: 'bg-transparent text-fg3 font-medium shadow-none',

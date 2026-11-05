@@ -9,13 +9,17 @@ const STAGES = [
   { key: 'review', label: 'Review' },
 ];
 
-const meta = {
+// @@T mol-1 begin
+const meta: Meta<typeof Stepper> = {
+// @@T mol-1 end
   title: 'Molecules/Stepper',
   component: Stepper,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
   args: { items: STAGES, index: 1, onChange: () => {} },
-} satisfies Meta<typeof Stepper>;
+// @@T mol-1 begin
+};
+// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
