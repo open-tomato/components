@@ -30,8 +30,7 @@
     "test:all": "bun run test && bun run --filter '@open-tomato/*' test",
     "gate:control-bytes": "bun tools/control-byte-gate/control-byte-gate.ts",
     "gate:privacy": "bun tools/privacy-gate/privacy-gate.ts",
-    "gate:privacy:history": "bun tools/privacy-gate/privacy-gate.ts --history",
-    "gate:doc-links": "bun packages/service/scripts/check-doc-links.ts"
+    "gate:privacy:history": "bun tools/privacy-gate/privacy-gate.ts --history"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
