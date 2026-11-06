@@ -89,11 +89,15 @@ export const Sortable: {
   const [mode, setMode] = useState<'internal' | 'cross' | null>(null);
   const [dragKey, setDragKey] = useState<string | null>(null);
   const depth = useRef(0);
+  const lineRef = useRef<HTMLDivElement>(null);
   const horizontal = direction === 'horizontal';
 
   const onItemDragOver = (e: DragEvent, i: number) => {
     const m = classify(e.dataTransfer, TYPE);
     if (!m || m === 'files' || (m === 'cross' && !onReceive)) return;
+    // Keep the container's dragover from overwriting this item's index with
+    // items.length while overIndex is still null in its closure (#5).
+    e.stopPropagation();
     e.preventDefault();
     e.dataTransfer.dropEffect = m === 'internal'
       ? 'move'
@@ -112,10 +116,11 @@ export const Sortable: {
     const m = classify(e.dataTransfer, TYPE);
     if (!m || m === 'files' || (m === 'cross' && !onReceive)) return;
     e.preventDefault();
-    if (overIndex == null) {
-      setOverIndex(items.length);
-      setMode(m);
-    }
+    // Item dragovers stop propagating, so only a gap (or the line) lands
+    // here: moving from an item onto a gap retargets the drop to the end.
+    if (e.target === lineRef.current) return;
+    setOverIndex(items.length);
+    setMode(m);
   };
 
   const onEnter = (e: DragEvent) => {
@@ -163,7 +168,7 @@ export const Sortable: {
     clear();
   };
 
-  const line = <div className={sortableLine({ direction })} />;
+  const line = <div ref={lineRef} className={sortableLine({ direction })} />;
   const style: CSSProperties = { gap };
 
   return (

@@ -4,14 +4,14 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, type ViteUserConfig } from 'vitest/config';
 
 const dirname =
   typeof __dirname !== 'undefined'
     ? __dirname
     : fileURLToPath(new URL('.', import.meta.url));
 
-export default defineConfig({
+const config: ViteUserConfig = defineConfig({
   plugins: [
     react(),
     tailwindcss(),
@@ -27,3 +27,5 @@ export default defineConfig({
     },
   },
 });
+
+export default config;
