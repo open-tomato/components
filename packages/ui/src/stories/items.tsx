@@ -3,37 +3,37 @@ import type { Column } from '../organisms/Table';
 import { Badge } from '../atoms/Badge';
 
 import {
-  sessionGoal,
-  sessionModel,
-  sessionName,
-  sessionSuffix,
-  sessionTokens,
-  sessionUpdated,
-} from './sessions.variants';
+  itemGoal,
+  itemModel,
+  itemName,
+  itemSuffix,
+  itemCount,
+  itemUpdated,
+} from './items.variants';
 
 /**
  * The demo dataset of work items shared by the Table/Toolbar stories —
  * stories only, never exported from the library barrel.
  */
 
-export interface Session {
+export interface Item {
   id: string;
   status: 'running' | 'waiting' | 'done' | 'idle' | 'failed';
   name: string;
   goal: string;
   model: string;
-  tokens: number;
+  count: number;
   updated: number;
 }
 
-export const SESSIONS: Session[] = [
+export const ITEMS: Item[] = [
   {
     id: 'ses_8x21',
     status: 'running',
     name: 'refactor-bot · split-primitives',
     goal: 'Split the monolith Primitives file into per-role wrappers and update every import across the dashboard kit.',
     model: 'sonnet-4.5',
-    tokens: 184200,
+    count: 184200,
     updated: 2,
   },
   {
@@ -42,7 +42,7 @@ export const SESSIONS: Session[] = [
     name: 'docs-writer · variant-tables',
     goal: 'Draft the variant reference tables for each wrapper directly from the CVA configs.',
     model: 'haiku-4',
-    tokens: 52100,
+    count: 52100,
     updated: 6,
   },
   {
@@ -51,7 +51,7 @@ export const SESSIONS: Session[] = [
     name: 'test-runner · snapshot-themes',
     goal: 'Snapshot every primitive across light and dark, then diff against the baseline set.',
     model: 'sonnet-4.5',
-    tokens: 311800,
+    count: 311800,
     updated: 18,
   },
   {
@@ -60,7 +60,7 @@ export const SESSIONS: Session[] = [
     name: 'schema-migrator · backfill-classes',
     goal: 'Backfill tokenized class names into the legacy kit so no raw hex survives in a variant.',
     model: 'opus-4',
-    tokens: 0,
+    count: 0,
     updated: 41,
   },
   {
@@ -69,7 +69,7 @@ export const SESSIONS: Session[] = [
     name: 'a11y-architect · focus-rings',
     goal: 'Audit keyboard focus order and add visible focus rings to every Touchable-derived component.',
     model: 'sonnet-4.5',
-    tokens: 96400,
+    count: 96400,
     updated: 1,
   },
   {
@@ -78,7 +78,7 @@ export const SESSIONS: Session[] = [
     name: 'perf-bot · bundle-trim',
     goal: 'Trim the shared bundle by code-splitting the playground; the build step is currently erroring on the colgroup helper.',
     model: 'haiku-4',
-    tokens: 23700,
+    count: 23700,
     updated: 33,
   },
   {
@@ -87,13 +87,13 @@ export const SESSIONS: Session[] = [
     name: 'lint-sweeper · no-static-interactions',
     goal: 'Resolve jsx-a11y/no-static-element-interactions by routing clicks through Touchable.',
     model: 'sonnet-4.5',
-    tokens: 142500,
+    count: 142500,
     updated: 27,
   },
 ];
 
 export const STATUS: Record<
-  Session['status'],
+  Item['status'],
   {
     tone: 'success' | 'warning' | 'danger' | 'info' | 'neutral';
     dot: boolean;
@@ -108,7 +108,7 @@ export const STATUS: Record<
   idle: { tone: 'neutral', dot: false, label: 'idle', rank: 4 },
 };
 
-export const fmtTokens = (n: number): string => n === 0
+export const fmtCount = (n: number): string => n === 0
   ? '—'
   : n >= 1000
     ? (n / 1000).toFixed(n >= 100000
@@ -119,7 +119,7 @@ export const fmtTokens = (n: number): string => n === 0
 /** The demo column config — width/sort/overflow defined once. */
 export const makeColumns = (
   goalMode: 'wrap' | 'clamp' | 'truncate',
-): Column<Session>[] => [
+): Column<Item>[] => [
   {
     key: 'status',
     header: 'Status',
@@ -147,8 +147,8 @@ export const makeColumns = (
     overflow: 'truncate',
     cell: (r) => (
       <span>
-        <span className={sessionName()}>{r.name.split(' · ')[0]}</span>
-        <span className={sessionSuffix()}>
+        <span className={itemName()}>{r.name.split(' · ')[0]}</span>
+        <span className={itemSuffix()}>
           {' '}
           · {r.name.split(' · ')[1]}
         </span>
@@ -160,7 +160,7 @@ export const makeColumns = (
     header: 'Goal',
     overflow: goalMode,
     clampLines: 2,
-    cell: (r) => <span className={sessionGoal()}>{r.goal}</span>,
+    cell: (r) => <span className={itemGoal()}>{r.goal}</span>,
   },
   {
     key: 'model',
@@ -168,21 +168,21 @@ export const makeColumns = (
     width: 116,
     sortable: true,
     cell: (r) => (
-      <span className={sessionModel()}>{r.model}</span>
+      <span className={itemModel()}>{r.model}</span>
     ),
   },
   {
-    key: 'tokens',
+    key: 'count',
     header: 'Usage',
     width: 100,
     align: 'end',
     sortable: true,
     cell: (r) => (
-      <span className={sessionTokens({ empty: r.tokens === 0 })}>
-        {fmtTokens(r.tokens)}
+      <span className={itemCount({ empty: r.count === 0 })}>
+        {fmtCount(r.count)}
       </span>
     ),
-    footer: (rows) => fmtTokens(rows.reduce((s, r) => s + r.tokens, 0)) + ' total',
+    footer: (rows) => fmtCount(rows.reduce((s, r) => s + r.count, 0)) + ' total',
   },
   {
     key: 'updated',
@@ -191,7 +191,7 @@ export const makeColumns = (
     align: 'end',
     sortable: true,
     cell: (r) => (
-      <span className={sessionUpdated()}>{r.updated}m ago</span>
+      <span className={itemUpdated()}>{r.updated}m ago</span>
     ),
   },
 ];

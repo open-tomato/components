@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import { afterEach, describe, expect, it, mock } from 'bun:test';
 
 import { Table, type Column } from './Table';
+import { ConfigDriven } from './Table.stories';
 
 interface Row {
   id: string;
@@ -30,6 +31,21 @@ const bodyNames = (): string[] => screen
 afterEach(cleanup);
 
 describe('Table', () => {
+  it('renders the amount column header and each row amount in the ConfigDriven story', () => {
+    render(ConfigDriven.render?.({} as never, {} as never) as never);
+    expect(screen.getByRole('columnheader', { name: 'Amount · Time' })).toBeTruthy();
+    const idx = screen.getAllByRole('columnheader').findIndex((h) => h.textContent === 'Amount · Time');
+    const amounts = screen.getAllByRole('row').slice(1)
+      .map((r) => within(r).getAllByRole('cell')[idx]?.textContent ?? '');
+    expect(amounts).toEqual([
+      '$0.427m 17s · 12:04 PM',
+      '$0.6123m · 11:48 AM',
+      '$0.049m · 11:52 AM',
+      '$0.316m 47s · 10:33 AM',
+      '$1.9218m 24s · 22 hours ago',
+    ]);
+  });
+
   it('renders headers and rows', () => {
     render(<Table columns={COLUMNS} data={DATA} getRowId={getRowId} />);
     expect(screen.getByRole('columnheader', { name: /Name/ })).toBeTruthy();

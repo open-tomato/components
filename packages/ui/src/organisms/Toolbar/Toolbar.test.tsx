@@ -1,6 +1,8 @@
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeAll, describe, expect, it, mock } from 'bun:test';
-import { useState } from 'react';
+import { useState, type ReactElement } from 'react';
+
+import { ITEMS } from '../../stories/items';
 
 import { FilterDropdown } from './FilterDropdown';
 import { SearchInput } from './SearchInput';
@@ -10,6 +12,7 @@ import {
   ToolbarSep,
   ToolbarSummary,
 } from './Toolbar';
+import { Attached, Detached } from './Toolbar.stories';
 
 beforeAll(() => {
   class NoopResizeObserver {
@@ -136,5 +139,30 @@ describe('FilterDropdown', () => {
     await openMenu();
     fireEvent.click(screen.getByRole('menuitem', { name: 'Clear status' }));
     expect(onClear).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe.each([
+  ['Detached', Detached],
+  ['Attached', Attached],
+])('%s story results', (_name, story) => {
+  const renderStory = (): void => {
+    const Story = story.render as () => ReactElement;
+    render(<Story />);
+  };
+
+  it('shows the illustration in the empty state when no item matches', () => {
+    renderStory();
+    fireEvent.change(screen.getByPlaceholderText('Search…'), { target: { value: 'zzz-no-such-item' } });
+    const title = screen.getByText('No items match');
+    const mark = title.parentElement?.querySelector('span') as HTMLElement;
+    expect(mark.querySelector('svg')).not.toBeNull();
+    expect(screen.queryAllByRole('row')).toHaveLength(0);
+  });
+
+  it('renders a row for each item when the query is empty', () => {
+    renderStory();
+    expect(screen.queryByText('No items match')).toBeNull();
+    expect(document.querySelectorAll('tbody tr')).toHaveLength(ITEMS.length);
   });
 });

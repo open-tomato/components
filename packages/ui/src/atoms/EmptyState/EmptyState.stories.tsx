@@ -1,15 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { JSX } from 'react';
 
+import { ArtPlaceholder } from '../../stories/fixtures';
 import { Button } from '../Button';
 
 import { EmptyState } from './EmptyState';
-
-const ArtPlaceholder = (): JSX.Element => (
-  <svg width={30} height={30} viewBox="0 0 64 64" aria-hidden>
-    <circle cx="32" cy="32" r="20" className="fill-primary" />
-  </svg>
-);
 
 const meta: Meta<typeof EmptyState> = {
   title: 'Atoms/EmptyState',

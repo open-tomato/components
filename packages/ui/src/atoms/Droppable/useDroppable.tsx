@@ -69,10 +69,12 @@ export function validateDrop(
         : ''} at a time.`,
     };
   for (const f of files) {
+    // A file passes when it matches any list that is set; with neither
+    // list set, every file passes.
     const okExt =
-      !ext || ext.some((e) => f.name.toLowerCase().endsWith(e.toLowerCase()));
-    const okMime = !mime || mime.some((m) => matchesMime(f.type, m));
-    if (!okExt && !okMime) {
+      !!ext && ext.some((e) => f.name.toLowerCase().endsWith(e.toLowerCase()));
+    const okMime = !!mime && mime.some((m) => matchesMime(f.type, m));
+    if ((ext || mime) && !okExt && !okMime) {
       const want = (ext || mime || []).join(', ');
       return { ok: false, reason: `${f.name} isn't accepted — needs ${want}.` };
     }

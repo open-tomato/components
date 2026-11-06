@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
-import { makeColumns, SESSIONS as ITEMS, type Session as Item } from '../../stories/sessions';
+import { makeColumns, ITEMS, type Item } from '../../stories/items';
 
 import { renderCellContent } from './cellTypes';
 import { RowContextAction } from './RowContextAction';
@@ -170,7 +170,7 @@ interface ItemRow {
   by: string;
   used: number;
   quota: number;
-  cost: number;
+  amount: number;
   seconds: number;
   date: Date;
 }
@@ -179,11 +179,11 @@ interface ItemRow {
 const REF_NOW = new Date(2026, 6, 22, 15, 0, 0);
 
 const ITEM_ROWS: ItemRow[] = [
-  { id: 'item-7d2f', name: 'auth-refactor', status: 'done', owner: 'the-refactorer', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 38120, quota: 50000, cost: 0.42, seconds: 437, date: new Date(2026, 6, 22, 12, 4, 0) },
-  { id: 'item-93af', name: 'perf-investigate', status: 'waiting', owner: 'the-profiler', model: 'opus-4-5', tone: 'gold', by: 'ren', used: 19800, quota: 80000, cost: 0.61, seconds: 1380, date: new Date(2026, 6, 22, 11, 48, 0) },
-  { id: 'item-22b1', name: 'docs-typos', status: 'running', owner: 'the-editor', model: 'haiku-4-5', tone: 'info', by: 'kai', used: 5320, quota: 15000, cost: 0.04, seconds: 540, date: new Date(2026, 6, 22, 11, 52, 0) },
-  { id: 'item-58c0', name: 'rate-limit-bug', status: 'failed', owner: 'the-investigator', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 27450, quota: 50000, cost: 0.31, seconds: 407, date: new Date(2026, 6, 22, 10, 33, 0) },
-  { id: 'item-0118', name: 'image-pipeline', status: 'done', owner: 'the-refactorer', model: 'opus-4-5', tone: 'accent', by: 'kai', used: 62100, quota: 80000, cost: 1.92, seconds: 1104, date: new Date(2026, 6, 21, 16, 20, 0) },
+  { id: 'item-7d2f', name: 'auth-refactor', status: 'done', owner: 'the-refactorer', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 38120, quota: 50000, amount: 0.42, seconds: 437, date: new Date(2026, 6, 22, 12, 4, 0) },
+  { id: 'item-93af', name: 'perf-investigate', status: 'waiting', owner: 'the-profiler', model: 'opus-4-5', tone: 'gold', by: 'ren', used: 19800, quota: 80000, amount: 0.61, seconds: 1380, date: new Date(2026, 6, 22, 11, 48, 0) },
+  { id: 'item-22b1', name: 'docs-typos', status: 'running', owner: 'the-editor', model: 'haiku-4-5', tone: 'info', by: 'kai', used: 5320, quota: 15000, amount: 0.04, seconds: 540, date: new Date(2026, 6, 22, 11, 52, 0) },
+  { id: 'item-58c0', name: 'rate-limit-bug', status: 'failed', owner: 'the-investigator', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 27450, quota: 50000, amount: 0.31, seconds: 407, date: new Date(2026, 6, 22, 10, 33, 0) },
+  { id: 'item-0118', name: 'image-pipeline', status: 'done', owner: 'the-refactorer', model: 'opus-4-5', tone: 'accent', by: 'kai', used: 62100, quota: 80000, amount: 1.92, seconds: 1104, date: new Date(2026, 6, 21, 16, 20, 0) },
 ];
 
 const STATUS_BADGE = {
@@ -239,11 +239,11 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     }),
   },
   {
-    key: 'cost',
-    header: 'Cost · Time',
+    key: 'amount',
+    header: 'Amount · Time',
     width: 148,
     cell: (r) => renderCellContent('amount-over-time', {
-      amount: r.cost,
+      amount: r.amount,
       seconds: r.seconds,
       date: r.date,
       now: REF_NOW,
