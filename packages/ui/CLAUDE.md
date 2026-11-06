@@ -4,9 +4,9 @@ order, and the reference-free rule.
 
 Quick orientation:
 
-- Workspace package `@ar/ui` of the agentic-research umbrella (bun
-  workspaces), vendored fork-style from the standalone `components-library`
-  template. Everything for the library (components, cache module, workbench, visual CI,
+- Workspace package `@open-tomato/components` of the `components-workspace`
+  root (bun workspaces); `NOTICE` names the source it was ported from.
+  Everything for the library (components, cache module, workbench, visual CI,
   agent tooling) lives here.
 - Component work follows `.claude/skills/component-from-design/SKILL.md`
   (the rosetta loop + Known hazards). Orchestrate sessions with the personas
