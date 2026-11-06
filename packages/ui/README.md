@@ -208,22 +208,14 @@ node scripts/compare-design.mjs atoms-button--primary Button
 
 Design reference pages live under [`design/`](design/README.md).
 
-### Visual CI (off by default)
+### CI
 
-`.github/workflows/front.yml` gates PRs on the visual suite using a
-self-hosted runner: merges to `main` refresh the runner's baselines, changed
-pixels on a PR fail with downloadable diffs.
+GitHub runs a minimal check on every pull request
+(`.github/workflows/verify.yml`): the privacy and control-byte gates, lint,
+types, the build, and the unit and render tests.
 
-The workflow ships **disabled** — it is a reference implementation for
-projects that adopt this library, and it does nothing until the repository
-Actions variable `VISUAL_CI` is set to `enabled`. The activation flag, and the
-runner it points at (`VISUAL_CI_RUNNER`, defaulting to the `grow-box` label),
-live in GitHub settings — the live pipeline wiring is deliberately not tracked
-in the repo. The local suite above works regardless.
-
-Operator setup and enablement:
-[docs/ci/grow-box-runner-setup.md](docs/ci/grow-box-runner-setup.md); verify
-the wiring with `scripts/verify-visual-ci.sh`.
+The visual suite stays local. It never runs in GitHub Actions, and its
+baselines are never committed or uploaded: each machine keeps its own.
 
 ## License
 
