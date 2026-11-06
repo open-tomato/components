@@ -94,6 +94,9 @@ export const Sortable: {
   const onItemDragOver = (e: DragEvent, i: number) => {
     const m = classify(e.dataTransfer, TYPE);
     if (!m || m === 'files' || (m === 'cross' && !onReceive)) return;
+    // Keep the container's dragover from overwriting this item's index with
+    // items.length while overIndex is still null in its closure (#5).
+    e.stopPropagation();
     e.preventDefault();
     e.dataTransfer.dropEffect = m === 'internal'
       ? 'move'

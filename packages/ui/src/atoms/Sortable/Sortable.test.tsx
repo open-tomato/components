@@ -43,9 +43,8 @@ const setup = (props: Partial<Parameters<typeof Sortable<Item>>[0]> = {}) => {
 };
 
 /**
- * A dragover on an item bubbles to the container, whose handler overwrites the
- * item's index while the container's overIndex is still null. Priming the
- * container first makes the item's index stick, as in a real drag.
+ * A real drag crosses the container (a gap) before it reaches an item, so a
+ * hover fires a dragover on the container first and then on the item.
  */
 const hover = (root: HTMLElement, row: HTMLElement, dt: ReturnType<typeof makeDt>): void => {
   fireEvent.dragOver(root, { dataTransfer: dt });
@@ -112,6 +111,35 @@ describe('Sortable', () => {
     fireEvent.dragOver(root, { dataTransfer: dt });
     fireEvent.drop(root, { dataTransfer: dt });
     expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['2', '3', '1']);
+  });
+
+  it('drops at the hovered item without a prior container dragover (#5)', () => {
+    const { rows, onReorder } = setup();
+    const dt = makeDt([TYPE], { [TYPE]: JSON.stringify({ fromIndex: 0 }) });
+    fireEvent.dragOver(rows()[2]!, { dataTransfer: dt });
+    fireEvent.drop(rows()[2]!, { dataTransfer: dt });
+    expect(onReorder).toHaveBeenCalledTimes(1);
+    // at = 2 (the item), not items.length (which would give ['2', '3', '1'])
+    expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['2', '1', '3']);
+  });
+
+  it('lands at the end after a dragover on a gap', () => {
+    const { container, onReorder } = setup();
+    const root = container.firstElementChild as HTMLElement;
+    const dt = makeDt([TYPE], { [TYPE]: JSON.stringify({ fromIndex: 1 }) });
+    fireEvent.dragOver(root, { dataTransfer: dt });
+    fireEvent.drop(root, { dataTransfer: dt });
+    expect(onReorder).toHaveBeenCalledTimes(1);
+    expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['1', '3', '2']);
+  });
+
+  it('lands at the item after a dragover on that item', () => {
+    const { rows, onReorder } = setup();
+    const dt = makeDt([TYPE], { [TYPE]: JSON.stringify({ fromIndex: 2 }) });
+    fireEvent.dragOver(rows()[0]!, { dataTransfer: dt });
+    fireEvent.drop(rows()[0]!, { dataTransfer: dt });
+    expect(onReorder).toHaveBeenCalledTimes(1);
+    expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['3', '1', '2']);
   });
 
   it('shows the drop line while dragging over and hides it on leave', () => {
