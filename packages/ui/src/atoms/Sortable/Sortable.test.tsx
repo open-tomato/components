@@ -142,6 +142,22 @@ describe('Sortable', () => {
     expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['3', '1', '2']);
   });
 
+  it('lands at the end after an item then a gap, and clears the drop target', () => {
+    const { rows, container, onReorder } = setup();
+    const root = container.firstElementChild as HTMLElement;
+    const dt = makeDt([TYPE], { [TYPE]: JSON.stringify({ fromIndex: 0 }) });
+    const before = root.children.length;
+    fireEvent.dragEnter(root, { dataTransfer: dt });
+    fireEvent.dragOver(rows()[1]!, { dataTransfer: dt });
+    expect(root.children.length).toBe(before + 1);
+    fireEvent.dragOver(root, { dataTransfer: dt });
+    fireEvent.drop(root, { dataTransfer: dt });
+    expect(onReorder).toHaveBeenCalledTimes(1);
+    expect(onReorder.mock.calls[0]![0].map((i) => i.id)).toEqual(['2', '3', '1']);
+    // the insertion line is gone: the drop target state is cleared
+    expect(root.children.length).toBe(before);
+  });
+
   it('shows the drop line while dragging over and hides it on leave', () => {
     const { rows, container } = setup();
     const root = container.firstElementChild as HTMLElement;
