@@ -33,10 +33,8 @@ import {
  * Radix owns anchoring/flip, outside-click + Escape dismissal, and roving
  * arrow-key focus.
  */
-// eslint-disable-next-line react-refresh/only-export-components -- Radix re-export, still a component
 export const Menu:
 import('react').FC<DropdownMenu.DropdownMenuProps> = DropdownMenu.Root;
-// eslint-disable-next-line react-refresh/only-export-components -- Radix re-export, still a component
 export const MenuTrigger:
 import('react').ForwardRefExoticComponent<DropdownMenu.DropdownMenuTriggerProps & import('react').RefAttributes<HTMLButtonElement>> = DropdownMenu.Trigger;
 
