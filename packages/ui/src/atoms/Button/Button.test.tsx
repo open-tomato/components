@@ -50,5 +50,29 @@ describe('Button', () => {
     expect(onClick).not.toHaveBeenCalled();
   });
 
-  it.todo('renders asChild via Slot (currently throws; Button.tsx is out of scope for this stream)', () => undefined);
+  it('renders asChild as the single child element carrying the button classes', () => {
+    const { container } = render(<Button asChild><a href="/x">Link</a></Button>);
+    const link = screen.getByRole('link', { name: 'Link' });
+    expect(container.querySelectorAll('a')).toHaveLength(1);
+    expect(container.querySelector('button')).toBeNull();
+    expect(container.firstElementChild).toBe(link);
+    expect(link.getAttribute('href')).toBe('/x');
+    expect(link.getAttribute('type')).toBeNull();
+    const { container: reference } = render(<Button>Ref</Button>);
+    expect(link.className).toBe(reference.querySelector('button')?.className ?? '');
+  });
+
+  it('keeps leading and trailing icons inside the asChild element', () => {
+    const { container } = render(
+      <Button asChild iconLeading={<i data-testid="l" />} iconTrailing={<i data-testid="t" />}>
+        <a href="/x">Link</a>
+      </Button>,
+    );
+    const link = screen.getByRole('link', { name: 'Link' });
+    expect(container.querySelectorAll('a')).toHaveLength(1);
+    expect(link.contains(screen.getByTestId('l'))).toBe(true);
+    expect(link.contains(screen.getByTestId('t'))).toBe(true);
+    expect(link.firstElementChild).toBe(screen.getByTestId('l'));
+    expect(link.lastElementChild).toBe(screen.getByTestId('t'));
+  });
 });

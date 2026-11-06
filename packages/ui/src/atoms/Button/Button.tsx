@@ -1,4 +1,4 @@
-import { Slot } from '@radix-ui/react-slot';
+import { Slot, Slottable } from '@radix-ui/react-slot';
 import {
   forwardRef,
   type ForwardRefExoticComponent,
@@ -56,7 +56,7 @@ export const Button: ForwardRefExoticComponent<
         {...props}
       >
         {iconLeading}
-        {children}
+        <Slottable>{children}</Slottable>
         {iconTrailing}
       </Comp>
     );
