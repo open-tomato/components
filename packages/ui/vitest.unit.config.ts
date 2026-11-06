@@ -1,9 +1,11 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, type ViteUserConfig } from 'vitest/config';
 
-export default defineConfig({
+const config: ViteUserConfig = defineConfig({
   test: {
     name: 'unit',
     environment: 'jsdom',
     include: ['src/**/__tests__/**/*.test.{ts,tsx}'],
   },
 });
+
+export default config;

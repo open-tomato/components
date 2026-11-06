@@ -2,13 +2,13 @@ import { resolve } from 'node:path';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, type UserConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const rootDir = import.meta.dirname;
 
-export default defineConfig({
+const config: UserConfig = defineConfig({
   server: {
     open: true,
     port: 5175,
@@ -66,3 +66,5 @@ export default defineConfig({
     target: 'es2022',
   },
 });
+
+export default config;
