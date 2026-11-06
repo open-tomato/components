@@ -179,6 +179,26 @@ bun run build              # library build (dist/ — JS, d.ts, styles/)
 Visual baselines are per-environment and untracked — each machine (and CI)
 regenerates its own; they are never copied between environments.
 
+### Visual diff tolerance (to revisit)
+
+Two parameters in `.storybook/test-runner.ts` decide when a screenshot
+counts as changed. Both are provisional: revisit them in a later iteration,
+for example once text renders the same way on every pass.
+
+| Parameter | Value | Meaning |
+|---|---|---|
+| `PIXEL_COLOR_THRESHOLD` | `0.1` | A pixel counts as changed when its colour moves past this pixelmatch threshold, about 26 of 255 brightness levels. |
+| `MAX_CHANGED_PIXELS` | `20` | A shot fails when more than this many pixels changed. |
+
+Why: Chromium draws the edges of text slightly differently from one render to
+the next, so at the previous near-exact setting (threshold `0.01`, one pixel
+failing a shot) a few shots failed on every run, even at rest with one test
+worker. Measured on the 658 shots: a flaky shot flagged at most 12 pixels at
+`0.1`, and the smallest reviewed real change flagged 85.
+
+The trade-off: a colour shift under about 26 brightness levels, or a change of
+20 pixels or fewer, passes unseen.
+
 Pixel-fidelity against design sources:
 
 ```bash
