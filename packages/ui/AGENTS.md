@@ -57,7 +57,6 @@ Other trees:
   `./cache/server`); unit tests in `src/cache/__tests__/`
 - `design/` — design reference pages for the rosetta comparator (see
   `design/README.md`)
-- `docs/ci/` — grow-box runner setup for visual CI
 
 ## Theming
 
@@ -234,17 +233,13 @@ makes `renderToStaticMarkup` throw. Prefer `StrokeIcon` in any component
 whose markup you intend to probe, and delete the probe in the same
 braced command that runs it.
 
-## Visual CI
+## CI
 
-`.github/workflows/front.yml` runs the visual suite on a self-hosted runner
-(default label `grow-box`): PRs gate against the runner's cached baselines,
-merges to `main` refresh them, diffs upload as artifacts, and a PR comment
-summarizes. **It is OFF by default** — the job no-ops until the untracked
-repository Actions variable `VISUAL_CI` is `enabled` (runner override via
-`VISUAL_CI_RUNNER`); the live wiring is intentionally not tracked in the repo.
-The local visual suite is independent and always available. Operator setup and
-enablement live in `docs/ci/grow-box-runner-setup.md`; wiring is checked by
-`scripts/verify-visual-ci.sh`.
+`.github/workflows/verify.yml` is the only workflow: the privacy and
+control-byte gates, lint, types, the build, and the unit and render tests,
+on every pull request. The visual suite and its baselines stay local and
+private: never add a visual job, a baseline upload or a self-hosted runner
+to GitHub Actions.
 
 ## Open debt measured from `@ar/web`
 

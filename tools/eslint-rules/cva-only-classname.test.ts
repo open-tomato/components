@@ -13,7 +13,6 @@ import { cvaOnlyClassName } from './cva-only-classname.mjs';
 
 RuleTester.describe = describe;
 RuleTester.it = it;
-RuleTester.itOnly = it.only;
 
 const tester = new RuleTester({
   languageOptions: {
