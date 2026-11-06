@@ -6,6 +6,7 @@ import { Button } from '../../atoms/Button';
 import { Chip } from '../../atoms/Chip';
 import { EmptyState } from '../../atoms/EmptyState';
 import { Select } from '../../molecules/Select/Select';
+import { ArtPlaceholder } from '../../stories/fixtures';
 import {
   makeColumns,
   ITEMS,
@@ -204,6 +205,7 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
   const empty = (
     <EmptyState
       title="No items match"
+      illustration={<ArtPlaceholder />}
       description="Nothing fits that query. Loosen a filter or clear them all to see everything again."
       action={<Button onClick={clearAll}>Clear filters</Button>}
       className="py-12"

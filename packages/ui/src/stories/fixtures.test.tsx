@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'bun:test';
 
-import { CardFiller, ContentTiles, GridTiles, Ph, ShellFiller } from './fixtures';
+import { ArtPlaceholder, CardFiller, ContentTiles, GridTiles, Ph, ShellFiller } from './fixtures';
 
 describe('story fixtures', () => {
   it('Ph merges className over its base', () => {
@@ -35,5 +35,12 @@ describe('story fixtures', () => {
     const { container } = render(<div>{GridTiles({})}</div>);
     expect(container.querySelectorAll('span').length).toBe(6);
     expect(screen.getByText('6')).toBeTruthy();
+  });
+
+  it('ArtPlaceholder renders a hidden svg with a primary circle', () => {
+    const { container } = render(<ArtPlaceholder />);
+    const svg = container.querySelector('svg');
+    expect(svg?.getAttribute('aria-hidden')).toBe('true');
+    expect(svg?.querySelector('circle')?.getAttribute('class')).toBe('fill-primary');
   });
 });
