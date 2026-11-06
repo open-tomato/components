@@ -72,9 +72,9 @@ Note: tokens.css wraps its element defaults (`h1`–`h6`, `a`, `p`) in
 `@layer base`, so Tailwind utilities beat element rules without the `!`
 important modifier. Do not reintroduce unlayered element rules.
 
-Brand atoms (`Wordmark`, `TomatoMark`, `Monogram`) are the logo slots of
-the shell — swap or restyle them per product; the demo strings in stories use
-the placeholder brand "Acme".
+The shells take their brand through slots (`AuthShell`'s `brand`, the
+sidebar's brand row); `Monogram` is the kit's neutral mark for them. The demo
+strings in stories use the placeholder brand "Acme".
 
 ## Tooling
 

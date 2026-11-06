@@ -14,7 +14,7 @@ describe('shell fixtures', () => {
     await act(async () => {
       view = render(<SidebarDemo active="overview" onNavigate={(id) => seen.push(id)} />);
     });
-    expect(screen.getByText('labs')).toBeTruthy();
+    expect(screen.getByText('acme labs')).toBeTruthy();
     await act(async () => {
       fireEvent.click(screen.getByText('Items'));
     });
@@ -23,7 +23,7 @@ describe('shell fixtures', () => {
     await act(async () => {
       render(<SidebarDemo active="settings" onNavigate={() => {}} collapsed />);
     });
-    expect(screen.queryByText('labs')).toBeNull();
+    expect(screen.queryByText('acme labs')).toBeNull();
   });
 
   it('TopbarDemo renders the title beside the group switcher', async () => {

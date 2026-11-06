@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 
 import { useState } from 'react';
 
-import { TomatoMark } from '../internal/TomatoMark';
+import { Monogram } from '../atoms/Monogram';
 import { cn } from '../lib';
 import { EntityKindsProvider } from '../molecules/KnownEntities/EntityKinds';
 import { type EntityKinds } from '../molecules/KnownEntities/entityKindsContext';
@@ -38,8 +38,6 @@ import {
   shellDemoSpacer,
   sidebarDemoBrand,
   sidebarDemoWordmark,
-  sidebarDemoWordmarkOpen,
-  sidebarDemoWordmarkTomato,
   topbarDemoSearch,
   topbarDemoTitle,
 } from './shell-fixtures.variants';
@@ -116,13 +114,8 @@ export const SidebarDemo = ({
     <div
       className={cn(sidebarDemoBrand({ collapsed }))}
     >
-      <TomatoMark size={26} />
-      {!collapsed && (
-        <span className={sidebarDemoWordmark()}>
-          <span className={sidebarDemoWordmarkOpen()}>acme</span>{' '}
-          <span className={sidebarDemoWordmarkTomato()}>labs</span>
-        </span>
-      )}
+      <Monogram name="Acme Labs" tone="primary" size="sm" />
+      {!collapsed && <span className={sidebarDemoWordmark()}>acme labs</span>}
     </div>
     <SidebarNav
       items={NAV_PRIMARY}

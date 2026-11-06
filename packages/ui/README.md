@@ -106,9 +106,10 @@ Dark mode: set `data-theme="dark"` on the document element (default follows
 `AppShell` (navigation + content chrome for signed-in surfaces) and `AuthShell`
 (the auth flow frame, paired with the `src/pages/auth` set) are the templates
 tier — most of their composition is reusable as-is, with app-specific layouts
-tweaked at the consumer. Brand atoms (`Wordmark`, `TomatoMark`,
-`Monogram`) are the shells' logo slots: swap or restyle them per product.
-Demo content in stories uses the placeholder brand "Acme".
+tweaked at the consumer. The shells take their brand through slots
+(`AuthShell`'s `brand`, the sidebar's brand row), and `Monogram` is the kit's
+neutral mark for them. Demo content in stories uses the placeholder brand
+"Acme".
 
 ## Theming (v1: theme definition via CSS)
 

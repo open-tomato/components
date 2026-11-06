@@ -202,7 +202,6 @@
 
   /* wordmark colors — theme-aware so the lockup stays readable on dark bg */
   --wordmark-open:   var(--green-700);
-  --wordmark-tomato: var(--red-500);
 
   color-scheme: light;
 }
@@ -242,7 +241,6 @@
   --code-comment: var(--warm-400);
 
   --wordmark-open:   var(--green-300);
-  --wordmark-tomato: var(--red-300);
 
   color-scheme: dark;
 }
@@ -270,7 +268,6 @@
     --code-string:  var(--green-300);
     --code-comment: var(--warm-400);
     --wordmark-open:   var(--green-300);
-    --wordmark-tomato: var(--red-300);
     color-scheme: dark;
   }
 }
@@ -411,17 +408,6 @@ pre {
   line-height: var(--lh-normal);
   border: 1px solid var(--border-soft);
 }
-
-/* Wordmark — for use anywhere the logo lockup is recreated in HTML/CSS */
-.wordmark {
-  font-family: var(--font-display);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-3xl);
-  letter-spacing: -0.02em;
-  font-variation-settings: "wdth" 90;
-}
-.wordmark .wordmark-open { color: var(--wordmark-open); }
-.wordmark .wordmark-tomato { color: var(--wordmark-tomato); }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
