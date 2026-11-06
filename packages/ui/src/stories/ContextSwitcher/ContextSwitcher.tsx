@@ -14,22 +14,22 @@ import { Monogram } from '../../atoms/Monogram';
 import { cn } from '../../lib';
 
 import {
-  workspaceRow,
-  workspaceRowBody,
-  workspaceRowCheck,
-  workspaceRowMembers,
-  workspaceRowName,
-  workspaceRowText,
-  workspaceSwitcherChevron,
-  workspaceSwitcherMenu,
-  workspaceSwitcherName,
-  workspaceSwitcherTotal,
-  workspaceSwitcherTrigger,
-} from './WorkspaceSwitcher.variants';
+  contextRow,
+  contextRowBody,
+  contextRowCheck,
+  contextRowMembers,
+  contextRowName,
+  contextRowText,
+  contextSwitcherChevron,
+  contextSwitcherMenu,
+  contextSwitcherName,
+  contextSwitcherTotal,
+  contextSwitcherTrigger,
+} from './ContextSwitcher.variants';
 
 const RECENT_LIMIT = 5;
 
-export interface WorkspaceOption {
+export interface ContextOption {
   id: string;
   name: string;
   /** Member count, shown mono under the name in the menu rows. */
@@ -38,9 +38,9 @@ export interface WorkspaceOption {
   tone?: MonogramProps['tone'];
 }
 
-export interface WorkspaceSwitcherProps {
+export interface ContextSwitcherProps {
   /** Ordered most-recent-first; only the first 5 are listed inline. */
-  workspaces: WorkspaceOption[];
+  contexts: ContextOption[];
   activeId: string;
   onSwitch?: (id: string) => void;
   /** "See all groups" — links to the groups settings page. */
@@ -59,48 +59,48 @@ export interface WorkspaceSwitcherProps {
  * default), and scope-free — no topbar dependency, so it can move to the
  * sidebar later.
  */
-export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
-  workspaces,
+export const ContextSwitcher: FC<ContextSwitcherProps> = ({
+  contexts,
   activeId,
   onSwitch,
   onSeeAll,
   onNew,
   defaultOpen = false,
   className,
-}: WorkspaceSwitcherProps) => {
+}: ContextSwitcherProps) => {
   // Spec: users with one group never see the switcher.
-  const [first] = workspaces;
-  if (workspaces.length < 2 || first == null) return null;
-  const active = workspaces.find((w) => w.id === activeId) ?? first;
-  const recent = workspaces.slice(0, RECENT_LIMIT);
+  const [first] = contexts;
+  if (contexts.length < 2 || first == null) return null;
+  const active = contexts.find((w) => w.id === activeId) ?? first;
+  const recent = contexts.slice(0, RECENT_LIMIT);
   return (
     <Menu defaultOpen={defaultOpen} modal={false}>
-      <MenuTrigger className={cn(workspaceSwitcherTrigger(), className)}>
+      <MenuTrigger className={cn(contextSwitcherTrigger(), className)}>
         <Monogram name={active.name} tone={active.tone} size="sm" />
-        <span className={workspaceSwitcherName()}>{active.name}</span>
-        <Icon name="chevron-down" size={14} className={workspaceSwitcherChevron()} />
+        <span className={contextSwitcherName()}>{active.name}</span>
+        <Icon name="chevron-down" size={14} className={contextSwitcherChevron()} />
       </MenuTrigger>
-      <MenuContent className={workspaceSwitcherMenu()}>
+      <MenuContent className={contextSwitcherMenu()}>
         <MenuLabel>Recent groups</MenuLabel>
         {recent.map((w) => (
           <MenuItem
             key={w.id}
-            className={workspaceRow({ active: w.id === activeId })}
+            className={contextRow({ active: w.id === activeId })}
             onSelect={() => onSwitch?.(w.id)}
             trailing={
               w.id === activeId
-                ? <Icon name="check" size={14} className={workspaceRowCheck()} />
+                ? <Icon name="check" size={14} className={contextRowCheck()} />
                 : undefined
             }
           >
-            <span className={workspaceRowBody()}>
+            <span className={contextRowBody()}>
               <Monogram name={w.name} tone={w.tone} size="sm" />
-              <span className={workspaceRowText()}>
-                <span className={workspaceRowName()}>
+              <span className={contextRowText()}>
+                <span className={contextRowName()}>
                   {w.name}
                 </span>
                 {w.members != null && (
-                  <span className={workspaceRowMembers()}>
+                  <span className={contextRowMembers()}>
                     {w.members} members
                   </span>
                 )}
@@ -112,8 +112,8 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
         <MenuItem
           icon={<Icon name="layers" size={15} />}
           trailing={(
-            <span className={workspaceSwitcherTotal()}>
-              {workspaces.length} total
+            <span className={contextSwitcherTotal()}>
+              {contexts.length} total
             </span>
           )}
           onSelect={() => onSeeAll?.()}
@@ -132,4 +132,4 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({
   );
 };
 
-WorkspaceSwitcher.displayName = 'WorkspaceSwitcher';
+ContextSwitcher.displayName = 'ContextSwitcher';

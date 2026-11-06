@@ -35,7 +35,7 @@
       "owner": "ato-2",
       "component": "src/atoms/WorkspaceMark",
       "change": "Rename the folder, the component, its variants and its types to `Monogram`.",
-      "callers": ["src/atoms/index.ts", "src/molecules/OptionCard", "src/stories/WorkspaceSwitcher/WorkspaceSwitcher.tsx"]
+      "callers": ["src/atoms/index.ts", "src/molecules/OptionCard", "src/stories/ContextSwitcher/ContextSwitcher.tsx"]
     },
     {
       "owner": "ato-1",

@@ -29,6 +29,10 @@ import {
 } from '../templates/AppShell';
 
 import {
+  ContextSwitcher,
+  type ContextOption,
+} from './ContextSwitcher';
+import {
   liveShellFrame,
   placeholderPage,
   placeholderPageCard,
@@ -41,10 +45,6 @@ import {
   topbarDemoSearch,
   topbarDemoTitle,
 } from './shell-fixtures.variants';
-import {
-  WorkspaceSwitcher,
-  type WorkspaceOption,
-} from './WorkspaceSwitcher';
 
 /**
  * Story harness for the AppShell stories. The chrome is the REAL library
@@ -68,7 +68,7 @@ export const NAV_PRIMARY: SidebarNavConfigItem[] = [
   { id: 'usage', label: 'Usage', icon: 'zap' },
 ];
 
-const GROUPS: WorkspaceOption[] = [
+const GROUPS: ContextOption[] = [
   { id: 'og', name: 'open-garden', members: 12, tone: 'accent' },
   { id: 'rt', name: 'bright-orchard', members: 6, tone: 'primary' },
   { id: 'vp', name: 'vine-patch', members: 3, tone: 'gold' },
@@ -154,7 +154,7 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
   const [theme, setTheme] = useState<ThemeName>('light');
   return (
     <>
-      <WorkspaceSwitcher workspaces={GROUPS} activeId="og" />
+      <ContextSwitcher contexts={GROUPS} activeId="og" />
       <div className={topbarDemoTitle()}>
         {title}
       </div>

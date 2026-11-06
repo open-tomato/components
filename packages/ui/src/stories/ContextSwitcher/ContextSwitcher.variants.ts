@@ -8,14 +8,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * The trigger is fixed/max width (truncating), and the component carries
  * no topbar-scope dependency — it may later live in the sidebar.
  */
-export const workspaceSwitcherTrigger: (props?: ClassProp) => string = cva([
+export const contextSwitcherTrigger: (props?: ClassProp) => string = cva([
   'flex max-w-[240px] cursor-pointer items-center gap-2.5',
   'rounded-md border border-border-soft bg-surface-sunk px-2.5 py-1.5',
   'font-body text-[13px] text-fg1 transition-colors hover:bg-surface-2',
 ]);
 
 /** A recent-group row (the menu's top section). */
-export const workspaceRow: (
+export const contextRow: (
   props?: {
     active?: boolean | null | undefined;
   } & ClassProp,
@@ -36,41 +36,41 @@ export const workspaceRow: (
   },
 );
 
-export type WorkspaceRowVariants = VariantProps<typeof workspaceRow>;
+export type ContextRowVariants = VariantProps<typeof contextRow>;
 
 /** The trigger's active-group name, truncating inside the pill. */
-export const workspaceSwitcherName: (props?: ClassProp) => string = cva(
+export const contextSwitcherName: (props?: ClassProp) => string = cva(
   'min-w-0 truncate font-semibold',
 );
 
 /** The trigger's trailing chevron. */
-export const workspaceSwitcherChevron: (props?: ClassProp) => string = cva('shrink-0 text-fg3');
+export const contextSwitcherChevron: (props?: ClassProp) => string = cva('shrink-0 text-fg3');
 
 /** The open menu's fixed width. */
-export const workspaceSwitcherMenu: (props?: ClassProp) => string = cva('w-[300px]');
+export const contextSwitcherMenu: (props?: ClassProp) => string = cva('w-[300px]');
 
 /** The check mark trailing the active recent-group row. */
-export const workspaceRowCheck: (props?: ClassProp) => string = cva('shrink-0 text-accent');
+export const contextRowCheck: (props?: ClassProp) => string = cva('shrink-0 text-accent');
 
 /** A recent row's body: the mark beside the name and member count. */
-export const workspaceRowBody: (props?: ClassProp) => string = cva(
+export const contextRowBody: (props?: ClassProp) => string = cva(
   'flex min-w-0 items-center gap-2.5',
 );
 
 /** A recent row's text column. */
-export const workspaceRowText: (props?: ClassProp) => string = cva('min-w-0');
+export const contextRowText: (props?: ClassProp) => string = cva('min-w-0');
 
 /** A recent row's group name. */
-export const workspaceRowName: (props?: ClassProp) => string = cva(
+export const contextRowName: (props?: ClassProp) => string = cva(
   'block truncate text-[13px] font-semibold',
 );
 
 /** A recent row's mono member count under the name. */
-export const workspaceRowMembers: (props?: ClassProp) => string = cva(
+export const contextRowMembers: (props?: ClassProp) => string = cva(
   'block font-mono text-[11px] font-normal text-fg3',
 );
 
 /** The "See all groups" row's trailing mono total. */
-export const workspaceSwitcherTotal: (props?: ClassProp) => string = cva(
+export const contextSwitcherTotal: (props?: ClassProp) => string = cva(
   'font-mono text-[11px] text-fg3',
 );
