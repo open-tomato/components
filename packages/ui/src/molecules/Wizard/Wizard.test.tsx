@@ -87,7 +87,6 @@ describe('Wizard', () => {
     expect(h.onClose).toHaveBeenCalledTimes(1);
   });
 
-  // @@S mol-1 begin
   it('uses the submitLabel prop on the last step', () => {
     render(
       <Wizard
@@ -105,7 +104,6 @@ describe('Wizard', () => {
     );
     expect(screen.getByRole('button', { name: 'Create' })).toBeTruthy();
   });
-  // @@S mol-1 end
 
   it('renders nothing for an out-of-range step', () => {
     setup(5);

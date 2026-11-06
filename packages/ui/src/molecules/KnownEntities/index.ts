@@ -1,4 +1,3 @@
-// @@S mol-3 begin
 export { Entity, type EntityLayout, type EntityProps } from './Entity';
 export {
   EntityKindsContext,
@@ -24,4 +23,3 @@ export {
   type EntityTileVariants,
 } from './KnownEntities.variants';
 export { ModelFooter, type ModelFooterProps } from './ModelFooter';
-// @@S mol-3 end

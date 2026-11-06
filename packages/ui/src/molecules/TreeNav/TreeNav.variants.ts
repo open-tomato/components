@@ -37,9 +37,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * hover treatment every row chrome in this package carries (see
  * `AppShell.variants.ts`'s `navItem`) and is not enter/exit motion.
  */
-// @@T mol-2 begin
 export const treeNav: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
-// @@T mol-2 end
   cva('m-0 flex list-none flex-col gap-0.5 p-0');
 
 /**
@@ -51,9 +49,7 @@ export const treeNav: (props?: import('class-variance-authority/types').ClassPro
  * unbroken past a row's own padding, which is what makes two sibling
  * subtrees readable at the same indent.
  */
-// @@T mol-2 begin
 export const treeNavGroup: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
-// @@T mol-2 end
   cva([
     'm-0 ml-3 flex list-none flex-col gap-0.5',
     'border-l border-border-soft py-0 pr-0 pl-2',
@@ -69,9 +65,7 @@ export const treeNavGroup: (props?: import('class-variance-authority/types').Cla
  * stylesheet in every engine, and a marker appearing in one of them
  * would move a pixel in exactly one baseline.
  */
-// @@T mol-2 begin
 export const treeNavItem: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
-// @@T mol-2 end
   cva(
     'group/tree-item list-none focus:outline-none focus-visible:outline-none',
   );
@@ -84,9 +78,7 @@ export const treeNavItem: (props?: import('class-variance-authority/types').Clas
  * `hover` is on the unselected arm alone: a hover fill on the row
  * that is already filled reads as the selection having moved.
  */
-// @@T mol-2 begin
 export const treeNavRow: (props?: ({selected?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
-// @@T mol-2 end
   cva(
     [
       'flex w-full items-center gap-1.5 rounded-md px-2 py-1.5',
@@ -117,9 +109,7 @@ export const treeNavRow: (props?: ({selected?: boolean | null | undefined;} & im
  * gives. The `leaf` arm is empty rather than `invisible` because a
  * leaf renders no glyph at all — the arm exists to reserve the box.
  */
-// @@T mol-2 begin
 export const treeNavTwisty: (props?: ({state?: 'collapsed' | 'expanded' | 'leaf' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
-// @@T mol-2 end
   cva(
     'flex h-4 w-4 shrink-0 items-center justify-center text-fg3',
     {
@@ -139,9 +129,7 @@ export const treeNavTwisty: (props?: ({state?: 'collapsed' | 'expanded' | 'leaf'
  * instead of pushing the row wider than its column — a tree lives in
  * a rail whose width is not its own.
  */
-// @@T mol-2 begin
 export const treeNavLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string =
-// @@T mol-2 end
   cva('min-w-0 flex-1 truncate');
 
 export type TreeNavRowVariants = VariantProps<typeof treeNavRow>;

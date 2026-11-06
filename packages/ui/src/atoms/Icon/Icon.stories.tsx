@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Icon } from './Icon';
 
-// @@T ato-2 begin
 const meta: Meta<typeof Icon> = {
-// @@T ato-2 end
   title: 'Atoms/Icon',
   component: Icon,
   parameters: { layout: 'centered' },
@@ -30,9 +28,7 @@ const meta: Meta<typeof Icon> = {
 };
 
 export default meta;
-// @@T ato-2 begin
 type Story = StoryObj<typeof Icon>;
-// @@T ato-2 end
 
 /** Spec: an icon defined via a string — `<Icon name="terminal" />`. */
 export const Default: Story = {

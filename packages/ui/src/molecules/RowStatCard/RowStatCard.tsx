@@ -1,10 +1,7 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ReactNode, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { cn } from '../../lib';
 
-// @@V mol-1 begin
 import {
   rowStatCard,
   rowStatCardHeader,
@@ -15,7 +12,6 @@ import {
   rowStatCardTitle,
   type RowStatCardStatValueVariants,
 } from './RowStatCard.variants';
-// @@V mol-1 end
 
 export interface RowStat {
   /** Ministat label, on top (mono, uppercase). */
@@ -39,10 +35,8 @@ export interface RowStatCardProps
   subtitle?: ReactNode;
   /** Row 1 right: the "invisible columns" of ministats. */
   stats?: RowStat[];
-  // @@S mol-1 begin
   /** Row 1 far right: optional action (for example an adjust button). */
   action?: ReactNode;
-  // @@S mol-1 end
   /**
    * Row 2: optional contextual text, link, or graphical indicator —
    * pair with the colocated `RowStatCardMeter` for the budget meter.
@@ -60,7 +54,6 @@ const statTone = (
     : 'danger';
 };
 
-// @@S mol-1 begin
 /**
  * RowStatCard — full-width card with title/subtitle left and borderless
  * ministat columns right, plus an optional second row (text, link, or
@@ -73,16 +66,11 @@ const statTone = (
  * - automatic accent: a ministat's `trend` colors its value
  *   (up → success, down → danger); explicit `tone` overrides.
  */
-// @@S mol-1 end
-// @@T mol-1 begin
 export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, RowStatCardProps>(
-// @@T mol-1 end
   ({ className, title, subtitle, stats, action, footer, ...props }, ref) => (
     <div ref={ref} className={cn(rowStatCard(), className)} {...props}>
       <div
-        // @@V mol-1 begin
         className={rowStatCardHeader()}
-        // @@V mol-1 end
       >
         <div>
           <div className={rowStatCardTitle()}>{title}</div>
@@ -92,9 +80,7 @@ export const RowStatCard: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardP
         </div>
         {(stats != null || action != null) && (
           <div
-            // @@V mol-1 begin
             className={rowStatCardStats()}
-            // @@V mol-1 end
           >
             {stats?.map((stat) => (
               <div key={stat.title}>

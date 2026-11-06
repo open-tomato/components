@@ -11,7 +11,6 @@ import { type EntityKinds } from './entityKindsContext';
 import { ACTIVITY_STATUS_TONE, type ActivityStatus } from './KnownEntities.variants';
 import { ModelFooter } from './ModelFooter';
 
-// @@S mol-3 begin
 /** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
 const DEMO_KINDS: EntityKinds = {
   worker: { icon: 'bot', tone: 'primary' },
@@ -30,7 +29,6 @@ const Status = ({ status }: { status: ActivityStatus }) => (
     label={status}
   />
 );
-// @@S mol-3 end
 
 const Row = ({ label, children }: { label: string; children: ReactNode }) => (
   <div className="flex items-center gap-3 text-sm text-fg2">
@@ -41,14 +39,11 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
   </div>
 );
 
-// @@T mol-3 begin
 const meta: Meta<typeof Entity> = {
-// @@T mol-3 end
   title: 'Molecules/KnownEntities',
   component: Entity,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-  // @@S mol-3 begin
   decorators: [
     (Story) => (
       <EntityKindsProvider kinds={DEMO_KINDS}>
@@ -56,13 +51,11 @@ const meta: Meta<typeof Entity> = {
       </EntityKindsProvider>
     ),
   ],
-  // @@S mol-3 end
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S mol-3 begin
 const BASE_ARGS = { title: 'the-refactorer' } as const;
 
 /**
@@ -233,4 +226,3 @@ export const Tool: Story = {
     </div>
   ),
 };
-// @@S mol-3 end

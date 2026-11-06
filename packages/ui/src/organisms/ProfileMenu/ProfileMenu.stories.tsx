@@ -7,7 +7,6 @@ import { Badge } from '../../atoms/Badge';
 
 import { ProfileMenu } from './ProfileMenu';
 
-// @@S org-2 begin
 /**
  * Touchable-avatar account menu (app-shell spec: Top Bar). Header carries
  * the user's identity (avatar, name, email, role badge); the option list is
@@ -16,15 +15,12 @@ import { ProfileMenu } from './ProfileMenu';
  * in-place. Fidelity note (recorded): a "Help & docs" item is omitted — the
  * spec's option list doesn't include it.
  */
-// @@S org-2 end
-// @@T org-2 begin
 const meta: Meta<typeof ProfileMenu> = {
   title: 'Organisms/ProfileMenu',
   component: ProfileMenu,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
 };
-// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

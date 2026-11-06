@@ -9,7 +9,6 @@ export {
   searchSuggestPanel,
   searchSuggestPuck,
   searchSuggestRow,
-  // @@V org-1 begin
   searchSuggestAll,
   searchSuggestAllLabel,
   searchSuggestEmpty,
@@ -21,5 +20,4 @@ export {
   searchSuggestRoot,
   searchSuggestSub,
   searchSuggestText,
-  // @@V org-1 end
 } from './SearchSuggest.variants';

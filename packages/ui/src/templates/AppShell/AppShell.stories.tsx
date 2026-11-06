@@ -4,7 +4,6 @@ import { LiveShell } from '../../stories/shell-fixtures';
 
 import { AppShell } from './AppShell';
 
-// @@S tpl-1 begin
 /**
  * The template's own variants: expanded and collapsed rail. The sidebar's
  * sections are NOT variants of the shell — each is a page (see Pages/*);
@@ -16,10 +15,7 @@ import { AppShell } from './AppShell';
  * SidebarQuickAccess, and the topbar composes the group switcher /
  * SearchSuggest / NotificationsBell / ThemeSwitcher / ProfileMenu.
  */
-// @@S tpl-1 end
-// @@T tpl-1 begin
 const meta: Meta<typeof AppShell> = {
-// @@T tpl-1 end
   title: 'Templates/AppShell',
   component: AppShell,
   parameters: { layout: 'padded' },

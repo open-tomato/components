@@ -16,9 +16,7 @@ export * from './Switch';
 export * from './EmptyState';
 export * from './Droppable';
 export * from './Sortable';
-// @@S ato-2 begin
 export * from './Monogram';
-// @@S ato-2 end
 export * from './Divider';
 export * from './OAuthButton';
 export * from './IconTile';

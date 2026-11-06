@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { switchThumb, switchTrack } from '../../atoms/Switch/Switch.variants';
 import { cn } from '../../lib';
 
-// @@V org-1 begin
 import {
   decoratedToggle,
   decoratedToggleDecoration,
@@ -16,9 +15,7 @@ import {
   decoratedToggleTitle,
   decoratedToggleTitleRow,
 } from './FormKit.variants';
-// @@V org-1 end
 
-// @@S org-1 begin
 /**
  * DecoratedToggle / DecoratedToggleList: bordered rows of decoration +
  * title/description + switch that tint accent when on, grouped under a
@@ -31,7 +28,6 @@ import {
  * decoratively inside it, so there is exactly one focusable control per
  * row and the whole box is its hit area.
  */
-// @@S org-1 end
 
 export interface DecoratedToggleProps {
   /** Leading decoration — icon, avatar… — vertically centered. */
@@ -46,9 +42,7 @@ export interface DecoratedToggleProps {
   className?: string;
 }
 
-// @@T org-1 begin
 export const DecoratedToggle: { (props: DecoratedToggleProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   decoration,
   title,
   description,
@@ -66,7 +60,6 @@ export const DecoratedToggle: { (props: DecoratedToggleProps): import('react').J
     onClick={() => onChange?.(!checked)}
     className={cn(decoratedToggle({ checked }), className)}
   >
-    {/* @@V org-1 begin */}
     {decoration != null && (
       <span
         className={decoratedToggleDecoration({ checked })}
@@ -90,7 +83,6 @@ export const DecoratedToggle: { (props: DecoratedToggleProps): import('react').J
     </span>
     <span
       className={cn(switchTrack({ size: 'sm' }), decoratedToggleSwitch())}
-      // @@V org-1 end
       data-on={checked
         ? ''
         : undefined}
@@ -123,9 +115,7 @@ export interface DecoratedToggleListProps {
 }
 
 /** Grouped toggles with the spec's x/y-on indicator in the header. */
-// @@T org-1 begin
 export const DecoratedToggleList: { (props: DecoratedToggleListProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   title,
   options,
   value,
@@ -142,14 +132,10 @@ export const DecoratedToggleList: { (props: DecoratedToggleListProps): import('r
     <div className={className}>
       <div className={decoratedToggleHeader()}>
         <span>{title}</span>
-        {/* @@V org-1 begin */}
         <span className={decoratedToggleHeaderDot()}>·</span>
-        {/* @@V org-1 end */}
         <span>{on}/{options.length}</span>
       </div>
-      {/* @@V org-1 begin */}
       <div className={decoratedToggleList()} role="group">
-        {/* @@V org-1 end */}
         {options.map((o) => (
           <DecoratedToggle
             key={o.id}

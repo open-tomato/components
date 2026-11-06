@@ -13,9 +13,7 @@ import { PasskeyPrompt } from './PasskeyPrompt';
  * affordance. A TwoFactorPage step candidate between the method pick
  * and the done splash; app wiring is WS08 scope.
  */
-// @@T mol-2 begin
 const meta: Meta<typeof PasskeyPrompt> = {
-// @@T mol-2 end
 
   title: 'Molecules/PasskeyPrompt',
   component: PasskeyPrompt,

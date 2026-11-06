@@ -30,9 +30,7 @@ const StatPill = forwardRef<HTMLSpanElement, HTMLAttributes<HTMLSpanElement>>(
 );
 StatPill.displayName = 'StatPill';
 
-// @@T mol-2 begin
 const meta: Meta<typeof Tooltip> = {
-// @@T mol-2 end
   title: 'Molecules/Tooltip',
   component: Tooltip,
   parameters: { layout: 'centered' },
@@ -56,9 +54,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     open: true,
-    // @@S mol-2 begin
     label: '184,210 of 200,000 units',
-    // @@S mol-2 end
     children: <StatPill>⚡ 184k</StatPill>,
   },
 };
@@ -75,9 +71,7 @@ export const BottomSide: Story = {
 /** Closed by default — the interactive hover/focus shape. */
 export const HoverMe: Story = {
   args: {
-    // @@S mol-2 begin
     label: 'Defined in 3 groups',
-    // @@S mol-2 end
     children: <StatPill>read_file</StatPill>,
   },
 };

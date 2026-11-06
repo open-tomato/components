@@ -3,27 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { useState } from 'react';
 
-// @@S mol-3 begin
 import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
-// @@S mol-3 end
-// @@S org-2 begin
 import { makeColumns, SESSIONS as ITEMS, type Session as Item } from '../../stories/sessions';
-// @@S org-2 end
 
 import { renderCellContent } from './cellTypes';
 import { RowContextAction } from './RowContextAction';
 import { Table } from './Table';
 
-// @@T org-2 begin
-// @@S org-2 begin
 const TypedTable: typeof Table<Item> = Table<Item>;
-// @@S org-2 end
-// @@T org-2 end
 
-// @@T org-2 begin
 const meta: Meta<typeof TypedTable> = {
-// @@T org-2 end
   title: 'Organisms/Table',
   component: TypedTable,
   parameters: { layout: 'padded' },
@@ -34,10 +24,8 @@ const meta: Meta<typeof TypedTable> = {
   },
   args: {
     columns: makeColumns('clamp'),
-    // @@S org-2 begin
     data: ITEMS,
     getRowId: (r: Item) => r.id,
-    // @@S org-2 end
     initialSort: { key: 'updated', dir: 'asc' },
   },
 };
@@ -90,9 +78,7 @@ const SelectableDemo = () => {
   return (
     <TypedTable
       columns={makeColumns('clamp')}
-      // @@S org-2 begin
       data={ITEMS}
-      // @@S org-2 end
       getRowId={(r) => r.id}
       selectable
       selectedIds={ids}
@@ -114,9 +100,7 @@ export const Selectable: Story = {
 };
 
 const ReorderableDemo = () => {
-  // @@S org-2 begin
   const [rows, setRows] = useState<readonly Item[]>(ITEMS);
-  // @@S org-2 end
   return (
     <TypedTable
       columns={makeColumns('clamp')}
@@ -143,13 +127,11 @@ export const Reorderable: Story = {
   render: () => <ReorderableDemo />,
 };
 
-// @@S org-2 begin
 const ITEM_ACTIONS = {
   actions: [
     { icon: 'eye' as const, title: 'Open', onClick: () => {} },
     { icon: 'git-branch' as const, title: 'Fork item', onClick: () => {} },
     { icon: 'copy' as const, title: 'Copy item ID', onClick: () => {} },
-    // @@S org-2 end
     { icon: 'download' as const, title: 'Export transcript', onClick: () => {} },
   ],
   destructive: { icon: 'archive' as const, title: 'Archive', onClick: () => {} },
@@ -157,10 +139,8 @@ const ITEM_ACTIONS = {
 
 /**
  * Spec: context action — `ellipsis-vertical` icon button opening the row
- * // @@S org-2 begin
  * menu from the `{actions[], destructive}` contract (the page spec's
  * table actions); the destructive item swaps to an inline confirmation
- * // @@S org-2 end
  * naming action + entity. Shown open for the docs; in a table it rides a
  * trailing untitled column (see ConfigDriven).
  */
@@ -169,10 +149,8 @@ export const ContextAction: Story = {
   render: () => (
     <div className="flex min-h-[320px] items-start justify-center pt-2">
       <RowContextAction
-        // @@S org-2 begin
         {...ITEM_ACTIONS}
         entityType="item"
-        // @@S org-2 end
         entityName="auth-refactor"
         defaultOpen
       />
@@ -182,19 +160,15 @@ export const ContextAction: Story = {
 
 /* ── self-describing table (registry: cellTypes.tsx) ── */
 
-// @@S org-2 begin
 interface ItemRow {
-// @@S org-2 end
   id: string;
   name: string;
   status: 'running' | 'waiting' | 'done' | 'failed';
-  // @@S org-2 begin
   owner: string;
   model: string;
   tone: 'primary' | 'gold' | 'info' | 'success' | 'accent';
   by: string;
   used: number;
-  // @@S org-2 end
   quota: number;
   cost: number;
   seconds: number;
@@ -204,7 +178,6 @@ interface ItemRow {
 /** Deterministic reference clock for the relative-time cells. */
 const REF_NOW = new Date(2026, 6, 22, 15, 0, 0);
 
-// @@S org-2 begin
 const ITEM_ROWS: ItemRow[] = [
   { id: 'item-7d2f', name: 'auth-refactor', status: 'done', owner: 'the-refactorer', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 38120, quota: 50000, cost: 0.42, seconds: 437, date: new Date(2026, 6, 22, 12, 4, 0) },
   { id: 'item-93af', name: 'perf-investigate', status: 'waiting', owner: 'the-profiler', model: 'opus-4-5', tone: 'gold', by: 'ren', used: 19800, quota: 80000, cost: 0.61, seconds: 1380, date: new Date(2026, 6, 22, 11, 48, 0) },
@@ -212,7 +185,6 @@ const ITEM_ROWS: ItemRow[] = [
   { id: 'item-58c0', name: 'rate-limit-bug', status: 'failed', owner: 'the-investigator', model: 'sonnet-4-5', tone: 'primary', by: 'sam', used: 27450, quota: 50000, cost: 0.31, seconds: 407, date: new Date(2026, 6, 22, 10, 33, 0) },
   { id: 'item-0118', name: 'image-pipeline', status: 'done', owner: 'the-refactorer', model: 'opus-4-5', tone: 'accent', by: 'kai', used: 62100, quota: 80000, cost: 1.92, seconds: 1104, date: new Date(2026, 6, 21, 16, 20, 0) },
 ];
-// @@S org-2 end
 
 const STATUS_BADGE = {
   running: { tone: 'success', dot: true },
@@ -221,14 +193,11 @@ const STATUS_BADGE = {
   failed: { tone: 'danger', dot: false },
 } as const;
 
-// @@S org-2 begin
 /** The page spec's table config, resolved through the registry. */
 const CONFIG_COLUMNS: Column<ItemRow>[] = [
   {
     key: 'item',
     header: 'Item',
-    // @@S org-2 end
-    // @@S mol-3 begin
     cell: (r) => renderCellContent('entity-cell', {
       leading: (
         <StatusIndicator
@@ -240,22 +209,15 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
       title: r.name,
       subtitle: `${r.id} · feat/${r.name}`,
     }),
-    // @@S mol-3 end
   },
   {
-    // @@S org-2 begin
     key: 'owner',
     header: 'Owner · Model',
-    // @@S org-2 end
     width: 170,
-    // @@S mol-3 begin
     cell: (r) => renderCellContent('entity-cell', {
-      // @@S org-2 begin
       title: r.owner,
-      // @@S org-2 end
       subtitle: r.model,
     }),
-    // @@S mol-3 end
   },
   {
     key: 'status',
@@ -267,33 +229,21 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     }),
   },
   {
-    // @@S org-2 begin
     key: 'used',
     header: 'Usage',
-    // @@S org-2 end
     width: 130,
-    // @@S mol-1 begin
     cell: (r) => renderCellContent('quota-progress', {
-    // @@S mol-1 end
-      // @@S org-2 begin
       used: r.used,
-      // @@S org-2 end
       quota: r.quota,
       locale: 'en-US',
     }),
   },
   {
-    // @@S org-2 begin
     key: 'cost',
     header: 'Cost · Time',
-    // @@S org-2 end
     width: 148,
-    // @@S mol-1 begin
     cell: (r) => renderCellContent('amount-over-time', {
-    // @@S mol-1 end
-      // @@S mol-1 begin
       amount: r.cost,
-      // @@S mol-1 end
       seconds: r.seconds,
       date: r.date,
       now: REF_NOW,
@@ -304,9 +254,7 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     key: 'by',
     header: 'By',
     width: 96,
-    // @@S mol-3 begin
     cell: (r) => renderCellContent('entity-inline', { title: r.by }),
-    // @@S mol-3 end
   },
   {
     key: 'menu',
@@ -314,21 +262,16 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     width: 52,
     align: 'end',
     cell: (r) => renderCellContent('context-menu', {
-      // @@S org-2 begin
       ...ITEM_ACTIONS,
       entityType: 'item',
-      // @@S org-2 end
       entityName: r.name,
     }),
   },
 ];
 
-// @@S org-2 begin
 const ConfigTable = Table<ItemRow>;
-// @@S org-2 end
 
 /**
- * // @@S org-2 begin
  * The self-describing table: every column resolves its renderer
  * from the `{entity}-{variant}` type registry, mirroring the JSON table
  * config in the page spec (entity-cell / badge / quota-progress /
@@ -337,7 +280,6 @@ const ConfigTable = Table<ItemRow>;
  * light+dark during the one-time port fidelity check. Spec-over-original
  * divergences: the usage bar colors by consumption thresholds, not
  * item status; the header band keeps the library Table chrome.
- * // @@S org-2 end
  * Intl-vs-original deltas: the compact quota renders `50K` (Intl compact)
  * where the original page hand-writes `50k`, and times are locale-formatted
  * (`12:04 PM` in en-US) where the original page hard-codes 24h strings.
@@ -346,9 +288,7 @@ export const ConfigDriven: Story = {
   render: () => (
     <ConfigTable
       columns={CONFIG_COLUMNS}
-      // @@S org-2 begin
       data={ITEM_ROWS}
-      // @@S org-2 end
       getRowId={(r) => r.id}
     />
   ),

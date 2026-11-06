@@ -6,10 +6,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * ring + leaf wash) — internal reorders keep the quiet sunk surface and get
  * the accent insertion line instead. Origin picks the feedback.
  */
-// @@T ato-2 begin
 export const sortableContainer:
 (props?: ({ direction?: 'vertical' | 'horizontal' | null; mode?: 'idle' | 'internal' | 'cross' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   [
     'flex min-h-[60px] rounded-lg border-[1.5px] p-2',
     'transition-[background-color,border-color]',
@@ -32,10 +30,8 @@ export const sortableContainer:
 );
 
 /** The accent insertion line shown at the hovered slot. */
-// @@T ato-2 begin
 export const sortableLine:
 (props?: ({ direction?: 'vertical' | 'horizontal' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   [
     'shrink-0 rounded-sm bg-accent',
     'shadow-[0_0_0_3px_color-mix(in_oklab,var(--accent)_22%,transparent)]',
@@ -52,17 +48,14 @@ export const sortableLine:
 );
 
 /** A convenient default row chrome — grip handle + content + trailing. */
-// @@T ato-2 begin
 export const sortableRow:
 (props?: import('class-variance-authority/types').ClassProp) => string = cva([
-// @@T ato-2 end
   'flex items-center gap-[11px] rounded-md px-3 py-2.5',
   'bg-surface-1 border border-border-soft shadow-xs',
 ]);
 
 export type SortableContainerVariants = VariantProps<typeof sortableContainer>;
 
-// @@V ato-2 begin
 /** The italic hint shown while the list is empty. */
 export const sortableEmpty: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('w-full px-3 py-[18px] text-center text-[12.5px] italic text-fg3');
 
@@ -85,4 +78,3 @@ export const sortableRowGrip: (props?: import('class-variance-authority/types').
 
 /** The row's content slot: takes the free width. */
 export const sortableRowBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1');
-// @@V ato-2 end

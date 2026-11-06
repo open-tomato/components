@@ -1,10 +1,7 @@
-// @@T org-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T org-1 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S org-1 begin
 /**
  * The form kit — every input is the SAME envelope (label + control +
  * hint/error) wrapped around a single interactive control; each control just
@@ -14,19 +11,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * input), so the envelope is named `FormField` here. A toggle is the
  * shipped Switch atom — FormKit composes it rather than re-implementing.
  */
-// @@S org-1 end
 
-// @@S org-1 begin
 /** The focus ring every text-like control shares. */
-// @@S org-1 end
 const CONTROL_FOCUS = [
   'outline-none focus-visible:border-border-focus',
   'focus-visible:shadow-[0_0_0_2px_var(--bg),0_0_0_4px_color-mix(in_oklab,var(--leaf)_55%,transparent)]',
 ];
 
-// @@T org-1 begin
 export const textInput: (props?: ({ invalid?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'h-[42px] w-full rounded-md bg-surface-1 border px-[13px]',
     'font-body text-[14.5px] text-fg1 placeholder:text-fg3',
@@ -43,9 +35,7 @@ export const textInput: (props?: ({ invalid?: boolean | null | undefined } & Cla
   },
 );
 
-// @@T org-1 begin
 export const textarea: (props?: ({ invalid?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'w-full rounded-md bg-surface-1 border px-[13px] py-[11px] resize-y',
     'font-body text-[14.5px] leading-normal text-fg1 placeholder:text-fg3',
@@ -63,9 +53,7 @@ export const textarea: (props?: ({ invalid?: boolean | null | undefined } & Clas
 );
 
 /** The 19px checkbox square. */
-// @@T org-1 begin
 export const checkboxBox: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'mt-px inline-flex size-[19px] shrink-0 items-center justify-center',
     'rounded-[5px] border-[1.5px] transition-colors',
@@ -82,9 +70,7 @@ export const checkboxBox: (props?: ({ checked?: boolean | null | undefined } & C
 );
 
 /** Grid the CheckGroup lays its options into. */
-// @@T org-1 begin
 export const checkGroup: (props?: ({ columns?: 1 | 2 | null | undefined } & ClassProp) | undefined) => string = cva('grid gap-2.5', {
-// @@T org-1 end
   variants: {
     columns: {
       1: 'grid-cols-1',
@@ -95,9 +81,7 @@ export const checkGroup: (props?: ({ columns?: 1 | 2 | null | undefined } & Clas
 });
 
 /** A radio option row — a bordered card that tints when selected. */
-// @@T org-1 begin
 export const radioOption: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex w-full items-center gap-[11px] rounded-md px-[13px] py-[11px]',
     'text-left cursor-pointer border',
@@ -114,9 +98,7 @@ export const radioOption: (props?: ({ checked?: boolean | null | undefined } & C
 );
 
 /** The 18px radio circle. */
-// @@T org-1 begin
 export const radioCircle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'inline-flex size-[18px] shrink-0 items-center justify-center',
     'rounded-full border-2',
@@ -132,12 +114,8 @@ export const radioCircle: (props?: ({ checked?: boolean | null | undefined } & C
   },
 );
 
-// @@S org-1 begin
 /** The range input — track fill driven by --pct. */
-// @@S org-1 end
-// @@T org-1 begin
 export const sliderInput: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'h-1.5 flex-1 cursor-pointer appearance-none rounded-full outline-none',
   'border border-border-soft',
   'bg-[linear-gradient(to_right,var(--primary)_var(--pct,50%),var(--surface-sunk)_var(--pct,50%))]',
@@ -162,26 +140,20 @@ export const sliderInput: (props?: ClassProp | undefined) => string = cva([
 ]);
 
 /** The landed-file chip FileDrop swaps to once a file is set. */
-// @@T org-1 begin
 export const fileChip: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'flex items-center gap-[11px] rounded-md px-[13px] py-[11px]',
   'bg-surface-1 border border-border-soft',
 ]);
 
 /* ── WS03d additions ("FormKit additions") ────────── */
 
-// @@S org-1 begin
 /**
  * VerboseOption: a bordered option
  * row with radio/checkbox semantics that tints accent when selected.
  * It uses the accent scale for selection (vs the primary-toned
  * RadioGroup above) — kept as rendered truth of the design source.
  */
-// @@S org-1 end
-// @@T org-1 begin
 export const verboseOption: (props?: ({ selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex w-full items-start gap-2.5 rounded-md border px-3 py-2.5',
     'text-left cursor-pointer transition-colors',
@@ -199,9 +171,7 @@ export const verboseOption: (props?: ({ selected?: boolean | null | undefined } 
 );
 
 /** VerboseOption's leading control glyph (16px, accent when selected). */
-// @@T org-1 begin
 export const verboseControl: (props?: ({ mode?: 'checkbox' | 'radio' | null | undefined; selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'relative mt-0.5 inline-flex size-4 shrink-0 items-center',
     'justify-center border-2',
@@ -222,23 +192,17 @@ export const verboseControl: (props?: ({ mode?: 'checkbox' | 'radio' | null | un
 );
 
 /** The mono capability pill on a VerboseOption ("web", "code", …). */
-// @@T org-1 begin
 export const verboseCap: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'rounded-full border border-border-soft bg-surface-sunk',
   'px-[7px] py-px font-mono text-[10px] text-fg3',
 ]);
 
-// @@S org-1 begin
 /**
  * DecoratedToggle: a bordered row (decoration + title/description +
  * switch) that tints accent when on. The ROW is the switch control; the
  * Switch atom's track/thumb cvas render decoratively inside it.
  */
-// @@S org-1 end
-// @@T org-1 begin
 export const decoratedToggle: (props?: ({ checked?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex w-full items-center gap-3 rounded-md border px-3 py-2',
     'text-left cursor-pointer transition-colors',
@@ -256,9 +220,7 @@ export const decoratedToggle: (props?: ({ checked?: boolean | null | undefined }
 );
 
 /** DecoratedToggleList's group header (mono label + x/y-on indicator). */
-// @@T org-1 begin
 export const decoratedToggleHeader: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'mb-1.5 flex items-center gap-2 font-mono text-[10px]',
   'uppercase tracking-[0.1em] text-fg3',
 ]);
@@ -268,9 +230,7 @@ export const decoratedToggleHeader: (props?: ClassProp | undefined) => string = 
  * selected chips render IN the container; in multi mode the input stays
  * below them, in single mode the chip takes over until removed.
  */
-// @@T org-1 begin
 export const chipListBox: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'flex w-full flex-col gap-2 rounded-md border border-border-strong',
   'bg-surface-1 px-[13px] py-[9px]',
   'focus-within:border-border-focus',
@@ -278,9 +238,7 @@ export const chipListBox: (props?: ClassProp | undefined) => string = cva([
 ]);
 
 /** A ChipList suggestion row. */
-// @@T org-1 begin
 export const chipListOption: (props?: ({ active?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex w-full cursor-pointer items-center gap-2.5 rounded-sm',
     'border-none px-2.5 py-2 text-left text-[13px] text-fg1',
@@ -297,22 +255,16 @@ export const chipListOption: (props?: ({ active?: boolean | null | undefined } &
 );
 
 /** The anchored ChipList suggestion panel. */
-// @@T org-1 begin
 export const chipListPanel: (props?: ClassProp | undefined) => string = cva([
-// @@T org-1 end
   'absolute inset-x-0 top-[calc(100%+6px)] z-popover overflow-hidden',
   'rounded-md border border-border-soft bg-surface-1 p-1 shadow-lg',
 ]);
 
-// @@S org-1 begin
 /**
  * AvatarSelector — big avatar preview + initials input + color-swatch
  * grid. Tones cover the avatar color palette.
  */
-// @@S org-1 end
-// @@T org-1 begin
 export const avatarPreview: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex size-[60px] items-center justify-center rounded-md',
     'font-display text-[28px] font-extrabold text-cream-50',
@@ -333,9 +285,7 @@ export const avatarPreview: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | '
 );
 
 /** One color swatch in the AvatarSelector grid. */
-// @@T org-1 begin
 export const avatarSwatch: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'info' | 'green' | 'slate' | null | undefined; selected?: boolean | null | undefined } & ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   'size-[18px] cursor-pointer rounded-full p-0 transition-shadow',
   {
     variants: {
@@ -356,7 +306,6 @@ export const avatarSwatch: (props?: ({ tone?: 'accent' | 'primary' | 'gold' | 'i
   },
 );
 
-// @@V org-1 begin
 /* ── Ad-hoc classes moved in by stream V ────────── */
 
 /* AvatarSelector */
@@ -570,7 +519,6 @@ export const verboseMeta: (props?: ClassProp | undefined) => string = cva('mt-1 
 
 /** VerboseOptionList column. */
 export const verboseOptionList: (props?: ClassProp | undefined) => string = cva('flex flex-col gap-1.5');
-// @@V org-1 end
 
 export type VerboseOptionVariants = VariantProps<typeof verboseOption>;
 export type VerboseControlVariants = VariantProps<typeof verboseControl>;
@@ -583,7 +531,5 @@ export type AvatarSelectorTone = NonNullable<
 export type TextInputVariants = VariantProps<typeof textInput>;
 export type TextareaVariants = VariantProps<typeof textarea>;
 export type CheckGroupVariants = VariantProps<typeof checkGroup>;
-// @@V org-1 begin
 export type FormFieldHintVariants = VariantProps<typeof formFieldHint>;
 export type TextInputPrefixVariants = VariantProps<typeof textInputPrefix>;
-// @@V org-1 end

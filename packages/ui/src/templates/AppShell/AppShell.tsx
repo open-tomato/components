@@ -1,4 +1,3 @@
-// @@T tpl-1 begin
 import {
   forwardRef,
   type ForwardRefExoticComponent,
@@ -6,7 +5,6 @@ import {
   type ReactNode,
   type RefAttributes,
 } from 'react';
-// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { IconButton } from '../../atoms/IconButton';
@@ -18,14 +16,11 @@ import {
   appShellFooter,
   appShellMain,
   appShellSidebar,
-  // @@V tpl-1 begin
   appShellToggle,
-  // @@V tpl-1 end
   appShellTopbar,
   type AppShellSidebarVariants,
 } from './AppShell.variants';
 
-// @@S tpl-1 begin
 /**
  * Compound API — the shell is layout only; everything inside the zones is
  * components from earlier chapters:
@@ -45,15 +40,12 @@ import {
  * on the toolbar. Per the app-shell spec the sidebar collapse BUTTON belongs
  * to the topbar wrapper itself (`onToggleSidebar`), not to page chrome.
  */
-// @@S tpl-1 end
 
 export type AppShellProps = HTMLAttributes<HTMLDivElement>;
 
-// @@T tpl-1 begin
 export const AppShell: ForwardRefExoticComponent<
   AppShellProps & RefAttributes<HTMLDivElement>
 > = forwardRef<
-// @@T tpl-1 end
   HTMLDivElement, AppShellProps>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(appShell(), className)} {...props} />
@@ -66,11 +58,9 @@ export interface AppShellSidebarProps
   extends HTMLAttributes<HTMLElement>,
   AppShellSidebarVariants {}
 
-// @@T tpl-1 begin
 export const AppShellSidebar: ForwardRefExoticComponent<
   AppShellSidebarProps & RefAttributes<HTMLElement>
 > = forwardRef<
-// @@T tpl-1 end
   HTMLElement, AppShellSidebarProps>(
   ({ className, collapsed, ...props }, ref) => (
     <aside
@@ -85,11 +75,9 @@ AppShellSidebar.displayName = 'AppShellSidebar';
 
 export type AppShellMainProps = HTMLAttributes<HTMLElement>;
 
-// @@T tpl-1 begin
 export const AppShellMain: ForwardRefExoticComponent<
   AppShellMainProps & RefAttributes<HTMLElement>
 > = forwardRef<
-// @@T tpl-1 end
   HTMLElement, AppShellMainProps>(
   ({ className, ...props }, ref) => (
     <main ref={ref} className={cn(appShellMain(), className)} {...props} />
@@ -109,11 +97,9 @@ export interface AppShellTopbarProps extends HTMLAttributes<HTMLElement> {
   sidebarCollapsed?: boolean;
 }
 
-// @@T tpl-1 begin
 export const AppShellTopbar: ForwardRefExoticComponent<
   AppShellTopbarProps & RefAttributes<HTMLElement>
 > = forwardRef<
-// @@T tpl-1 end
   HTMLElement, AppShellTopbarProps>(
   (
     { className, onToggleSidebar, sidebarCollapsed = false, children, ...props },
@@ -122,9 +108,7 @@ export const AppShellTopbar: ForwardRefExoticComponent<
     <header ref={ref} className={cn(appShellTopbar(), className)} {...props}>
       {onToggleSidebar != null && (
         <IconButton
-          // @@V tpl-1 begin
           className={appShellToggle()}
-          // @@V tpl-1 end
           icon={<Icon name="panel-left" size={18} />}
           label={sidebarCollapsed
             ? 'Expand sidebar'
@@ -147,11 +131,9 @@ export interface AppShellContentProps extends HTMLAttributes<HTMLDivElement> {
   footer?: ReactNode;
 }
 
-// @@T tpl-1 begin
 export const AppShellContent: ForwardRefExoticComponent<
   AppShellContentProps & RefAttributes<HTMLDivElement>
 > = forwardRef<
-// @@T tpl-1 end
   HTMLDivElement, AppShellContentProps>(
   ({ className, footer, children, ...props }, ref) => (
     <div ref={ref} className={cn(appShellContent(), className)} {...props}>

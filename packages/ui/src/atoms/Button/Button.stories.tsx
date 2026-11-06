@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Button } from './Button';
 
-// @@T ato-3 begin
 const meta: Meta<typeof Button> = {
-// @@T ato-3 end
   title: 'Atoms/Button',
   component: Button,
   parameters: { layout: 'centered' },
@@ -22,9 +20,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  // @@S ato-3 begin
   args: { children: 'Run task' },
-  // @@S ato-3 end
 };
 
 export const Accent: Story = {
@@ -40,9 +36,7 @@ export const Ghost: Story = {
 };
 
 export const Danger: Story = {
-  // @@S ato-3 begin
   args: { variant: 'danger', children: 'Delete item' },
-  // @@S ato-3 end
 };
 
 export const SmallSize: Story = {
@@ -64,9 +58,7 @@ export const Disabled: Story = {
 
 export const WithLeadingIcon: Story = {
   args: {
-    // @@S ato-3 begin
     children: 'Run task',
-    // @@S ato-3 end
     iconLeading: (
       // Stroked zap icon (size = text + 2px).
       <svg

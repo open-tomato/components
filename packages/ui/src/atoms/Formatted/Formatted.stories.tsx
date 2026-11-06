@@ -38,9 +38,7 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
 /** Render-only stories still need args (the dispatcher's props are required). */
 const BASE_ARGS = { type: 'number', value: 0, locale: LOCALE } as const;
 
-// @@T ato-3 begin
 const meta: Meta<typeof FormattedValue> = {
-// @@T ato-3 end
   title: 'Atoms/Formatted',
   component: FormattedValue,
   parameters: { layout: 'centered' },
@@ -48,18 +46,14 @@ const meta: Meta<typeof FormattedValue> = {
 };
 
 export default meta;
-// @@T ato-3 begin
 type Story = StoryObj<typeof FormattedValue>;
-// @@T ato-3 end
 
 /**
  * Spec: FormattedValue dispatches to the right family member by `type` —
  * the contract self-describing tables and generated cards format through.
  */
 export const Default: Story = {
-  // @@S ato-3 begin
   args: { type: 'number', value: 8240, unit: 'units', locale: LOCALE },
-  // @@S ato-3 end
 };
 
 /** Spec: value + small greyed unit suffix; `short` compacts (default). */
@@ -68,14 +62,10 @@ export const HumanReadable: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="short (default)">
-        {/* @@S ato-3 begin */}
         <HumanReadableValue value={8240} unit="units" locale={LOCALE} />
-        {/* @@S ato-3 end */}
       </Row>
       <Row label="short=false">
-        {/* @@S ato-3 begin */}
         <HumanReadableValue value={8240} unit="units" short={false} locale={LOCALE} />
-        {/* @@S ato-3 end */}
       </Row>
       <Row label="no unit">
         <HumanReadableValue value={128} locale={LOCALE} />
@@ -255,9 +245,7 @@ export const Dispatch: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="type=number">
-        {/* @@S ato-3 begin */}
         <FormattedValue type="number" value={8240} unit="units" locale={LOCALE} />
-        {/* @@S ato-3 end */}
       </Row>
       <Row label="type=currency">
         <FormattedValue type="currency" value={12.4} currency="usd" locale={LOCALE} />

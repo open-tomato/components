@@ -4,7 +4,6 @@ import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 import { touchable } from '../Touchable/Touchable.variants';
 
-// @@V ato-1 begin
 import {
   droppableInline,
   droppableInlineGlyph,
@@ -20,7 +19,6 @@ import {
   droppableZoneLabel,
   type DroppableInlineVariants,
 } from './Droppable.variants';
-// @@V ato-1 end
 import {
   useDroppable,
   useFilePick,
@@ -54,7 +52,6 @@ export interface DroppableInlineProps
   glyph?: ReactNode;
 }
 
-// @@T ato-1 begin
 export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
@@ -91,9 +88,7 @@ export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.E
       </span>
       <span
         aria-hidden
-        // @@V ato-1 begin
         className={cn(droppableInlineGlyph({ visible: showGlyph }))}
-        // @@V ato-1 end
       >
         {state === 'reject'
           ? (
@@ -107,7 +102,6 @@ export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.E
     </button>
   );
 }) as { (p: DroppableInlineProps): import('react').JSX.Element; displayName: string };
-// @@T ato-1 end
 
 DroppableInline.displayName = 'DroppableInline';
 
@@ -119,7 +113,6 @@ export interface DroppableZoneProps extends DroppableBaseProps {
   compact?: boolean;
 }
 
-// @@T ato-1 begin
 export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
@@ -165,9 +158,7 @@ export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Eleme
             )}
         </span>
         <span
-          // @@V ato-1 begin
           className={cn(droppableZoneLabel({ compact, rejected }))}
-          // @@V ato-1 end
         >
           {rejected
             ? reason
@@ -175,18 +166,15 @@ export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Eleme
               ? 'Release to add'
               : (label ?? 'Drag a file here')}
         </span>
-        {/* @@V ato-1 begin */}
         {!rejected && hint != null && (
           <span className={droppableZoneHint()}>{hint}</span>
         )}
-        {/* @@V ato-1 end */}
       </button>
       {children}
       {input}
     </div>
   );
 }) as { (p: DroppableZoneProps): import('react').JSX.Element; displayName: string };
-// @@T ato-1 end
 
 DroppableZone.displayName = 'DroppableZone';
 
@@ -197,7 +185,6 @@ export interface DroppableRegionProps extends DroppableBaseProps {
   minHeight?: number;
 }
 
-// @@T ato-1 begin
 export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.Element; displayName: string } = (({
   accept,
   onDrop,
@@ -221,9 +208,7 @@ export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.E
   return (
     <div
       {...handlers}
-      // @@V ato-1 begin
       className={cn(droppableRegion(), className)}
-      // @@V ato-1 end
       style={style}
     >
       {children}
@@ -236,7 +221,6 @@ export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.E
             size={28}
           />
         </span>
-        {/* @@V ato-1 begin */}
         <span className={droppableRegionLabel()}>
           {rejected
             ? reason
@@ -247,12 +231,10 @@ export const DroppableRegion: { (p: DroppableRegionProps): import('react').JSX.E
             {hint}
           </span>
         )}
-        {/* @@V ato-1 end */}
       </div>
     </div>
   );
 }) as { (p: DroppableRegionProps): import('react').JSX.Element; displayName: string };
-// @@T ato-1 end
 
 DroppableRegion.displayName = 'DroppableRegion';
 
@@ -264,7 +246,6 @@ export type DroppableProps =
   | ({ feedback: 'region' } & DroppableRegionProps);
 
 /** The one public component — `feedback` picks the presentation. */
-// @@T ato-1 begin
 export const Droppable: { (props: DroppableProps): import('react').JSX.Element; displayName: string } = ((props: DroppableProps): import('react').JSX.Element => {
   if (props.feedback === 'inline') {
     const { feedback: _feedback, ...rest } = props;
@@ -277,6 +258,5 @@ export const Droppable: { (props: DroppableProps): import('react').JSX.Element; 
   const { feedback: _feedback, ...rest } = props;
   return <DroppableZone {...rest} />;
 }) as { (props: DroppableProps): import('react').JSX.Element; displayName: string };
-// @@T ato-1 end
 
 Droppable.displayName = 'Droppable';

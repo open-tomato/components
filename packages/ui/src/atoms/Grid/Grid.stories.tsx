@@ -4,9 +4,7 @@ import { GridTiles } from '../../stories/fixtures';
 
 import { Grid } from './Grid';
 
-// @@T ato-2 begin
 const meta: Meta<typeof Grid> = {
-// @@T ato-2 end
   title: 'Atoms/Grid',
   component: Grid,
   parameters: { layout: 'padded' },
@@ -19,9 +17,7 @@ const meta: Meta<typeof Grid> = {
 };
 
 export default meta;
-// @@T ato-2 begin
 type Story = StoryObj<typeof Grid>;
-// @@T ato-2 end
 
 /** Defaults: auto-fill columns (min 180px), md gap. */
 export const Default: Story = {};

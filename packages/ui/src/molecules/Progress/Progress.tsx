@@ -15,11 +15,9 @@ export interface ProgressProps
   value?: number;
 }
 
-// @@T mol-3 begin
 export const Progress: import('react').ForwardRefExoticComponent<
   ProgressProps & import('react').RefAttributes<HTMLDivElement>
 > = forwardRef<HTMLDivElement, ProgressProps>(
-// @@T mol-3 end
   ({ className, value = 0, tone, indeterminate = false, ...props }, ref) => (
     <div
       ref={ref}

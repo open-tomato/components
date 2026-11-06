@@ -13,16 +13,12 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *   demo's internal `rows`/`row.id`;
  * - `stickyHeader` is omitted — the demo destructures it but never reads it
  *   (the header is structurally outside the scroll region, always pinned);
- * // @@S org-2 begin
  * - the demo hard-codes the totals footer ("N items" / usage sum); the
  *   library generalizes it to a per-column `footer(data)` renderer;
- * // @@S org-2 end
  * - `initialSort` mirrors the demo's seeded `{key:'updated', dir:'asc'}`.
  */
 
-// @@T org-2 begin
 export const tableFrame: (props?: ({ frame?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'overflow-hidden',
   {
     variants: {
@@ -36,9 +32,7 @@ export const tableFrame: (props?: ({ frame?: boolean | null | undefined } & impo
 );
 
 /** Header/footer band — its own table, gutter-reserved to match the body. */
-// @@T org-2 begin
 export const tableBand: (props?: ({ edge?: 'header' | 'footer' | null | undefined; gutter?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'overflow-hidden bg-surface-2',
   {
     variants: {
@@ -56,9 +50,7 @@ export const tableBand: (props?: ({ edge?: 'header' | 'footer' | null | undefine
 );
 
 /** The body wrap — the ONLY scrolling element (scrollbar always shown). */
-// @@T org-2 begin
 export const tableScroll: (props?: ({ layout?: 'fit' | 'scroll' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   '',
   {
     variants: {
@@ -81,15 +73,11 @@ export const tableScroll: (props?: ({ layout?: 'fit' | 'scroll' | null | undefin
 );
 
 /** Every internal table: fixed tracks, collapsed spacing, full width. */
-// @@T org-2 begin
 export const tableEl: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
-// @@T org-2 end
   'w-full table-fixed border-separate border-spacing-0',
 );
 
-// @@T org-2 begin
 export const tableHead: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined; active?: boolean | null | undefined; sortable?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   [
     'whitespace-nowrap text-left font-mono text-[11px] font-semibold',
     'uppercase tracking-[0.06em]',
@@ -113,9 +101,7 @@ export const tableHead: (props?: ({ density?: 'comfortable' | 'compact' | null |
   },
 );
 
-// @@T org-2 begin
 export const tableCell: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   [
     'max-w-0 border-b border-border-soft text-[13.5px] text-fg1',
     'transition-[background-color]',
@@ -134,9 +120,7 @@ export const tableCell: (props?: ({ density?: 'comfortable' | 'compact' | null |
 );
 
 /** Footer cells — mono summary line on the surface-2 band. */
-// @@T org-2 begin
 export const tableFoot: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined; align?: 'start' | 'center' | 'end' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'whitespace-nowrap bg-surface-2 font-mono text-xs text-fg2',
   {
     variants: {
@@ -160,9 +144,7 @@ export const tableFoot: (props?: ({ density?: 'comfortable' | 'compact' | null |
  * reorder feedback states (drop-target insert line drawn as an inset
  * shadow so nothing shifts; the dragged row dims like Sortable does).
  */
-// @@T org-2 begin
 export const tableRowEl: (props?: ({ striped?: boolean | null | undefined; drop?: 'none' | 'above' | 'below' | null | undefined; dragging?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'group/row',
   {
     variants: {
@@ -189,9 +171,7 @@ export const tableRowEl: (props?: ({ striped?: boolean | null | undefined; drop?
  * their own padding so the 19px controls sit flush; the row hover wash
  * matches tableCell.
  */
-// @@T org-2 begin
 export const tableModCell: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   [
     'border-b border-border-soft align-middle',
     'transition-[background-color]',
@@ -209,9 +189,7 @@ export const tableModCell: (props?: ({ density?: 'comfortable' | 'compact' | nul
   },
 );
 
-// @@T org-2 begin
 export const tableModHead: (props?: ({ density?: 'comfortable' | 'compact' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'bg-surface-2 align-middle',
   {
     variants: {
@@ -225,9 +203,7 @@ export const tableModHead: (props?: ({ density?: 'comfortable' | 'compact' | nul
 );
 
 /** The grab affordance for row reordering (grip-vertical glyph). */
-// @@T org-2 begin
 export const tableSortHandle: (props?: ({ disabled?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   [
     'inline-flex items-center justify-center rounded-sm p-0.5 text-fg3',
     'cursor-grab select-none hover:text-fg2 active:cursor-grabbing',
@@ -244,9 +220,7 @@ export const tableSortHandle: (props?: ({ disabled?: boolean | null | undefined 
 );
 
 /** The clipped-cell tooltip (fixed-position; coordinates are dynamic). */
-// @@T org-2 begin
 export const tableTip: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
-// @@T org-2 end
   [
     'fixed z-[100] max-w-[360px] -translate-x-1/2 -translate-y-full',
     'pointer-events-none rounded-md border border-char-300 bg-char-700',
@@ -254,7 +228,6 @@ export const tableTip: (props?: import('class-variance-authority/types').ClassPr
   ],
 );
 
-// @@V org-2 begin
 /** The header label row: glyph and title side by side. */
 export const tableHeadLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
   'inline-flex w-full items-center gap-[5px]',
@@ -362,7 +335,6 @@ export const cellTypeText: (props?: import('class-variance-authority/types').Cla
 export const cellTypeRelativeTime: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
   'font-mono text-[12.5px] text-fg3',
 );
-// @@V org-2 end
 
 export type TableFrameVariants = VariantProps<typeof tableFrame>;
 export type TableRowVariants = VariantProps<typeof tableRowEl>;

@@ -1,11 +1,9 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   type HTMLAttributes,
   type ForwardRefExoticComponent,
   type RefAttributes,
 } from 'react';
-// @@T ato-3 end
 
 import { cn, formatDuration, type DateInput } from '../../lib';
 
@@ -30,11 +28,9 @@ export type FormattedDurationProps = HTMLAttributes<HTMLSpanElement> &
  * (spec-defined). Zero units are omitted; a zero duration
  * reads `0s`.
  */
-// @@T ato-3 begin
 export const FormattedDuration: ForwardRefExoticComponent<
   FormattedDurationProps & RefAttributes<HTMLSpanElement>
 > = forwardRef<
-// @@T ato-3 end
   
   HTMLSpanElement,
   FormattedDurationProps

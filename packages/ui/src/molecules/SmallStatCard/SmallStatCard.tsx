@@ -6,9 +6,7 @@ import { cn, formatNumber } from '../../lib';
 import {
   smallStatCard,
   smallStatCardFooter,
-  // @@V mol-3 begin
   smallStatCardHeader,
-  // @@V mol-3 end
   smallStatCardNumber,
   smallStatCardSuffix,
   smallStatCardTitle,
@@ -33,9 +31,7 @@ export interface SmallStatCardProps
    * (e.g. `<FormattedCurrency>`) to take over formatting.
    */
   value: number | ReactNode;
-  // @@S mol-3 begin
   /** Unit suffix — small, greyed, right of the value (`units`, `runs`). */
-  // @@S mol-3 end
   unit?: string;
   /** Renders the suffix as `/ goal` (current / goal), before any unit. */
   goal?: number;
@@ -49,7 +45,6 @@ export interface SmallStatCardProps
   footer?: ReactNode;
 }
 
-// @@S mol-3 begin
 /**
  * SmallStatCard — at-a-glance stat tile (hero rows of overview pages).
  * Design source: original design `MetricTile` (the original usage screen); contract:
@@ -61,12 +56,9 @@ export interface SmallStatCardProps
  * - Numeric values format via the shared human-readable formatter; any
  *   ReactNode value renders verbatim for currency/custom cases.
  */
-// @@S mol-3 end
-// @@T mol-3 begin
 export const SmallStatCard: import('react').ForwardRefExoticComponent<
   SmallStatCardProps & import('react').RefAttributes<HTMLDivElement>
 > = forwardRef<HTMLDivElement, SmallStatCardProps>(
-// @@T mol-3 end
   (
     {
       className,
@@ -98,9 +90,7 @@ export const SmallStatCard: import('react').ForwardRefExoticComponent<
         className={cn(smallStatCard({ size }), className)}
         {...props}
       >
-        {/* @@V mol-3 begin */}
         <div className={smallStatCardHeader()}>
-          {/* @@V mol-3 end */}
           <span className={smallStatCardTitle()}>{title}</span>
           {trend != null
             ? <TrendIndicator trend={trend} showValue locale={locale} />

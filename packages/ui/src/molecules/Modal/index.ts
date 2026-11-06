@@ -6,7 +6,6 @@ export {
 export { OverlayHeader, type OverlayHeaderProps } from './OverlayHeader';
 export {
   modalPanel,
-  // @@V mol-2 begin
   modalBody,
   modalFooter,
   modalFooterStatus,
@@ -15,6 +14,5 @@ export {
   overlayHeaderEyebrow,
   overlayHeaderText,
   overlayHeaderTitle,
-  // @@V mol-2 end
   type ModalPanelVariants,
 } from './Modal.variants';

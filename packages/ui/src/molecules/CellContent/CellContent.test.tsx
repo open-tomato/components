@@ -1,32 +1,24 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'bun:test';
 
-// @@S mol-1 begin
 import { AmountOverTime } from './AmountOverTime';
-// @@S mol-1 end
 import { CellBar } from './CellBar';
 import { CellDecoration } from './CellDecoration';
 import { CellDoubleLine } from './CellDoubleLine';
 import { CellLabel } from './CellLabel';
 import { CellStatus } from './CellStatus';
 import { CellValue } from './CellValue';
-// @@S mol-1 begin
 import { QuotaProgress, QuotaUsage } from './QuotaUsage';
-// @@S mol-1 end
 
 const NOW = new Date(2026, 6, 22, 15, 0, 0);
 
 describe('CellValue', () => {
   it('renders a numeric value with its unit', () => {
     const { container } = render(
-      // @@S mol-1 begin
       <CellValue value={12500} unit="units" locale="en-US" />,
-      // @@S mol-1 end
     );
     expect(container.textContent).toContain('12.5');
-    // @@S mol-1 begin
     expect(container.textContent).toContain('units');
-    // @@S mol-1 end
   });
 
   it('renders children when no value is given', () => {
@@ -121,7 +113,6 @@ describe('CellBar', () => {
   });
 });
 
-// @@S mol-1 begin
 describe('AmountOverTime', () => {
   it('renders amount over duration and relative time', () => {
     const { container } = render(
@@ -161,4 +152,3 @@ describe('QuotaProgress', () => {
     expect(screen.getByRole('meter', { name: 'none' }).getAttribute('aria-valuenow')).toBe('0');
   });
 });
-// @@S mol-1 end

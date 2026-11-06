@@ -1,4 +1,3 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   useId,
@@ -7,11 +6,9 @@ import {
   type ForwardRefExoticComponent,
   type RefAttributes,
 } from 'react';
-// @@T ato-3 end
 
 import { cn } from '../../lib';
 
-// @@V ato-3 begin
 import {
   field,
   fieldControl,
@@ -22,7 +19,6 @@ import {
   fieldRoot,
   type FieldVariants,
 } from './Field.variants';
-// @@V ato-3 end
 
 export interface FieldProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'disabled'>,
@@ -35,36 +31,28 @@ export interface FieldProps
   icon?: ReactNode;
 }
 
-// @@T ato-3 begin
 export const Field: ForwardRefExoticComponent<
   FieldProps & RefAttributes<HTMLInputElement>
 > = forwardRef<
-// @@T ato-3 end
   HTMLInputElement, FieldProps>(
   ({ className, state, size, label, helper, icon, id, ...props }, ref) => {
     const autoId = useId();
     const inputId = id ?? autoId;
     return (
       <div
-        // @@V ato-3 begin
         className={cn(fieldRoot({ disabled: state === 'disabled' }), className)}
-        // @@V ato-3 end
       >
         {label != null && (
           <label
             htmlFor={inputId}
-            // @@V ato-3 begin
             className={fieldLabel()}
-            // @@V ato-3 end
           >
             {label}
           </label>
         )}
-        {/* @@V ato-3 begin */}
         <span className={fieldControl()}>
           {icon != null && (
             <span className={fieldIcon()}>
-              {/* @@V ato-3 end */}
               {icon}
             </span>
           )}
@@ -72,9 +60,7 @@ export const Field: ForwardRefExoticComponent<
             ref={ref}
             id={inputId}
             disabled={state === 'disabled'}
-            // @@V ato-3 begin
             className={cn(field({ state, size }), fieldIconPad({ icon: icon != null }))}
-            // @@V ato-3 end
             {...props}
           />
         </span>

@@ -9,17 +9,13 @@ const STAGES = [
   { key: 'review', label: 'Review' },
 ];
 
-// @@T mol-1 begin
 const meta: Meta<typeof Stepper> = {
-// @@T mol-1 end
   title: 'Molecules/Stepper',
   component: Stepper,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
   args: { items: STAGES, index: 1, onChange: () => {} },
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -45,9 +41,7 @@ export const AuthFlow: Story = {
   args: {
     items: [
       { key: 'account', label: 'Account' },
-      // @@S mol-1 begin
       { key: 'details', label: 'Details' },
-      // @@S mol-1 end
     ],
     index: 1,
     tone: 'accent',

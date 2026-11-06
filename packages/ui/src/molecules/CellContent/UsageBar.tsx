@@ -1,18 +1,12 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
-// @@V mol-1 begin
 import { cn, type ChartTone } from '../../lib';
-// @@V mol-1 end
 
 import {
   usageBarFill,
   usageBarGoalTick,
   usageBarOverflowFill,
-  // @@V mol-1 begin
   usageBarTone,
-  // @@V mol-1 end
   usageBarTrack,
   type UsageBarTrackVariants,
 } from './UsageBar.variants';
@@ -34,7 +28,6 @@ export interface UsageBarProps
   label?: string;
 }
 
-// @@S mol-1 begin
 /**
  * UsageBar — the borderless bar indicator behind UsageChart rows
  * (simple and multi-row bar designs). Exported for reuse as a table
@@ -43,10 +36,7 @@ export interface UsageBarProps
  * The >100% treatment is a spec-driven design (not in the original
  * artboards): see `usageBarOverflowFill` in the variants file.
  */
-// @@S mol-1 end
-// @@T mol-1 begin
 export const UsageBar: ForwardRefExoticComponent<PropsWithoutRef<UsageBarProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, UsageBarProps>(
-// @@T mol-1 end
   ({ className, ratio, tone, size, track, label, ...props }, ref) => {
     const isOver = ratio > 1;
     const safeRatio = Math.max(0, ratio);
@@ -71,9 +61,7 @@ export const UsageBar: ForwardRefExoticComponent<PropsWithoutRef<UsageBarProps> 
         aria-label={label ?? pctText}
         className={cn(
           usageBarTrack({ size, track }),
-          // @@V mol-1 begin
           usageBarTone({
-          // @@V mol-1 end
             tone: isOver
               ? 'danger'
               : tone,

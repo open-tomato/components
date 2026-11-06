@@ -4,9 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
-  // @@T mol-3 begin
   type JSX,
-  // @@T mol-3 end
   type ReactNode,
 } from 'react';
 
@@ -20,7 +18,6 @@ import {
   confirmPopoverContent,
 } from './ConfirmPopover.variants';
 
-// @@S mol-3 begin
 /**
  * The reusable confirmation pattern (spec: the app-shell spec
  * "Confirmation popover"). Two flavours:
@@ -33,7 +30,6 @@ import {
  * example-item?"), never a bare "are you sure?" — and `confirmLabel`
  * names it again ("Yes, delete"), never generic OK.
  */
-// @@S mol-3 end
 
 export interface ConfirmInlineProps {
   /** Names the action and its object — never a bare "are you sure?". */
@@ -59,9 +55,7 @@ export interface ConfirmInlineProps {
   className?: string;
 }
 
-// @@T mol-3 begin
 export const ConfirmInline: { (props: ConfirmInlineProps): JSX.Element; displayName: string } = ({
-// @@T mol-3 end
   message,
   confirmLabel,
   cancelLabel = 'Cancel',
@@ -157,9 +151,7 @@ export interface ConfirmPopoverProps
  * dismissal, and focus return; focus lands on Cancel first (it is the
  * panel's first focusable), so Enter never destroys by accident.
  */
-// @@T mol-3 begin
 export const ConfirmPopover: { (props: ConfirmPopoverProps): JSX.Element; displayName: string } = ({
-// @@T mol-3 end
   message,
   confirmLabel,
   cancelLabel,

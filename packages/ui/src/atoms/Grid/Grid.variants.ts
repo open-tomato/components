@@ -1,17 +1,13 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S ato-2 begin
 /**
  * Grid — grid layout for a set of children (card grid, metric row, tools
  * gallery). Pair with GridItem for explicit placement.
  *
  * The auto column tracks minmax(180px,1fr).
  */
-// @@S ato-2 end
-// @@T ato-2 begin
 export const grid:
 (props?: ({ cols?: 'auto' | '1' | '2' | '3' | '4' | null; gap?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('grid', {
-// @@T ato-2 end
   variants: {
     cols: {
       '1': 'grid-cols-1',

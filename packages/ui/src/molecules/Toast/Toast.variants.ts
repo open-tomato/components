@@ -7,9 +7,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * deferred to the motion pass — v1 is controlled: render it while it
  * should show.
  */
-// @@T mol-2 begin
 export const toast: (props?: ({floating?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
-// @@T mol-2 end
   cva(
     [
       'inline-flex items-center gap-2.5 rounded-md border px-3.5 py-[11px]',
@@ -29,9 +27,7 @@ export const toast: (props?: ({floating?: boolean | null | undefined;} & import(
   );
 
 /** Tone color for the leading icon (reads fine on the dark chrome). */
-// @@T mol-2 begin
 export const toastIcon: (props?: ({tone?: 'success' | 'warning' | 'danger' | 'info' | 'neutral' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
-// @@T mol-2 end
   cva('shrink-0', {
     variants: {
       tone: {
@@ -45,13 +41,11 @@ export const toastIcon: (props?: ({tone?: 'success' | 'warning' | 'danger' | 'in
     defaultVariants: { tone: 'success' },
   });
 
-// @@V mol-2 begin
 /** The message text, filling the row between icon and dismiss. */
 export const toastBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex-1');
 
 /** The dismiss button, merged over the inline touchable. */
 export const toastClose: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('size-[22px] shrink-0 justify-center border-none bg-transparent text-cream-300');
-// @@V mol-2 end
 
 export type ToastVariants = VariantProps<typeof toast> &
   VariantProps<typeof toastIcon>;

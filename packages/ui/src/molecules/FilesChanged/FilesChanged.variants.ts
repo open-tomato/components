@@ -1,6 +1,4 @@
-// @@T mol-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T mol-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -10,9 +8,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * artboard); chrome mirrors the original-design Section rows (mono paths, soft
  * row rhythm).
  */
-// @@T mol-3 begin
 export const filesChangedSummary: (props?: { kind?: 'additions' | 'deletions' | 'count' | null | undefined } & ClassProp) => string = cva('font-mono text-xs', {
-// @@T mol-3 end
 
   variants: {
     kind: {
@@ -24,15 +20,11 @@ export const filesChangedSummary: (props?: { kind?: 'additions' | 'deletions' | 
   defaultVariants: { kind: 'count' },
 });
 
-// @@T mol-3 begin
 export const filesChangedPath: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'min-w-0 flex-1 truncate font-mono text-xs text-fg1',
 );
 
-// @@T mol-3 begin
 export const filesChangedDelta: (props?: { kind?: 'additions' | 'deletions' | null | undefined; zero?: boolean | null | undefined } & ClassProp) => string = cva('text-right font-mono text-xs', {
-// @@T mol-3 end
 
   variants: {
     kind: {
@@ -47,7 +39,6 @@ export const filesChangedDelta: (props?: { kind?: 'additions' | 'deletions' | nu
   defaultVariants: { zero: false },
 });
 
-// @@V mol-3 begin
 /** The header's count + totals row. */
 export const filesChangedTotals: (props?: ClassProp | undefined) => string = cva('flex items-baseline gap-3');
 
@@ -59,6 +50,5 @@ export const filesChangedRow: (props?: ClassProp | undefined) => string = cva('f
 
 /** The file-type glyph at the start of a row. */
 export const filesChangedIcon: (props?: ClassProp | undefined) => string = cva('shrink-0 text-fg3');
-// @@V mol-3 end
 
 export type FilesChangedDeltaVariants = VariantProps<typeof filesChangedDelta>;

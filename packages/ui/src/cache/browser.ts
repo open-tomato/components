@@ -15,7 +15,6 @@ import type { UseCacheOptions, UseCacheResult } from './types';
 
 import { useQuery } from '@tanstack/react-query';
 
-// @@S tpl-1 begin
 /**
  * A thin wrapper around `useQuery` that enforces sensible read-only defaults
  * for stale-while-revalidate caching in browser contexts.
@@ -71,7 +70,6 @@ import { useQuery } from '@tanstack/react-query';
  * )
  * ```
  */
-// @@S tpl-1 end
 export function useCache<T>(
   key: string[],
   fetcher: () => Promise<T>,

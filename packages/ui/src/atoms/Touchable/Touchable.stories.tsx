@@ -29,15 +29,11 @@ const DemoSurface = ({ stretch = false }: { stretch?: boolean }) => (
     >
       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
     </svg>
-    {/* @@S ato-2 begin */}
     Run action
-    {/* @@S ato-2 end */}
   </span>
 );
 
-// @@T ato-2 begin
 const meta: Meta<typeof Touchable> = {
-// @@T ato-2 end
   title: 'Atoms/Touchable',
   component: Touchable,
   parameters: { layout: 'centered' },

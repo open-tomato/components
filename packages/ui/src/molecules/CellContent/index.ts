@@ -9,7 +9,6 @@ export {
   cellStatus,
   cellStatusText,
   cellValue,
-  // @@S mol-1 begin
   amountOverTime,
   amountOverTimeMeta,
   QUOTA_DANGER_RATIO,
@@ -18,7 +17,6 @@ export {
   quotaProgressTone,
   quotaUsage,
   quotaUsageQuota,
-  // @@S mol-1 end
   type CellLabelVariants,
   type CellStatusTone,
   type CellStatusVariants,
@@ -33,7 +31,6 @@ export {
   type CellStatusProps,
 } from './CellStatus';
 export { CellValue, type CellValueProps } from './CellValue';
-// @@S mol-1 begin
 export { AmountOverTime, type AmountOverTimeProps } from './AmountOverTime';
 export {
   QuotaProgress,
@@ -41,7 +38,6 @@ export {
   type QuotaProgressProps,
   type QuotaUsageProps,
 } from './QuotaUsage';
-// @@S mol-1 end
 export { UsageBar, type UsageBarProps } from './UsageBar';
 export {
   usageBarFill,

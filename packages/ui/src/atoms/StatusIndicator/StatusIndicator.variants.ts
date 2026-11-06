@@ -1,10 +1,7 @@
-// @@T ato-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T ato-3 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S ato-3 begin
 /**
  * StatusIndicator — the standalone inline status dot (spec-driven,
  * the component spec). `Badge dot` already draws one inside a pill; this
@@ -14,8 +11,6 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * DS pulses live dots with the pulseRing keyframes already mapped to
  * `animate-pulse-ring` in src/styles/theme.css.
  */
-// @@S ato-3 end
-// @@T ato-3 begin
 export const statusIndicator: (
   props?: {
     tone?: 'ok' | 'warn' | 'err' | 'info' | 'disabled' | null | undefined;
@@ -24,7 +19,6 @@ export const statusIndicator: (
     pulse?: boolean | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T ato-3 end
 
   'inline-block shrink-0',
   {

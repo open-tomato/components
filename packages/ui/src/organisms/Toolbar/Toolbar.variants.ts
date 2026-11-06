@@ -12,9 +12,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * divided` carries the original demo's attached-mode divider (a table follows
  * inside the same surface).
  */
-// @@T org-2 begin
 export const toolbarSurface: (props?: import('class-variance-authority/types').ClassProp) => string = cva(
-// @@T org-2 end
   [
     'overflow-hidden rounded-lg bg-surface-1',
     'border border-border-soft shadow-xs',
@@ -22,9 +20,7 @@ export const toolbarSurface: (props?: import('class-variance-authority/types').C
 );
 
 /** Row 1 — search + filter dropdowns + view controls, on the sunk band. */
-// @@T org-2 begin
 export const toolbarControls: (props?: import('class-variance-authority/types').ClassProp) => string = cva(
-// @@T org-2 end
   [
     'flex flex-wrap items-center gap-2.5 px-4 py-[13px]',
     'border-b border-border-soft bg-surface-sunk',
@@ -32,9 +28,7 @@ export const toolbarControls: (props?: import('class-variance-authority/types').
 );
 
 /** Row 2 — result count, active-filter chips, clear-all. */
-// @@T org-2 begin
 export const toolbarSummary: (props?: ({ divided?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
 
   'flex flex-wrap items-center gap-2 px-4 py-[11px]',
   {
@@ -49,9 +43,7 @@ export const toolbarSummary: (props?: ({ divided?: boolean | null | undefined } 
 );
 
 /** The filter trigger — accent-tinted while any value is selected. */
-// @@T org-2 begin
 export const filterTrigger: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
 
   [
     'inline-flex h-[38px] items-center gap-2 px-3 rounded-md border',
@@ -73,9 +65,7 @@ export const filterTrigger: (props?: ({ active?: boolean | null | undefined } & 
 );
 
 /** The search field control (the original toolbar demo SearchInput). */
-// @@T org-2 begin
 export const searchInput: (props?: ({ clearable?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
 
   [
     'h-[38px] w-full rounded-md bg-surface-1 border border-border-strong',
@@ -97,7 +87,6 @@ export const searchInput: (props?: ({ clearable?: boolean | null | undefined } &
 export type ToolbarSummaryVariants = VariantProps<typeof toolbarSummary>;
 export type FilterTriggerVariants = VariantProps<typeof filterTrigger>;
 
-// @@V org-2 begin
 /** The filter trigger's count badge, shown while any value is selected. */
 export const filterCount: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
   'inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-[5px] font-mono text-[11px] font-bold text-on-accent',
@@ -141,4 +130,3 @@ export const searchClear: (props?: import('class-variance-authority/types').Clas
 export const toolbarSep: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
   'mx-0.5 w-px self-stretch bg-border-soft',
 );
-// @@V org-2 end

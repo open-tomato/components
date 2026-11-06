@@ -12,9 +12,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** The floating panel — top-anchored, not centered. */
-// @@T org-2 begin
 export const palettePanel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
-// @@T org-2 end
   [
     'flex max-h-[70vh] w-[min(560px,calc(100vw-40px))] flex-col self-start',
     'mt-[11vh] overflow-hidden rounded-xl bg-surface-1',
@@ -23,9 +21,7 @@ export const palettePanel: (props?: import('class-variance-authority/types').Cla
 );
 
 /** A result row; active carries the sunk fill + primary inset bar. */
-// @@T org-2 begin
 export const paletteItem: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   [
     'flex w-full cursor-pointer items-center gap-[11px] rounded-md',
     'border-none px-[11px] py-[9px] text-left',
@@ -42,9 +38,7 @@ export const paletteItem: (props?: ({ active?: boolean | null | undefined } & im
 );
 
 /** The row's leading icon puck. */
-// @@T org-2 begin
 export const paletteItemIcon: (props?: ({ active?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'inline-flex size-[30px] shrink-0 items-center justify-center rounded-sm',
   {
     variants: {
@@ -58,9 +52,7 @@ export const paletteItemIcon: (props?: ({ active?: boolean | null | undefined } 
 );
 
 /** The mono kbd chip (esc hint, shortcut hints, footer keys). */
-// @@T org-2 begin
 export const paletteKbd: (props?: ({ size?: 'sm' | 'md' | null | undefined; surface?: 'sunk' | 'raised' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-2 end
   'rounded-md border border-border-soft font-mono text-fg3',
   {
     variants: {
@@ -77,7 +69,6 @@ export const paletteKbd: (props?: ({ size?: 'sm' | 'md' | null | undefined; surf
   },
 );
 
-// @@V org-2 begin
 /** The Overlay root: the panel anchors to the top instead of centering. */
 export const paletteOverlay: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('items-start');
 
@@ -122,6 +113,5 @@ export const paletteCount: (props?: import('class-variance-authority/types').Cla
 
 /** A footer key legend entry: the kbd chip plus its label. */
 export const keyHint: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('inline-flex items-center gap-1.5');
-// @@V org-2 end
 
 export type PaletteItemVariants = VariantProps<typeof paletteItem>;

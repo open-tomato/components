@@ -1,6 +1,4 @@
-// @@V org-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@V org-1 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -16,9 +14,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** The 28px level-tinted icon puck on each row. */
-// @@T org-1 begin
 export const notificationPuck: (props?: ({ level?: 'ok' | 'warn' | 'err' | 'info' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   'flex size-7 shrink-0 items-center justify-center rounded-full',
   {
     variants: {
@@ -34,9 +30,7 @@ export const notificationPuck: (props?: ({ level?: 'ok' | 'warn' | 'err' | 'info
 );
 
 /** A notification row — unread rows carry a faint accent wash. */
-// @@T org-1 begin
 export const notificationRow: (props?: ({ unread?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T org-1 end
   [
     'flex w-full cursor-pointer select-none items-start gap-2.5',
     'rounded-sm px-2.5 py-2 text-left outline-none',
@@ -54,14 +48,11 @@ export const notificationRow: (props?: ({ unread?: boolean | null | undefined } 
 );
 
 /** The bell's unread dot (raw: primary red, ringed by the topbar fill). */
-// @@T org-1 begin
 export const notificationDot: (props?: import('class-variance-authority/types').ClassProp) => string = cva([
-// @@T org-1 end
   'absolute right-1.5 top-1.5 size-2 rounded-full bg-primary',
   'shadow-[0_0_0_2px_var(--surface-2)]',
 ]);
 
-// @@V org-1 begin
 /* ── Ad-hoc classes moved in by stream V ────────── */
 
 /** The bell trigger — anchors the unread dot. */
@@ -108,7 +99,6 @@ export const notificationUnreadMark: (props?: ClassProp | undefined) => string =
 
 /** Popover footer holding the see-all item. */
 export const notificationFooter: (props?: ClassProp | undefined) => string = cva('border-t border-border-soft p-1.5');
-// @@V org-1 end
 
 export type NotificationPuckVariants = VariantProps<typeof notificationPuck>;
 export type NotificationRowVariants = VariantProps<typeof notificationRow>;

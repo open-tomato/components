@@ -25,9 +25,7 @@ const DemoHeader = () => (
   </>
 );
 
-// @@T ato-1 begin
 const meta: Meta<typeof Card> = {
-// @@T ato-1 end
   title: 'Atoms/Card',
   component: Card,
   parameters: { layout: 'centered' },
@@ -48,9 +46,7 @@ const meta: Meta<typeof Card> = {
 };
 
 export default meta;
-// @@T ato-1 begin
 type Story = StoryObj<typeof Card>;
-// @@T ato-1 end
 
 /** Defaults: bordered surface, lg radius, md padding, no shadow. */
 export const Default: Story = {};

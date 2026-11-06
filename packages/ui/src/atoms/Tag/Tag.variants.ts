@@ -1,15 +1,11 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S ato-1 begin
 /**
  * Tag — a classification label: a model, a tool, an id. Often monospace.
  *
  * Tones use the shared `*-soft`/`*-tint` theme colours.
  */
-// @@S ato-1 end
-// @@T ato-1 begin
 export const tag: (props?: ({ tone?: 'neutral' | 'success' | 'warning' | 'danger' | 'info' | null | undefined; mono?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   'inline-flex items-center gap-1.5 rounded-sm border px-[9px] py-1 text-[12.5px] font-semibold',
   {
     variants: {

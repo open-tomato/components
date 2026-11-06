@@ -1,6 +1,4 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 // Deep import, not the Formatted barrel: the storybook production build's
 // lazy-init chunking drops the barrel init that defines HumanReadableValue
@@ -20,9 +18,7 @@ export interface CellValueProps
    * (FormattedCurrency, FormattedDate, …) instead.
    */
   value?: number;
-  // @@S mol-1 begin
   /** Unit suffix (`units`, `runs`, …) — small, greyed, to the right. */
-  // @@S mol-1 end
   unit?: string;
   /** Compact notation (`12.5K`). Default true — "human readable". */
   short?: boolean;
@@ -36,9 +32,7 @@ export interface CellValueProps
  * default (`align="end"`); pass pre-formatted children (currency, date,
  * time) for the plain Value form.
  */
-// @@T mol-1 begin
 export const CellValue: ForwardRefExoticComponent<PropsWithoutRef<CellValueProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, CellValueProps>(
-// @@T mol-1 end
   (
     {
       className,

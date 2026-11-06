@@ -1,11 +1,9 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   type TimeHTMLAttributes,
   type ForwardRefExoticComponent,
   type RefAttributes,
 } from 'react';
-// @@T ato-3 end
 
 import {
   cn,
@@ -33,11 +31,9 @@ export interface FormattedRelativeTimeProps
  * `x years ago` (spec-defined). The absolute date rides
  * along as a `title` tooltip and the machine-readable `dateTime`.
  */
-// @@T ato-3 begin
 export const FormattedRelativeTime: ForwardRefExoticComponent<
   FormattedRelativeTimeProps & RefAttributes<HTMLTimeElement>
 > = forwardRef<
-// @@T ato-3 end
   
   HTMLTimeElement,
   FormattedRelativeTimeProps

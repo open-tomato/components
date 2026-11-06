@@ -1,14 +1,10 @@
-// @@T tpl-1 begin
 import type { IconName } from '../../atoms/Icon';
 import type { FC } from 'react';
-// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
 
-// @@V tpl-1 begin
 import { sidebarNav } from './AppShell.variants';
-// @@V tpl-1 end
 import { NavItem } from './NavItem';
 
 /**
@@ -33,17 +29,13 @@ export interface SidebarNavProps {
   className?: string;
 }
 
-// @@S tpl-1 begin
 /**
  * The sidebar's data-driven navigation: a column of NavItems rendered
  * from a config array. The current spec'd set is Overview
  * (layout-dashboard), Reports (terminal), Members (bot), Roadmap (list),
  * Tools (cpu) — but the component takes whatever the config says.
  */
-// @@S tpl-1 end
-// @@T tpl-1 begin
 export const SidebarNav: FC<SidebarNavProps> = ({
-// @@T tpl-1 end
   items,
   activeId,
   onNavigate,
@@ -53,9 +45,7 @@ export const SidebarNav: FC<SidebarNavProps> = ({
 }: SidebarNavProps) => (
   <nav
     aria-label={label}
-    // @@V tpl-1 begin
     className={cn(sidebarNav({ collapsed }), className)}
-    // @@V tpl-1 end
   >
     {items.map((item) => (
       <NavItem

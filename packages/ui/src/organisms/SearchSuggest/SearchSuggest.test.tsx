@@ -8,7 +8,6 @@ import { type EntityKinds } from '../../molecules/KnownEntities/entityKindsConte
 
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
-// @@S mol-3 begin
 const KINDS: EntityKinds = {
   worker: { icon: 'bot', tone: 'primary' },
   run: { icon: 'terminal', tone: 'accent' },
@@ -24,17 +23,14 @@ const SUGGESTIONS: SearchSuggestion[] = [
   { kind: 'connector', label: 'github-issues', sub: 'MCP · connected', icon: 'cpu' },
   { kind: 'doc', label: 'Composting context' },
 ];
-// @@S mol-3 end
 
 const renderOpen = async (props: Partial<ComponentProps<typeof SearchSuggest>> = {}) => {
   await act(async () => {
-    // @@S mol-3 begin
     render(
       <EntityKindsProvider kinds={KINDS}>
         <SearchSuggest suggestions={SUGGESTIONS} {...props} />
       </EntityKindsProvider>,
     );
-    // @@S mol-3 end
   });
   return screen.getByRole('combobox');
 };
@@ -49,19 +45,16 @@ describe('SearchSuggest', () => {
     expect(screen.getByText('⌘K')).toBeTruthy();
   });
 
-  // @@S mol-3 begin
   it('defaults the placeholder to "Search…"', async () => {
     await renderOpen();
     expect(screen.getByPlaceholderText('Search…')).toBeTruthy();
   });
-  // @@S mol-3 end
 
   it('renders the placeholder', async () => {
     await renderOpen({ placeholder: 'Find' });
     expect(screen.getByPlaceholderText('Find')).toBeTruthy();
   });
 
-  // @@S mol-3 begin
   it('renders all five kinds when defaultOpen', async () => {
     await renderOpen({ defaultOpen: true });
     expect(screen.getAllByRole('option').length).toBe(5);
@@ -80,7 +73,6 @@ describe('SearchSuggest', () => {
     expect(screen.getAllByRole('option').length).toBe(1);
     expect(screen.getByRole('option').textContent).toBe('plain');
   });
-  // @@S mol-3 end
 
   it('opens on focus', async () => {
     const input = await renderOpen();

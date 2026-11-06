@@ -15,9 +15,7 @@ const DENSITY_OPTIONS = [
   { value: 'compact', label: 'Compact' },
 ];
 
-// @@T mol-1 begin
 const meta: Meta<typeof Select> = {
-// @@T mol-1 end
   title: 'Molecules/Select',
   component: Select,
   parameters: { layout: 'centered' },
@@ -32,9 +30,7 @@ const meta: Meta<typeof Select> = {
       </div>
     ),
   ],
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

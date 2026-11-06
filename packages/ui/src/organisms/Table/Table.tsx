@@ -1,6 +1,4 @@
-// @@T org-2 begin
 import { useState, type CSSProperties, type ReactElement, type ReactNode } from 'react';
-// @@T org-2 end
 
 import { cn } from '../../lib';
 
@@ -12,10 +10,8 @@ import {
   tableFoot,
   tableFrame,
   tableHead,
-  // @@V org-2 begin
   tableHeadJustify,
   tableHeadLabel,
-  // @@V org-2 end
   tableModCell,
   tableModHead,
   tableRowEl,
@@ -130,7 +126,6 @@ const ColGroup = <Row,>({
   </colgroup>
 );
 
-// @@T org-2 begin
 export const Table: {
   <Row>(props: TableProps<Row>): ReactElement;
   displayName?: string;
@@ -154,7 +149,6 @@ export const Table: {
   isRowReorderable,
   className,
 }: TableProps<Row>): ReactElement => {
-// @@T org-2 end
   const [sort, setSort] = useState<SortState>(initialSort ?? NO_SORT);
   const [tip, setTip] = useState<TableTip | null>(null);
   const reorder = useRowReorder({ data, onReorder });
@@ -266,12 +260,10 @@ export const Table: {
                     })}
                   >
                     <span
-                      // @@V org-2 begin
                       className={cn(
                         tableHeadLabel(),
                         tableHeadJustify({ end: col.align === 'end' }),
                       )}
-                      // @@V org-2 end
                     >
                       {col.align === 'end' && (
                         <SortGlyph

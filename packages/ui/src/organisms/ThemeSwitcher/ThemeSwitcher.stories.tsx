@@ -10,9 +10,7 @@ import { ThemeSwitcher, type ThemeName } from './ThemeSwitcher';
  * entirely when the user preference is "system" — the OS drives the
  * theme then.
  */
-// @@T org-2 begin
 const meta: Meta<typeof ThemeSwitcher> = {
-// @@T org-2 end
   title: 'Organisms/ThemeSwitcher',
   component: ThemeSwitcher,
   parameters: { layout: 'centered' },

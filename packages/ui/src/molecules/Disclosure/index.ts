@@ -5,7 +5,6 @@ export {
   accordionTrigger,
   tabsList,
   tabsTrigger,
-  // @@V mol-3 begin
   accordionItem,
   accordionHeading,
   accordionTriggerGroup,
@@ -14,6 +13,5 @@ export {
   accordionContent,
   accordionBody,
   tabsContent,
-  // @@V mol-3 end
   type DisclosureFrameVariants,
 } from './Disclosure.variants';

@@ -2,7 +2,6 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 import { cn } from '../../lib';
 
-// @@V mol-2 begin
 import {
   sectionCard,
   sectionCardAction,
@@ -13,7 +12,6 @@ import {
   sectionCardTitle,
   type SectionCardBodyVariants,
 } from './SectionCard.variants';
-// @@V mol-2 end
 
 export interface SectionCardProps
   extends HTMLAttributes<HTMLElement>,
@@ -36,9 +34,7 @@ export interface SectionCardProps
  * (UsageChart, CalendarHeatmap, LineChart, FilesChanged) compose on it so
  * the header/body/footer chrome stays in one place.
  */
-// @@T mol-2 begin
 export const SectionCard: import('react').ForwardRefExoticComponent<SectionCardProps & import('react').RefAttributes<HTMLElement>> = forwardRef<
-// @@T mol-2 end
   HTMLElement, SectionCardProps>(
   (
     {
@@ -63,9 +59,7 @@ export const SectionCard: import('react').ForwardRefExoticComponent<SectionCardP
               <div className={sectionCardSubtitle()}>{subtitle}</div>
             )}
           </div>
-          {/* @@V mol-2 begin */}
           {action != null && <div className={sectionCardAction()}>{action}</div>}
-          {/* @@V mol-2 end */}
         </header>
       )}
       <div className={sectionCardBody({ padded })}>{children}</div>

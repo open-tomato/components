@@ -1,16 +1,12 @@
-// @@T mol-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
  * CodeInput — one cell per digit, auto-advance, backspace-to-previous
  * (auth + settings 2FA). Filled cells carry the accent border.
  */
-// @@T mol-1 begin
 export const codeInputCell: (props?: { filled?: boolean | null } & ClassProp) => string = cva(
-// @@T mol-1 end
   [
     'h-14 w-11 rounded-md border bg-surface-1 text-center',
     'font-mono text-[22px] font-semibold text-fg1',
@@ -27,9 +23,7 @@ export const codeInputCell: (props?: { filled?: boolean | null } & ClassProp) =>
   },
 );
 
-// @@V mol-1 begin
 /** The cell row: digits centred with a fixed gutter. */
 export const codeInputGroup: (props?: ClassProp) => string = cva('flex justify-center gap-2');
-// @@V mol-1 end
 
 export type CodeInputCellVariants = VariantProps<typeof codeInputCell>;

@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Progress } from './Progress';
 
-// @@T mol-3 begin
 const meta: Meta<typeof Progress> = {
-// @@T mol-3 end
   title: 'Molecules/Progress',
   component: Progress,
   parameters: { layout: 'padded' },
@@ -34,9 +32,7 @@ export const DangerThreshold: Story = {
   args: { value: 92, tone: 'danger', 'aria-label': 'Token budget' },
 };
 
-// @@S mol-3 begin
 /** Indeterminate — "work in progress". */
-// @@S mol-3 end
 export const Indeterminate: Story = {
   args: { indeterminate: true, 'aria-label': 'Working' },
 };

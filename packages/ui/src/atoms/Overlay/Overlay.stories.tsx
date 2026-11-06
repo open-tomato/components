@@ -35,9 +35,7 @@ const DemoPanel = ({ side = false }: { side?: boolean }) => (
   </div>
 );
 
-// @@T ato-3 begin
 const meta: Meta<typeof Overlay> = {
-// @@T ato-3 end
   title: 'Atoms/Overlay',
   component: Overlay,
   parameters: { layout: 'fullscreen' },

@@ -1,27 +1,17 @@
-// @@T mol-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@V mol-1 begin
 import { chartTone, type ChartTone } from '../../lib';
-// @@V mol-1 end
 
 /* ── UsageBar (colocated bar indicator, reused by 03c cell content) ── */
 
-// @@T mol-1 begin
 export const usageBarTrack: (props?: { size?: 'md' | 'sm' | null; track?: boolean | null } & ClassProp) => string = cva('relative w-full overflow-hidden', {
-// @@T mol-1 end
   variants: {
     size: {
-      // @@S mol-1 begin
       /** Simple-row stroke. */
-      // @@S mol-1 end
       md: 'h-2.5 rounded-[5px]',
-      // @@S mol-1 begin
       /** Multi-row stroke (mini cells). */
-      // @@S mol-1 end
       sm: 'h-[5px] rounded-[3px]',
     },
     /** Gray background — the progress variant's required track. */
@@ -33,9 +23,7 @@ export const usageBarTrack: (props?: { size?: 'md' | 'sm' | null; track?: boolea
   defaultVariants: { size: 'md', track: false },
 });
 
-// @@T mol-1 begin
 export const usageBarFill: (props?: ClassProp) => string = cva(
-// @@T mol-1 end
   'absolute inset-y-0 left-0 rounded-[inherit] bg-current',
 );
 
@@ -46,25 +34,19 @@ export const usageBarFill: (props?: ClassProp) => string = cva(
  * region past the tick renders the same danger at reduced opacity, and
  * a contrast tick marks where 100% sits.
  */
-// @@T mol-1 begin
 export const usageBarOverflowFill: (props?: ClassProp) => string = cva(
-// @@T mol-1 end
   'absolute inset-y-0 right-0 rounded-r-[inherit] bg-current opacity-40',
 );
 
-// @@T mol-1 begin
 export const usageBarGoalTick: (props?: ClassProp) => string = cva(
-// @@T mol-1 end
   'absolute inset-y-0 w-0.5 -translate-x-1/2 bg-surface-1',
 );
 
-// @@V mol-1 begin
 /**
  * The bar's series color: the shared chart palette (`chartTone` in
  * `src/lib`), bound here so the component reads every class from its
  * variants file.
  */
 export const usageBarTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
-// @@V mol-1 end
 
 export type UsageBarTrackVariants = VariantProps<typeof usageBarTrack>;

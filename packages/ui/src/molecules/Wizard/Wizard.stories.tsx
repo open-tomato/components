@@ -11,27 +11,19 @@ interface Answers {
   model: string;
 }
 
-// @@S mol-1 begin
 /** A compact setup step set. */
-// @@S mol-1 end
 const STEPS: WizardStep<Answers>[] = [
   {
     key: 'name',
-    // @@S mol-1 begin
     title: 'Name your project',
-    // @@S mol-1 end
     short: 'Name',
-    // @@S mol-1 begin
     blurb: 'This is where your items and plans live. You can change it later.',
-    // @@S mol-1 end
     validate: (a) => /^[a-z0-9][a-z0-9-]{2,}$/.test(a.name)
       ? null
       : 'Lowercase letters, numbers and dashes — at least 3 characters.',
     render: ({ answers, set, error }) => (
       <Field
-        // @@S mol-1 begin
         label="Project name"
-        // @@S mol-1 end
         state={error
           ? 'error'
           : 'default'}
@@ -46,9 +38,7 @@ const STEPS: WizardStep<Answers>[] = [
     key: 'model',
     title: 'Pick a default model',
     short: 'Model',
-    // @@S mol-1 begin
     blurb: 'Every new item starts here. Per-item overrides are always available.',
-    // @@S mol-1 end
     validate: (a) => (a.model
       ? null
       : 'Choose a model to continue.'),
@@ -89,18 +79,14 @@ const STEPS: WizardStep<Answers>[] = [
     key: 'review',
     title: 'Review & create',
     short: 'Review',
-    // @@S mol-1 begin
     blurb: 'One last look. We\'ll create an empty project and take you to the overview.',
-    // @@S mol-1 end
     validate: () => null,
     render: ({ answers }) => (
       <div className="flex flex-col overflow-hidden rounded-lg border border-border-soft">
         {[
-          // @@S mol-1 begin
           ['Project', answers.name
             ? `example.dev/${answers.name}`
             : '—'],
-          // @@S mol-1 end
           ['Default model', answers.model || '—'],
         ].map(([k, v], i) => (
           <div
@@ -126,16 +112,12 @@ const STEPS: WizardStep<Answers>[] = [
 
 const Heading = () => (
   <>
-    {/* @@S mol-1 begin */}
     <span aria-hidden className="size-[22px] rounded-full bg-primary" />
     <span className="font-display text-sm font-bold text-fg1">New project</span>
-    {/* @@S mol-1 end */}
   </>
 );
 
-// @@T mol-1 begin
 const meta: Meta<typeof Wizard<Answers>> = {
-// @@T mol-1 end
   title: 'Molecules/Wizard',
   component: Wizard,
   parameters: { layout: 'fullscreen' },
@@ -146,9 +128,7 @@ const meta: Meta<typeof Wizard<Answers>> = {
     step: 0,
     answers: { name: '', model: 'sonnet-4.5' },
     heading: <Heading />,
-    // @@S mol-1 begin
     submitLabel: 'Create',
-    // @@S mol-1 end
     onAnswer: () => {},
     onBack: () => {},
     onNext: () => {},
@@ -163,9 +143,7 @@ const meta: Meta<typeof Wizard<Answers>> = {
       </div>
     ),
   ],
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

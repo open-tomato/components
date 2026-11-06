@@ -1,8 +1,6 @@
 import type { SelectionItem } from '../Breadcrumb';
 
-// @@T mol-1 begin
 import { forwardRef, Fragment, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
@@ -11,11 +9,9 @@ import {
   stepperConnector,
   stepperDot,
   stepperLabel,
-  // @@V mol-1 begin
   stepperButton,
   stepperRoot,
   stepperStatic,
-  // @@V mol-1 end
 } from './Stepper.variants';
 
 export interface StepperProps
@@ -46,18 +42,14 @@ const Check = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
-// @@T mol-1 begin
 export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, StepperProps>(
-// @@T mol-1 end
   (
     { className, items, index, onChange, tone = 'primary', size = 'md', ...props },
     ref,
   ) => (
     <div
       ref={ref}
-      // @@V mol-1 begin
       className={cn(stepperRoot({ size }), className)}
-      // @@V mol-1 end
       {...props}
     >
       {items.map((item, i) => {
@@ -91,21 +83,17 @@ export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & 
                 <button
                   type="button"
                   onClick={() => onChange(i)}
-                  // @@V mol-1 begin
                   className={cn(
                     touchable({ inline: true, noBrightness: false }),
                     stepperButton(),
                   )}
-                  // @@V mol-1 end
                 >
                   {content}
                 </button>
               )
               : (
                 <span
-                  // @@V mol-1 begin
                   className={stepperStatic()}
-                  // @@V mol-1 end
                 >
                   {content}
                 </span>

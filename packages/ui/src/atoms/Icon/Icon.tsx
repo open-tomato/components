@@ -13,9 +13,7 @@ import {
 import { cn } from '../../lib';
 import { devError } from '../../lib/dev';
 
-// @@V ato-2 begin
 import { icon, iconPlaceholder, type IconVariants } from './Icon.variants';
-// @@V ato-2 end
 
 /** Matches the stroke weight of the kit's hand-rolled glyphs (lib/icons). */
 const DEFAULT_STROKE_WIDTH = 1.75;
@@ -54,9 +52,7 @@ const GlyphPlaceholder = ({ size, pending = false }: { size: number; pending?: b
   <span
     aria-hidden
     data-glyph-pending={pending || undefined}
-    // @@V ato-2 begin
     className={iconPlaceholder()}
-    // @@V ato-2 end
     style={{ width: size, height: size }}
   />
 );
@@ -93,10 +89,8 @@ export interface IconProps
  * fallback is a same-size placeholder, so nothing shifts while the chunk
  * arrives, and the caller-facing API stays fully synchronous.
  */
-// @@T ato-2 begin
 export const Icon:
 import('react').ForwardRefExoticComponent<IconProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, IconProps>(
-// @@T ato-2 end
   (
     {
       className,

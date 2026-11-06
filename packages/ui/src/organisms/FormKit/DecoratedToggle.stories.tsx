@@ -11,31 +11,23 @@ import {
   type DecoratedToggleOption,
 } from './DecoratedToggle';
 
-// @@S org-1 begin
 /**
  * Bordered toggle rows: decoration +
  * title/description + switch, tone change when on; the list groups rows
  * under a mono header with the x/y-on indicator. The single row serves
  * auto-start flags and the list serves skill toggles.
  */
-// @@S org-1 end
-// @@T org-1 begin
 const meta: Meta<typeof DecoratedToggleList> = {
-// @@T org-1 end
   title: 'Organisms/DecoratedToggle',
   component: DecoratedToggleList,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-// @@T org-1 begin
 };
-// @@T org-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S org-1 begin
 /** Code tool choices as toggle data. */
-// @@S org-1 end
 const CODE_TOOLS: DecoratedToggleOption[] = [
   { id: 'fs', decoration: <Icon name="folder" size={16} />, title: 'fs', description: 'Read & write project files' },
   { id: 'shell', decoration: <Icon name="terminal" size={16} />, title: 'shell', description: 'Execute shell commands' },
@@ -86,9 +78,7 @@ const SingleDemo = () => {
         decoration={<Icon name="server" size={16} />}
         title="Auto-start"
         meta={<Badge tone="accent" size="sm">recommended</Badge>}
-        // @@S org-1 begin
         description="Connect to the MCP server when this group boots up."
-        // @@S org-1 end
         checked={auto}
         onChange={setAuto}
       />

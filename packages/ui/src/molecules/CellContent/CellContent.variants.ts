@@ -1,12 +1,8 @@
-// @@T mol-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@V mol-1 begin
 import { chartTone, type ChartTone } from '../../lib';
-// @@V mol-1 end
 
 /**
  * CellContent kit — standardized cell formats for tables and table-like
@@ -28,9 +24,7 @@ import { chartTone, type ChartTone } from '../../lib';
  */
 
 /** Value / value-with-unit — numeric cells right-align by default. */
-// @@T mol-1 begin
 export const cellValue: (props?: { align?: 'start' | 'end' | null } & ClassProp) => string = cva('flex min-w-0 items-baseline', {
-// @@T mol-1 end
   variants: {
     align: {
       start: 'justify-start text-left',
@@ -45,32 +39,22 @@ export const cellValue: (props?: { align?: 'start' | 'end' | null } & ClassProp)
  * decoration is optional, but when a row has one it must be the row's
  * FIRST column so decorations gutter-align down the table.
  */
-// @@T mol-1 begin
 export const cellDecoration: (props?: ClassProp) => string = cva('flex shrink-0 items-center justify-center');
-// @@T mol-1 end
 
-// @@T mol-1 begin
 export const cellDoubleLine: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
-// @@T mol-1 end
 
 /** DoubleLine top: short + accentuated. */
-// @@T mol-1 begin
 export const cellDoubleLineTitle: (props?: ClassProp) => string = cva(
-// @@T mol-1 end
   'truncate text-[13.5px] font-semibold leading-tight text-fg1',
 );
 
 /** DoubleLine bottom: longer, greyed, truncating. */
-// @@T mol-1 begin
 export const cellDoubleLineSubtitle: (props?: ClassProp) => string = cva(
-// @@T mol-1 end
   'truncate font-mono text-[11px] leading-tight text-fg3',
 );
 
 /** Status — indicator + optional text. */
-// @@T mol-1 begin
 export const cellStatus: (props?: { tone?: 'ok' | 'warn' | 'err' | 'info' | 'disabled' | null } & ClassProp) => string = cva('inline-flex items-center gap-2', {
-// @@T mol-1 end
   variants: {
     tone: {
       ok: 'text-success',
@@ -83,18 +67,14 @@ export const cellStatus: (props?: { tone?: 'ok' | 'warn' | 'err' | 'info' | 'dis
   defaultVariants: { tone: 'ok' },
 });
 
-// @@T mol-1 begin
 export const cellStatusText: (props?: ClassProp) => string = cva('text-[12.5px] font-medium text-fg2');
-// @@T mol-1 end
 
 /**
  * Label — accent-colored label-format text (the Overview "Top 5" rank
  * labels: subtle or transparent background, simple accent color). Paints
  * from `currentColor`, so the tone axis comes from `chartTone`.
  */
-// @@T mol-1 begin
 export const cellLabel: (props?: { bg?: 'none' | 'soft' | null } & ClassProp) => string = cva(
-// @@T mol-1 end
   [
     'inline-flex items-center rounded-sm px-1.5 py-0.5',
     'font-mono text-[11px] font-semibold uppercase tracking-[0.06em]',
@@ -111,51 +91,27 @@ export const cellLabel: (props?: { bg?: 'none' | 'soft' | null } & ClassProp) =>
   },
 );
 
-// @@T mol-1 begin
 export const cellLabelGroup: (props?: ClassProp) => string = cva('inline-flex flex-wrap items-center gap-1.5');
-// @@T mol-1 end
 
-// @@V mol-1 begin
 /**
  * A label's accent: the shared chart palette (`chartTone` in `src/lib`),
  * bound here so the component reads every class from its variants file.
  */
 export const cellLabelTone: (props?: ({ tone?: ChartTone | null | undefined } & ClassProp) | undefined) => string = chartTone;
-// @@V mol-1 end
 
 /** quota-usage — bold full number used, greyed quota. */
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const quotaUsage: (props?: ClassProp) => string = cva(
-// @@S mol-1 end
-// @@T mol-1 end
   'whitespace-nowrap font-mono text-xs font-semibold text-fg1',
 );
 
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const quotaUsageQuota: (props?: ClassProp) => string = cva('font-normal text-fg3');
-// @@S mol-1 end
-// @@T mol-1 end
 
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const quotaProgress: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-1');
-// @@S mol-1 end
-// @@T mol-1 end
 
 /** amount-over-time — currency over a greyed duration · relative-time line. */
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const amountOverTime: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
-// @@S mol-1 end
-// @@T mol-1 end
 
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const amountOverTimeMeta: (props?: ClassProp) => string = cva(
-// @@S mol-1 end
-// @@T mol-1 end
   'truncate font-mono text-[11px] leading-tight text-fg3',
 );
 
@@ -165,14 +121,12 @@ export const amountOverTimeMeta: (props?: ClassProp) => string = cva(
  * the exact cutoffs weren't given: green below 45%, yellow from 45%, red
  * from 85% (and for any overflow past the quota).
  */
-// @@S mol-1 begin
 export const QUOTA_WARN_RATIO = 0.45;
 export const QUOTA_DANGER_RATIO = 0.85;
 
 export const quotaProgressTone = (ratio: number): ChartTone => {
   if (ratio >= QUOTA_DANGER_RATIO) return 'danger';
   if (ratio >= QUOTA_WARN_RATIO) return 'gold';
-  // @@S mol-1 end
   return 'success';
 };
 

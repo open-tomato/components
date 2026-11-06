@@ -3,7 +3,6 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-// @@V mol-3 begin
 import {
   optionCard,
   optionCardBody,
@@ -13,15 +12,12 @@ import {
   optionCardTitleRow,
   type OptionCardVariants,
 } from './OptionCard.variants';
-// @@V mol-3 end
 
 export interface OptionCardProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'title'>,
   OptionCardVariants {
   selected: boolean;
-  // @@S mol-3 begin
   /** Identity slot — Monogram, IconTile, …. */
-  // @@S mol-3 end
   leading?: ReactNode;
   title: ReactNode;
   description?: ReactNode;
@@ -29,11 +25,9 @@ export interface OptionCardProps
   meta?: ReactNode;
 }
 
-// @@T mol-3 begin
 export const OptionCard: import('react').ForwardRefExoticComponent<
   OptionCardProps & import('react').RefAttributes<HTMLButtonElement>
 > = forwardRef<HTMLButtonElement, OptionCardProps>(
-// @@T mol-3 end
   ({ className, selected, align, leading, title, description, meta, ...props }, ref) => (
     <button
       ref={ref}
@@ -43,18 +37,14 @@ export const OptionCard: import('react').ForwardRefExoticComponent<
       {...props}
     >
       {leading}
-      {/* @@V mol-3 begin */}
       <span className={optionCardBody()}>
         <span className={optionCardTitleRow()}>
-          {/* @@V mol-3 end */}
           <span className={optionCardTitle({ align })}>{title}</span>
           {meta}
         </span>
         {description != null && (
           <span
-            // @@V mol-3 begin
             className={optionCardDescription({ align: align ?? 'center' })}
-            // @@V mol-3 end
           >
             {description}
           </span>

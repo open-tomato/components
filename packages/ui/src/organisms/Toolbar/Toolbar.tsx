@@ -12,9 +12,7 @@ import {
   toolbarControls,
   toolbarSummary,
   toolbarSurface,
-  // @@V org-2 begin
   toolbarSep,
-  // @@V org-2 end
   type ToolbarSummaryVariants,
 } from './Toolbar.variants';
 
@@ -38,9 +36,7 @@ import {
 
 export type ToolbarProps = HTMLAttributes<HTMLDivElement>;
 
-// @@T org-2 begin
 export const Toolbar: ForwardRefExoticComponent<ToolbarProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarProps>(
-// @@T org-2 end
 
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(toolbarSurface(), className)} {...props} />
@@ -51,9 +47,7 @@ Toolbar.displayName = 'Toolbar';
 
 export type ToolbarControlsProps = HTMLAttributes<HTMLDivElement>;
 
-// @@T org-2 begin
 export const ToolbarControls: ForwardRefExoticComponent<ToolbarControlsProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarControlsProps>(
-// @@T org-2 end
 
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn(toolbarControls(), className)} {...props} />
@@ -66,9 +60,7 @@ export interface ToolbarSummaryProps
   extends HTMLAttributes<HTMLDivElement>,
   ToolbarSummaryVariants {}
 
-// @@T org-2 begin
 export const ToolbarSummary: ForwardRefExoticComponent<ToolbarSummaryProps & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, ToolbarSummaryProps>(
-// @@T org-2 end
 
   ({ className, divided, ...props }, ref) => (
     <div
@@ -82,15 +74,11 @@ export const ToolbarSummary: ForwardRefExoticComponent<ToolbarSummaryProps & Ref
 ToolbarSummary.displayName = 'ToolbarSummary';
 
 /** The vertical hairline between control clusters. */
-// @@T org-2 begin
 export const ToolbarSep: FC<{ className?: string }> = ({ className }) => (
-// @@T org-2 end
 
   <div
     aria-hidden
-    // @@V org-2 begin
     className={cn(toolbarSep(), className)}
-    // @@V org-2 end
   />
 );
 

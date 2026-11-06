@@ -11,9 +11,7 @@ export interface TextareaProps
   onChange: (value: string) => void;
 }
 
-// @@T org-1 begin
 export const Textarea: import('react').ForwardRefExoticComponent<TextareaProps & import('react').RefAttributes<HTMLTextAreaElement>> = forwardRef<HTMLTextAreaElement, TextareaProps>(
-// @@T org-1 end
   ({ className, value, onChange, invalid, rows = 3, ...props }, ref) => (
     <textarea
       ref={ref}

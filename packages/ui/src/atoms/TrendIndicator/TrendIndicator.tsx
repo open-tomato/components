@@ -32,10 +32,8 @@ export interface TrendIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
  * from a ratio `trend` prop, optionally with the signed percentage value.
  * Spec-driven; no design artboard.
  */
-// @@T ato-2 begin
 export const TrendIndicator:
 import('react').ForwardRefExoticComponent<TrendIndicatorProps & import('react').RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, TrendIndicatorProps>(
-// @@T ato-2 end
   (
     {
       className,

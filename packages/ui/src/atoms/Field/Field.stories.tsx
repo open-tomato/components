@@ -18,9 +18,7 @@ const SearchIcon = () => (
   </svg>
 );
 
-// @@T ato-3 begin
 const meta: Meta<typeof Field> = {
-// @@T ato-3 end
   title: 'Atoms/Field',
   component: Field,
   parameters: { layout: 'centered' },
@@ -33,9 +31,7 @@ const meta: Meta<typeof Field> = {
     size: { control: 'select', options: ['sm', 'md'] },
   },
   args: {
-    // @@S ato-3 begin
     label: 'Group name',
-    // @@S ato-3 end
     defaultValue: 'open-garden',
     helper: 'Lowercase, no spaces.',
   },
@@ -71,9 +67,7 @@ export const SmallSize: Story = {
 };
 
 export const WithIcon: Story = {
-  // @@S ato-3 begin
   args: { icon: <SearchIcon />, placeholder: 'Search items…', defaultValue: '' },
-  // @@S ato-3 end
 };
 
 export const NoLabel: Story = {

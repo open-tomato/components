@@ -35,7 +35,6 @@ const Glyph = ({ name }: { name: string }) => (
   </svg>
 );
 
-// @@S org-2 begin
 /** The demo command registry. */
 const COMMANDS: Command[] = [
   { id: 'go-overview', group: 'Go to', icon: <Glyph name="home" />, label: 'Overview', keys: 'dashboard home' },
@@ -55,9 +54,7 @@ const COMMANDS: Command[] = [
 ];
 
 const RECENT = ['go-items', 'new-item', 'member-refactor', 'theme'];
-// @@S org-2 end
 
-// @@T org-2 begin
 const meta: Meta<typeof CommandPalette> = {
   title: 'Organisms/CommandPalette',
   component: CommandPalette,
@@ -79,7 +76,6 @@ const meta: Meta<typeof CommandPalette> = {
     ),
   ],
 };
-// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -5,15 +5,11 @@ import { Button } from '../../atoms/Button';
 import { AuthHeading } from './AuthHeading';
 import { AuthShell } from './AuthShell';
 
-// @@S tpl-1 begin
 /**
  * The pre-authentication shell: tinted backdrop, brand slot, centred
  * card, footer line. Screens fill the card — see Pages/Auth/*.
  */
-// @@S tpl-1 end
-// @@T tpl-1 begin
 const meta: Meta<typeof AuthShell> = {
-// @@T tpl-1 end
   title: 'Templates/AuthShell',
   component: AuthShell,
   parameters: { layout: 'fullscreen' },
@@ -27,9 +23,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <AuthShell
-      // @@S tpl-1 begin
       brand={<a href="#home">Brand</a>}
-      // @@S tpl-1 end
       eyebrow="welcome back"
       footer={
         <>
@@ -37,9 +31,7 @@ export const Default: Story = {
         </>
       }
     >
-      {/* @@S tpl-1 begin */}
       <AuthHeading title="Sign in" sub="Pick up where you left off." />
-      {/* @@S tpl-1 end */}
       <Button variant="primary" block>Sign in</Button>
     </AuthShell>
   ),
@@ -49,9 +41,7 @@ export const Default: Story = {
 export const WideXl: Story = {
   render: () => (
     <AuthShell
-      // @@S tpl-1 begin
       brand={<a href="#home">Brand</a>}
-      // @@S tpl-1 end
       eyebrow="security · two-factor"
       width="xl"
     >

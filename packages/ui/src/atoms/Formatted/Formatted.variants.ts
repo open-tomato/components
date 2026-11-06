@@ -1,6 +1,4 @@
-// @@T ato-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T ato-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -9,9 +7,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * values with small greyed-out units, per the DS value-display rules.
  * The size axis is shared across the family so values align when mixed.
  */
-// @@T ato-3 begin
 export const formattedValue: (props?: { size?: 'sm' | 'md' | 'lg' | null | undefined } & ClassProp) => string = cva(
-// @@T ato-3 end
 
   'inline-flex items-baseline gap-1 font-semibold text-fg1',
   {
@@ -27,9 +23,7 @@ export const formattedValue: (props?: { size?: 'sm' | 'md' | 'lg' | null | undef
 );
 
 /** The small greyed unit suffix (mono, like the original design MetricTile). */
-// @@T ato-3 begin
 export const formattedUnit: (props?: { size?: 'sm' | 'md' | 'lg' | null | undefined } & ClassProp) => string =
-// @@T ato-3 end
   cva('font-mono font-normal text-fg3', {
     variants: {
       size: {

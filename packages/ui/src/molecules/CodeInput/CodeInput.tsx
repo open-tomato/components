@@ -1,12 +1,8 @@
-// @@T mol-1 begin
 import { useRef, type JSX, type KeyboardEvent } from 'react';
-// @@T mol-1 end
 
 import { cn } from '../../lib';
 
-// @@V mol-1 begin
 import { codeInputCell, codeInputGroup } from './CodeInput.variants';
-// @@V mol-1 end
 
 export interface CodeInputProps {
   /** Number of digit cells. */
@@ -20,12 +16,10 @@ export interface CodeInputProps {
 }
 
 /** Digits fill left-to-right; typing advances, backspace on empty retreats. */
-// @@T mol-1 begin
 export const CodeInput: {
   (props: CodeInputProps): JSX.Element;
   displayName?: string;
 } = ({
-// @@T mol-1 end
   length = 6,
   value,
   onChange,
@@ -53,9 +47,7 @@ export const CodeInput: {
     <div
       role="group"
       aria-label={label}
-      // @@V mol-1 begin
       className={cn(codeInputGroup(), className)}
-      // @@V mol-1 end
     >
       {chars.map((c, i) => (
         <input

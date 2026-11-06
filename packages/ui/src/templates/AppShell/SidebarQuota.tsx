@@ -1,8 +1,4 @@
-// @@T tpl-1 begin
-// @@S tpl-1 begin
 import type { FC, ReactNode } from 'react';
-// @@S tpl-1 end
-// @@T tpl-1 end
 
 import { Badge } from '../../atoms/Badge';
 import { cn, formatNumber } from '../../lib';
@@ -10,7 +6,6 @@ import { cn, formatNumber } from '../../lib';
 // cross-tree barrel inits (see the built-storybook lazy-init chunking hazard).
 import { Progress } from '../../molecules/Progress/Progress';
 
-// @@V tpl-1 begin
 import {
   weekSummary,
   weekSummaryCard,
@@ -21,9 +16,7 @@ import {
   weekSummaryProgress,
   weekSummaryUsed,
 } from './AppShell.variants';
-// @@V tpl-1 end
 
-// @@S tpl-1 begin
 export interface SidebarQuotaProps {
   /** Drives the pill's copy and tone. */
   status: 'healthy' | 'unhealthy';
@@ -48,14 +41,11 @@ export interface SidebarQuotaProps {
  * composition, not widget state.
  */
 export const SidebarQuota: FC<SidebarQuotaProps> = ({
-// @@S tpl-1 end
   status,
   used,
   limit,
-  // @@S tpl-1 begin
   title = 'usage',
   unit,
-  // @@S tpl-1 end
   collapsed = false,
   className,
 }: SidebarQuotaProps) => {
@@ -64,17 +54,11 @@ export const SidebarQuota: FC<SidebarQuotaProps> = ({
     ? (used / limit) * 100
     : 0;
   return (
-    // @@V tpl-1 begin
     <div className={cn(weekSummary(), className)}>
       <div className={weekSummaryCard()}>
-        {/* @@V tpl-1 end */}
-        {/* @@V tpl-1 begin */}
         <div className={weekSummaryHeader()}>
           <span className={weekSummaryEyebrow()}>
-            {/* @@V tpl-1 end */}
-            {/* @@S tpl-1 begin */}
             {title}
-            {/* @@S tpl-1 end */}
           </span>
           <Badge
             tone={status === 'healthy'
@@ -86,18 +70,14 @@ export const SidebarQuota: FC<SidebarQuotaProps> = ({
             {status}
           </Badge>
         </div>
-        {/* @@V tpl-1 begin */}
         <div className={weekSummaryFigures()}>
           <span className={weekSummaryUsed()}>
             {formatNumber(used)}
           </span>
           <span className={weekSummaryLimit()}>
-            {/* @@V tpl-1 end */}
-            {/* @@S tpl-1 begin */}
             / {formatNumber(limit)}{unit
               ? ` ${unit}`
               : ''}
-            {/* @@S tpl-1 end */}
           </span>
         </div>
         <Progress
@@ -105,15 +85,11 @@ export const SidebarQuota: FC<SidebarQuotaProps> = ({
           tone={status === 'healthy'
             ? 'accent'
             : 'danger'}
-          // @@V tpl-1 begin
           className={weekSummaryProgress()}
-          // @@V tpl-1 end
         />
       </div>
     </div>
   );
 };
 
-// @@S tpl-1 begin
 SidebarQuota.displayName = 'SidebarQuota';
-// @@S tpl-1 end

@@ -1,13 +1,10 @@
-// @@T tpl-1 begin
 import type { IconName } from '../../atoms/Icon';
 import type { FC } from 'react';
-// @@T tpl-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-// @@V tpl-1 begin
 import {
   navItem,
   navItemIcon,
@@ -15,7 +12,6 @@ import {
   quickAccessLink,
   sidebarQuickAccess,
 } from './AppShell.variants';
-// @@V tpl-1 end
 import { NavItem } from './NavItem';
 
 export interface SidebarQuickAccessItem {
@@ -45,9 +41,7 @@ export interface SidebarQuickAccessProps {
  * real links opening in a new tab (Docs → the documentation site);
  * items with `onClick` are in-app NavItems (Settings → settings page).
  */
-// @@T tpl-1 begin
 export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
-// @@T tpl-1 end
   items,
   collapsed = false,
   label = 'Quick access',
@@ -55,9 +49,7 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
 }: SidebarQuickAccessProps) => (
   <nav
     aria-label={label}
-    // @@V tpl-1 begin
     className={cn(sidebarQuickAccess({ collapsed }), className)}
-    // @@V tpl-1 end
   >
     {items.map((item) => item.href != null
       ? (
@@ -72,21 +64,15 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
           className={cn(
             touchable({ rounded: 'md', noBrightness: false }),
             navItem({ active: false, collapsed }),
-            // @@V tpl-1 begin
-            // @@S tpl-1 begin
             // The theme's element defaults can beat Tailwind utilities
             // on `a` — win with `!` (see the layered-base gotcha in the docs).
-            // @@S tpl-1 end
             quickAccessLink(),
-            // @@V tpl-1 end
           )}
         >
-          {/* @@V tpl-1 begin */}
           <span className={navItemIcon()}>
             <Icon name={item.icon} size={18} />
           </span>
           {!collapsed && <span className={navItemLabel()}>{item.label}</span>}
-          {/* @@V tpl-1 end */}
         </a>
       )
       : (

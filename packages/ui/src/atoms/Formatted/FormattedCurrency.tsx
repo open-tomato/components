@@ -1,11 +1,9 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   type HTMLAttributes,
   type ForwardRefExoticComponent,
   type RefAttributes,
 } from 'react';
-// @@T ato-3 end
 
 import { cn, formatCurrency } from '../../lib';
 
@@ -31,11 +29,9 @@ export interface FormattedCurrencyProps
  * FormattedCurrency — money, bold with the currency symbol on the left per
  * the DS value-display rules (spec-defined).
  */
-// @@T ato-3 begin
 export const FormattedCurrency: ForwardRefExoticComponent<
   FormattedCurrencyProps & RefAttributes<HTMLSpanElement>
 > = forwardRef<
-// @@T ato-3 end
   
   HTMLSpanElement,
   FormattedCurrencyProps

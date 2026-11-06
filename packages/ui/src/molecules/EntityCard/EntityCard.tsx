@@ -51,9 +51,7 @@ export interface EntityCardProps
  * @param props - The title, the four slots, and the open callback.
  * @returns The card, with `children` as its body.
  */
-// @@T mol-2 begin
 export const EntityCard: import('react').ForwardRefExoticComponent<EntityCardProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
-// @@T mol-2 end
   HTMLDivElement, EntityCardProps>(
   (
     { className, title, badges, meta, control, action, onOpen, children, ...props },

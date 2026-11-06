@@ -1,10 +1,8 @@
 import { forwardRef, useMemo, type SVGAttributes } from 'react';
 
-// @@V ato-1 begin
 import { cn, type ChartTone } from '../../lib';
 
 import { sparkline, sparklineTone, type SparklineVariants } from './Sparkline.variants';
-// @@V ato-1 end
 
 /** ViewBox geometry — the box is stretched, strokes stay non-scaling. */
 const VIEW_W = 100;
@@ -18,16 +16,12 @@ export interface SparklineProps
   data: number[];
   /** Series color from the shared chart palette. */
   tone?: ChartTone;
-  // @@S ato-1 begin
   /** Faint area fill under the line. */
-  // @@S ato-1 end
   fill?: boolean;
-  // @@S ato-1 begin
   /**
    * Accessible label (e.g. "usage over the last 30 days"). Without it
    * the chart is decorative (aria-hidden) — pair it with visible text.
    */
-  // @@S ato-1 end
   label?: string;
 }
 
@@ -47,7 +41,6 @@ const buildPath = (data: number[]): string => {
     .join(' ');
 };
 
-// @@S ato-1 begin
 /**
  * Sparkline — small inline SVG trend chart (card bottom lines, table
  * cells). Hand-rolled per the D1 decision (see LineChart/D1-DECISION.md);
@@ -57,8 +50,6 @@ const buildPath = (data: number[]): string => {
  * not scale); the box stretches to the container while
  * `vector-effect: non-scaling-stroke` keeps the line weight constant.
  */
-// @@S ato-1 end
-// @@T ato-1 begin
 export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps & import('react').RefAttributes<SVGSVGElement>> = forwardRef<SVGSVGElement, SparklineProps>(
   ({ className, data, tone, fill = true, label, size, ...props }, ref) => {
     const path = useMemo(
@@ -78,9 +69,7 @@ export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps
           : undefined}
         aria-label={label}
         aria-hidden={label == null || undefined}
-        // @@V ato-1 begin
         className={cn(sparkline({ size }), sparklineTone({ tone }), className)}
-        // @@V ato-1 end
         {...props}
       >
         {fill && (
@@ -103,6 +92,5 @@ export const Sparkline: import('react').ForwardRefExoticComponent<SparklineProps
     );
   },
 );
-// @@T ato-1 end
 
 Sparkline.displayName = 'Sparkline';

@@ -6,13 +6,11 @@ import { StrokeIcon } from '../../lib/icons';
 
 import {
   checkboxBox,
-  // @@V org-1 begin
   checkboxHint,
   checkboxLabel,
   checkboxMark,
   checkboxRow,
   checkboxText,
-  // @@V org-1 end
   checkGroup,
   type CheckGroupVariants,
 } from './FormKit.variants';
@@ -25,9 +23,7 @@ export interface CheckboxProps {
   className?: string;
 }
 
-// @@T org-1 begin
 export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   checked,
   onChange,
   label,
@@ -39,15 +35,12 @@ export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; di
     role="checkbox"
     aria-checked={checked}
     onClick={() => onChange(!checked)}
-    // @@V org-1 begin
     className={cn(
       touchable({ rounded: 'sm', noBrightness: false }),
       checkboxRow(),
       className,
     )}
-    // @@V org-1 end
   >
-    {/* @@V org-1 begin */}
     <span className={checkboxBox({ checked })}>
       {checked && (
         <span className={checkboxMark()}>
@@ -61,7 +54,6 @@ export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; di
         <span className={checkboxHint()}>{hint}</span>
       )}
     </span>
-    {/* @@V org-1 end */}
   </button>
 );
 
@@ -80,9 +72,7 @@ export interface CheckGroupProps extends CheckGroupVariants {
   className?: string;
 }
 
-// @@T org-1 begin
 export const CheckGroup: { (props: CheckGroupProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   options,
   value,
   onChange,

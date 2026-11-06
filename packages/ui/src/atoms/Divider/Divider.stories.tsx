@@ -3,9 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Divider } from './Divider';
 
 /** A rule, optionally interrupted by a mono label — the auth forms' "or with email". */
-// @@T ato-3 begin
 const meta: Meta<typeof Divider> = {
-// @@T ato-3 end
   title: 'Atoms/Divider',
   component: Divider,
   parameters: { layout: 'centered' },

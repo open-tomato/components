@@ -1,18 +1,12 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S ato-2 begin
 /**
  * Monogram — an identity block: initials on a brand fill, squarer than
  * Avatar (auth screens + topbar). Font size tracks a 0.42 × box ratio; lg
  * carries a 10px radius.
  */
-// @@S ato-2 end
-// @@T ato-2 begin
-// @@S ato-2 begin
 export const monogram:
-// @@S ato-2 end
 (props?: ({ tone?: 'accent' | 'primary' | 'gold' | null; size?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   'inline-flex shrink-0 items-center justify-center font-display font-bold text-on-accent',
   {
     variants: {
@@ -31,6 +25,4 @@ export const monogram:
   },
 );
 
-// @@S ato-2 begin
 export type MonogramVariants = VariantProps<typeof monogram>;
-// @@S ato-2 end

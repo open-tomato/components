@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-// @@V org-1 begin
 import {
   formField,
   formFieldError,
@@ -12,7 +11,6 @@ import {
   formFieldLabelRow,
   formFieldRequired,
 } from './FormKit.variants';
-// @@V org-1 end
 
 export interface FormFieldProps {
   label?: ReactNode;
@@ -20,12 +18,10 @@ export interface FormFieldProps {
   labelEnd?: ReactNode;
   /** Shown under the control when there's no error. */
   hint?: ReactNode;
-  // @@S org-1 begin
   /**
    * 'above' renders the hint between label and control, as auth-style
    * forms do. Default 'below' puts the hint under the control.
    */
-  // @@S org-1 end
   hintPlacement?: 'below' | 'above';
   /** Replaces the below-hint and turns the message danger-toned. */
   error?: ReactNode;
@@ -35,17 +31,13 @@ export interface FormFieldProps {
   children: ReactNode;
 }
 
-// @@S org-1 begin
 /**
  * The shared envelope — Field is to inputs what Touchable is to buttons:
  * it owns labelling, the hint/error slot and the controlled-value posture,
  * so no control re-implements them. Swap the control in the middle and
  * everything else comes along unchanged.
  */
-// @@S org-1 end
-// @@T org-1 begin
 export const FormField: { (props: FormFieldProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   label,
   labelEnd,
   hint,
@@ -56,7 +48,6 @@ export const FormField: { (props: FormFieldProps): import('react').JSX.Element; 
   className,
   children,
 }: FormFieldProps) => (
-  // @@V org-1 begin
   <div className={cn(formField(), className)}>
     {(label != null || labelEnd != null) && (
       <span className={formFieldLabelRow()}>
@@ -86,7 +77,6 @@ export const FormField: { (props: FormFieldProps): import('react').JSX.Element; 
       hint != null && <span className={formFieldHint({ placement: 'below' })}>{hint}</span>
       )}
   </div>
-  // @@V org-1 end
 );
 
 FormField.displayName = 'FormField';

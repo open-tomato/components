@@ -3,9 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { OAuthButton } from './OAuthButton';
 
 /** Provider sign-in rows — surface button, provider glyph, hover sink. */
-// @@T ato-2 begin
 const meta: Meta<typeof OAuthButton> = {
-// @@T ato-2 end
   title: 'Atoms/OAuthButton',
   component: OAuthButton,
   parameters: { layout: 'centered' },

@@ -8,13 +8,11 @@ import { Badge } from '../Badge';
 import { Sortable } from './Sortable';
 import { SortableRow } from './SortableRow';
 
-// @@S ato-2 begin
 /**
  * Scenarios that exercise the Droppable drop targets end to end.
  * Same wrapper: an isolated single-group list, then two groups that
  * reorder internally AND receive each other's items (origin decides).
  */
-// @@S ato-2 end
 
 const GLYPHS: Record<string, string> = {
   list: 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
@@ -107,9 +105,7 @@ const WidgetRow = ({ w, accent }: { w: Widget; accent: string }) => (
   </div>
 );
 
-// @@T ato-2 begin
 const meta: Meta<typeof Sortable> = {
-// @@T ato-2 end
   title: 'Atoms/Sortable',
   component: Sortable,
   parameters: { layout: 'padded' },
@@ -164,11 +160,9 @@ const PaletteBoardDemo = () => {
     { id: 'w-cost', label: 'Cost / day', icon: 'zap' },
   ]);
   const [board, setBoard] = useState<Widget[]>([
-    // @@S ato-2 begin
     { id: 'w-workers', label: 'Active workers', icon: 'bot' },
     { id: 'w-budget', label: 'Token budget', icon: 'cpu' },
     { id: 'w-activity', label: 'Recent activity', icon: 'terminal' },
-    // @@S ato-2 end
   ]);
   const boardReceive = (item: Widget, at: number) => {
     setBoard((b) => {

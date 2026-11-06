@@ -12,9 +12,7 @@ const SpanTile = ({ label }: { label: string }) => (
   </span>
 );
 
-// @@T ato-3 begin
 const meta: Meta<typeof GridItem> = {
-// @@T ato-3 end
   title: 'Atoms/GridItem',
   component: GridItem,
   parameters: { layout: 'padded' },

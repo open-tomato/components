@@ -1,13 +1,9 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-// @@V mol-1 begin
 import { paginationButton, paginationRoot } from './Pagination.variants';
-// @@V mol-1 end
 
 export interface PaginationProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -34,15 +30,11 @@ const Arrow = ({ left = false }: { left?: boolean }) => (
   </svg>
 );
 
-// @@T mol-1 begin
 export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, PaginationProps>(
-// @@T mol-1 end
   ({ className, count, index, onChange, ...props }, ref) => (
     <div
       ref={ref}
-      // @@V mol-1 begin
       className={cn(paginationRoot(), className)}
-      // @@V mol-1 end
       {...props}
     >
       <button
@@ -50,12 +42,10 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
         aria-label="Previous"
         disabled={index === 0}
         onClick={() => onChange?.(Math.max(0, index - 1))}
-        // @@V mol-1 begin
         className={cn(
           touchable({ inline: true, rounded: 'md', noBrightness: false }),
           paginationButton({ active: false }),
         )}
-        // @@V mol-1 end
       >
         <Arrow left />
       </button>
@@ -67,12 +57,10 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
             ? 'page'
             : undefined}
           onClick={() => onChange?.(i)}
-          // @@V mol-1 begin
           className={cn(
             touchable({ inline: true, rounded: 'md', noBrightness: false }),
             paginationButton({ active: i === index }),
           )}
-          // @@V mol-1 end
         >
           {i + 1}
         </button>
@@ -82,12 +70,10 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
         aria-label="Next"
         disabled={index === count - 1}
         onClick={() => onChange?.(Math.min(count - 1, index + 1))}
-        // @@V mol-1 begin
         className={cn(
           touchable({ inline: true, rounded: 'md', noBrightness: false }),
           paginationButton({ active: false }),
         )}
-        // @@V mol-1 end
       >
         <Arrow />
       </button>

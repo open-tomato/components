@@ -16,7 +16,6 @@ import {
 
 import { ConfirmInline, ConfirmPopover } from './ConfirmPopover';
 
-// @@S mol-3 begin
 /**
  * The reusable confirmation ("Confirmation popover" card; app-shell spec).
  * Two flavours: standalone (anchored to any
@@ -24,10 +23,7 @@ import { ConfirmInline, ConfirmPopover } from './ConfirmPopover';
  * always names the action and its object — never a bare "are you sure?" —
  * and the confirm button names it again ("Yes, delete", never OK).
  */
-// @@S mol-3 end
-// @@T mol-3 begin
 const meta: Meta<typeof ConfirmPopover> = {
-// @@T mol-3 end
   title: 'Molecules/ConfirmPopover',
   component: ConfirmPopover,
   parameters: { layout: 'centered' },
@@ -39,13 +35,11 @@ type Story = StoryObj<typeof meta>;
 
 const noop = () => {};
 
-// @@S mol-3 begin
 /**
  * Standalone flavour, destructive: the "Delete item…" example.
  * Open by default for the docs; focus lands on Cancel (the panel's first
  * focusable), so Enter never destroys by accident.
  */
-// @@S mol-3 end
 export const StandaloneDanger: Story = {
   args: {
     message: '',
@@ -58,10 +52,8 @@ export const StandaloneDanger: Story = {
       <ConfirmPopover
         message={(
           <>
-            {/* @@S mol-3 begin */}
             Delete the item <b>example-item</b>? This removes 9
             related records too.
-            {/* @@S mol-3 end */}
           </>
         )}
         confirmLabel="Yes, delete"
@@ -71,9 +63,7 @@ export const StandaloneDanger: Story = {
         defaultOpen
       >
         <Button variant="danger" iconLeading={<Icon name="trash-2" size={15} />}>
-          {/* @@S mol-3 begin */}
           Delete item…
-          {/* @@S mol-3 end */}
         </Button>
       </ConfirmPopover>
     </div>
@@ -95,17 +85,13 @@ export const StandaloneNeutral: Story = {
   render: () => (
     <div className="flex min-h-[240px] items-start justify-center pt-2">
       <ConfirmPopover
-        // @@S mol-3 begin
         message="Archive this group? Members keep access but no new items can be started."
-        // @@S mol-3 end
         confirmLabel="Archive"
         onConfirm={noop}
         defaultOpen
       >
         <Button variant="secondary" iconLeading={<Icon name="package" size={15} />}>
-          {/* @@S mol-3 begin */}
           Archive group…
-          {/* @@S mol-3 end */}
         </Button>
       </ConfirmPopover>
     </div>
@@ -147,9 +133,7 @@ const InMenuDemo = () => {
         }}
       >
         <MenuTrigger asChild>
-          {/* @@S mol-3 begin */}
           <Button variant="secondary">Item actions</Button>
-          {/* @@S mol-3 end */}
         </MenuTrigger>
         <MenuContent size="md">
           {confirming
@@ -158,9 +142,7 @@ const InMenuDemo = () => {
                 host="menu"
                 message={(
                   <>
-                    {/* @@S mol-3 begin */}
                     This action will <strong>archive</strong> the item
-                    {/* @@S mol-3 end */}
                     {' '}
                     <strong className="font-mono text-xs">auth-refactor</strong>
                     {' '}

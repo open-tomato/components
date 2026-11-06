@@ -1,20 +1,15 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { cn, formatNumber } from '../../lib';
 
-// @@S mol-1 begin
 import {
   quotaProgress,
   quotaProgressTone,
   quotaUsage,
   quotaUsageQuota,
 } from './CellContent.variants';
-// @@S mol-1 end
 import { UsageBar } from './UsageBar';
 
-// @@S mol-1 begin
 export interface QuotaUsageProps
   extends HTMLAttributes<HTMLSpanElement> {
   /** Amount used — rendered bold, as the FULL number. */
@@ -29,12 +24,7 @@ export interface QuotaUsageProps
  * human-readable quota (spec: "CellContent → quota-usage"; typical use: a
  * usage column in a table of items).
  */
-// @@S mol-1 end
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const QuotaUsage: ForwardRefExoticComponent<PropsWithoutRef<QuotaUsageProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, QuotaUsageProps>(({ className, used, quota, locale, ...props }, ref) => (
-// @@S mol-1 end
-// @@T mol-1 end
   <span
     ref={ref}
     className={cn(quotaUsage(), className)}
@@ -48,7 +38,6 @@ export const QuotaUsage: ForwardRefExoticComponent<PropsWithoutRef<QuotaUsagePro
   </span>
 ));
 
-// @@S mol-1 begin
 QuotaUsage.displayName = 'QuotaUsage';
 
 export interface QuotaProgressProps extends QuotaUsageProps {
@@ -63,12 +52,7 @@ export interface QuotaProgressProps extends QuotaUsageProps {
  * STATUS instead (running green, failed red, else accent) diverges from
  * this; the spec keys the color to usage thresholds — the spec wins.
  */
-// @@S mol-1 end
-// @@T mol-1 begin
-// @@S mol-1 begin
 export const QuotaProgress: ForwardRefExoticComponent<PropsWithoutRef<QuotaProgressProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, QuotaProgressProps>(
-// @@S mol-1 end
-// @@T mol-1 end
   ({ className, used, quota, locale, label, ...props }, ref) => {
     const ratio = quota > 0
       ? used / quota
@@ -76,7 +60,6 @@ export const QuotaProgress: ForwardRefExoticComponent<PropsWithoutRef<QuotaProgr
         ? Number.POSITIVE_INFINITY
         : 0;
     return (
-      // @@S mol-1 begin
       <div ref={ref} className={cn(quotaProgress(), className)} {...props}>
         <QuotaUsage used={used} quota={quota} locale={locale} />
         <UsageBar
@@ -87,11 +70,8 @@ export const QuotaProgress: ForwardRefExoticComponent<PropsWithoutRef<QuotaProgr
           label={label ?? `${used} of ${quota}`}
         />
       </div>
-      // @@S mol-1 end
     );
   },
 );
 
-// @@S mol-1 begin
 QuotaProgress.displayName = 'QuotaProgress';
-// @@S mol-1 end

@@ -14,25 +14,19 @@ describe('shell fixtures', () => {
     await act(async () => {
       view = render(<SidebarDemo active="overview" onNavigate={(id) => seen.push(id)} />);
     });
-    // @@S tpl-1 begin
     expect(screen.getByText('labs')).toBeTruthy();
     await act(async () => {
       fireEvent.click(screen.getByText('Items'));
     });
     expect(seen).toEqual(['items']);
-    // @@S tpl-1 end
     view.unmount();
     await act(async () => {
       render(<SidebarDemo active="settings" onNavigate={() => {}} collapsed />);
     });
-    // @@S tpl-1 begin
     expect(screen.queryByText('labs')).toBeNull();
-    // @@S tpl-1 end
   });
 
-  // @@S tpl-1 begin
   it('TopbarDemo renders the title beside the group switcher', async () => {
-  // @@S tpl-1 end
     await act(async () => {
       render(<TopbarDemo title="usage" />);
     });
@@ -42,11 +36,9 @@ describe('shell fixtures', () => {
 
   it('LiveShell renders the page placeholder and the optional footer', async () => {
     await act(async () => {
-      // @@S tpl-1 begin
       render(<LiveShell page="teams" withFooter />);
     });
     expect(screen.getByLabelText('teams placeholder')).toBeTruthy();
-    // @@S tpl-1 end
     expect(screen.getByText('Documentation')).toBeTruthy();
   });
 

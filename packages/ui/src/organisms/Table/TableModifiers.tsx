@@ -1,16 +1,10 @@
-// @@T org-2 begin
 import { forwardRef, type ForwardRefExoticComponent, type RefAttributes } from 'react';
-// @@T org-2 end
 
 import { Icon } from '../../atoms/Icon';
 import { cn } from '../../lib';
-// @@V org-2 begin
 import { checkboxBox } from '../FormKit/FormKit.variants';
-// @@V org-2 end
 
-// @@V org-2 begin
 import { tableRowCheckbox, tableRowCheckboxMark, tableSortHandle } from './Table.variants';
-// @@V org-2 end
 
 /**
  * TableRow modifier controls (spec: "TableRow
@@ -38,9 +32,7 @@ export interface TableRowCheckboxProps {
   className?: string;
 }
 
-// @@T org-2 begin
 export const TableRowCheckbox: ForwardRefExoticComponent<TableRowCheckboxProps & RefAttributes<HTMLButtonElement>> = forwardRef<
-// @@T org-2 end
   HTMLButtonElement,
   TableRowCheckboxProps
 >(
@@ -58,16 +50,12 @@ export const TableRowCheckbox: ForwardRefExoticComponent<TableRowCheckboxProps &
       aria-label={label}
       disabled={disabled}
       onClick={() => onChange(!(checked || indeterminate))}
-      // @@V org-2 begin
       className={cn(tableRowCheckbox({ disabled }), className)}
-      // @@V org-2 end
     >
       <span className={checkboxBox({ checked: checked || indeterminate })}>
         {(checked || indeterminate) && (
           <span
-            // @@V org-2 begin
             className={tableRowCheckboxMark()}
-            // @@V org-2 end
           >
             <Icon
               name={indeterminate
@@ -100,9 +88,7 @@ export interface TableSortHandleProps {
  * — no keyboard path yet, mirroring the existing Sortable atom. See the
  * useRowReorder docblock for the planned keyboard fallback.
  */
-// @@T org-2 begin
 export const TableSortHandle: ForwardRefExoticComponent<TableSortHandleProps & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, TableSortHandleProps>(
-// @@T org-2 end
 
   ({ disabled = false, className }, ref) => (
     <span

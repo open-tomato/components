@@ -8,7 +8,6 @@ import { StrokeIcon } from '../../lib/icons';
 // Concrete files, not the Droppable barrel, to keep static-build chunks
 // acyclic (the React #130 lesson from Stage 4).
 
-// @@V org-1 begin
 import {
   fileChip,
   fileChipIcon,
@@ -17,7 +16,6 @@ import {
   fileChipSize,
   fileChipText,
 } from './FormKit.variants';
-// @@V org-1 end
 
 /** The slice of File the control needs — parents may store just this. */
 export interface FileValue {
@@ -41,9 +39,7 @@ export interface FileDropProps {
  * empty, a removable file chip once a file lands. Same controlled contract
  * as every other control — value + onChange.
  */
-// @@T org-1 begin
 export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   value,
   onChange,
   accept,
@@ -55,7 +51,6 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
   if (value != null) {
     return (
       <div className={cn(fileChip(), className)}>
-        {/* @@V org-1 begin */}
         <span className={fileChipIcon()}>
           {icon ?? <StrokeIcon name="fileText" size={17} />}
         </span>
@@ -64,7 +59,6 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
             {value.name}
           </span>
           <span className={fileChipSize()}>
-            {/* @@V org-1 end */}
             {fmtBytes(value.size)}
           </span>
         </span>
@@ -72,12 +66,10 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
           type="button"
           aria-label="Remove file"
           onClick={() => onChange(null)}
-          // @@V org-1 begin
           className={cn(
             touchable({ inline: true, rounded: 'sm', noBrightness: false }),
             fileChipRemove(),
           )}
-          // @@V org-1 end
         >
           <StrokeIcon name="trash" size={15} />
         </button>
