@@ -118,3 +118,32 @@ describe('validateDrop', () => {
     expect(fmtBytes(3145728)).toBe('3.0 MB');
   });
 });
+
+describe('validateDrop ext/mime match', () => {
+  it('rejects a file off the ext list when only ext is set', () => {
+    expect(validateDrop([file('a.png', 'image/png')], { ext: ['.md'] })).toEqual({
+      ok: false,
+      reason: 'a.png isn\'t accepted — needs .md.',
+    });
+    expect(validateDrop([file('a.md')], { ext: ['.md'] }).ok).toBe(true);
+  });
+
+  it('matches and rejects on the mime list when only mime is set', () => {
+    expect(validateDrop([file('a.md')], { mime: ['text/markdown'] }).ok).toBe(true);
+    expect(validateDrop([file('a.png', 'image/png')], { mime: ['text/markdown'] })).toEqual({
+      ok: false,
+      reason: 'a.png isn\'t accepted — needs text/markdown.',
+    });
+  });
+
+  it('accepts a file matching either list when both are set', () => {
+    const accept = { ext: ['.md'], mime: ['image/*'] };
+    expect(validateDrop([file('a.md', '')], accept).ok).toBe(true);
+    expect(validateDrop([file('a.png', 'image/png')], accept).ok).toBe(true);
+    expect(validateDrop([file('a.txt', 'text/plain')], accept).ok).toBe(false);
+  });
+
+  it('accepts any file when neither list is set', () => {
+    expect(validateDrop([file('a.png', 'image/png'), file('b', '')]).ok).toBe(true);
+  });
+});
