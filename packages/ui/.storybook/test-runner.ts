@@ -13,6 +13,20 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
  */
 const THEMES = ['light', 'dark'] as const;
 
+/**
+ * Diff tolerance, provisional: README.md lists both values under "Visual
+ * diff tolerance (to revisit)". Chromium does not draw text the same way
+ * on every render, so the edge pixels of glyphs differ between passes of
+ * the same page, at rest and with one worker. Measured on the kit's 658
+ * shots: at the default per-pixel threshold (0.01) a flaky shot flagged up
+ * to 396 pixels and the smallest reviewed real change 150; at 0.1 those
+ * were 12 and 85. So a pixel counts as changed when its colour moves
+ * past 0.1 (about 26 of 255 brightness levels), and a shot fails when
+ * more than 20 pixels changed.
+ */
+const PIXEL_COLOR_THRESHOLD = 0.1;
+const MAX_CHANGED_PIXELS = 20;
+
 const customSnapshotsDir = `${process.cwd()}/visual/__image_snapshots__`;
 const customDiffDir = `${process.cwd()}/visual/__diff_output__`;
 
@@ -62,9 +76,9 @@ const config: TestRunnerConfig = {
         customSnapshotsDir,
         customDiffDir,
         customSnapshotIdentifier: `${context.id}--${theme}`,
-        // Near-exact: epsilon is an anti-aliasing safety valve, not a tolerance.
-        failureThreshold: 0.0001,
-        failureThresholdType: 'percent',
+        customDiffConfig: { threshold: PIXEL_COLOR_THRESHOLD },
+        failureThreshold: MAX_CHANGED_PIXELS,
+        failureThresholdType: 'pixel',
       });
     }
   },
