@@ -3,19 +3,19 @@ import type { ClassProp } from 'class-variance-authority/types';
 import { cva } from 'class-variance-authority';
 
 /** The Item cell's lead: the item name before its ` · ` suffix. */
-export const sessionName: (props?: ClassProp) => string = cva('font-semibold');
+export const itemName: (props?: ClassProp) => string = cva('font-semibold');
 
 /** The Item cell's mono ` · suffix` after the name. */
-export const sessionSuffix: (props?: ClassProp) => string = cva('font-mono text-xs text-fg3');
+export const itemSuffix: (props?: ClassProp) => string = cva('font-mono text-xs text-fg3');
 
 /** The Goal cell's text. */
-export const sessionGoal: (props?: ClassProp) => string = cva('text-fg2');
+export const itemGoal: (props?: ClassProp) => string = cva('text-fg2');
 
 /** The Model cell's mono id. */
-export const sessionModel: (props?: ClassProp) => string = cva('font-mono text-[12.5px] text-fg2');
+export const itemModel: (props?: ClassProp) => string = cva('font-mono text-[12.5px] text-fg2');
 
 /** The Usage cell: mono, and dimmed when the item used none. */
-export const sessionTokens: (
+export const itemCount: (
   props?: {
     empty?: boolean | null | undefined;
   } & ClassProp,
@@ -30,6 +30,6 @@ export const sessionTokens: (
 });
 
 /** The Updated cell's mono `Nm ago`. */
-export const sessionUpdated: (props?: ClassProp) => string = cva(
+export const itemUpdated: (props?: ClassProp) => string = cva(
   'font-mono text-[12.5px] text-fg3',
 );

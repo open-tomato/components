@@ -8,10 +8,10 @@ import { EmptyState } from '../../atoms/EmptyState';
 import { Select } from '../../molecules/Select/Select';
 import {
   makeColumns,
-  SESSIONS as ITEMS,
+  ITEMS,
   STATUS,
-  type Session as Item,
-} from '../../stories/sessions';
+  type Item,
+} from '../../stories/items';
 import { Table } from '../Table/Table';
 
 import { FilterDropdown } from './FilterDropdown';

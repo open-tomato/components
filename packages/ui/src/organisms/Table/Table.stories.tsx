@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
-import { makeColumns, SESSIONS as ITEMS, type Session as Item } from '../../stories/sessions';
+import { makeColumns, ITEMS, type Item } from '../../stories/items';
 
 import { renderCellContent } from './cellTypes';
 import { RowContextAction } from './RowContextAction';
