@@ -1,8 +1,8 @@
----
-plan: components-port
-title: The first release of the component library
-level: minor
----
+# Changelog
+
+## 0.1.0 — 2026-11-06, The first release of the component library
+<!-- rafa:fragments components-port -->
+
 - library: the variant-first React component library, ported from its source repository and held to the source's screenshots through every step of the port
 - library: atoms, molecules, organisms and templates, with CVA variants, typed props and one story per state
 - cache: the caching module, with a browser entry (TanStack Query) and a server entry (Redis), each on its own subpath export
