@@ -70,3 +70,10 @@ export const GridTiles = ({ count = 6 }: { count?: number }): ReactNode => Array
     {i + 1}
   </span>
 ));
+
+/** The circle mark passed as an EmptyState `illustration` in demos. */
+export const ArtPlaceholder = (): JSX.Element => (
+  <svg width={30} height={30} viewBox="0 0 64 64" aria-hidden>
+    <circle cx="32" cy="32" r="20" className="fill-primary" />
+  </svg>
+);

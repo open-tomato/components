@@ -6,12 +6,13 @@ import { Button } from '../../atoms/Button';
 import { Chip } from '../../atoms/Chip';
 import { EmptyState } from '../../atoms/EmptyState';
 import { Select } from '../../molecules/Select/Select';
+import { ArtPlaceholder } from '../../stories/fixtures';
 import {
   makeColumns,
-  SESSIONS as ITEMS,
+  ITEMS,
   STATUS,
-  type Session as Item,
-} from '../../stories/sessions';
+  type Item,
+} from '../../stories/items';
 import { Table } from '../Table/Table';
 
 import { FilterDropdown } from './FilterDropdown';
@@ -204,6 +205,7 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
   const empty = (
     <EmptyState
       title="No items match"
+      illustration={<ArtPlaceholder />}
       description="Nothing fits that query. Loosen a filter or clear them all to see everything again."
       action={<Button onClick={clearAll}>Clear filters</Button>}
       className="py-12"
