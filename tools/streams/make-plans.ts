@@ -78,7 +78,7 @@ export const STREAMS: readonly Stream[] = [
   {
     id: 'T',
     name: 'types',
-    check: 'bunx tsc -p tsconfig.isolated.json | grep -E "^({pathsRegex})"',
+    check: 'bunx tsc --noEmit | grep -E "^({pathsRegex})"',
     fix: 'Give every export an explicit type for isolatedDeclarations in',
     fixRoute: 'agent=build-error-resolver effort=medium',
     movesPixels: false,
