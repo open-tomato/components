@@ -21,12 +21,10 @@ export {
   type SidebarQuickAccessItem,
   type SidebarQuickAccessProps,
 } from './SidebarQuickAccess';
-// @@S tpl-1 begin
 export {
   SidebarQuota,
   type SidebarQuotaProps,
 } from './SidebarQuota';
-// @@S tpl-1 end
 export {
   appShell,
   appShellContent,

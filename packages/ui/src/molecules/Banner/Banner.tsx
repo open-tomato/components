@@ -3,7 +3,6 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-// @@V mol-2 begin
 import {
   banner,
   bannerAction,
@@ -14,7 +13,6 @@ import {
   bannerTitle,
   type BannerVariants,
 } from './Banner.variants';
-// @@V mol-2 end
 import { ToneIcon } from './ToneIcon';
 
 export interface BannerProps
@@ -27,23 +25,19 @@ export interface BannerProps
   onClose?: () => void;
 }
 
-// @@T mol-2 begin
 export const Banner: import('react').ForwardRefExoticComponent<BannerProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
-// @@T mol-2 end
   HTMLDivElement, BannerProps>(
   ({ className, tone = 'info', title, action, onClose, children, ...props }, ref) => (
     <div ref={ref} className={cn(banner({ tone }), className)} {...props}>
       <span className={bannerIcon({ tone })}>
         <ToneIcon tone={tone ?? 'info'} />
       </span>
-      {/* @@V mol-2 begin */}
       <div className={bannerContent()}>
         {title != null && (
           <div className={bannerTitle()}>{title}</div>
         )}
         <div className={bannerBody()}>{children}</div>
       </div>
-      {/* @@V mol-2 end */}
       {action != null && (
         <button
           type="button"
@@ -63,9 +57,7 @@ export const Banner: import('react').ForwardRefExoticComponent<BannerProps & imp
           onClick={onClose}
           className={cn(
             touchable({ inline: true, rounded: 'sm', noBrightness: false }),
-            // @@V mol-2 begin
             bannerDismiss(),
-            // @@V mol-2 end
           )}
         >
           <svg

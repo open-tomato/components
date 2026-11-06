@@ -4,14 +4,11 @@ import { useState } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { Badge } from '../../atoms/Badge';
-// @@S mol-3 begin
 import { EntityKindsProvider } from '../../molecules/KnownEntities/EntityKinds';
 import { type EntityKinds } from '../../molecules/KnownEntities/entityKindsContext';
-// @@S mol-3 end
 
 import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
 
-// @@S mol-3 begin
 /**
  * A ⌘K search box with anchored suggestions. Each suggestion's `kind` is a
  * key into the `EntityKinds` map — here a neutral demo map of five kinds,
@@ -20,15 +17,11 @@ import { SearchSuggest, type SearchSuggestion } from './SearchSuggest';
  * page. Sibling of CommandPalette, not a variant of it — see the
  * component docblock for the recorded relationship decision.
  */
-// @@S mol-3 end
-// @@T org-1 begin
 const meta: Meta<typeof SearchSuggest> = {
-// @@T org-1 end
   title: 'Organisms/SearchSuggest',
   component: SearchSuggest,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-  // @@S mol-3 begin
   decorators: [
     (Story) => (
       <EntityKindsProvider kinds={DEMO_KINDS}>
@@ -36,13 +29,11 @@ const meta: Meta<typeof SearchSuggest> = {
       </EntityKindsProvider>
     ),
   ],
-  // @@S mol-3 end
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S mol-3 begin
 /** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
 const DEMO_KINDS: EntityKinds = {
   worker: { icon: 'bot', tone: 'primary' },
@@ -60,22 +51,17 @@ const SUGGESTIONS: SearchSuggestion[] = [
   { kind: 'connector', label: 'github-issues', sub: 'MCP · connected' },
   { kind: 'doc', label: 'Composting context between runs', sub: 'docs/experiments' },
 ];
-// @@S mol-3 end
 
-// @@S mol-3 begin
 /** Resting input: search icon left, ⌘K chip right. */
-// @@S mol-3 end
 export const Default: Story = {
   args: { suggestions: SUGGESTIONS },
 };
 
-// @@S org-1 begin
 /**
  * Panel open with the five kinds, each carrying its own accent (worker→
  * primary, run→accent, task→gold, connector→info, doc→success) on both the
  * icon puck and the trailing kind pill.
  */
-// @@S org-1 end
 export const Open: Story = {
   args: {
     suggestions: SUGGESTIONS,

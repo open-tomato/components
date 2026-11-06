@@ -11,7 +11,6 @@ import { Overlay } from '../../atoms/Overlay';
 import { StrokeIcon } from '../../lib/icons';
 
 import {
-  // @@V org-2 begin
   paletteCount,
   paletteEmpty,
   paletteEmptyHint,
@@ -21,22 +20,15 @@ import {
   paletteGroup,
   paletteGroupLabel,
   paletteIconSlot,
-  // @@V org-2 end
   paletteItem,
   paletteItemIcon,
-  // @@V org-2 begin
   paletteItemLabel,
-  // @@V org-2 end
   paletteKbd,
-  // @@V org-2 begin
   paletteList,
   paletteOverlay,
-  // @@V org-2 end
   palettePanel,
-  // @@V org-2 begin
   paletteSearchInput,
   paletteSearchRow,
-  // @@V org-2 end
 } from './CommandPalette.variants';
 import { KeyHint } from './KeyHint';
 
@@ -48,9 +40,7 @@ export interface Command {
   label: string;
   /** Trailing mono chip (a shortcut like ⌘N, or a status). */
   hint?: ReactNode;
-  // @@S org-2 begin
   /** Extra search terms the fuzzy filter also matches against. */
-  // @@S org-2 end
   keys?: string;
 }
 
@@ -98,9 +88,7 @@ const PalettePanel = ({
   onRun,
   commands,
   recent,
-  // @@S org-2 begin
   placeholder = 'Search commands…',
-  // @@S org-2 end
 }: Omit<CommandPaletteProps, 'open'>) => {
   const [q, setQ] = useState('');
   const [active, setActive] = useState(0);
@@ -175,14 +163,10 @@ const PalettePanel = ({
     <div className={palettePanel()}>
       {/* search row — the form kit's field, lightly dressed */}
       <div
-        // @@V org-2 begin
         className={paletteSearchRow()}
-        // @@V org-2 end
       >
         <span
-          // @@V org-2 begin
           className={paletteIconSlot()}
-          // @@V org-2 end
         >
           <StrokeIcon name="search" size={19} />
         </span>
@@ -195,9 +179,7 @@ const PalettePanel = ({
           }}
           onKeyDown={onKey}
           placeholder={placeholder}
-          // @@V org-2 begin
           className={paletteSearchInput()}
-          // @@V org-2 end
         />
         <kbd className={paletteKbd()}>esc</kbd>
       </div>
@@ -205,39 +187,27 @@ const PalettePanel = ({
       {/* results — the Menu behavior, keyboard-driven */}
       <div
         ref={listRef}
-        // @@V org-2 begin
         className={paletteList()}
-        // @@V org-2 end
       >
         {flat.length === 0
           ? (
             <div
-              // @@V org-2 begin
               className={paletteEmpty()}
-              // @@V org-2 end
             >
               <span
-                // @@V org-2 begin
                 className={paletteEmptyIcon()}
-                // @@V org-2 end
               >
                 <StrokeIcon name="search" size={26} />
               </span>
               <div
-                // @@V org-2 begin
                 className={paletteEmptyTitle()}
-                // @@V org-2 end
               >
                 No commands for &ldquo;{q}&rdquo;
               </div>
               <div
-                // @@V org-2 begin
                 className={paletteEmptyHint()}
-                // @@V org-2 end
               >
-                {/* @@S org-2 begin */}
                 Try a page name or an action.
-                {/* @@S org-2 end */}
               </div>
             </div>
           )
@@ -245,14 +215,10 @@ const PalettePanel = ({
             groups.map((g) => (
               <div
                 key={g.group}
-                // @@V org-2 begin
                 className={paletteGroup()}
-                // @@V org-2 end
               >
                 <div
-                  // @@V org-2 begin
                   className={paletteGroupLabel()}
-                  // @@V org-2 end
                 >
                   {g.group}
                 </div>
@@ -273,9 +239,7 @@ const PalettePanel = ({
                         {c.icon}
                       </span>
                       <span
-                        // @@V org-2 begin
                         className={paletteItemLabel()}
-                        // @@V org-2 end
                       >
                         {c.label}
                       </span>
@@ -286,9 +250,7 @@ const PalettePanel = ({
                       )}
                       {on && (
                         <span
-                          // @@V org-2 begin
                           className={paletteIconSlot()}
-                          // @@V org-2 end
                         >
                           <StrokeIcon name="cornerDownRight" size={15} />
                         </span>
@@ -303,17 +265,13 @@ const PalettePanel = ({
 
       {/* footer key hints */}
       <div
-        // @@V org-2 begin
         className={paletteFooter()}
-        // @@V org-2 end
       >
         <KeyHint k="↑↓" label="navigate" />
         <KeyHint k="↵" label="run" />
         <KeyHint k="esc" label="close" />
         <span
-          // @@V org-2 begin
           className={paletteCount()}
-          // @@V org-2 end
         >
           {flat.length} result{flat.length === 1
             ? ''
@@ -324,7 +282,6 @@ const PalettePanel = ({
   );
 };
 
-// @@T org-2 begin
 export const CommandPalette: { (p: CommandPaletteProps): import('react').JSX.Element; displayName: string } = (({
   open,
   onClose,
@@ -340,9 +297,7 @@ export const CommandPalette: { (p: CommandPaletteProps): import('react').JSX.Ele
     backdrop="blur"
     dismiss="both"
     label="Command palette"
-    // @@V org-2 begin
     className={paletteOverlay()}
-    // @@V org-2 end
   >
     <PalettePanel
       onClose={onClose}
@@ -353,6 +308,5 @@ export const CommandPalette: { (p: CommandPaletteProps): import('react').JSX.Ele
     />
   </Overlay>
 )) as { (p: CommandPaletteProps): import('react').JSX.Element; displayName: string };
-// @@T org-2 end
 
 CommandPalette.displayName = 'CommandPalette';

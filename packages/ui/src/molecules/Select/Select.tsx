@@ -1,7 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-// @@T mol-1 begin
 import { type CSSProperties, type JSX, type ReactNode } from 'react';
-// @@T mol-1 end
 
 import { Menu, MenuContent, MenuTrigger } from '../../atoms/Menu';
 import { menuItem } from '../../atoms/Menu/Menu.variants';
@@ -9,7 +7,6 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-// @@V mol-1 begin
 import {
   selectAdornment,
   selectItemIndicator,
@@ -18,7 +15,6 @@ import {
   selectValue,
   type SelectTriggerVariants,
 } from './Select.variants';
-// @@V mol-1 end
 
 export interface SelectOption {
   value: string;
@@ -39,12 +35,10 @@ export interface SelectProps extends SelectTriggerVariants {
 /** Minimum dropdown width. */
 const MIN_PANEL_WIDTH = 160;
 
-// @@T mol-1 begin
 export const Select: {
   (props: SelectProps): JSX.Element;
   displayName?: string;
 } = ({
-// @@T mol-1 end
   value,
   options,
   onChange,
@@ -52,9 +46,7 @@ export const Select: {
   width = 200,
   ariaLabel,
   className,
-// @@T mol-1 begin
 }: SelectProps): JSX.Element => {
-// @@T mol-1 end
   const sel = options.find((o) => o.value === value) ?? options[0];
   const panelStyle: CSSProperties = {
     width: Math.max(width, MIN_PANEL_WIDTH),
@@ -71,24 +63,18 @@ export const Select: {
       >
         {sel?.icon != null && (
           <span
-            // @@V mol-1 begin
             className={selectAdornment()}
-            // @@V mol-1 end
           >
             {sel.icon}
           </span>
         )}
         <span
-          // @@V mol-1 begin
           className={selectValue()}
-          // @@V mol-1 end
         >
           {sel?.label ?? 'Select…'}
         </span>
         <span
-          // @@V mol-1 begin
           className={selectAdornment()}
-          // @@V mol-1 end
         >
           <StrokeIcon name="chevronsUpDown" size={15} />
         </span>
@@ -103,16 +89,12 @@ export const Select: {
             >
               {o.icon}
               <span
-                // @@V mol-1 begin
                 className={selectItemLabel()}
-                // @@V mol-1 end
               >
                 {o.label}
               </span>
               <DropdownMenu.ItemIndicator
-                // @@V mol-1 begin
                 className={selectItemIndicator()}
-                // @@V mol-1 end
               >
                 <StrokeIcon name="check" size={15} />
               </DropdownMenu.ItemIndicator>

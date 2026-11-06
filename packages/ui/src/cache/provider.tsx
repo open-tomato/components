@@ -24,9 +24,7 @@ function getQueryClient() {
   return browserQueryClient;
 }
 
-// @@T tpl-1 begin
 export function QueryProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
-// @@T tpl-1 end
   const client = getQueryClient();
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }

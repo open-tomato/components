@@ -18,15 +18,9 @@ export const sidebarDemoBrand: (
 });
 
 /** The brand row's wordmark, at the rail's 17px. */
-export const sidebarDemoWordmark: (props?: ClassProp) => string = cva('wordmark !text-[17px]');
-
-/** The wordmark's "open" half. */
-export const sidebarDemoWordmarkOpen: (props?: ClassProp) => string = cva('wordmark-open');
-
-// @@S tpl-1 begin
-/** The wordmark's accent half. */
-// @@S tpl-1 end
-export const sidebarDemoWordmarkTomato: (props?: ClassProp) => string = cva('wordmark-tomato');
+export const sidebarDemoWordmark: (props?: ClassProp) => string = cva(
+  'font-display text-[17px] font-bold tracking-[-0.02em] text-fg1',
+);
 
 /** A flex spacer that pushes what follows to the far end. */
 export const shellDemoSpacer: (props?: ClassProp) => string = cva('flex-1');

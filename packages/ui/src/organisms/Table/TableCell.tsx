@@ -1,10 +1,7 @@
-// @@T org-2 begin
 import { useRef, type CSSProperties, type ReactElement, type ReactNode } from 'react';
-// @@T org-2 end
 
 import { cn } from '../../lib';
 
-// @@V org-2 begin
 import {
   tableCellClamp,
   tableCellJustify,
@@ -12,7 +9,6 @@ import {
   tableCellTruncate,
   tableCellWrap,
 } from './Table.variants';
-// @@V org-2 end
 
 export type CellOverflow = 'wrap' | 'truncate' | 'clamp';
 export type CellAlign = 'start' | 'center' | 'end';
@@ -39,7 +35,6 @@ export interface TableCellProps {
  * wrapped in a div, and a tooltip is surfaced only when the text is
  * genuinely clipped (scrollWidth / scrollHeight probe on hover).
  */
-// @@T org-2 begin
 export const TableCell: {
   (props: TableCellProps): ReactElement | null;
   displayName?: string;
@@ -51,7 +46,6 @@ export const TableCell: {
   onTip,
   offTip,
 }: TableCellProps): ReactElement | null => {
-// @@T org-2 end
   const ref = useRef<HTMLDivElement>(null);
   const enter = () => {
     if (mode === 'wrap' || !onTip) return;
@@ -77,9 +71,7 @@ export const TableCell: {
         ref={ref}
         onMouseEnter={enter}
         onMouseLeave={offTip}
-        // @@V org-2 begin
         className={cn(tableCellTruncate(), tableCellText({ align }))}
-        // @@V org-2 end
       >
         {children}
       </div>
@@ -93,9 +85,7 @@ export const TableCell: {
         ref={ref}
         onMouseEnter={enter}
         onMouseLeave={offTip}
-        // @@V org-2 begin
         className={cn(tableCellClamp(), tableCellText({ align }))}
-        // @@V org-2 end
         style={style}
       >
         {children}
@@ -105,13 +95,11 @@ export const TableCell: {
 
   return (
     <div
-      // @@V org-2 begin
       className={cn(
         tableCellWrap(),
         tableCellJustify({ align }),
         tableCellText({ align }),
       )}
-      // @@V org-2 end
     >
       {children}
     </div>

@@ -7,7 +7,6 @@ import {
   verboseCap,
   verboseControl,
   verboseOption,
-  // @@V org-1 begin
   verboseBadge,
   verboseDescription,
   verboseLabel,
@@ -16,17 +15,14 @@ import {
   verboseRadioDot,
   verboseText,
   verboseTitleRow,
-  // @@V org-1 end
 } from './FormKit.variants';
 
-// @@S org-1 begin
 /**
  * VerboseOption / VerboseOptionList: a rich option row — name, badge
  * slot, short description — behaving as a radio or checkbox, tinting
  * accent when selected. Deliberately NOT tied to one use case:
  * a model picker, say, is just `options` data.
  */
-// @@S org-1 end
 
 export interface VerboseOptionProps {
   /** Control semantics: exclusive pick vs independent toggle. */
@@ -36,25 +32,19 @@ export interface VerboseOptionProps {
   onSelect?: () => void;
   /** The option's name (raw: mono semibold model id). */
   label: ReactNode;
-  // @@S org-1 begin
   /**
    * Badge slot next to the name — Badges, or plain strings rendered as
    * capability pills ("fast", "web", "code", …).
    */
-  // @@S org-1 end
   badges?: ReactNode[];
   description?: ReactNode;
-  // @@S org-1 begin
   /** Extra mono line under the description (a cost line, say). */
-  // @@S org-1 end
   meta?: ReactNode;
   disabled?: boolean;
   className?: string;
 }
 
-// @@T org-1 begin
 export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   mode = 'radio',
   selected,
   onSelect,
@@ -75,7 +65,6 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
     onClick={() => onSelect?.()}
     className={cn(verboseOption({ selected }), className)}
   >
-    {/* @@V org-1 begin */}
     <span className={verboseControl({ mode, selected })} aria-hidden>
       {selected && (
         mode === 'radio'
@@ -86,10 +75,8 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
     <span className={verboseText()}>
       <span className={verboseTitleRow()}>
         <span className={verboseLabel()}>
-          {/* @@V org-1 end */}
           {label}
         </span>
-        {/* @@V org-1 begin */}
         {badges?.map((badge, i) => typeof badge === 'string' || typeof badge === 'number'
           ? (
                
@@ -97,9 +84,7 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
           )
              
           : <span key={i} className={verboseBadge()}>{badge}</span>)}
-        {/* @@V org-1 end */}
       </span>
-      {/* @@V org-1 begin */}
       {description != null && (
         <span className={verboseDescription()}>
           {description}
@@ -107,7 +92,6 @@ export const VerboseOption: { (props: VerboseOptionProps): import('react').JSX.E
       )}
       {meta != null && (
         <span className={verboseMeta()}>
-          {/* @@V org-1 end */}
           {meta}
         </span>
       )}
@@ -151,9 +135,7 @@ export type VerboseOptionListProps =
   | VerboseOptionCheckboxListProps;
 
 /** Data-driven column of VerboseOptions with the mode's group semantics. */
-// @@T org-1 begin
 export const VerboseOptionList: { (props: VerboseOptionListProps): import('react').JSX.Element; displayName: string } = (props: VerboseOptionListProps) => {
-// @@T org-1 end
   const { options, ariaLabel, className } = props;
   const isRadio = props.mode !== 'checkbox';
   const isSelected = (v: string) => (props.mode === 'checkbox'
@@ -174,9 +156,7 @@ export const VerboseOptionList: { (props: VerboseOptionListProps): import('react
         ? 'radiogroup'
         : 'group'}
       aria-label={ariaLabel}
-      // @@V org-1 begin
       className={cn(verboseOptionList(), className)}
-      // @@V org-1 end
     >
       {options.map((o) => (
         <VerboseOption

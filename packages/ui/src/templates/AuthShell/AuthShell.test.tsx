@@ -4,7 +4,6 @@ import { describe, expect, it } from 'bun:test';
 import { AuthShell } from './AuthShell';
 
 describe('AuthShell', () => {
-  // @@S tpl-1 begin
   it('renders brand, eyebrow, children and footer', () => {
     render(
       <AuthShell brand={<a href="#home">Brand</a>} eyebrow="welcome back" footer={<span>New here?</span>}>
@@ -23,7 +22,6 @@ describe('AuthShell', () => {
     expect(container.querySelector('section')?.children.length).toBe(1);
     expect(container.firstElementChild?.children.length).toBe(1);
   });
-  // @@S tpl-1 end
 
   it('renders the xl width and forwards className/props', () => {
     const { container } = render(

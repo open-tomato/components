@@ -1,6 +1,4 @@
-// @@T mol-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T mol-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -14,9 +12,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * min-height 130 (the footer slot bottom-anchors via mt-auto so tiles in
  * a row align whether or not they carry a bottom line).
  */
-// @@T mol-3 begin
 export const smallStatCard: (props?: { size?: 'md' | 'sm' | null | undefined } & ClassProp) => string = cva(
-// @@T mol-3 end
   'relative flex flex-col gap-2 overflow-hidden rounded-lg border border-border-soft bg-surface-1 p-[18px]',
   {
     variants: {
@@ -31,29 +27,21 @@ export const smallStatCard: (props?: { size?: 'md' | 'sm' | null | undefined } &
   },
 );
 
-// @@V mol-3 begin
 /** Top line: title left, trend or decoration right. */
 export const smallStatCardHeader: (props?: ClassProp) => string = cva(
   'flex items-center justify-between gap-2',
 );
-// @@V mol-3 end
 
-// @@T mol-3 begin
 export const smallStatCardTitle: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'font-mono text-[10px] uppercase tracking-[0.1em] text-fg3',
 );
 
 /** The stat line: display-font value + small mono suffix, baselined. */
-// @@T mol-3 begin
 export const smallStatCardValue: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'flex items-baseline gap-1.5',
 );
 
-// @@T mol-3 begin
 export const smallStatCardNumber: (props?: { size?: 'md' | 'sm' | null | undefined } & ClassProp) => string = cva(
-// @@T mol-3 end
   'font-display font-bold leading-none tracking-[-0.02em] text-fg1',
   {
     variants: {
@@ -67,16 +55,12 @@ export const smallStatCardNumber: (props?: { size?: 'md' | 'sm' | null | undefin
 );
 
 /** Unit / `/ goal` suffix — small, mono, greyed (original MetricTile `unit`). */
-// @@T mol-3 begin
 export const smallStatCardSuffix: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'font-mono text-[13px] text-fg3',
 );
 
 /** Bottom line slot — anchored to the tile bottom like the original sparkline. */
-// @@T mol-3 begin
 export const smallStatCardFooter: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'mt-auto text-xs text-fg3',
 );
 

@@ -6,9 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * Fills use the softer `*-wash` tier the feedback surfaces share.
  */
-// @@T mol-2 begin
 export const banner: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
-// @@T mol-2 end
 
   variants: {
     tone: {
@@ -23,9 +21,7 @@ export const banner: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral'
 });
 
 /** Tone color for the leading icon. */
-// @@T mol-2 begin
 export const bannerIcon: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('mt-px shrink-0', {
-// @@T mol-2 end
 
   variants: {
     tone: {
@@ -40,9 +36,7 @@ export const bannerIcon: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neut
 });
 
 /** The optional tone-colored action button. */
-// @@T mol-2 begin
 export const bannerAction: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T mol-2 end
 
   'self-center shrink-0 rounded-md border bg-surface-1 px-3 py-1.5 text-[12.5px] font-semibold',
   {
@@ -59,7 +53,6 @@ export const bannerAction: (props?: ({tone?: 'info' | 'success' | 'danger' | 'ne
   },
 );
 
-// @@V mol-2 begin
 /** The text column holding title and body. */
 export const bannerContent: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1');
 
@@ -74,6 +67,5 @@ export const bannerDismiss: (props?: import('class-variance-authority/types').Cl
 
 /** The tone icon's svg, shared by Banner and Toast through ToneIcon. */
 export const toneIcon: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('shrink-0');
-// @@V mol-2 end
 
 export type BannerVariants = VariantProps<typeof banner>;

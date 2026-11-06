@@ -12,7 +12,7 @@ describe('package root barrel', () => {
   });
 
   it('does not leak internals or story fixtures', () => {
-    for (const name of ['devWarn', 'StrokeIcon', 'TomatoMark', 'FakeQrCode', 'LiveShell']) {
+    for (const name of ['devWarn', 'StrokeIcon', 'FakeQrCode', 'LiveShell']) {
       expect(name in root).toBe(false);
     }
   });

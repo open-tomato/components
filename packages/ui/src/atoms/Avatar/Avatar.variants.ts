@@ -1,10 +1,7 @@
-// @@T ato-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T ato-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S ato-3 begin
 /**
  * Avatar — the identity mark: a person or any named entity. Initials on a
  * brand fill, with size, shape and an optional presence indicator.
@@ -12,15 +9,12 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `status` drives a bottom-right presence dot with a surface border
  * (avatarStatus below) rather than a ring on the avatar itself.
  */
-// @@S ato-3 end
-// @@T ato-3 begin
 export const avatar: (
   props?: {
     size?: 'sm' | 'md' | 'lg' | null | undefined;
     shape?: 'circle' | 'rounded' | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T ato-3 end
 
   'inline-flex items-center justify-center shrink-0 font-display font-bold text-cream-50 bg-primary',
   {
@@ -43,14 +37,12 @@ export const avatar: (
 );
 
 /** The presence dot (demo: 0.3× avatar size, 2px surface border). */
-// @@T ato-3 begin
 export const avatarStatus: (
   props?: {
     status?: 'none' | 'online' | 'busy' | 'away' | null | undefined;
     size?: 'sm' | 'md' | 'lg' | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T ato-3 end
 
   'absolute -bottom-px -right-px rounded-full border-2 border-surface-1',
   {
@@ -74,10 +66,8 @@ export const avatarStatus: (
   },
 );
 
-// @@V ato-3 begin
 /** The positioning wrapper the presence dot is placed against. */
 export const avatarRoot: (props?: ClassProp | undefined) => string = cva('relative inline-flex shrink-0');
-// @@V ato-3 end
 
 export type AvatarVariants = VariantProps<typeof avatar> &
   Pick<VariantProps<typeof avatarStatus>, 'status'>;

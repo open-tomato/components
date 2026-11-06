@@ -8,7 +8,6 @@ export {
   notificationDot,
   notificationPuck,
   notificationRow,
-  // @@V org-1 begin
   notificationBody,
   notificationCount,
   notificationFooter,
@@ -24,7 +23,6 @@ export {
   notificationTitleRow,
   notificationTrigger,
   notificationUnreadMark,
-  // @@V org-1 end
   type NotificationPuckVariants,
   type NotificationRowVariants,
 } from './NotificationsBell.variants';

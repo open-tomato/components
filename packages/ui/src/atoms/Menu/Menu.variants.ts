@@ -9,10 +9,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * and a fixed Content inside it would detach from the anchor. `z-popover`
  * stays on the content (the wrapper carries no z-index of its own).
  */
-// @@T ato-2 begin
 export const menu:
 (props?: ({ align?: 'start' | 'end' | null; size?: 'sm' | 'md' | 'lg' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   [
     'z-popover flex flex-col gap-px p-1.5 rounded-md',
     'bg-surface-1 border border-border-soft shadow-lg overflow-y-auto',
@@ -37,10 +35,8 @@ export const menu:
 );
 
 /** Item chrome (incl. hover/focus treatment). */
-// @@T ato-2 begin
 export const menuItem:
 (props?: ({ tone?: 'accent' | 'danger' | 'default' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   [
     'flex w-full items-center gap-[9px] px-2.5 py-2 text-left',
     'rounded-sm text-[13.5px] font-medium cursor-pointer select-none',
@@ -52,10 +48,8 @@ export const menuItem:
       tone: {
         default: 'text-fg1 [&_svg]:text-fg3',
         danger: 'text-danger [&_svg]:text-danger',
-        // @@S ato-2 begin
         // The "See all… / New group" style affirmative rows in
         // header menus.
-        // @@S ato-2 end
         accent: 'text-accent [&_svg]:text-accent',
       },
     },
@@ -66,7 +60,6 @@ export const menuItem:
 export type MenuVariants = VariantProps<typeof menu>;
 export type MenuItemVariants = VariantProps<typeof menuItem>;
 
-// @@V ato-2 begin
 /** Item label: takes the free width and truncates. */
 export const menuItemLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-0 flex-1 truncate');
 
@@ -75,4 +68,3 @@ export const menuLabel: (props?: import('class-variance-authority/types').ClassP
 
 /** Hairline separator between item groups. */
 export const menuSep: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mx-0.5 my-1 h-px bg-border-soft');
-// @@V ato-2 end

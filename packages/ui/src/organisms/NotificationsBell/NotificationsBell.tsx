@@ -1,7 +1,5 @@
 import type { IconName } from '../../atoms/Icon';
-// @@T org-1 begin
 import type { FC, ReactNode } from 'react';
-// @@T org-1 end
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -19,7 +17,6 @@ import {
   notificationDot,
   notificationPuck,
   notificationRow,
-  // @@V org-1 begin
   notificationBody,
   notificationCount,
   notificationFooter,
@@ -35,7 +32,6 @@ import {
   notificationTitleRow,
   notificationTrigger,
   notificationUnreadMark,
-  // @@V org-1 end
 } from './NotificationsBell.variants';
 
 export type NotificationLevel = 'ok' | 'warn' | 'err' | 'info';
@@ -82,9 +78,7 @@ const LEVEL_ORDER: NotificationLevel[] = ['ok', 'warn', 'err', 'info'];
  * parent-owned: the component renders `notifications` and reports
  * intents through callbacks.
  */
-// @@T org-1 begin
 export const NotificationsBell: FC<NotificationsBellProps> = ({
-// @@T org-1 end
   notifications,
   onMarkAllRead,
   onOpenItem,
@@ -103,9 +97,7 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
     <Menu defaultOpen={defaultOpen} modal={false}>
       <MenuTrigger asChild>
         <IconButton
-          // @@V org-1 begin
           className={notificationTrigger()}
-          // @@V org-1 end
           label={unread > 0
             ? `${label} — ${unread} unread`
             : label}
@@ -117,7 +109,6 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
           )}
         />
       </MenuTrigger>
-      {/* @@V org-1 begin */}
       <MenuContent align="end" className={notificationPopover()}>
         <div className={notificationHeader()}>
           <div>
@@ -125,7 +116,6 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
               Notifications
             </div>
             <div className={notificationCount()}>
-              {/* @@V org-1 end */}
               {unread} unread · {notifications.length} total
             </div>
           </div>
@@ -140,17 +130,13 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
           >
             <button
               type="button"
-              // @@V org-1 begin
               className={notificationMarkAll()}
-              // @@V org-1 end
             >
               Mark all read
             </button>
           </DropdownMenu.Item>
         </div>
-        {/* @@V org-1 begin */}
         <div className={notificationList()}>
-          {/* @@V org-1 end */}
           {groups.map((g) => (
             <div key={g.level}>
               <MenuLabel>{g.level}</MenuLabel>
@@ -160,7 +146,6 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
                   className={notificationRow({ unread: n.unread ?? false })}
                   onSelect={() => onOpenItem?.(n)}
                 >
-                  {/* @@V org-1 begin */}
                   <span className={notificationRowInner()}>
                     <span className={notificationPuck({ level: n.level })}>
                       <Icon name={n.icon ?? LEVEL_ICON[n.level]} size={14} />
@@ -189,15 +174,12 @@ export const NotificationsBell: FC<NotificationsBellProps> = ({
                       />
                     )}
                   </span>
-                  {/* @@V org-1 end */}
                 </MenuItem>
               ))}
             </div>
           ))}
         </div>
-        {/* @@V org-1 begin */}
         <div className={notificationFooter()}>
-          {/* @@V org-1 end */}
           <MenuItem
             tone="accent"
             icon={<Icon name="inbox" size={15} />}

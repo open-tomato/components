@@ -9,14 +9,12 @@ import {
 
 import { cn } from '../../lib';
 
-// @@V ato-2 begin
 import {
   sortableContainer,
   sortableEmpty,
   sortableItem,
   sortableLine,
 } from './Sortable.variants';
-// @@V ato-2 end
 
 /**
  * Sortable — the INTERNAL half of the drag story Droppable defers.
@@ -71,12 +69,10 @@ export interface SortableProps<T> {
   className?: string;
 }
 
-// @@T ato-2 begin
 export const Sortable: {
   <T>(props: SortableProps<T>): import('react').JSX.Element;
   displayName: string;
 } = <T,>({
-// @@T ato-2 end
   group,
   items,
   getKey,
@@ -183,9 +179,7 @@ export const Sortable: {
       style={style}
     >
       {items.length === 0 && overIndex == null && (
-        // @@V ato-2 begin
         <div className={sortableEmpty()}>
-          {/* @@V ato-2 end */}
           {emptyHint ?? 'Empty'}
         </div>
       )}
@@ -207,9 +201,7 @@ export const Sortable: {
               }}
               onDragEnd={clear}
               onDragOver={(e) => onItemDragOver(e, i)}
-              // @@V ato-2 begin
               className={sortableItem({ dragging })}
-              // @@V ato-2 end
             >
               {renderItem(it, { dragging })}
             </div>

@@ -6,21 +6,16 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * browser's WebAuthn interaction is pending; decision D5). The pulsing
  * ring reuses the theme's pulseRing keyframes (animate-pulse-ring).
  */
-// @@T mol-2 begin
 export const passkeyPromptIndicator: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva([
-// @@T mol-2 end
   'flex size-[72px] items-center justify-center rounded-full',
   'bg-[color-mix(in_oklab,var(--accent)_12%,transparent)] text-accent',
   'animate-pulse-ring motion-reduce:animate-none',
 ]);
 
-// @@T mol-2 begin
 export const passkeyPrompt: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva(
-// @@T mol-2 end
   'flex flex-col items-center gap-4 py-4 text-center',
 );
 
-// @@V mol-2 begin
 /** The copy column, capped at 380px. */
 export const passkeyPromptCopy: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('max-w-[380px]');
 
@@ -29,6 +24,5 @@ export const passkeyPromptTitle: (props?: import('class-variance-authority/types
 
 /** The instruction copy under the title. */
 export const passkeyPromptDescription: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('text-[13px] leading-[1.55] text-fg2');
-// @@V mol-2 end
 
 export type PasskeyPromptVariants = VariantProps<typeof passkeyPrompt>;

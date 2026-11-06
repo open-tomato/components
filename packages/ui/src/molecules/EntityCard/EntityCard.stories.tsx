@@ -49,9 +49,7 @@ const OTHER_ROWS: readonly TaxonomyRow[] = [
   { id: 4104, name: 'Benchmarks and evaluations', terms: 34, reviewed: '2026-02-02' },
 ];
 
-// @@T mol-2 begin
 const meta: Meta<typeof EntityCard> = {
-// @@T mol-2 end
   title: 'Molecules/EntityCard',
   component: EntityCard,
   parameters: { layout: 'padded' },

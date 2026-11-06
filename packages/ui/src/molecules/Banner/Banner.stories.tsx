@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Banner } from './Banner';
 
-// @@T mol-2 begin
 const meta: Meta<typeof Banner> = {
-// @@T mol-2 end
   title: 'Molecules/Banner',
   component: Banner,
   parameters: { layout: 'padded' },
@@ -24,9 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: 'New model available',
-    // @@S mol-2 begin
     children: 'Version 4.5 is now the default for new items.',
-    // @@S mol-2 end
     onClose: () => {},
   },
 };
@@ -34,9 +30,7 @@ export const Default: Story = {
 export const Success: Story = {
   args: {
     tone: 'success',
-    // @@S mol-2 begin
     title: 'Export complete',
-    // @@S mol-2 end
     children: 'refactor-bot finished in 4m 12s and opened a diff for review.',
     onClose: () => {},
   },
@@ -45,10 +39,8 @@ export const Success: Story = {
 export const WarningWithAction: Story = {
   args: {
     tone: 'warning',
-    // @@S mol-2 begin
     title: 'Usage budget at 80%',
     children: 'This group has used 3.2M of 4M units this week.',
-    // @@S mol-2 end
     action: { label: 'Upgrade', onClick: () => {} },
     onClose: () => {},
   },

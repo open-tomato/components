@@ -1,6 +1,4 @@
-// @@T ato-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T ato-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -10,9 +8,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * never per-call overrides.
 
  */
-// @@T ato-3 begin
 export const field: (props?: { state?: 'default' | 'error' | 'success' | 'disabled' | null | undefined; size?: 'sm' | 'md' | null | undefined } & ClassProp) => string = cva(
-// @@T ato-3 end
 
   'w-full rounded-md bg-surface-1 border px-3 text-fg1 placeholder:text-fg3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf',
   {
@@ -36,9 +32,7 @@ export const field: (props?: { state?: 'default' | 'error' | 'success' | 'disabl
 );
 
 /** The helper/error line under the control; color follows the state. */
-// @@T ato-3 begin
 export const fieldHelper: (props?: { state?: 'default' | 'error' | 'success' | 'disabled' | null | undefined } & ClassProp) => string =
-// @@T ato-3 end
   cva('text-[11.5px]', {
     variants: {
       state: {
@@ -51,7 +45,6 @@ export const fieldHelper: (props?: { state?: 'default' | 'error' | 'success' | '
     defaultVariants: { state: 'default' },
   });
 
-// @@V ato-3 begin
 /** The outer column; dims the whole field when disabled. */
 export const fieldRoot: (props?: { disabled?: boolean | null | undefined } & ClassProp) => string =
   cva('flex flex-col gap-1.5', {
@@ -90,6 +83,5 @@ export const fieldIconPad: (props?: { icon?: boolean | null | undefined } & Clas
     },
     defaultVariants: { icon: false },
   });
-// @@V ato-3 end
 
 export type FieldVariants = VariantProps<typeof field>;

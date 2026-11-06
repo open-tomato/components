@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { FilesChanged, type FileChange } from './FilesChanged';
 
-// @@S mol-3 begin
 const SAMPLE_FILES: FileChange[] = [
   { path: 'src/auth/login.ts', additions: 126, deletions: 12 },
   { path: 'src/auth/refresh.ts', additions: 48, deletions: 31 },
@@ -10,11 +9,8 @@ const SAMPLE_FILES: FileChange[] = [
   { path: 'docs/auth.md', additions: 18, deletions: 4 },
   { path: 'package.json', additions: 2, deletions: 1 },
 ];
-// @@S mol-3 end
 
-// @@T mol-3 begin
 const meta: Meta<typeof FilesChanged> = {
-// @@T mol-3 end
   title: 'Molecules/FilesChanged',
   component: FilesChanged,
   parameters: { layout: 'padded' },
@@ -39,9 +35,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   args: {
-    // @@S mol-3 begin
     files: SAMPLE_FILES,
-    // @@S mol-3 end
     locale: 'en-US',
   },
 };
@@ -80,9 +74,7 @@ export const LongPaths: Story = {
     locale: 'en-US',
     files: [
       {
-        // @@S mol-3 begin
         path: 'services/job-orchestrator/src/internal/scheduling/priority-queue-rebalancer.ts',
-        // @@S mol-3 end
         additions: 154,
         deletions: 89,
       },

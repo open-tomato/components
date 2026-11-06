@@ -61,7 +61,6 @@ export {
   type CheckGroupVariants,
   type TextareaVariants,
   type TextInputVariants,
-  // @@V org-1 begin
   avatarInitialsInput,
   avatarSelector,
   avatarSwatchGrid,
@@ -116,5 +115,4 @@ export {
   verboseTitleRow,
   type FormFieldHintVariants,
   type TextInputPrefixVariants,
-  // @@V org-1 end
 } from './FormKit.variants';

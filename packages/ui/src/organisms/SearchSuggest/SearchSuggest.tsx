@@ -5,9 +5,7 @@ import {
   useId,
   useRef,
   useState,
-  // @@T org-1 begin
   type FC,
-  // @@T org-1 end
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
 
@@ -28,7 +26,6 @@ import {
   searchSuggestPanel,
   searchSuggestPuck,
   searchSuggestRow,
-  // @@V org-1 begin
   searchSuggestAll,
   searchSuggestAllLabel,
   searchSuggestEmpty,
@@ -40,22 +37,17 @@ import {
   searchSuggestRoot,
   searchSuggestSub,
   searchSuggestText,
-  // @@V org-1 end
 } from './SearchSuggest.variants';
 
-// @@S mol-3 begin
 export interface SearchSuggestion {
   /** Key into the `EntityKinds` map: supplies the glyph and accent, and is shown in the pill. */
   kind?: string;
   label: string;
-  // @@S org-1 begin
   /** Mono context line under the label ("running · job-7d2f"). */
-  // @@S org-1 end
   sub?: string;
   /** Overrides the kind's default glyph. */
   icon?: IconName;
 }
-// @@S mol-3 end
 
 export interface SearchSuggestProps {
   suggestions: SearchSuggestion[];
@@ -68,9 +60,7 @@ export interface SearchSuggestProps {
   onSearch?: (query: string) => void;
   /** Global ⌘K / Ctrl-K focuses the input (scope switch). Default on. */
   hotkey?: boolean;
-  // @@S mol-3 begin
   /** Input placeholder. Default "Search…". */
-  // @@S mol-3 end
   placeholder?: string;
   /** Render with the panel open (docs/stories). */
   defaultOpen?: boolean;
@@ -79,7 +69,6 @@ export interface SearchSuggestProps {
 
 const VISIBLE_LIMIT = 5;
 
-// @@S mol-3 begin
 /**
  * SearchSuggest: search-icon input with a `⌘K` chip, globally focusable via ⌘K, suggesting
  * across the kinds of the `EntityKinds` map (supplied through
@@ -97,23 +86,16 @@ const VISIBLE_LIMIT = 5;
  * for no shared behavior win; what IS shared is reused directly (the
  * `paletteKbd` chip chrome for the ⌘K/↵ hints).
  */
-// @@S mol-3 end
-// @@T org-1 begin
 export const SearchSuggest: FC<SearchSuggestProps> = ({
-// @@T org-1 end
   suggestions,
   onSelect,
   onSearch,
   hotkey = true,
-  // @@S mol-3 begin
   placeholder = 'Search…',
-  // @@S mol-3 end
   defaultOpen = false,
   className,
 }: SearchSuggestProps) => {
-  // @@S mol-3 begin
   const kinds = useEntityKinds();
-  // @@S mol-3 end
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(defaultOpen);
   const [idx, setIdx] = useState(0);
@@ -184,13 +166,9 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
   const optId = (i: number) => `${baseId}-opt-${i}`;
 
   return (
-    // @@V org-1 begin
     <div ref={wrapRef} className={cn(searchSuggestRoot(), className)}>
-      {/* @@V org-1 end */}
       <div className={searchSuggestBox({ open })}>
-        {/* @@V org-1 begin */}
         <Icon name="search" size={14} className={searchSuggestLens()} />
-        {/* @@V org-1 end */}
         <input
           ref={inputRef}
           role="combobox"
@@ -209,18 +187,14 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
-          // @@V org-1 begin
           className={searchSuggestInput()}
-          // @@V org-1 end
         />
         <kbd className={paletteKbd({ size: 'sm' })}>⌘K</kbd>
       </div>
 
       {open && (
         <div className={searchSuggestPanel()}>
-          {/* @@V org-1 begin */}
           <div className={searchSuggestHeader()}>
-            {/* @@V org-1 end */}
             <span>
               {needle
                 ? `matches · ${filtered.length}`
@@ -230,16 +204,13 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
           </div>
           <div id={listId} role="listbox" aria-label="Suggestions">
             {shown.length === 0 && (
-              // @@V org-1 begin
               <div className={searchSuggestEmpty()}>
-                {/* @@V org-1 end */}
                 No quick matches. Press{' '}
                 <kbd className={paletteKbd({ size: 'sm' })}>↵</kbd> to search
                 all surfaces.
               </div>
             )}
             {shown.map((s, i) => {
-              // @@S mol-3 begin
               const found = s.kind != null
                 ? kinds[s.kind]
                 : undefined;
@@ -248,7 +219,6 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
               }
               const glyph = s.icon ?? found?.icon;
               const accent = chartTone({ tone: found?.tone });
-              // @@S mol-3 end
               return (
                 <button
                   key={`${s.kind ?? ''}-${s.label}`}
@@ -261,51 +231,37 @@ export const SearchSuggest: FC<SearchSuggestProps> = ({
                   onClick={() => select(s)}
                   className={searchSuggestRow({ active: i === idx })}
                 >
-                  {/* @@S mol-3 begin */}
                   <span className={cn(searchSuggestPuck(), accent)}>
                     {glyph != null && <Icon name={glyph} size={14} />}
                   </span>
-                  {/* @@S mol-3 end */}
-                  {/* @@V org-1 begin */}
                   <span className={searchSuggestText()}>
                     <span className={searchSuggestLabel()}>
-                      {/* @@V org-1 end */}
                       {s.label}
                     </span>
                     {s.sub != null && (
-                      // @@V org-1 begin
                       <span className={searchSuggestSub()}>
-                        {/* @@V org-1 end */}
                         {s.sub}
                       </span>
                     )}
                   </span>
-                  {/* @@S mol-3 begin */}
                   {s.kind != null && (
                     <span className={cn(searchSuggestKindPill(), accent)}>
                       {s.kind}
                     </span>
                   )}
-                  {/* @@S mol-3 end */}
                 </button>
               );
             })}
           </div>
           {needle !== '' && (
-            // @@V org-1 begin
             <div className={searchSuggestFooter()}>
-              {/* @@V org-1 end */}
               <button
                 type="button"
                 onClick={searchAll}
-                // @@V org-1 begin
                 className={searchSuggestAll()}
-                // @@V org-1 end
               >
                 <Icon name="search" size={15} />
-                {/* @@V org-1 begin */}
                 <span className={searchSuggestAllLabel()}>
-                  {/* @@V org-1 end */}
                   Search all for &ldquo;<b>{q}</b>&rdquo;
                 </span>
                 <kbd className={paletteKbd({ size: 'sm' })}>↵</kbd>

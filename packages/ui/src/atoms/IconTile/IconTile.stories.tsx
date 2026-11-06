@@ -5,9 +5,7 @@ import { StrokeIcon } from '../../lib/icons';
 import { IconTile } from './IconTile';
 
 /** Tinted icon square/circle — method cards, next-step rows, status circles. */
-// @@T ato-1 begin
 const meta: Meta<typeof IconTile> = {
-// @@T ato-1 end
 
   title: 'Atoms/IconTile',
   component: IconTile,
@@ -16,9 +14,7 @@ const meta: Meta<typeof IconTile> = {
 };
 
 export default meta;
-// @@T ato-1 begin
 type Story = StoryObj<typeof IconTile>;
-// @@T ato-1 end
 
 /** The 2FA method card's 36px accent tile. */
 export const Default: Story = {

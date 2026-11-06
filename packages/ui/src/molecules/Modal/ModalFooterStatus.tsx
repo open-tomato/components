@@ -2,9 +2,7 @@ import type { ReactNode } from 'react';
 
 import { cn } from '../../lib';
 
-// @@V mol-2 begin
 import { modalFooterStatus } from './Modal.variants';
-// @@V mol-2 end
 
 /**
  * The left-aligned status slot in a Modal footer (spec:
@@ -20,20 +18,14 @@ export interface ModalFooterStatusProps {
   className?: string;
 }
 
-// @@T mol-2 begin
 export const ModalFooterStatus: { (props: ModalFooterStatusProps): import('react').JSX.Element; displayName?: string } = ({
-// @@T mol-2 end
   children,
   className,
-// @@T mol-2 begin
 }: ModalFooterStatusProps): import('react').JSX.Element => (
-// @@T mol-2 end
   <span
     aria-live="polite"
     className={cn(
-      // @@V mol-2 begin
       modalFooterStatus(),
-      // @@V mol-2 end
       className,
     )}
   >

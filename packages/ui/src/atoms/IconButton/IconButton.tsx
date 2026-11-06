@@ -12,7 +12,6 @@ export interface IconButtonProps
   label: string;
 }
 
-// @@T ato-1 begin
 export const IconButton: import('react').ForwardRefExoticComponent<IconButtonProps & import('react').RefAttributes<HTMLButtonElement>> = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, icon, label, active, ...props }, ref) => (
     <button
@@ -26,6 +25,5 @@ export const IconButton: import('react').ForwardRefExoticComponent<IconButtonPro
     </button>
   ),
 );
-// @@T ato-1 end
 
 IconButton.displayName = 'IconButton';

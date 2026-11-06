@@ -48,7 +48,6 @@
 
   /* auth lockup + code chip (auth screens) */
   --color-wordmark-open: var(--wordmark-open);
-  --color-wordmark-tomato: var(--wordmark-tomato);
   --color-code-bg: var(--code-bg);
 
   /* tonal tint recipes — the shared tone contract: soft = tinted surface

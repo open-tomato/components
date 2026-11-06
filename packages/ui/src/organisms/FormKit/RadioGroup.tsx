@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-// @@V org-1 begin
 import {
   radioCircle,
   radioDot,
@@ -13,7 +12,6 @@ import {
   radioOption,
   radioText,
 } from './FormKit.variants';
-// @@V org-1 end
 
 export interface RadioOption {
   value: string;
@@ -29,9 +27,7 @@ export interface RadioGroupProps {
   className?: string;
 }
 
-// @@T org-1 begin
 export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   options,
   value,
   onChange,
@@ -41,9 +37,7 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
   <div
     role="radiogroup"
     aria-label={ariaLabel}
-    // @@V org-1 begin
     className={cn(radioGroup(), className)}
-    // @@V org-1 end
   >
     {options.map((o) => {
       const on = value === o.value;
@@ -59,7 +53,6 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
             radioOption({ checked: on }),
           )}
         >
-          {/* @@V org-1 begin */}
           <span className={radioCircle({ checked: on })}>
             {on && <span className={radioDot()} />}
           </span>
@@ -71,7 +64,6 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
               <span className={radioHint()}>{o.hint}</span>
             )}
           </span>
-          {/* @@V org-1 end */}
         </button>
       );
     })}

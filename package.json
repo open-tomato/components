@@ -1,5 +1,5 @@
 {
-  "name": "agentic-research",
+  "name": "components-workspace",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -23,11 +23,11 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "lint:all": "bun run lint && bun run --filter '@ar/*' lint",
+    "lint:all": "bun run lint && bun run --filter '@open-tomato/*' lint",
     "check-types": "tsc --noEmit",
-    "check-types:all": "bun run check-types && bun run --filter '@ar/*' check-types",
+    "check-types:all": "bun run check-types && bun run --filter '@open-tomato/*' check-types",
     "test": "vitest run",
-    "test:all": "bun run test && bun run --filter '@ar/*' test",
+    "test:all": "bun run test && bun run --filter '@open-tomato/*' test",
     "gate:control-bytes": "bun tools/control-byte-gate/control-byte-gate.ts",
     "gate:privacy": "bun tools/privacy-gate/privacy-gate.ts",
     "gate:privacy:history": "bun tools/privacy-gate/privacy-gate.ts --history",

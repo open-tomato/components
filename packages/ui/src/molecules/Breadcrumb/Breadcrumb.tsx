@@ -3,9 +3,7 @@ import { forwardRef, Fragment, type HTMLAttributes } from 'react';
 import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 
-// @@V mol-2 begin
 import { breadcrumb, breadcrumbItem, breadcrumbSeparator } from './Breadcrumb.variants';
-// @@V mol-2 end
 
 export interface SelectionItem {
   key: string;
@@ -29,26 +27,20 @@ const Chevron = () => (
     strokeWidth="1.75"
     strokeLinecap="round"
     strokeLinejoin="round"
-    // @@V mol-2 begin
     className={breadcrumbSeparator()}
-    // @@V mol-2 end
     aria-hidden
   >
     <path d="M9 18l6-6-6-6" />
   </svg>
 );
 
-// @@T mol-2 begin
 export const Breadcrumb: import('react').ForwardRefExoticComponent<BreadcrumbProps & import('react').RefAttributes<HTMLElement>> = forwardRef<
-// @@T mol-2 end
   HTMLElement, BreadcrumbProps>(
   ({ className, items, index, onChange, ...props }, ref) => (
     <nav
       ref={ref}
       aria-label="Breadcrumb"
-      // @@V mol-2 begin
       className={cn(breadcrumb(), className)}
-      // @@V mol-2 end
       {...props}
     >
       {items.map((item, i) => (

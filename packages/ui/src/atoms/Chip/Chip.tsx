@@ -1,17 +1,13 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   type ForwardRefExoticComponent,
   type RefAttributes,
   type HTMLAttributes, type ReactNode } from 'react';
-// @@T ato-3 end
 
 import { cn } from '../../lib';
 import { Touchable } from '../Touchable';
 
-// @@V ato-3 begin
 import { chip, chipIcon, chipRemove } from './Chip.variants';
-// @@V ato-3 end
 
 export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   /** Optional leading icon (13px, accent-colored). */
@@ -20,11 +16,9 @@ export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   onRemove?: () => void;
 }
 
-// @@T ato-3 begin
 export const Chip: ForwardRefExoticComponent<
   ChipProps & RefAttributes<HTMLSpanElement>
 > = forwardRef<
-// @@T ato-3 end
   HTMLSpanElement, ChipProps>(
   ({ className, icon, onRemove, children, ...props }, ref) => (
     <span
@@ -32,9 +26,7 @@ export const Chip: ForwardRefExoticComponent<
       className={cn(chip({ removable: onRemove != null }), className)}
       {...props}
     >
-      {/* @@V ato-3 begin */}
       {icon != null && <span className={chipIcon()}>{icon}</span>}
-      {/* @@V ato-3 end */}
       {children}
       {onRemove != null && (
         <Touchable
@@ -42,9 +34,7 @@ export const Chip: ForwardRefExoticComponent<
           rounded="full"
           aria-label="Remove"
           onClick={onRemove}
-          // @@V ato-3 begin
           className={chipRemove()}
-          // @@V ato-3 end
         >
           <svg
             width="11"

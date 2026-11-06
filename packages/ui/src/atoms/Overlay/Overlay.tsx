@@ -1,19 +1,15 @@
-// @@T ato-3 begin
 import type { FC, ReactNode } from 'react';
-// @@T ato-3 end
 
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { cn } from '../../lib';
 
-// @@V ato-3 begin
 import {
   overlay,
   overlayContent,
   type OverlayDismiss,
   type OverlayVariants,
 } from './Overlay.variants';
-// @@V ato-3 end
 
 export interface OverlayProps extends OverlayVariants {
   open: boolean;
@@ -33,9 +29,7 @@ export interface OverlayProps extends OverlayVariants {
   children: ReactNode;
 }
 
-// @@T ato-3 begin
 export const Overlay: FC<OverlayProps> = ({
-// @@T ato-3 end
 
   open,
   onClose,
@@ -66,9 +60,7 @@ export const Overlay: FC<OverlayProps> = ({
         <div className={cn(overlay({ position, backdrop }), className)}>
           <Dialog.Content
             aria-label={label}
-            // @@V ato-3 begin
             className={overlayContent()}
-            // @@V ato-3 end
             onEscapeKeyDown={(e) => {
               if (!canEscape) e.preventDefault();
             }}

@@ -1,8 +1,6 @@
 import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
-// @@T tpl-1 begin
-// @@T tpl-1 end
 
 /**
  * AppShell — the capstone (the original appshell demo). It invents almost no new behavior:
@@ -18,18 +16,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** The frame: sidebar | main, filling whatever box the parent gives it. */
-// @@T tpl-1 begin
 export const appShell: (props?: ClassProp) => string = cva('flex h-full w-full overflow-hidden bg-bg');
-// @@T tpl-1 end
 
 /** The rail — collapse animates width; content is clipped, never squashed. */
-// @@T tpl-1 begin
 export const appShellSidebar: (
   props?: {
     collapsed?: boolean | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T tpl-1 end
   [
     'flex shrink-0 flex-col overflow-hidden',
     'bg-surface-1 border-r border-border-soft',
@@ -47,16 +41,12 @@ export const appShellSidebar: (
 );
 
 /** The main column next to the rail: topbar | scrolling content. */
-// @@T tpl-1 begin
 export const appShellMain: (props?: ClassProp) => string = cva(
-// @@T tpl-1 end
   'flex min-w-0 flex-1 flex-col overflow-hidden',
 );
 
 /** The 60px sticky band — translucent bg over a backdrop blur. */
-// @@T tpl-1 begin
 export const appShellTopbar: (props?: ClassProp) => string = cva([
-// @@T tpl-1 end
   'flex h-[60px] shrink-0 items-center gap-3.5 px-[18px]',
   'border-b border-border-soft',
   'bg-[color-mix(in_oklab,var(--bg)_80%,transparent)]',
@@ -64,9 +54,7 @@ export const appShellTopbar: (props?: ClassProp) => string = cva([
 ]);
 
 /** The content slot — the only scrolling element in the shell. */
-// @@T tpl-1 begin
 export const appShellContent: (props?: ClassProp) => string = cva(
-// @@T tpl-1 end
   'flex-1 overflow-y-auto bg-bg px-[22px] pb-7 pt-5',
 );
 
@@ -74,36 +62,28 @@ export const appShellContent: (props?: ClassProp) => string = cva(
  * The optional content footer (app-shell spec: Main Content) —
  * copyright + general links, riding at the bottom of the scroll flow.
  */
-// @@T tpl-1 begin
 export const appShellFooter: (props?: ClassProp) => string = cva([
-// @@T tpl-1 end
   'mt-7 flex flex-wrap items-center gap-x-4 gap-y-1.5',
   'border-t border-border-soft pt-4',
   'text-xs text-fg3 [&_a]:text-fg3 [&_a:hover]:text-fg1',
 ]);
 
-// @@S tpl-1 begin
 /**
  * The sidebar's quota card (app-shell spec: Side Bar) — a
  * stub for now: status pill + used-over-limit progress underneath.
  */
-// @@S tpl-1 end
-// @@T tpl-1 begin
 export const weekSummaryCard: (props?: ClassProp) => string = cva([
-// @@T tpl-1 end
   'flex flex-col gap-1.5 rounded-md border border-border-soft',
   'bg-surface-sunk px-3 py-2.5',
 ]);
 
 /** A rail nav entry — active is a tone, collapse is a prop, not its state. */
-// @@T tpl-1 begin
 export const navItem: (
   props?: {
     active?: boolean | null | undefined;
     collapsed?: boolean | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T tpl-1 end
   [
     'flex w-full items-center gap-[11px] rounded-md border-none',
     'text-left text-sm cursor-pointer',
@@ -124,7 +104,6 @@ export const navItem: (
   },
 );
 
-// @@V tpl-1 begin
 /** The topbar's sidebar toggle — pulled flush to the band's left padding. */
 export const appShellToggle: (props?: ClassProp) => string = cva('-ml-1 shrink-0');
 
@@ -167,17 +146,13 @@ export const sidebarQuickAccess: (
 /** A quick-access external link's text override, merged last over navItem. */
 export const quickAccessLink: (props?: ClassProp) => string = cva('!text-fg2 !no-underline');
 
-// @@S tpl-1 begin
 /** The quota widget's outer inset around its card. */
-// @@S tpl-1 end
 export const weekSummary: (props?: ClassProp) => string = cva('px-3 py-2');
 
 /** The card's first row: eyebrow left, status pill right. */
 export const weekSummaryHeader: (props?: ClassProp) => string = cva('flex items-center justify-between');
 
-// @@S tpl-1 begin
 /** The heading eyebrow. */
-// @@S tpl-1 end
 export const weekSummaryEyebrow: (props?: ClassProp) => string = cva(
   'font-mono text-[10px] uppercase tracking-[0.08em] text-fg3',
 );
@@ -185,9 +160,7 @@ export const weekSummaryEyebrow: (props?: ClassProp) => string = cva(
 /** The used-over-limit row, aligned on the text baseline. */
 export const weekSummaryFigures: (props?: ClassProp) => string = cva('flex items-baseline gap-1.5');
 
-// @@S tpl-1 begin
 /** The amount-used figure. */
-// @@S tpl-1 end
 export const weekSummaryUsed: (props?: ClassProp) => string = cva(
   'font-display text-[22px] font-bold tracking-[-0.01em] text-fg1',
 );
@@ -197,7 +170,6 @@ export const weekSummaryLimit: (props?: ClassProp) => string = cva('text-xs text
 
 /** The thin progress bar under the figures. */
 export const weekSummaryProgress: (props?: ClassProp) => string = cva('h-1');
-// @@V tpl-1 end
 
 export type AppShellSidebarVariants = VariantProps<typeof appShellSidebar>;
 export type NavItemVariants = VariantProps<typeof navItem>;

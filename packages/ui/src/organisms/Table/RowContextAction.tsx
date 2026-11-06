@@ -1,8 +1,6 @@
 import type { IconName } from '../../atoms/Icon';
 
-// @@T org-2 begin
 import { useState, type ReactElement } from 'react';
-// @@T org-2 end
 
 import { Icon } from '../../atoms/Icon';
 import { IconButton } from '../../atoms/IconButton';
@@ -16,9 +14,7 @@ import {
 // Deep member import, not the ConfirmPopover barrel (built-storybook lazy-init chunking hazard).
 import { ConfirmInline } from '../../molecules/ConfirmPopover/ConfirmPopover';
 
-// @@V org-2 begin
 import { rowActionEntity } from './Table.variants';
-// @@V org-2 end
 
 /**
  * Context action (spec: "TableRow modifiers →
@@ -51,9 +47,7 @@ export interface RowContextActionsConfig {
 }
 
 export interface RowContextActionProps extends RowContextActionsConfig {
-  // @@S org-2 begin
   /** Entity vocabulary for the confirmation copy (`item`, `task`). */
-  // @@S org-2 end
   entityType: string;
   entityName: string;
   /** Accessible name for the trigger (defaults to `Actions for {name}`). */
@@ -62,7 +56,6 @@ export interface RowContextActionProps extends RowContextActionsConfig {
   defaultOpen?: boolean;
 }
 
-// @@T org-2 begin
 export const RowContextAction: {
   (props: RowContextActionProps): ReactElement;
   displayName?: string;
@@ -74,7 +67,6 @@ export const RowContextAction: {
   label,
   defaultOpen = false,
 }: RowContextActionProps): ReactElement => {
-// @@T org-2 end
   const [open, setOpen] = useState(defaultOpen);
   const [confirming, setConfirming] = useState(false);
 
@@ -114,9 +106,7 @@ export const RowContextAction: {
                   {entityType}
                   {' '}
                   <strong
-                    // @@V org-2 begin
                     className={rowActionEntity()}
-                    // @@V org-2 end
                   >{entityName}</strong>
                   {' '}
                   — do you want to proceed?

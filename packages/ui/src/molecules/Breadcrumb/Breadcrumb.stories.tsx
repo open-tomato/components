@@ -4,18 +4,12 @@ import { Breadcrumb } from './Breadcrumb';
 
 const PATH = [
   { key: 'ws', label: 'ripe-tomatoes' },
-  // @@S mol-2 begin
   { key: 'ag', label: 'Projects' },
-  // @@S mol-2 end
   { key: 'bot', label: 'refactor-bot' },
-  // @@S mol-2 begin
   { key: 's', label: 'Item #4128' },
-  // @@S mol-2 end
 ];
 
-// @@T mol-2 begin
 const meta: Meta<typeof Breadcrumb> = {
-// @@T mol-2 end
   title: 'Molecules/Breadcrumb',
   component: Breadcrumb,
   parameters: { layout: 'centered' },

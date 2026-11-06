@@ -65,9 +65,7 @@ const FLAT: readonly TreeNavNode[] = [
   { key: '$/k:notes', label: 'Notes', children: [] },
 ];
 
-// @@T mol-2 begin
 const meta: Meta<typeof TreeNav> = {
-// @@T mol-2 end
   title: 'Molecules/TreeNav',
   component: TreeNav,
   parameters: { layout: 'padded' },

@@ -5,9 +5,7 @@ import { Button } from '../../atoms';
 import { RowStatCard } from './RowStatCard';
 import { RowStatCardMeter } from './RowStatCardMeter';
 
-// @@T mol-1 begin
 const meta: Meta<typeof RowStatCard> = {
-// @@T mol-1 end
   title: 'Molecules/RowStatCard',
   component: RowStatCard,
   parameters: { layout: 'padded' },
@@ -19,14 +17,11 @@ const meta: Meta<typeof RowStatCard> = {
       </div>
     ),
   ],
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S mol-1 begin
 /**
  * The "Monthly budget" card: title/subtitle left, used/forecast ministats
  * + action right, budget meter with forecast tick below. Spec-driven
@@ -34,13 +29,10 @@ type Story = StoryObj<typeof meta>;
  * the caption row is misaligned), and the track uses surface-sunk instead
  * of a literal light colour so dark mode stays coherent.
  */
-// @@S mol-1 end
 export const Default: Story = {
   args: {
     title: 'Monthly budget',
-    // @@S mol-1 begin
     subtitle: '1.07M of 4M units used · $13.35 spent so far',
-    // @@S mol-1 end
     stats: [
       { title: 'used', value: '27%' },
       { title: 'forecast', value: '3.9M', tone: 'muted' },
@@ -69,9 +61,7 @@ export const Default: Story = {
 export const AutoAccentedStats: Story = {
   args: {
     title: 'This week',
-    // @@S mol-1 begin
     subtitle: '128 items across 9 groups',
-    // @@S mol-1 end
     stats: [
       { title: 'done', value: 117, trend: 0.06 },
       { title: 'failed', value: 11, trend: -0.4 },
@@ -83,10 +73,8 @@ export const AutoAccentedStats: Story = {
 /** Row 2 as contextual text/link instead of an indicator. */
 export const TextFooter: Story = {
   args: {
-    // @@S mol-1 begin
     title: 'Usage quota',
     subtitle: 'Account-wide, resets on the 1st',
-    // @@S mol-1 end
     stats: [
       { title: 'remaining', value: '2.93M' },
       { title: 'burn rate', value: '96k/day', tone: 'warning' },
@@ -106,9 +94,7 @@ export const TextFooter: Story = {
 export const MeterWarning: Story = {
   args: {
     title: 'Monthly budget',
-    // @@S mol-1 begin
     subtitle: '3.4M of 4M units used · $41.20 spent so far',
-    // @@S mol-1 end
     stats: [
       { title: 'used', value: '85%', tone: 'warning' },
       { title: 'forecast', value: '4.6M', tone: 'muted' },
@@ -129,10 +115,8 @@ export const MeterWarning: Story = {
 /** Row 1 only — no footer, no action. */
 export const StatsOnly: Story = {
   args: {
-    // @@S mol-1 begin
     title: 'Groups',
     subtitle: '9 configured',
-    // @@S mol-1 end
     stats: [
       { title: 'active', value: 6 },
       { title: 'errors', value: 1, tone: 'danger' },

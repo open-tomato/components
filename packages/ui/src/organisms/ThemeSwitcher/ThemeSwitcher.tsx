@@ -1,6 +1,4 @@
-// @@T org-2 begin
 import type { FC } from 'react';
-// @@T org-2 end
 
 import { Icon } from '../../atoms/Icon';
 import { IconButton } from '../../atoms/IconButton';
@@ -27,14 +25,12 @@ export interface ThemeSwitcherProps {
  * (switch to dark), sun in dark. Renders nothing when the user
  * preference is "system".
  */
-// @@T org-2 begin
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
   theme,
   onToggle,
   preference,
   className,
 }) => {
-// @@T org-2 end
   if (preference === 'system') return null;
   const next: ThemeName = theme === 'dark'
     ? 'light'

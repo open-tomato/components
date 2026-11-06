@@ -1,6 +1,7 @@
 # components-library
 
-This is the umbrella's component library package (`@ar/ui`), vendored fork-style from the standalone `components-library` template — the building blocks for
+This is the component library package (`@open-tomato/components`; `NOTICE`
+names the source it was ported from) — the building blocks for
 apps and UI surfaces. It is variant-first React (CVA + Tailwind 4 + Radix
 primitives) plus a dual-entry caching module. Everything lives in this one repo:
 source, workbench (Storybook), test harnesses, visual CI, and the agent tooling
@@ -72,9 +73,9 @@ Note: tokens.css wraps its element defaults (`h1`–`h6`, `a`, `p`) in
 `@layer base`, so Tailwind utilities beat element rules without the `!`
 important modifier. Do not reintroduce unlayered element rules.
 
-Brand atoms (`Wordmark`, `TomatoMark`, `Monogram`) are the logo slots of
-the shell — swap or restyle them per product; the demo strings in stories use
-the placeholder brand "Acme".
+The shells take their brand through slots (`AuthShell`'s `brand`, the
+sidebar's brand row); `Monogram` is the kit's neutral mark for them. The demo
+strings in stories use the placeholder brand "Acme".
 
 ## Tooling
 
@@ -320,7 +321,7 @@ indistinguishable from one the tests do not discriminate. Budget two
 builds per leg, one to apply and one to restore.
 
 The tree's own grid took the cheaper shape, which needs no build at
-all: `packages/web/node_modules/@ar/ui` symlinks straight here and
+all: `packages/web/node_modules/@open-tomato/components` symlinks straight here and
 this package's `.` export names `./dist/index.js` under its `import`
 condition, so editing that file IS the leg and the next vite boot
 reads it. Identifiers are mangled, but one `//#region <source path>`
@@ -330,7 +331,7 @@ original code. Two disciplines follow from `dist/` being gitignored,
 which leaves `git status` clean with a mutation IN PLACE: keep the
 pristine bytes in `/tmp` and restore from them after each leg, and
 prove the tree carries no leftover with a sha256 held across a hand
-`bun run --filter '@ar/ui' build` — equal before and after means the
+`bun run --filter '@open-tomato/components' build` — equal before and after means the
 tree's bytes are the build's bytes. An mtime says nothing in either
 direction, a restore having rewritten the file too.
 

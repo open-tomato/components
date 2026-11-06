@@ -1,10 +1,8 @@
-// @@T mol-3 begin
 import {
   useId,
   type JSX,
   type ReactNode,
 } from 'react';
-// @@T mol-3 end
 
 import { Overlay, type OverlayDismiss, type OverlayVariants } from '../../atoms/Overlay';
 import { cn } from '../../lib';
@@ -12,14 +10,12 @@ import { cn } from '../../lib';
 // imports create a chunk cycle in the static Storybook build (React #130).
 import { OverlayHeader } from '../Modal/OverlayHeader';
 
-// @@V mol-3 begin
 import {
   drawerBody,
   drawerFooter,
   drawerPanel,
   type DrawerPanelVariants,
 } from './Drawer.variants';
-// @@V mol-3 end
 
 export interface DrawerProps extends DrawerPanelVariants {
   open: boolean;
@@ -33,9 +29,7 @@ export interface DrawerProps extends DrawerPanelVariants {
   children: ReactNode;
 }
 
-// @@T mol-3 begin
 export const Drawer: { (props: DrawerProps): JSX.Element; displayName: string } = ({
-// @@T mol-3 end
   open,
   onClose,
   title,
@@ -71,7 +65,6 @@ export const Drawer: { (props: DrawerProps): JSX.Element; displayName: string } 
             onClose={onClose}
           />
         )}
-        {/* @@V mol-3 begin */}
         <div className={drawerBody()}>
           {children}
         </div>
@@ -80,7 +73,6 @@ export const Drawer: { (props: DrawerProps): JSX.Element; displayName: string } 
             {footer}
           </div>
         )}
-        {/* @@V mol-3 end */}
       </div>
     </Overlay>
   );

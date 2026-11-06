@@ -2,7 +2,6 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S tpl-1 begin
 /**
  * Shared chart color vocabulary — the fixed series palette the original design uses
  * across the Usage dashboard (the model / tool / team series maps in
@@ -14,14 +13,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `neutral`/`muted` map to fg2/fg3 (char-200 / warm-500 in light) rather
  * than the original literals so dark mode stays legible.
  */
-// @@S tpl-1 end
-// @@T tpl-1 begin
 export const chartTone: (
   props?: {
     tone?: 'accent' | 'primary' | 'gold' | 'info' | 'success' | 'danger' | 'neutral' | 'muted' | null | undefined;
   } & ClassProp,
 ) => string = cva('', {
-// @@T tpl-1 end
   variants: {
     tone: {
       accent: 'text-accent',

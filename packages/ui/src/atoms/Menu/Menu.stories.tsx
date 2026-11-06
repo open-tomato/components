@@ -33,23 +33,17 @@ const x = 'M18 6L6 18M6 6l12 12';
 /** Demo item set: three actions, a separator, a danger action. */
 const DemoItems = () => (
   <>
-    {/* @@S ato-2 begin */}
     <MenuItem icon={<ItemIcon d={eye} />}>Open item</MenuItem>
-    {/* @@S ato-2 end */}
     <MenuItem icon={<ItemIcon d={zap} />}>Re-seed</MenuItem>
     <MenuItem icon={<ItemIcon d={copy} />}>Duplicate</MenuItem>
     <MenuSep />
     <MenuItem tone="danger" icon={<ItemIcon d={x} />}>
-      {/* @@S ato-2 begin */}
       Delete item
-      {/* @@S ato-2 end */}
     </MenuItem>
   </>
 );
 
-// @@T ato-2 begin
 const meta: Meta<typeof MenuContent> = {
-// @@T ato-2 end
   title: 'Atoms/Menu',
   component: MenuContent,
   parameters: { layout: 'centered' },
@@ -65,9 +59,7 @@ const meta: Meta<typeof MenuContent> = {
       <div className="flex h-[320px] w-[400px] justify-center pt-6">
         <Menu open modal={false}>
           <MenuTrigger asChild>
-            {/* @@S ato-2 begin */}
             <Button variant="secondary">Item actions</Button>
-            {/* @@S ato-2 end */}
           </MenuTrigger>
           <Story />
         </Menu>
@@ -77,9 +69,7 @@ const meta: Meta<typeof MenuContent> = {
 };
 
 export default meta;
-// @@T ato-2 begin
 type Story = StoryObj<typeof MenuContent>;
-// @@T ato-2 end
 
 /** Defaults: md width, start-aligned under its trigger. */
 export const Default: Story = {
@@ -102,9 +92,7 @@ export const WithLabel: Story = {
   args: {
     children: (
       <>
-        {/* @@S ato-2 begin */}
         <MenuLabel>Group</MenuLabel>
-        {/* @@S ato-2 end */}
         <DemoItems />
       </>
     ),

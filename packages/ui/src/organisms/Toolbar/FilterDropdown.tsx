@@ -11,14 +11,12 @@ import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
 
-// @@V org-2 begin
 import {
   filterCheck,
   filterCount,
   filterOptionLabel,
   filterTrigger,
 } from './Toolbar.variants';
-// @@V org-2 end
 
 export interface FilterOption {
   value: string;
@@ -46,9 +44,7 @@ const PANEL_WIDTH = 224;
  * any value is selected; toggling keeps the menu open (multi-select), the
  * Clear item closes it.
  */
-// @@T org-2 begin
 export const FilterDropdown: FC<FilterDropdownProps> = ({
-// @@T org-2 end
 
   label,
   icon,
@@ -72,9 +68,7 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({
         {label}
         {active && (
           <span
-            // @@V org-2 begin
             className={filterCount()}
-            // @@V org-2 end
           >
             {selected.length}
           </span>
@@ -94,18 +88,14 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({
               trailing={
                 <span
                   aria-hidden
-                  // @@V org-2 begin
                   className={cn(filterCheck({ on }))}
-                  // @@V org-2 end
                 >
                   {on && <StrokeIcon name="check" size={12} />}
                 </span>
               }
             >
               <span
-                // @@V org-2 begin
                 className={filterOptionLabel()}
-                // @@V org-2 end
               >
                 {o.swatch}
                 {o.label}

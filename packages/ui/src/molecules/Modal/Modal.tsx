@@ -3,14 +3,12 @@ import { useId, type ReactNode } from 'react';
 import { Overlay, type OverlayDismiss, type OverlayVariants } from '../../atoms/Overlay';
 import { cn } from '../../lib';
 
-// @@V mol-2 begin
 import {
   modalBody,
   modalFooter,
   modalPanel,
   type ModalPanelVariants,
 } from './Modal.variants';
-// @@V mol-2 end
 import { ModalFooterStatus } from './ModalFooterStatus';
 import { OverlayHeader } from './OverlayHeader';
 
@@ -32,9 +30,7 @@ export interface ModalProps extends ModalPanelVariants {
   children: ReactNode;
 }
 
-// @@T mol-2 begin
 export const Modal: { (props: ModalProps): import('react').JSX.Element; displayName?: string } = ({
-// @@T mol-2 end
   open,
   onClose,
   title,
@@ -46,9 +42,7 @@ export const Modal: { (props: ModalProps): import('react').JSX.Element; displayN
   backdrop,
   className,
   children,
-// @@T mol-2 begin
 }: ModalProps): import('react').JSX.Element => {
-// @@T mol-2 end
   const titleId = useId();
   return (
     <Overlay
@@ -72,7 +66,6 @@ export const Modal: { (props: ModalProps): import('react').JSX.Element; displayN
             onClose={onClose}
           />
         )}
-        {/* @@V mol-2 begin */}
         <div className={modalBody()}>
           {children}
         </div>
@@ -84,7 +77,6 @@ export const Modal: { (props: ModalProps): import('react').JSX.Element; displayN
             {footer}
           </div>
         )}
-        {/* @@V mol-2 end */}
       </div>
     </Overlay>
   );

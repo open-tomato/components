@@ -1,17 +1,11 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
-// @@V mol-1 begin
 import { cn, type ChartTone } from '../../lib';
-// @@V mol-1 end
 
 import {
   cellLabel,
   cellLabelGroup,
-  // @@V mol-1 begin
   cellLabelTone,
-  // @@V mol-1 end
   type CellLabelVariants,
 } from './CellContent.variants';
 
@@ -38,7 +32,6 @@ const normalize = (
     ? { text: l }
     : l)));
 
-// @@S mol-1 begin
 /**
  * CellLabel — accent-colored label-format text with array support (spec:
  * "CellContent → Label"; typical use: ranking labels — subtle or
@@ -46,10 +39,7 @@ const normalize = (
  * shared chart palette;
  * `bg="soft"` adds the subtle currentColor tint.
  */
-// @@S mol-1 end
-// @@T mol-1 begin
 export const CellLabel: ForwardRefExoticComponent<PropsWithoutRef<CellLabelProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, CellLabelProps>(
-// @@T mol-1 end
   ({ className, labels, tone, bg, ...props }, ref) => {
     const items = normalize(labels);
     return (
@@ -59,9 +49,7 @@ export const CellLabel: ForwardRefExoticComponent<PropsWithoutRef<CellLabelProps
             key={item.text}
             className={cn(
               cellLabel({ bg }),
-              // @@V mol-1 begin
               cellLabelTone({ tone: item.tone ?? tone ?? 'accent' }),
-              // @@V mol-1 end
             )}
           >
             {item.text}

@@ -6,16 +6,12 @@ import { expect, userEvent, within } from 'storybook/test';
 import { CodeInput, type CodeInputProps } from './CodeInput';
 
 /** 6-digit code entry — auto-advance, backspace-to-previous, accent when filled. */
-// @@T mol-1 begin
 const meta: Meta<typeof CodeInput> = {
-// @@T mol-1 end
   title: 'Molecules/CodeInput',
   component: CodeInput,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

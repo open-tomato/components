@@ -1,11 +1,9 @@
-// @@T ato-3 begin
 import {
   forwardRef,
   type HTMLAttributes,
   type ForwardRefExoticComponent,
   type RefAttributes,
 } from 'react';
-// @@T ato-3 end
 
 import { cn, formatPercentage } from '../../lib';
 
@@ -29,11 +27,9 @@ export interface FormattedPercentageProps
  * in HumanReadableValue-style chrome at the call site when emphasis is
  * needed.
  */
-// @@T ato-3 begin
 export const FormattedPercentage: ForwardRefExoticComponent<
   FormattedPercentageProps & RefAttributes<HTMLSpanElement>
 > = forwardRef<
-// @@T ato-3 end
   
   HTMLSpanElement,
   FormattedPercentageProps

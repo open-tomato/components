@@ -1,7 +1,5 @@
-// @@T mol-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -11,9 +9,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * tone/size cover the auth flows' stepper: tone=accent size=sm — 22px
  * dots, 11px mono numerals, border-soft connectors that never fill.
  */
-// @@T mol-1 begin
 export const stepperDot: (props?: { state?: 'done' | 'active' | 'upcoming' | null; tone?: 'primary' | 'accent' | null; size?: 'md' | 'sm' | null } & ClassProp) => string = cva(
-// @@T mol-1 end
   [
     'inline-flex shrink-0 items-center justify-center rounded-full',
     'font-mono font-bold border',
@@ -53,9 +49,7 @@ export const stepperDot: (props?: { state?: 'done' | 'active' | 'upcoming' | nul
   },
 );
 
-// @@T mol-1 begin
 export const stepperLabel: (props?: { state?: 'done' | 'active' | 'upcoming' | null; tone?: 'primary' | 'accent' | null; size?: 'md' | 'sm' | null } & ClassProp) => string = cva('whitespace-nowrap', {
-// @@T mol-1 end
   variants: {
     state: {
       done: 'font-medium',
@@ -75,9 +69,7 @@ export const stepperLabel: (props?: { state?: 'done' | 'active' | 'upcoming' | n
   defaultVariants: { state: 'upcoming', tone: 'primary', size: 'md' },
 });
 
-// @@T mol-1 begin
 export const stepperConnector: (props?: { done?: boolean | null; tone?: 'primary' | 'accent' | null; size?: 'md' | 'sm' | null } & ClassProp) => string = cva('h-px flex-1', {
-// @@T mol-1 end
   variants: {
     done: { false: '', true: '' },
     tone: { primary: '', accent: '' },
@@ -97,7 +89,6 @@ export const stepperConnector: (props?: { done?: boolean | null; tone?: 'primary
 
 export type StepperDotVariants = VariantProps<typeof stepperDot>;
 
-// @@V mol-1 begin
 export const stepperRoot: (props?: { size?: 'md' | 'sm' | null } & ClassProp) => string = cva('flex w-full items-center', {
   variants: {
     size: {
@@ -115,4 +106,3 @@ export const stepperButton: (props?: ClassProp) => string = cva(
 export const stepperStatic: (props?: ClassProp) => string = cva(
   'inline-flex items-center gap-2',
 );
-// @@V mol-1 end

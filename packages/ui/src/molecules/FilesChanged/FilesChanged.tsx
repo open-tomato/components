@@ -6,7 +6,6 @@ import { Icon } from '../../atoms';
 import { formatNumber } from '../../lib';
 import { SectionCard } from '../SectionCard';
 
-// @@V mol-3 begin
 import {
   filesChangedDelta,
   filesChangedIcon,
@@ -16,7 +15,6 @@ import {
   filesChangedSummary,
   filesChangedTotals,
 } from './FilesChanged.variants';
-// @@V mol-3 end
 
 export interface FileChange {
   /** File path (mono, truncates from the middle of the card). */
@@ -76,7 +74,6 @@ const iconFor = (file: FileChange): IconName => {
   return EXTENSION_ICONS[extension] ?? 'file';
 };
 
-// @@S mol-3 begin
 /**
  * FilesChanged — the "files touched" card (detail views, PR summaries).
  * Spec: "FilesChanged" (no design artboard):
@@ -86,12 +83,9 @@ const iconFor = (file: FileChange): IconName => {
  * Interpretation decision: zero deltas render dimmed (`+0`/`-0` at half
  * opacity) so the columns stay scannable without shouting zeros.
  */
-// @@S mol-3 end
-// @@T mol-3 begin
 export const FilesChanged: import('react').ForwardRefExoticComponent<
   FilesChangedProps & import('react').RefAttributes<HTMLElement>
 > = forwardRef<HTMLElement, FilesChangedProps>(
-// @@T mol-3 end
   ({ className, files, title = 'Files changed', locale, ...props }, ref) => {
     const additions = files.reduce((acc, f) => acc + f.additions, 0);
     const deletions = files.reduce((acc, f) => acc + f.deletions, 0);
@@ -103,9 +97,7 @@ export const FilesChanged: import('react').ForwardRefExoticComponent<
         className={className}
         padded={false}
         action={
-          // @@V mol-3 begin
           <div className={filesChangedTotals()}>
-            {/* @@V mol-3 end */}
             <span className={filesChangedSummary()}>
               {files.length === 1
                 ? '1 file'
@@ -121,7 +113,6 @@ export const FilesChanged: import('react').ForwardRefExoticComponent<
         }
         {...props}
       >
-        {/* @@V mol-3 begin */}
         <ul className={filesChangedList()}>
           {files.map((file) => (
             <li
@@ -129,7 +120,6 @@ export const FilesChanged: import('react').ForwardRefExoticComponent<
               className={filesChangedRow()}
             >
               <Icon name={iconFor(file)} size={14} className={filesChangedIcon()} />
-              {/* @@V mol-3 end */}
               <span className={filesChangedPath()} title={file.path}>
                 {file.path}
               </span>

@@ -60,18 +60,18 @@ the root `src/index.tsx`. Styling is variants-only: axes live in
 `<Name>.variants.ts`, call sites pass variants and flags — not class strings.
 
 ## Exports
-<!-- doc-links-skip: @ar/ui/styles.css -- package export, not file path -->
-<!-- doc-links-skip: @ar/ui/theme.css -- package export, not file path -->
-<!-- doc-links-skip: @ar/ui/fonts.css -- package export, not file path -->
+<!-- doc-links-skip: @open-tomato/components/styles.css -- package export, not file path -->
+<!-- doc-links-skip: @open-tomato/components/theme.css -- package export, not file path -->
+<!-- doc-links-skip: @open-tomato/components/fonts.css -- package export, not file path -->
 
 | Import | Contents |
 | --- | --- |
-| `@ar/ui` | every component, `cn()` |
-| `@ar/ui/styles.css` | the styles entry: fonts + default theme + component contract + Tailwind `@source` scan |
-| `@ar/ui/theme.css` | the default theme definition alone (semantic variables, light + dark) |
-| `@ar/ui/fonts.css` | the type-face layer alone |
-| `@ar/ui/cache` | browser cache: `useCache`, `QueryProvider`, `defaultQueryClient`, re-exported TanStack Query core |
-| `@ar/ui/cache/server` | server cache: `createServerCache` (Redis cache-aside; `ioredis` optional peer) |
+| `@open-tomato/components` | every component, `cn()` |
+| `@open-tomato/components/styles.css` | the styles entry: fonts + default theme + component contract + Tailwind `@source` scan |
+| `@open-tomato/components/theme.css` | the default theme definition alone (semantic variables, light + dark) |
+| `@open-tomato/components/fonts.css` | the type-face layer alone |
+| `@open-tomato/components/cache` | browser cache: `useCache`, `QueryProvider`, `defaultQueryClient`, re-exported TanStack Query core |
+| `@open-tomato/components/cache/server` | server cache: `createServerCache` (Redis cache-aside; `ioredis` optional peer) |
 
 ## Setup (Tailwind 4 consumers)
 
@@ -80,7 +80,7 @@ exactly the classes the components use. In your Tailwind CSS entry:
 
 ```css
 @import "tailwindcss";
-@import "@ar/ui/styles.css";
+@import "@open-tomato/components/styles.css";
 ```
 
 That single import brings in, layer by layer:
@@ -93,7 +93,7 @@ That single import brings in, layer by layer:
 | source scan            | `@source`                              | points your Tailwind build at the package's JS so the components' classes are generated              |
 
 ```tsx
-import { Button, Touchable } from '@ar/ui';
+import { Button, Touchable } from '@open-tomato/components';
 
 <Button variant="accent" size="lg">Run agent</Button>
 ```
@@ -106,9 +106,10 @@ Dark mode: set `data-theme="dark"` on the document element (default follows
 `AppShell` (navigation + content chrome for signed-in surfaces) and `AuthShell`
 (the auth flow frame, paired with the `src/pages/auth` set) are the templates
 tier — most of their composition is reusable as-is, with app-specific layouts
-tweaked at the consumer. Brand atoms (`Wordmark`, `TomatoMark`,
-`Monogram`) are the shells' logo slots: swap or restyle them per product.
-Demo content in stories uses the placeholder brand "Acme".
+tweaked at the consumer. The shells take their brand through slots
+(`AuthShell`'s `brand`, the sidebar's brand row), and `Monogram` is the kit's
+neutral mark for them. Demo content in stories uses the placeholder brand
+"Acme".
 
 ## Theming (v1: theme definition via CSS)
 
@@ -137,7 +138,7 @@ it.
 Browser (TanStack Query wrapper with stale-while-revalidate defaults):
 
 ```tsx
-import { QueryProvider, useCache } from '@ar/ui/cache';
+import { QueryProvider, useCache } from '@open-tomato/components/cache';
 
 // once at the root
 <QueryProvider>{children}</QueryProvider>
@@ -150,7 +151,7 @@ Server (Redis cache-aside; `ioredis` is an optional peer dependency):
 
 ```ts
 import Redis from 'ioredis';
-import { createServerCache } from '@ar/ui/cache/server';
+import { createServerCache } from '@open-tomato/components/cache/server';
 
 const cache = createServerCache(new Redis(process.env.REDIS_URL!));
 const value = await cache.get('agents:1', 300, () => fetchAgent('1'));

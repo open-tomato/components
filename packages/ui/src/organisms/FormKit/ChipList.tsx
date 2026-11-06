@@ -12,14 +12,12 @@ import {
   chipListBox,
   chipListOption,
   chipListPanel,
-  // @@V org-1 begin
   chipList,
   chipListChips,
   chipListEmpty,
   chipListInput,
   chipListNewTag,
   chipListOptionLabel,
-  // @@V org-1 end
 } from './FormKit.variants';
 
 /**
@@ -63,9 +61,7 @@ interface SuggestionRow {
   isNew?: boolean;
 }
 
-// @@T org-1 begin
 export const ChipList: { (props: ChipListProps): import('react').JSX.Element; displayName: string } = ({
-// @@T org-1 end
   options,
   value,
   onChange,
@@ -139,12 +135,10 @@ export const ChipList: { (props: ChipListProps): import('react').JSX.Element; di
   const optId = (i: number) => `${baseId}-opt-${i}`;
 
   return (
-    // @@V org-1 begin
     <div className={cn(chipList(), className)}>
       <div className={chipListBox()}>
         {value.length > 0 && (
           <div className={chipListChips()}>
-            {/* @@V org-1 end */}
             {value.map((v) => (
               <Chip key={v} onRemove={() => remove(v)}>
                 {labelFor(v)}
@@ -171,9 +165,7 @@ export const ChipList: { (props: ChipListProps): import('react').JSX.Element; di
             }}
             onKeyDown={onKeyDown}
             placeholder={placeholder}
-            // @@V org-1 begin
             className={chipListInput()}
-            // @@V org-1 end
           />
         )}
       </div>
@@ -181,13 +173,11 @@ export const ChipList: { (props: ChipListProps): import('react').JSX.Element; di
       {open && (
         <div className={chipListPanel()}>
           <div id={listId} role="listbox" aria-label="Suggestions">
-            {/* @@V org-1 begin */}
             {rows.length === 0 && (
               <div className={chipListEmpty()}>
                 No matches.
               </div>
             )}
-            {/* @@V org-1 end */}
             {rows.map((row, i) => (
               <button
                 key={row.isNew
@@ -204,7 +194,6 @@ export const ChipList: { (props: ChipListProps): import('react').JSX.Element; di
                 onClick={() => pick(row)}
                 className={chipListOption({ active: i === idx })}
               >
-                {/* @@V org-1 begin */}
                 {row.isNew
                   ? (
                     <span className={chipListOptionLabel()}>
@@ -219,7 +208,6 @@ export const ChipList: { (props: ChipListProps): import('react').JSX.Element; di
                     new
                   </span>
                 )}
-                {/* @@V org-1 end */}
               </button>
             ))}
           </div>

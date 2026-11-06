@@ -35,7 +35,6 @@ describe('ProfileMenu', () => {
     expect(handler).toHaveBeenCalledTimes(1);
   });
 
-  // @@S org-2 begin
   it('renders the actions slot between the built-in items and Log out', () => {
     const onSelect = mock(() => {});
     render(
@@ -50,7 +49,6 @@ describe('ProfileMenu', () => {
     fireEvent.click(screen.getByRole('menuitem', { name: 'Help' }));
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
-  // @@S org-2 end
 
   it('confirms logout inline, cancel returns to the menu', () => {
     const onLogout = mock(() => {});

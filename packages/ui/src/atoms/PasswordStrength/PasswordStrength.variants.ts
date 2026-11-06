@@ -5,10 +5,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * a mono label (auth screens). Empty segments keep cream-300 in both
  * themes.
  */
-// @@T ato-2 begin
 export const passwordStrengthSegment:
 (props?: ({ fill?: 'empty' | 'danger' | 'gold' | 'success' | null } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-2 end
   'h-1 flex-1 rounded-[2px] transition-colors',
   {
     variants: {
@@ -27,10 +25,8 @@ export type PasswordStrengthSegmentVariants = VariantProps<
   typeof passwordStrengthSegment
 >;
 
-// @@V ato-2 begin
 /** The meter row: segments plus the label. */
 export const passwordStrength: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex items-center gap-1.5');
 
 /** The mono score label after the segments. */
 export const passwordStrengthLabel: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('min-w-10 font-mono text-[11px] text-fg3');
-// @@V ato-2 end

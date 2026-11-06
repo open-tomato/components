@@ -6,9 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 
-// @@V ato-1 begin
 import { droppableFileInput } from './Droppable.variants';
-// @@V ato-1 end
 
 /**
  * Droppable behavior core: drag enter/leave
@@ -208,9 +206,7 @@ export function useFilePick({
       accept={
         [...(accept?.ext ?? []), ...(accept?.mime ?? [])].join(',') || undefined
       }
-      // @@V ato-1 begin
       className={droppableFileInput()}
-      // @@V ato-1 end
       onChange={(e) => {
         if (!e.target.files) return;
         const res = validateDrop(e.target.files, accept);

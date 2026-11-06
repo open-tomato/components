@@ -1,18 +1,12 @@
-// @@T mol-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T mol-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
-// @@S mol-3 begin
 /**
  * OptionCard — one selectable card for both pickers: group choice
  * (centered, 20px radio) and 2FA method choice (top-aligned, 18px radio).
  */
-// @@S mol-3 end
-// @@T mol-3 begin
 export const optionCard: (props?: { selected?: boolean | null | undefined; align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva(
-// @@T mol-3 end
 
   [
     'flex w-full cursor-pointer gap-3 rounded-lg border p-3.5 text-left',
@@ -33,12 +27,8 @@ export const optionCard: (props?: { selected?: boolean | null | undefined; align
   },
 );
 
-// @@S mol-3 begin
 /** Centered titles are display-face 15px; top-aligned method titles body 14px. */
-// @@S mol-3 end
-// @@T mol-3 begin
 export const optionCardTitle: (props?: { align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva('font-bold text-fg1', {
-// @@T mol-3 end
 
   variants: {
     align: {
@@ -49,9 +39,7 @@ export const optionCardTitle: (props?: { align?: 'center' | 'start' | null | und
   defaultVariants: { align: 'center' },
 });
 
-// @@T mol-3 begin
 export const optionCardIndicator: (props?: { selected?: boolean | null | undefined; align?: 'center' | 'start' | null | undefined } & ClassProp) => string = cva(
-// @@T mol-3 end
   'flex shrink-0 items-center justify-center rounded-full border-2',
   {
     variants: {
@@ -68,7 +56,6 @@ export const optionCardIndicator: (props?: { selected?: boolean | null | undefin
   },
 );
 
-// @@V mol-3 begin
 /** The text column: title row over the description. */
 export const optionCardBody: (props?: ClassProp | undefined) => string = cva('flex min-w-0 flex-1 flex-col');
 
@@ -85,6 +72,5 @@ export const optionCardDescription: (props?: { align?: 'center' | 'start' | null
   },
   defaultVariants: { align: 'center' },
 });
-// @@V mol-3 end
 
 export type OptionCardVariants = VariantProps<typeof optionCard>;

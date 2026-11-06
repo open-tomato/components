@@ -347,9 +347,7 @@ const TreeNavItem = ({ node, control }: TreeNavItemProps) => {
  * the two callbacks that answer them.
  * @returns The tree.
  */
-// @@T mol-2 begin
 export const TreeNav: import('react').ForwardRefExoticComponent<TreeNavProps & import('react').RefAttributes<HTMLUListElement>> = forwardRef<HTMLUListElement, TreeNavProps>(
-// @@T mol-2 end
   (
     {
       className,

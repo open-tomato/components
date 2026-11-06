@@ -5,9 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * alignment; the illustration and action slots are optional.
 
  */
-// @@T ato-1 begin
 export const emptyState: (props?: ({ size?: 'sm' | 'md' | 'lg' | null | undefined; align?: 'start' | 'center' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex flex-col w-full', {
-// @@T ato-1 end
   variants: {
     size: {
       sm: 'py-6 gap-2',
@@ -25,7 +23,6 @@ export const emptyState: (props?: ({ size?: 'sm' | 'md' | 'lg' | null | undefine
   },
 });
 
-// @@V ato-1 begin
 /** The illustration slot's puck: a primary-tinted circle. */
 export const emptyStateMark: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('flex size-[52px] items-center justify-center rounded-full bg-[color-mix(in_oklab,var(--primary)_12%,var(--surface-1))]');
 
@@ -37,6 +34,5 @@ export const emptyStateDescription: (props?: import('class-variance-authority/ty
 
 /** The optional action slot's wrapper. */
 export const emptyStateAction: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mt-1');
-// @@V ato-1 end
 
 export type EmptyStateVariants = VariantProps<typeof emptyState>;

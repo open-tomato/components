@@ -11,7 +11,6 @@ export interface CardProps
   header?: ReactNode;
 }
 
-// @@T ato-1 begin
 export const Card: import('react').ForwardRefExoticComponent<CardProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, CardProps>(
   (
     {
@@ -42,6 +41,5 @@ export const Card: import('react').ForwardRefExoticComponent<CardProps & import(
     </div>
   ),
 );
-// @@T ato-1 end
 
 Card.displayName = 'Card';

@@ -1,6 +1,4 @@
-// @@T mol-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T mol-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -10,15 +8,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * danger past 85%; the threshold decision belongs to the caller, the
  * tone variant is the mechanism).
  */
-// @@T mol-3 begin
 export const progressTrack: (props?: ClassProp) => string = cva(
-// @@T mol-3 end
   'relative h-2 w-full overflow-hidden rounded-full border border-border-soft bg-surface-sunk',
 );
 
-// @@T mol-3 begin
 export const progressBar: (props?: { tone?: 'accent' | 'danger' | 'leaf' | null | undefined; indeterminate?: boolean | null | undefined } & ClassProp) => string = cva(
-// @@T mol-3 end
   'h-full rounded-full',
   {
     variants: {

@@ -1,8 +1,6 @@
 import type { IconName } from '../../atoms/Icon';
 
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ReactNode, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { Icon } from '../../atoms/Icon';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
@@ -45,9 +43,7 @@ export interface CellStatusProps
  * reuse the StatusIndicator atom; the icon format maps each tone to its
  * Lucide glyph.
  */
-// @@T mol-1 begin
 export const CellStatus: ForwardRefExoticComponent<PropsWithoutRef<CellStatusProps> & RefAttributes<HTMLSpanElement>> = forwardRef<HTMLSpanElement, CellStatusProps>(
-// @@T mol-1 end
   (
     {
       className,

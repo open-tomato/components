@@ -20,7 +20,6 @@ export {
   type DropValidation,
   type UseDroppableOptions,
 } from './useDroppable';
-// @@V ato-1 begin
 export {
   droppableFileInput,
   droppableInline,
@@ -38,4 +37,3 @@ export {
   type DroppableInlineVariants,
   type DroppableZoneVariants,
 } from './Droppable.variants';
-// @@V ato-1 end

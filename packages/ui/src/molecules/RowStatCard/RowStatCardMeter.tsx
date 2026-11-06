@@ -1,10 +1,7 @@
-// @@T mol-1 begin
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
-// @@T mol-1 end
 
 import { cn } from '../../lib';
 
-// @@V mol-1 begin
 import {
   rowStatCardMeter,
   rowStatCardMeterFill,
@@ -14,7 +11,6 @@ import {
   rowStatCardMeterTrack,
   type RowStatCardMeterFillVariants,
 } from './RowStatCard.variants';
-// @@V mol-1 end
 
 const clampRatio = (ratio: number): number => Math.max(0, Math.min(1, ratio));
 
@@ -27,28 +23,22 @@ export interface RowStatCardMeterProps
   startLabel?: string;
   /** End caption, right-aligned. */
   endLabel?: string;
-  // @@S mol-1 begin
   /**
    * Optional marker tick (forecast/goal): ratio position + legend. The
    * legend renders centered UNDER the tick, never centered in the caption row
    * regardless of the tick's position (the spec calls that misaligned).
    */
   marker?: { ratio: number; label: string };
-  // @@S mol-1 end
   /** Accessible description of the meter (falls back to a percentage). */
   label?: string;
 }
 
-// @@S mol-1 begin
 /**
  * RowStatCardMeter — the row-2 graphical indicator for RowStatCard
  * (track + forecast tick + caption row). Colocated:
  * story coverage lives on RowStatCard.
  */
-// @@S mol-1 end
-// @@T mol-1 begin
 export const RowStatCardMeter: ForwardRefExoticComponent<PropsWithoutRef<RowStatCardMeterProps> & RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, RowStatCardMeterProps>(
-// @@T mol-1 end
   (
     { className, value, startLabel, endLabel, marker, tone, label, ...props },
     ref,
@@ -60,9 +50,7 @@ export const RowStatCardMeter: ForwardRefExoticComponent<PropsWithoutRef<RowStat
     return (
       <div
         ref={ref}
-        // @@V mol-1 begin
         className={cn(rowStatCardMeter(), className)}
-        // @@V mol-1 end
         {...props}
       >
         <div

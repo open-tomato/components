@@ -5,9 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * header/body/footer rows. Decoration only; behavior is all Overlay's.
 
  */
-// @@T mol-2 begin
 export const modalPanel: (props?: ({size?: 'sm' | 'md' | 'lg' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T mol-2 end
   [
     'flex max-h-[calc(100vh-96px)] flex-col overflow-hidden',
     'bg-surface-1 border border-border-soft rounded-xl shadow-lg',
@@ -24,7 +22,6 @@ export const modalPanel: (props?: ({size?: 'sm' | 'md' | 'lg' | null | undefined
   },
 );
 
-// @@V mol-2 begin
 /** The scrolling body row. */
 export const modalBody: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('overflow-y-auto p-5 text-sm leading-relaxed text-fg2');
 
@@ -48,6 +45,5 @@ export const overlayHeaderTitle: (props?: import('class-variance-authority/types
 
 /** The close button, merged over the inline touchable. */
 export const overlayHeaderClose: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('size-8 shrink-0 justify-center bg-surface-1 border border-border-soft text-fg2');
-// @@V mol-2 end
 
 export type ModalPanelVariants = VariantProps<typeof modalPanel>;

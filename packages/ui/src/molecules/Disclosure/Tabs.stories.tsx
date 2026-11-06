@@ -28,9 +28,7 @@ const home = 'M3 12L12 3l9 9M5 10v10h14V10';
 const terminal = 'M4 17l6-6-6-6M12 19h8';
 const cpu = 'M4 4h16v16H4zM9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M20 9h3M1 15h3M20 15h3';
 
-// @@T mol-3 begin
 const meta: Meta<typeof Tabs> = {
-// @@T mol-3 end
   title: 'Molecules/Tabs',
   component: Tabs,
   parameters: { layout: 'padded' },
@@ -47,9 +45,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// @@S mol-3 begin
 /** Item tabs: strip + one panel, first tab active. */
-// @@S mol-3 end
 export const Default: Story = {
   render: () => (
     <Tabs defaultValue="overview">

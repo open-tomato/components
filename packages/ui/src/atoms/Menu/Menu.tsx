@@ -7,7 +7,6 @@ import {
 
 import { cn } from '../../lib';
 
-// @@V ato-2 begin
 import {
   menu,
   menuItem,
@@ -17,9 +16,7 @@ import {
   type MenuItemVariants,
   type MenuVariants,
 } from './Menu.variants';
-// @@V ato-2 end
 
-// @@S ato-2 begin
 /**
  * Compound API:
  *
@@ -36,17 +33,10 @@ import {
  * Radix owns anchoring/flip, outside-click + Escape dismissal, and roving
  * arrow-key focus.
  */
-// @@S ato-2 end
-// eslint-disable-next-line react-refresh/only-export-components -- Radix re-export, still a component
-// @@T ato-2 begin
 export const Menu:
 import('react').FC<DropdownMenu.DropdownMenuProps> = DropdownMenu.Root;
-// @@T ato-2 end
-// eslint-disable-next-line react-refresh/only-export-components -- Radix re-export, still a component
-// @@T ato-2 begin
 export const MenuTrigger:
 import('react').ForwardRefExoticComponent<DropdownMenu.DropdownMenuTriggerProps & import('react').RefAttributes<HTMLButtonElement>> = DropdownMenu.Trigger;
-// @@T ato-2 end
 
 export interface MenuContentProps
   extends Omit<
@@ -55,10 +45,8 @@ export interface MenuContentProps
   >,
   MenuVariants {}
 
-// @@T ato-2 begin
 export const MenuContent:
 import('react').ForwardRefExoticComponent<MenuContentProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, MenuContentProps>(
-// @@T ato-2 end
   ({ className, align, size, sideOffset = 6, ...props }, ref) => (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
@@ -85,10 +73,8 @@ export interface MenuItemProps
   trailing?: ReactNode;
 }
 
-// @@T ato-2 begin
 export const MenuItem:
 import('react').ForwardRefExoticComponent<MenuItemProps & import('react').RefAttributes<HTMLDivElement>> = forwardRef<HTMLDivElement, MenuItemProps>(
-// @@T ato-2 end
   ({ className, tone, icon, trailing, children, ...props }, ref) => (
     <DropdownMenu.Item
       ref={ref}
@@ -96,9 +82,7 @@ import('react').ForwardRefExoticComponent<MenuItemProps & import('react').RefAtt
       {...props}
     >
       {icon}
-      {/* @@V ato-2 begin */}
       <span className={menuItemLabel()}>{children}</span>
-      {/* @@V ato-2 end */}
       {trailing}
     </DropdownMenu.Item>
   ),
@@ -106,36 +90,28 @@ import('react').ForwardRefExoticComponent<MenuItemProps & import('react').RefAtt
 
 MenuItem.displayName = 'MenuItem';
 
-// @@T ato-2 begin
 export const MenuLabel:
 import('react').ForwardRefExoticComponent<Omit<DropdownMenu.DropdownMenuLabelProps & import('react').RefAttributes<HTMLDivElement>, 'ref'> & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
-// @@T ato-2 end
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DropdownMenu.Label>
 >(({ className, ...props }, ref) => (
   <DropdownMenu.Label
     ref={ref}
-    // @@V ato-2 begin
     className={cn(menuLabel(), className)}
-    // @@V ato-2 end
     {...props}
   />
 ));
 
 MenuLabel.displayName = 'MenuLabel';
 
-// @@T ato-2 begin
 export const MenuSep:
 import('react').ForwardRefExoticComponent<Omit<DropdownMenu.DropdownMenuSeparatorProps & import('react').RefAttributes<HTMLDivElement>, 'ref'> & import('react').RefAttributes<HTMLDivElement>> = forwardRef<
-// @@T ato-2 end
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DropdownMenu.Separator>
 >(({ className, ...props }, ref) => (
   <DropdownMenu.Separator
     ref={ref}
-    // @@V ato-2 begin
     className={cn(menuSep(), className)}
-    // @@V ato-2 end
     {...props}
   />
 ));

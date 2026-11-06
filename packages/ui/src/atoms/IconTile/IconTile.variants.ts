@@ -6,9 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * confirmation screens (lg 64 / xl 72 / 2xl 80). Tints ship at 14% for
  * every tone.
  */
-// @@T ato-1 begin
 export const iconTile: (props?: ({ tone?: 'accent' | 'primary' | 'success' | null | undefined; size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | null | undefined; shape?: 'rounded' | 'circle' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   'relative inline-flex shrink-0 items-center justify-center',
   {
     variants: {
@@ -40,9 +38,7 @@ export const iconTile: (props?: ({ tone?: 'accent' | 'primary' | 'success' | nul
   },
 );
 
-// @@V ato-1 begin
 /** The animated success ring drawn over the tile when `pulse` is on. */
 export const iconTilePulse: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('absolute -inset-1.5 rounded-full border-2 border-current opacity-35 motion-safe:animate-pulse-ring');
-// @@V ato-1 end
 
 export type IconTileVariants = VariantProps<typeof iconTile>;

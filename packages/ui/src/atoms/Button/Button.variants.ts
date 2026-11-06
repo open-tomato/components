@@ -1,6 +1,4 @@
-// @@T ato-3 begin
 import type { ClassProp } from 'class-variance-authority/types';
-// @@T ato-3 end
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -12,7 +10,6 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * sizes stay equal; secondary/ghost drop the shadow and read in fg1.
  * `rounded-md` comes via the Touchable layer.
  */
-// @@T ato-3 begin
 export const button: (
   props?: {
     variant?: 'primary' | 'accent' | 'secondary' | 'ghost' | 'danger' | null | undefined;
@@ -20,7 +17,6 @@ export const button: (
     block?: boolean | null | undefined;
   } & ClassProp,
 ) => string = cva(
-// @@T ato-3 end
 
   [
     'inline-flex items-center justify-center gap-2 font-semibold',

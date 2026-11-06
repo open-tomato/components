@@ -8,9 +8,7 @@ const VIEWS = [
   { key: 'timeline', label: 'Timeline' },
 ];
 
-// @@T mol-1 begin
 const meta: Meta<typeof Segmented> = {
-// @@T mol-1 end
   title: 'Molecules/Segmented',
   component: Segmented,
   parameters: { layout: 'centered' },
@@ -19,9 +17,7 @@ const meta: Meta<typeof Segmented> = {
     size: { control: 'select', options: ['sm', 'md'] },
   },
   args: { items: VIEWS, index: 0 },
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

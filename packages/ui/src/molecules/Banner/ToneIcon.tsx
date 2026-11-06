@@ -1,6 +1,4 @@
-// @@V mol-2 begin
 import { toneIcon } from './Banner.variants';
-// @@V mol-2 end
 
 /**
  * The tone scale's icons: the scale owns hue, icon and
@@ -24,9 +22,7 @@ export const ToneIcon = ({
 }: {
   tone: FeedbackTone;
   size?: number;
-// @@T mol-2 begin
 }): import('react').JSX.Element => (
-// @@T mol-2 end
   <svg
     width={size}
     height={size}
@@ -36,9 +32,7 @@ export const ToneIcon = ({
     strokeWidth="1.75"
     strokeLinecap="round"
     strokeLinejoin="round"
-    // @@V mol-2 begin
     className={toneIcon()}
-    // @@V mol-2 end
     aria-hidden
   >
     {PATHS[tone].split('M').filter(Boolean)

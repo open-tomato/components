@@ -116,7 +116,6 @@ export interface ServerCache {
    */
   invalidate(key: string): Promise<void>;
 
-  // @@S tpl-1 begin
   /**
    * Removes all keys matching a glob-style prefix pattern (e.g. `"items:*"`).
    * No-ops gracefully when no keys match.
@@ -126,7 +125,6 @@ export interface ServerCache {
    *
    * @param prefix - Glob-style pattern, e.g. `"items:*"`.
    */
-  // @@S tpl-1 end
   invalidatePattern(prefix: string): Promise<void>;
 
   /**

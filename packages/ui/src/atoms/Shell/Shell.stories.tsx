@@ -4,9 +4,7 @@ import { ShellFiller } from '../../stories/fixtures';
 
 import { Shell } from './Shell';
 
-// @@T ato-3 begin
 const meta: Meta<typeof Shell> = {
-// @@T ato-3 end
   title: 'Atoms/Shell',
   component: Shell,
   parameters: { layout: 'padded' },

@@ -1,7 +1,6 @@
 import type { Column } from '../organisms/Table';
 
 import { Badge } from '../atoms/Badge';
-// @@V tpl-1 begin
 
 import {
   sessionGoal,
@@ -11,14 +10,11 @@ import {
   sessionTokens,
   sessionUpdated,
 } from './sessions.variants';
-// @@V tpl-1 end
 
-// @@S tpl-1 begin
 /**
  * The demo dataset of work items shared by the Table/Toolbar stories —
  * stories only, never exported from the library barrel.
  */
-// @@S tpl-1 end
 
 export interface Session {
   id: string;
@@ -61,9 +57,7 @@ export const SESSIONS: Session[] = [
   {
     id: 'ses_9b13',
     status: 'idle',
-    // @@S tpl-1 begin
     name: 'schema-migrator · backfill-classes',
-    // @@S tpl-1 end
     goal: 'Backfill tokenized class names into the legacy kit so no raw hex survives in a variant.',
     model: 'opus-4',
     tokens: 0,
@@ -143,24 +137,18 @@ export const makeColumns = (
         </Badge>
       );
     },
-    // @@S tpl-1 begin
     footer: (rows) => `${rows.length} items`,
-    // @@S tpl-1 end
   },
   {
     key: 'name',
-    // @@S tpl-1 begin
     header: 'Item',
-    // @@S tpl-1 end
     width: 220,
     sortable: true,
     overflow: 'truncate',
     cell: (r) => (
       <span>
-        {/* @@V tpl-1 begin */}
         <span className={sessionName()}>{r.name.split(' · ')[0]}</span>
         <span className={sessionSuffix()}>
-          {/* @@V tpl-1 end */}
           {' '}
           · {r.name.split(' · ')[1]}
         </span>
@@ -172,9 +160,7 @@ export const makeColumns = (
     header: 'Goal',
     overflow: goalMode,
     clampLines: 2,
-    // @@V tpl-1 begin
     cell: (r) => <span className={sessionGoal()}>{r.goal}</span>,
-    // @@V tpl-1 end
   },
   {
     key: 'model',
@@ -182,23 +168,17 @@ export const makeColumns = (
     width: 116,
     sortable: true,
     cell: (r) => (
-      // @@V tpl-1 begin
       <span className={sessionModel()}>{r.model}</span>
-      // @@V tpl-1 end
     ),
   },
   {
     key: 'tokens',
-    // @@S tpl-1 begin
     header: 'Usage',
-    // @@S tpl-1 end
     width: 100,
     align: 'end',
     sortable: true,
     cell: (r) => (
-      // @@V tpl-1 begin
       <span className={sessionTokens({ empty: r.tokens === 0 })}>
-        {/* @@V tpl-1 end */}
         {fmtTokens(r.tokens)}
       </span>
     ),
@@ -211,9 +191,7 @@ export const makeColumns = (
     align: 'end',
     sortable: true,
     cell: (r) => (
-      // @@V tpl-1 begin
       <span className={sessionUpdated()}>{r.updated}m ago</span>
-      // @@V tpl-1 end
     ),
   },
 ];

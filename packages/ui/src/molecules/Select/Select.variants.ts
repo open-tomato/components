@@ -1,7 +1,5 @@
-// @@T mol-1 begin
 import type { ClassProp } from 'class-variance-authority/types';
 
-// @@T mol-1 end
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
@@ -13,9 +11,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * listbox/option) — selection state is still announced via aria-checked
  * on the items.
  */
-// @@T mol-1 begin
 export const selectTrigger: (props?: { size?: 'sm' | 'md' | null } & ClassProp) => string = cva(
-// @@T mol-1 end
   [
     'inline-flex min-w-0 items-center gap-2 px-[11px] rounded-md',
     'bg-surface-1 border border-border-strong text-fg1',
@@ -32,7 +28,6 @@ export const selectTrigger: (props?: { size?: 'sm' | 'md' | null } & ClassProp) 
   },
 );
 
-// @@V mol-1 begin
 /** The trigger's leading icon and trailing chevron: fixed width, muted. */
 export const selectAdornment: (props?: ClassProp) => string = cva('shrink-0 text-fg3');
 
@@ -44,6 +39,5 @@ export const selectItemLabel: (props?: ClassProp) => string = cva('min-w-0 flex-
 
 /** The checkmark on the selected option. */
 export const selectItemIndicator: (props?: ClassProp) => string = cva('shrink-0 text-primary');
-// @@V mol-1 end
 
 export type SelectTriggerVariants = VariantProps<typeof selectTrigger>;

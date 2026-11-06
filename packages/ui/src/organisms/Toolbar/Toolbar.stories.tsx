@@ -6,14 +6,12 @@ import { Button } from '../../atoms/Button';
 import { Chip } from '../../atoms/Chip';
 import { EmptyState } from '../../atoms/EmptyState';
 import { Select } from '../../molecules/Select/Select';
-// @@S org-2 begin
 import {
   makeColumns,
   SESSIONS as ITEMS,
   STATUS,
   type Session as Item,
 } from '../../stories/sessions';
-// @@S org-2 end
 import { Table } from '../Table/Table';
 
 import { FilterDropdown } from './FilterDropdown';
@@ -21,7 +19,6 @@ import { SearchInput } from './SearchInput';
 import { Toolbar, ToolbarControls, ToolbarSep, ToolbarSummary } from './Toolbar';
 
 /** Status swatch dot from the original toolbar demo. */
-// @@S org-2 begin
 const STATUS_COLOR: Record<
   (typeof STATUS)[Item['status']]['tone'],
   string
@@ -32,7 +29,6 @@ const STATUS_COLOR: Record<
   info: 'var(--info)',
   neutral: 'var(--fg3)',
 };
-// @@S org-2 end
 
 const Dot = ({ c }: { c: string }) => (
   <span
@@ -65,18 +61,14 @@ const CPU_D =
 const SEARCH_D = 'M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z';
 
 const STATUS_OPTIONS = (
-// @@S org-2 begin
   Object.entries(STATUS) as [Item['status'], (typeof STATUS)[Item['status']]][]
-// @@S org-2 end
 ).map(([value, s]) => ({
   value,
   label: s.label,
   swatch: <Dot c={STATUS_COLOR[s.tone]} />,
 }));
 
-// @@S org-2 begin
 const MODEL_OPTIONS = [...new Set(ITEMS.map((r) => r.model))].map((m) => ({
-// @@S org-2 end
   value: m,
   label: m,
 }));
@@ -102,9 +94,7 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
       : [...arr, v]);
 
   const rows = useMemo(
-    // @@S org-2 begin
     () => ITEMS.filter((r) => {
-    // @@S org-2 end
       if (
         query &&
           !(r.name + ' ' + r.goal).toLowerCase().includes(query.toLowerCase())
@@ -163,13 +153,11 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
       <span className="font-mono text-xs font-semibold text-fg1">
         {rows.length}
       </span>
-      {/* @@S org-2 begin */}
       <span className="text-[12.5px] text-fg3">
         {anyFilter
           ? `of ${ITEMS.length} items`
           : 'items'}
       </span>
-      {/* @@S org-2 end */}
       {anyFilter && (
         <>
           <div className="mx-1 h-4 w-px bg-border-soft" aria-hidden />
@@ -187,10 +175,8 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
               onRemove={() => setStatuses((a) => a.filter((x) => x !== s))}
             >
               <span className="inline-flex items-center gap-1.5">
-                {/* @@S org-2 begin */}
                 <Dot c={STATUS_COLOR[STATUS[s as Item['status']].tone]} />
                 {STATUS[s as Item['status']].label}
-                {/* @@S org-2 end */}
               </span>
             </Chip>
           ))}
@@ -217,9 +203,7 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
 
   const empty = (
     <EmptyState
-      // @@S org-2 begin
       title="No items match"
-      // @@S org-2 end
       description="Nothing fits that query. Loosen a filter or clear them all to see everything again."
       action={<Button onClick={clearAll}>Clear filters</Button>}
       className="py-12"
@@ -267,14 +251,12 @@ const ResultsToolbar = ({ attached }: { attached: boolean }) => {
     );
 };
 
-// @@T org-2 begin
 const meta: Meta<typeof Toolbar> = {
   title: 'Organisms/Toolbar',
   component: Toolbar,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
 };
-// @@T org-2 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;

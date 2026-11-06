@@ -7,18 +7,14 @@ import { FormattedCurrency } from '../../atoms/Formatted/FormattedCurrency';
 import { FormattedDate } from '../../atoms/Formatted/FormattedDate';
 import { Icon } from '../../atoms/Icon';
 
-// @@S mol-1 begin
 import { AmountOverTime } from './AmountOverTime';
-// @@S mol-1 end
 import { CellBar } from './CellBar';
 import { CellDecoration } from './CellDecoration';
 import { CellDoubleLine } from './CellDoubleLine';
 import { CellLabel } from './CellLabel';
 import { CellStatus } from './CellStatus';
 import { CellValue } from './CellValue';
-// @@S mol-1 begin
 import { QuotaProgress, QuotaUsage } from './QuotaUsage';
-// @@S mol-1 end
 
 /**
  * Deterministic fixtures — fixed locale + reference dates so visual
@@ -38,16 +34,12 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
   </div>
 );
 
-// @@T mol-1 begin
 const meta: Meta<typeof CellValue> = {
-// @@T mol-1 end
   title: 'Molecules/CellContent',
   component: CellValue,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-// @@T mol-1 begin
 };
-// @@T mol-1 end
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -58,15 +50,11 @@ type Story = StoryObj<typeof meta>;
  * (currency, date, time).
  */
 export const Value: Story = {
-  // @@S mol-1 begin
   args: { value: 184200, unit: 'units', locale: LOCALE },
-  // @@S mol-1 end
   render: () => (
     <div className="flex flex-col gap-2">
       <Row label="value + unit (end)">
-        {/* @@S mol-1 begin */}
         <CellValue value={184200} unit="units" locale={LOCALE} />
-        {/* @@S mol-1 end */}
       </Row>
       <Row label="value only">
         <CellValue value={128} locale={LOCALE} />
@@ -118,9 +106,7 @@ export const DoubleLine: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
       <Row label="name + subtitle">
-        {/* @@S mol-1 begin */}
         <CellDoubleLine title="auth-refactor" subtitle="item-7d2f · feat/jwt-refresh" />
-        {/* @@S mol-1 end */}
       </Row>
       <Row label="truncating subtitle">
         <CellDoubleLine
@@ -221,7 +207,6 @@ export const BarIndicator: Story = {
   ),
 };
 
-// @@S mol-1 begin
 /**
  * Spec: quota-usage — bold FULL used number, greyed human-readable
  * quota; quota-progress stacks the mini bar below, green below 45%,
@@ -251,9 +236,7 @@ export const Quota: Story = {
     </div>
   ),
 };
-// @@S mol-1 end
 
-// @@S mol-1 begin
 /**
  * Spec: amount-over-time — FormattedCurrency over a smaller greyed
  * `FormattedDuration · FormattedRelativeTime` line. Separator note: spec
@@ -285,4 +268,3 @@ export const AmountTime: Story = {
     </div>
   ),
 };
-// @@S mol-1 end

@@ -10,9 +10,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  */
 
 /** inline — invisible until a drag is over it, then ring + dim + glyph. */
-// @@T ato-1 begin
 export const droppableInline: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; rounded?: 'full' | 'none' | 'sm' | 'md' | 'lg' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   [
     'relative inline-flex cursor-pointer border-none bg-transparent p-0',
     'transition-shadow',
@@ -37,9 +35,7 @@ export const droppableInline: (props?: ({ state?: 'idle' | 'over' | 'reject' | n
 );
 
 /** The media inside the inline target dims while a drag is over it. */
-// @@T ato-1 begin
 export const droppableInlineMedia: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; rounded?: 'full' | 'none' | 'sm' | 'md' | 'lg' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   'inline-flex overflow-hidden transition-[filter]',
   {
     variants: {
@@ -61,9 +57,7 @@ export const droppableInlineMedia: (props?: ({ state?: 'idle' | 'over' | 'reject
 );
 
 /** zone — a standing dashed target that intensifies under a drag. */
-// @@T ato-1 begin
 export const droppableZone: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; compact?: boolean | null | undefined; disabled?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   [
     'flex w-full flex-col items-center border-[1.5px] border-dashed',
     'rounded-lg text-fg2 cursor-pointer',
@@ -91,9 +85,7 @@ export const droppableZone: (props?: ({ state?: 'idle' | 'over' | 'reject' | nul
 );
 
 /** The zone's icon puck — leaf-tinted, lifts while a drag hovers. */
-// @@T ato-1 begin
 export const droppableZoneIcon: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined; compact?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   [
     'inline-flex items-center justify-center rounded-md',
     'transition-transform ease-out',
@@ -116,9 +108,7 @@ export const droppableZoneIcon: (props?: ({ state?: 'idle' | 'over' | 'reject' |
 );
 
 /** region — a full-area overlay floated over wrapped content on drag. */
-// @@T ato-1 begin
 export const droppableRegionOverlay: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   [
     'absolute inset-0 z-[5] flex flex-col items-center justify-center gap-3',
     'rounded-lg border-2 border-dashed text-white',
@@ -138,9 +128,7 @@ export const droppableRegionOverlay: (props?: ({ state?: 'idle' | 'over' | 'reje
 );
 
 /** The region overlay's glyph puck. */
-// @@T ato-1 begin
 export const droppableRegionIcon: (props?: ({ state?: 'idle' | 'over' | 'reject' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   'flex size-14 items-center justify-center rounded-full shadow-lg',
   {
     variants: {
@@ -154,7 +142,6 @@ export const droppableRegionIcon: (props?: ({ state?: 'idle' | 'over' | 'reject'
   },
 );
 
-// @@V ato-1 begin
 /** The inline target's glyph layer, shown only while a drag hovers. */
 export const droppableInlineGlyph: (props?: ({ visible?: boolean | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
   'pointer-events-none absolute inset-0 flex items-center justify-center text-white transition-opacity',
@@ -199,7 +186,6 @@ export const droppableRegionHint: (props?: import('class-variance-authority/type
 
 /** The hidden file input behind click-to-pick. */
 export const droppableFileInput: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('hidden');
-// @@V ato-1 end
 
 export type DroppableInlineVariants = VariantProps<typeof droppableInline>;
 export type DroppableZoneVariants = VariantProps<typeof droppableZone>;

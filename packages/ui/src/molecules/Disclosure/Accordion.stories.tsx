@@ -30,9 +30,7 @@ const Items = () => (
   </>
 );
 
-// @@T mol-3 begin
 const meta: Meta<typeof Accordion> = {
-// @@T mol-3 end
   title: 'Molecules/Accordion',
   component: Accordion,
   parameters: { layout: 'padded' },

@@ -8,28 +8,19 @@ import { devWarn } from '../../lib/dev';
 // built storybook's lazy-init chunking can drop barrel member inits
 // (renders undefined → React #130); see the matching note in
 // CellValue.tsx.
-// @@S mol-1 begin
 import { AmountOverTime, type AmountOverTimeProps } from '../../molecules/CellContent/AmountOverTime';
-// @@S mol-1 end
 import { CellBar, type CellBarProps } from '../../molecules/CellContent/CellBar';
 import { CellDoubleLine, type CellDoubleLineProps } from '../../molecules/CellContent/CellDoubleLine';
 import { CellLabel, type CellLabelProps } from '../../molecules/CellContent/CellLabel';
 import { CellStatus, type CellStatusProps } from '../../molecules/CellContent/CellStatus';
 import { CellValue, type CellValueProps } from '../../molecules/CellContent/CellValue';
-// @@S mol-1 begin
 import { QuotaProgress, type QuotaProgressProps } from '../../molecules/CellContent/QuotaUsage';
-// @@S mol-1 end
-// @@S mol-3 begin
 import { Entity, type EntityProps } from '../../molecules/KnownEntities/Entity';
 import { ModelFooter, type ModelFooterProps } from '../../molecules/KnownEntities/ModelFooter';
-// @@S mol-3 end
 
 import { RowContextAction, type RowContextActionProps } from './RowContextAction';
-// @@V org-2 begin
 import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
-// @@V org-2 end
 
-// @@S mol-3 begin
 /**
  * Self-describing column types: a self-defining table grid can infer the
  * component to use if the data type for a column is of
@@ -45,26 +36,21 @@ import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
  * column machinery. The `entity-*` types render `Entity`; the kinds they
  * can name come from the `EntityKindsProvider` the implementor mounts.
  */
-// @@S mol-3 end
 
 export interface CellTypeDataMap {
   /* known entities */
-  // @@S mol-3 begin
   'entity-inline': EntityProps;
   'entity-cell': EntityProps;
   'entity-title': EntityProps;
   'model-footer': ModelFooterProps;
-  // @@S mol-3 end
   /* cell-content kit */
   'value': CellValueProps;
   'double-line': CellDoubleLineProps;
   'status': CellStatusProps;
   'label': CellLabelProps;
   'bar': CellBarProps;
-  // @@S mol-1 begin
   'quota-progress': QuotaProgressProps;
   'amount-over-time': AmountOverTimeProps;
-  // @@S mol-1 end
   /* primitives the configs also name */
   'text': { text: ReactNode };
   'badge': { label: string; tone?: BadgeProps['tone']; dot?: boolean };
@@ -79,26 +65,20 @@ type CellRegistry = {
 };
 
 const registry: CellRegistry = {
-  // @@S mol-3 begin
   'entity-inline': (d) => <Entity {...d} layout="inline" />,
   'entity-cell': (d) => <Entity {...d} layout="cell" />,
   'entity-title': (d) => <Entity {...d} layout="title" />,
   'model-footer': (d) => <ModelFooter {...d} />,
-  // @@S mol-3 end
   'value': (d) => <CellValue {...d} />,
   'double-line': (d) => <CellDoubleLine {...d} />,
   'status': (d) => <CellStatus {...d} />,
   'label': (d) => <CellLabel {...d} />,
   'bar': (d) => <CellBar {...d} />,
-  // @@S mol-1 begin
   'quota-progress': (d) => <QuotaProgress {...d} />,
   'amount-over-time': (d) => <AmountOverTime {...d} />,
-  // @@S mol-1 end
   'text': (d) => (
     <span
-      // @@V org-2 begin
       className={cellTypeText()}
-      // @@V org-2 end
     >{d.text}</span>
   ),
   'badge': (d) => (
@@ -108,9 +88,7 @@ const registry: CellRegistry = {
   ),
   'relative-time': (d) => (
     <span
-      // @@V org-2 begin
       className={cellTypeRelativeTime()}
-      // @@V org-2 end
     >
       <FormattedRelativeTime date={d.date} now={d.now} locale={d.locale} />
     </span>
@@ -125,22 +103,18 @@ const registry: CellRegistry = {
  * the consuming app's job at its config boundary.
  */
 const REQUIRED_KEYS: Record<KnownCellType, string[]> = {
-  // @@S mol-3 begin
   'entity-inline': [],
   'entity-cell': [],
   'entity-title': [],
   'model-footer': ['name'],
-  // @@S mol-3 end
   'value': [],
   'double-line': ['title'],
   // status/value: every key is optional (tone defaults to ok).
   'status': [],
   'label': ['labels'],
   'bar': ['ratio'],
-  // @@S mol-1 begin
   'quota-progress': ['used', 'quota'],
   'amount-over-time': ['amount', 'seconds', 'date'],
-  // @@S mol-1 end
   'text': ['text'],
   'badge': ['label'],
   'relative-time': ['date'],

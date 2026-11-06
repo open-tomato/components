@@ -5,9 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * optional header slot. No interaction; wrap in a Touchable to click it.
 
  */
-// @@T ato-1 begin
 export const card: (props?: ({ noShadow?: boolean | null | undefined; padding?: 'sm' | 'md' | 'lg' | null | undefined; density?: 'compact' | 'comfortable' | null | undefined; bordered?: boolean | null | undefined; rounded?: 'md' | 'lg' | 'xl' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex flex-col bg-surface-1', {
-// @@T ato-1 end
   variants: {
     noShadow: {
       false: 'shadow-sm',
@@ -42,9 +40,7 @@ export const card: (props?: ({ noShadow?: boolean | null | undefined; padding?: 
 });
 
 /** The header slot's row + divider; density mirrors the card's gap rhythm. */
-// @@T ato-1 begin
 export const cardHeader: (props?: ({ density?: 'compact' | 'comfortable' | null | undefined } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
-// @@T ato-1 end
   'flex items-center justify-between border-b border-border-soft',
   {
     variants: {
