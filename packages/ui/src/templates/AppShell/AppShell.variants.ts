@@ -53,6 +53,40 @@ export const appShellTopbar: (props?: ClassProp) => string = cva([
   'backdrop-blur-[12px]',
 ]);
 
+/**
+ * The rail's brand row: as tall as the topbar, with the same divider, so the
+ * two line up across the frame. Centred when the rail is collapsed.
+ */
+export const appShellBrand: (
+  props?: {
+    collapsed?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva('flex h-[60px] shrink-0 items-center gap-2.5 border-b border-border-soft', {
+  variants: {
+    collapsed: {
+      false: 'justify-start px-[18px]',
+      true: 'justify-center p-0',
+    },
+  },
+  defaultVariants: { collapsed: false },
+});
+
+/** The brand row's wordmark, at the rail's 17px; one line, ellipsized. */
+export const appShellBrandWordmark: (props?: ClassProp) => string = cva(
+  'truncate font-display text-[17px] font-bold tracking-[-0.02em] text-fg1',
+);
+
+/**
+ * The topbar's page title. It takes the band's free space, so what follows
+ * it sits at the far end, and it ellipsizes before it pushes them out.
+ */
+export const appShellTitle: (props?: ClassProp) => string = cva(
+  'min-w-0 flex-1 truncate font-display text-lg font-bold tracking-[-0.015em] text-fg1',
+);
+
+/** Takes the free space of a flex zone, pushing what follows to its far end. */
+export const appShellSpacer: (props?: ClassProp) => string = cva('flex-1');
+
 /** The content slot — the only scrolling element in the shell. */
 export const appShellContent: (props?: ClassProp) => string = cva(
   'flex-1 overflow-y-auto bg-bg px-[22px] pb-7 pt-5',
@@ -172,4 +206,5 @@ export const weekSummaryLimit: (props?: ClassProp) => string = cva('text-xs text
 export const weekSummaryProgress: (props?: ClassProp) => string = cva('h-1');
 
 export type AppShellSidebarVariants = VariantProps<typeof appShellSidebar>;
+export type AppShellBrandVariants = VariantProps<typeof appShellBrand>;
 export type NavItemVariants = VariantProps<typeof navItem>;

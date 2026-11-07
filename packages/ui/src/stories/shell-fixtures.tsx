@@ -3,7 +3,6 @@ import type { JSX } from 'react';
 import { useState } from 'react';
 
 import { Monogram } from '../atoms/Monogram';
-import { cn } from '../lib';
 import { EntityKindsProvider } from '../molecules/KnownEntities/EntityKinds';
 import { type EntityKinds } from '../molecules/KnownEntities/entityKindsContext';
 import {
@@ -18,9 +17,12 @@ import {
 import { ThemeSwitcher, type ThemeName } from '../organisms/ThemeSwitcher';
 import {
   AppShell,
+  AppShellBrand,
   AppShellContent,
   AppShellMain,
   AppShellSidebar,
+  AppShellSpacer,
+  AppShellTitle,
   AppShellTopbar,
   SidebarNav,
   SidebarQuickAccess,
@@ -39,11 +41,7 @@ import {
   placeholderPageGrid,
   placeholderPageHeading,
   placeholderPagePanel,
-  shellDemoSpacer,
-  sidebarDemoBrand,
-  sidebarDemoWordmark,
   topbarDemoSearch,
-  topbarDemoTitle,
 } from './shell-fixtures.variants';
 
 /**
@@ -111,19 +109,18 @@ export const SidebarDemo = ({
   collapsed?: boolean;
 }): JSX.Element => (
   <>
-    <div
-      className={cn(sidebarDemoBrand({ collapsed }))}
-    >
-      <Monogram name="Acme Labs" tone="primary" size="sm" />
-      {!collapsed && <span className={sidebarDemoWordmark()}>acme labs</span>}
-    </div>
+    <AppShellBrand
+      collapsed={collapsed}
+      mark={<Monogram name="Acme Labs" tone="primary" size="sm" />}
+      wordmark="acme labs"
+    />
     <SidebarNav
       items={NAV_PRIMARY}
       activeId={active}
       onNavigate={onNavigate}
       collapsed={collapsed}
     />
-    <div className={shellDemoSpacer()} />
+    <AppShellSpacer />
     <SidebarQuota
       title="this week"
       unit="units"
@@ -155,10 +152,7 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
   return (
     <>
       <ContextSwitcher contexts={GROUPS} activeId="og" />
-      <div className={topbarDemoTitle()}>
-        {title}
-      </div>
-      <div className={shellDemoSpacer()} />
+      <AppShellTitle>{title.charAt(0).toUpperCase() + title.slice(1)}</AppShellTitle>
       <EntityKindsProvider kinds={SUGGESTION_KINDS}>
         <SearchSuggest
           suggestions={SUGGESTIONS}

@@ -2,34 +2,6 @@ import type { ClassProp } from 'class-variance-authority/types';
 
 import { cva } from 'class-variance-authority';
 
-/** SidebarDemo's 60px brand row; centred when the rail is collapsed. */
-export const sidebarDemoBrand: (
-  props?: {
-    collapsed?: boolean | null | undefined;
-  } & ClassProp,
-) => string = cva('flex h-[60px] shrink-0 items-center gap-2.5 border-b border-border-soft', {
-  variants: {
-    collapsed: {
-      true: 'justify-center p-0',
-      false: 'justify-start px-[18px]',
-    },
-  },
-  defaultVariants: { collapsed: false },
-});
-
-/** The brand row's wordmark, at the rail's 17px. */
-export const sidebarDemoWordmark: (props?: ClassProp) => string = cva(
-  'font-display text-[17px] font-bold tracking-[-0.02em] text-fg1',
-);
-
-/** A flex spacer that pushes what follows to the far end. */
-export const shellDemoSpacer: (props?: ClassProp) => string = cva('flex-1');
-
-/** TopbarDemo's page title. */
-export const topbarDemoTitle: (props?: ClassProp) => string = cva(
-  'font-display text-lg font-bold capitalize tracking-[-0.015em] text-fg1',
-);
-
 /** TopbarDemo's search field width. */
 export const topbarDemoSearch: (props?: ClassProp) => string = cva('w-[220px]');
 

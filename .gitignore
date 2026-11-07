@@ -31,3 +31,6 @@ playwright-report/
 # >>> rafa tracking: rafa rewrites the lines up to the end marker
 .rafa/
 # <<< rafa tracking
+.tsbuild/
+storybook-static/
+__diff_output__/

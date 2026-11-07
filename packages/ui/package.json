@@ -1,12 +1,13 @@
 {
   "name": "@open-tomato/components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Variant-first React component library (CVA + Tailwind 4 + Radix primitives) with a dual-entry caching module (TanStack Query browser cache + Redis server cache).",
   "author": "Marcos Tomatti <marcostomatti.cv@gmail.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/open-tomato/components.git"
+    "url": "git+https://github.com/open-tomato/components.git",
+    "directory": "packages/ui"
   },
   "type": "module",
   "module": "./dist/index.js",
@@ -36,6 +37,11 @@
   "sideEffects": [
     "**/*.css"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "@open-tomato:registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "vite build",
     "postbuild": "grep -q 'ioredis' ./dist/cache.js && { echo 'ERROR: ioredis leaked into the browser cache bundle' >&2; exit 1; } || exit 0",
@@ -84,7 +90,7 @@
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "21.0.4",
-    "@storybook/addon-vitest": "~10.6.0",
+    "@storybook/addon-vitest": "~10.6.6",
     "@storybook/react-vite": "^10.6.0",
     "@storybook/test-runner": "^0.24.5",
     "@tailwindcss/vite": "^4",
@@ -108,8 +114,8 @@
     "jsdom": "^30.0.1",
     "playwright": "1.61.1",
     "playwright-core": "1.61.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "storybook": "^10.6.0",
     "tailwindcss": "^4",
     "typescript": "^5.9.3",
