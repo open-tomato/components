@@ -1,6 +1,6 @@
 {
   "name": "@open-tomato/charts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React 19 charting for the @open-tomato scope: a chart-engine seam over ECharts 6, the theme token names, formatters, and a headless engine subpath.",
   "license": "Apache-2.0",
   "openTomato": {

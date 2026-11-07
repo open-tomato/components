@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 — 2026-11-07, Publish from CI with npm trusted publishing
+<!-- rafa:fragments release-publish-ci -->
+
+- release: published from CI with npm provenance
+- package: the manifest names its registry and its folder in the repository
+
 ## 0.1.1 — 2026-11-06, Stretch 1 sweep — fresh-worktree green, one tsconfig, three atom fixes; Stretch 1 sweep — neutral story fixtures and the Toolbar empty-state illustration
 <!-- rafa:fragments repo-leftovers rafa-61-spec-stretch-1-sweep rafa-62-spec-stretch-1-sweep -->
 
