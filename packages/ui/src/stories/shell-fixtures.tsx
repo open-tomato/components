@@ -199,42 +199,46 @@ export const LiveShell = ({
   page: initialPage = 'overview',
   collapsed: initialCollapsed = false,
   withFooter = false,
+  viewport = false,
 }: {
   page?: string;
   collapsed?: boolean;
   withFooter?: boolean;
+  /** Render the shell unframed, filling the viewport, as a page root would. */
+  viewport?: boolean;
 }): JSX.Element => {
   const [page, setPage] = useState(initialPage);
   const [collapsed, setCollapsed] = useState(initialCollapsed);
-  return (
-    <div className={liveShellFrame()}>
-      <AppShell>
-        <AppShellSidebar collapsed={collapsed}>
-          <SidebarDemo active={page} onNavigate={setPage} collapsed={collapsed} />
-        </AppShellSidebar>
-        <AppShellMain>
-          <AppShellTopbar
-            sidebarCollapsed={collapsed}
-            onToggleSidebar={() => setCollapsed((c) => !c)}
-          >
-            <TopbarDemo title={page} />
-          </AppShellTopbar>
-          <AppShellContent
-            footer={withFooter
-              ? (
-                <>
-                  <span>© 2026 Acme</span>
-                  <a href="#docs">Documentation</a>
-                  <a href="#support">Support</a>
-                  <a href="#feedback">Feedback</a>
-                </>
-              )
-              : undefined}
-          >
-            <PlaceholderPage id={page} />
-          </AppShellContent>
-        </AppShellMain>
-      </AppShell>
-    </div>
+  const shell = (
+    <AppShell viewport={viewport}>
+      <AppShellSidebar collapsed={collapsed}>
+        <SidebarDemo active={page} onNavigate={setPage} collapsed={collapsed} />
+      </AppShellSidebar>
+      <AppShellMain>
+        <AppShellTopbar
+          sidebarCollapsed={collapsed}
+          onToggleSidebar={() => setCollapsed((c) => !c)}
+        >
+          <TopbarDemo title={page} />
+        </AppShellTopbar>
+        <AppShellContent
+          footer={withFooter
+            ? (
+              <>
+                <span>© 2026 Acme</span>
+                <a href="#docs">Documentation</a>
+                <a href="#support">Support</a>
+                <a href="#feedback">Feedback</a>
+              </>
+            )
+            : undefined}
+        >
+          <PlaceholderPage id={page} />
+        </AppShellContent>
+      </AppShellMain>
+    </AppShell>
   );
+  return viewport
+    ? shell
+    : <div className={liveShellFrame()}>{shell}</div>;
 };
