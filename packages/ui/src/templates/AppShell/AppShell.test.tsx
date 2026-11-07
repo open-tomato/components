@@ -6,9 +6,12 @@ import { LiveShell } from '../../stories/shell-fixtures';
 
 import {
   AppShell,
+  AppShellBrand,
   AppShellContent,
   AppShellMain,
   AppShellSidebar,
+  AppShellSpacer,
+  AppShellTitle,
   AppShellTopbar,
 } from './AppShell';
 
@@ -53,6 +56,53 @@ describe('AppShell zones', () => {
     });
     fireEvent.click(screen.getByRole('button', { name }));
     expect(onToggle).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('AppShell brand, title and spacer', () => {
+  it('brand row shows the mark and the wordmark, and forwards ref and className', () => {
+    const ref = createRef<HTMLDivElement>();
+    render(
+      <AppShellBrand
+        ref={ref}
+        className="extra"
+        data-testid="brand"
+        mark={<span>M</span>}
+        wordmark="acme labs"
+      />,
+    );
+    const brand = screen.getByTestId('brand');
+    expect(ref.current === brand).toBe(true);
+    expect(brand.className).toContain('extra');
+    expect(brand.className).toContain('h-[60px]');
+    expect(brand.className).toContain('border-b');
+    expect(brand.textContent).toBe('Macme labs');
+  });
+
+  it('collapsed brand row keeps the mark, drops the wordmark and centres', () => {
+    render(
+      <AppShellBrand data-testid="brand" collapsed mark={<span>M</span>} wordmark="acme labs" />,
+    );
+    const brand = screen.getByTestId('brand');
+    expect(brand.textContent).toBe('M');
+    expect(brand.className).toContain('justify-center');
+  });
+
+  it('title is the page heading and grows, so what follows sits at the far end', () => {
+    const ref = createRef<HTMLHeadingElement>();
+    render(<AppShellTitle ref={ref} className="extra">Usage</AppShellTitle>);
+    const title = screen.getByRole('heading', { level: 1, name: 'Usage' });
+    expect(ref.current === title).toBe(true);
+    expect(title.className).toContain('extra');
+    expect(title.className).toContain('flex-1');
+    expect(title.className).toContain('truncate');
+  });
+
+  it('spacer is hidden from assistive tech and takes the free space', () => {
+    render(<AppShellSpacer data-testid="spacer" />);
+    const spacer = screen.getByTestId('spacer');
+    expect(spacer.getAttribute('aria-hidden')).toBe('true');
+    expect(spacer.className).toContain('flex-1');
   });
 });
 

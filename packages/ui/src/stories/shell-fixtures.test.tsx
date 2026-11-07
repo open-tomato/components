@@ -30,7 +30,7 @@ describe('shell fixtures', () => {
     await act(async () => {
       render(<TopbarDemo title="usage" />);
     });
-    expect(screen.getByText('usage')).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1, name: 'Usage' })).toBeTruthy();
     expect(screen.getByText('open-garden')).toBeTruthy();
   });
 

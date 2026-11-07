@@ -107,8 +107,10 @@ Dark mode: set `data-theme="dark"` on the document element (default follows
 (the auth flow frame, paired with the `src/pages/auth` set) are the templates
 tier — most of their composition is reusable as-is, with app-specific layouts
 tweaked at the consumer. The shells take their brand through slots
-(`AuthShell`'s `brand`, the sidebar's brand row), and `Monogram` is the kit's
-neutral mark for them. Demo content in stories uses the placeholder brand
+(`AuthShell`'s `brand`, and `AppShellBrand` for the sidebar's brand row), and
+`Monogram` is the kit's neutral mark for them. In the topbar, `AppShellTitle`
+is the page title and pushes the controls after it to the far end;
+`AppShellSpacer` does the same anywhere else, such as the rail's foot. Demo content in stories uses the placeholder brand
 "Acme".
 
 ## Theming (v1: theme definition via CSS)
