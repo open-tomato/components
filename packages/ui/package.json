@@ -6,7 +6,8 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/open-tomato/components.git"
+    "url": "git+https://github.com/open-tomato/components.git",
+    "directory": "packages/ui"
   },
   "type": "module",
   "module": "./dist/index.js",
@@ -36,6 +37,11 @@
   "sideEffects": [
     "**/*.css"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "@open-tomato:registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "vite build",
     "postbuild": "grep -q 'ioredis' ./dist/cache.js && { echo 'ERROR: ioredis leaked into the browser cache bundle' >&2; exit 1; } || exit 0",
