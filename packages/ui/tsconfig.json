@@ -1,18 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Library",
-  "extends": "../../tsconfig.base.json",
+  "extends": "@open-tomato/typescript-config/react",
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
     "allowImportingTsExtensions": false,
-    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitOverride": true,
-    "useDefineForClassFields": true,
-    "jsx": "react-jsx",
-    "declaration": true,
-    "isolatedDeclarations": true,
     "types": ["node", "bun"]
   },
   "include": ["src", "test", "*.ts", "*.tsx", "*.mjs", ".storybook"],

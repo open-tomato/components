@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * header/body/footer rows. Decoration only; behavior is all Overlay's.
 
  */
-export const modalPanel: (props?: ({size?: 'sm' | 'md' | 'lg' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+export const modalPanel: (props?: ({ size?: 'sm' | 'md' | 'lg' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
   [
     'flex max-h-[calc(100vh-96px)] flex-col overflow-hidden',
     'bg-surface-1 border border-border-soft rounded-xl shadow-lg',

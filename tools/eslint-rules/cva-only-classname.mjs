@@ -12,9 +12,13 @@
  *   - the passthrough `className` identifier, handed on unchanged.
  *
  * A string literal, a template literal, or any other expression is an
- * ad-hoc class and is refused. `react.mjs` registers the rule for TSX and
- * JSX files and leaves out `templates/`, `pages/`, `*.stories.tsx` and
- * `*.test.tsx`, where a layout class is the point.
+ * ad-hoc class and is refused. `packages/ui/eslint.variants.mjs` turns the
+ * rule on for TSX files and leaves out `templates/`, `pages/`, `stories/`,
+ * `*.stories.tsx` and `*.test.tsx`, where a layout class is the point.
+ *
+ * `@open-tomato/cva-only-classname` from `@open-tomato/eslint-plugin` is
+ * the shared copy of this rule, without the `.variants` import case below.
+ * This local copy goes once the shared rule accepts those imports.
  */
 
 /** The passthrough prop a component merges last. */

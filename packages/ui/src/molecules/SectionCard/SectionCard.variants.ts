@@ -22,7 +22,7 @@ export const sectionCardTitle: (props?: import('class-variance-authority/types')
 
 export const sectionCardSubtitle: (props?: import('class-variance-authority/types').ClassProp | undefined) => string = cva('mt-0.5 text-xs text-fg3');
 
-export const sectionCardBody: (props?: ({padded?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex-1', {
+export const sectionCardBody: (props?: ({ padded?: boolean | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex-1', {
   variants: {
     padded: {
       false: 'p-0',
@@ -33,7 +33,7 @@ export const sectionCardBody: (props?: ({padded?: boolean | null | undefined;} &
 });
 
 /** Footer line (UsageChart contract): small text, optional divider. */
-export const sectionCardFooter: (props?: ({divider?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('px-[18px] pb-3.5 text-xs text-fg3', {
+export const sectionCardFooter: (props?: ({ divider?: boolean | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('px-[18px] pb-3.5 text-xs text-fg3', {
   variants: {
     divider: {
       false: '',

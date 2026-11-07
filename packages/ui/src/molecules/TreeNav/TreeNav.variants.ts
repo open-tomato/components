@@ -78,7 +78,7 @@ export const treeNavItem: (props?: import('class-variance-authority/types').Clas
  * `hover` is on the unselected arm alone: a hover fill on the row
  * that is already filled reads as the selection having moved.
  */
-export const treeNavRow: (props?: ({selected?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+export const treeNavRow: (props?: ({ selected?: boolean | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string =
   cva(
     [
       'flex w-full items-center gap-1.5 rounded-md px-2 py-1.5',
@@ -109,7 +109,7 @@ export const treeNavRow: (props?: ({selected?: boolean | null | undefined;} & im
  * gives. The `leaf` arm is empty rather than `invisible` because a
  * leaf renders no glyph at all — the arm exists to reserve the box.
  */
-export const treeNavTwisty: (props?: ({state?: 'collapsed' | 'expanded' | 'leaf' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+export const treeNavTwisty: (props?: ({ state?: 'collapsed' | 'expanded' | 'leaf' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string =
   cva(
     'flex h-4 w-4 shrink-0 items-center justify-center text-fg3',
     {
