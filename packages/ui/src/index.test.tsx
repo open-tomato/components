@@ -11,6 +11,12 @@ describe('package root barrel', () => {
     expect(root.AppShell).toBeDefined();
   });
 
+  it('exports the shell chrome its story composes', () => {
+    for (const name of ['AppShellBrand', 'AppShellTitle', 'AppShellSpacer']) {
+      expect(name in root).toBe(true);
+    }
+  });
+
   it('does not leak internals or story fixtures', () => {
     for (const name of ['devWarn', 'StrokeIcon', 'FakeQrCode', 'LiveShell']) {
       expect(name in root).toBe(false);

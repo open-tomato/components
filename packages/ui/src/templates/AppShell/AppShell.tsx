@@ -12,12 +12,17 @@ import { cn } from '../../lib';
 
 import {
   appShell,
+  appShellBrand,
+  appShellBrandWordmark,
   appShellContent,
   appShellFooter,
   appShellMain,
   appShellSidebar,
+  appShellSpacer,
+  appShellTitle,
   appShellToggle,
   appShellTopbar,
+  type AppShellBrandVariants,
   type AppShellSidebarVariants,
 } from './AppShell.variants';
 
@@ -26,10 +31,16 @@ import {
  * components from earlier chapters:
  *
  *   <AppShell>
- *     <AppShellSidebar collapsed={collapsed}>…brand, nav, NavItems…</AppShellSidebar>
+ *     <AppShellSidebar collapsed={collapsed}>
+ *       <AppShellBrand collapsed={collapsed} mark={…} wordmark="…" />
+ *       <SidebarNav … />
+ *       <AppShellSpacer />
+ *       …SidebarQuota, SidebarQuickAccess…
+ *     </AppShellSidebar>
  *     <AppShellMain>
  *       <AppShellTopbar onToggleSidebar={…} sidebarCollapsed={collapsed}>
- *         …group switcher, title, search, Menu-driven buttons…
+ *         <AppShellTitle>…</AppShellTitle>
+ *         …search, Menu-driven buttons, at the far end…
  *       </AppShellTopbar>
  *       <AppShellContent footer={…}>{page}</AppShellContent>
  *     </AppShellMain>
@@ -53,6 +64,36 @@ export const AppShell: ForwardRefExoticComponent<
 );
 
 AppShell.displayName = 'AppShell';
+
+export interface AppShellBrandProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'children'>,
+  AppShellBrandVariants {
+  /** The brand's mark, such as a `Monogram`; shown in both rail widths. */
+  mark?: ReactNode;
+  /** The brand's name beside the mark; hidden when `collapsed`. */
+  wordmark?: ReactNode;
+}
+
+/**
+ * The rail's brand row: the mark and the wordmark, as tall as the topbar
+ * and with the same divider, so the two line up. Pass the rail's
+ * `collapsed` so the row centres the mark and drops the wordmark.
+ */
+export const AppShellBrand: ForwardRefExoticComponent<
+  AppShellBrandProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+  HTMLDivElement, AppShellBrandProps>(
+  ({ className, collapsed, mark, wordmark, ...props }, ref) => (
+    <div ref={ref} className={cn(appShellBrand({ collapsed }), className)} {...props}>
+      {mark}
+      {collapsed !== true && wordmark != null && (
+        <span className={appShellBrandWordmark()}>{wordmark}</span>
+      )}
+    </div>
+  ),
+);
+
+AppShellBrand.displayName = 'AppShellBrand';
 
 export interface AppShellSidebarProps
   extends HTMLAttributes<HTMLElement>,
@@ -122,6 +163,43 @@ export const AppShellTopbar: ForwardRefExoticComponent<
 );
 
 AppShellTopbar.displayName = 'AppShellTopbar';
+
+export type AppShellTitleProps = HTMLAttributes<HTMLHeadingElement>;
+
+/**
+ * The topbar's page title, as the page's `h1`. It takes the band's free
+ * space, so the controls after it sit at the far end, and it ellipsizes a
+ * long title instead of pushing them out.
+ */
+export const AppShellTitle: ForwardRefExoticComponent<
+  AppShellTitleProps & RefAttributes<HTMLHeadingElement>
+> = forwardRef<
+  HTMLHeadingElement, AppShellTitleProps>(
+  ({ className, children, ...props }, ref) => (
+    <h1 ref={ref} className={cn(appShellTitle(), className)} {...props}>
+      {children}
+    </h1>
+  ),
+);
+
+AppShellTitle.displayName = 'AppShellTitle';
+
+export type AppShellSpacerProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
+
+/**
+ * Takes the free space of the zone it sits in, pushing what follows to the
+ * far end: in the rail, the quota and quick-access blocks to its foot.
+ */
+export const AppShellSpacer: ForwardRefExoticComponent<
+  AppShellSpacerProps & RefAttributes<HTMLDivElement>
+> = forwardRef<
+  HTMLDivElement, AppShellSpacerProps>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} aria-hidden="true" className={cn(appShellSpacer(), className)} {...props} />
+  ),
+);
+
+AppShellSpacer.displayName = 'AppShellSpacer';
 
 export interface AppShellContentProps extends HTMLAttributes<HTMLDivElement> {
   /**
