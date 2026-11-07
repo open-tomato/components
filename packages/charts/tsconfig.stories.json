@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["./tsconfig.json", "@open-tomato/typescript-config/tooling"],
+  "compilerOptions": { "rootDir": ".", "tsBuildInfoFile": null },
+  "include": ["src/**/*.stories.tsx", ".storybook", "scripts", "visual", "test"],
+  "exclude": []
+}
