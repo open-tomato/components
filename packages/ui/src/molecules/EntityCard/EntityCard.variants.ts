@@ -26,7 +26,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * the containing block it stretches against — that class is load-bearing
  * and not decoration.
  */
-export const entityCard: (props?: ({openable?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+export const entityCard: (props?: ({ openable?: boolean | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 
   [
     'relative flex flex-col gap-3 rounded-lg border p-4',
@@ -125,7 +125,7 @@ export const entityCardMeta: (props?: import('class-variance-authority/types').C
  * persona grids, 340px for the connector grid, both `auto-fill` so a
  * short list stays card-width instead of stretching to fill the row.
  */
-export const entityCardGrid: (props?: ({min?: 'md' | 'lg' | null | undefined; gap?: 'sm' | 'md' | 'lg' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('grid', {
+export const entityCardGrid: (props?: ({ min?: 'md' | 'lg' | null | undefined; gap?: 'sm' | 'md' | 'lg' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('grid', {
 
   variants: {
     min: {
