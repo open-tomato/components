@@ -5,7 +5,8 @@ ECharts 6 behind it, the names of the theme tokens it reads, formatters,
 and a headless engine subpath that draws a chart to SVG with no React and
 no DOM. Other projects consume it on its own; `@open-tomato/atlas-ui`
 builds Atlas's cards on it. The consuming app brings the token values;
-`@open-tomato/atlas-demo` is the reference consumer.
+the Atlas demo in the open-tomato/rafa repository is the reference
+consumer.
 
 ## Layout
 
@@ -150,11 +151,12 @@ The `Engine/Formats` stories draw one series under each kind.
   `cn(chartRootVariants({ cursor }), className)`. `cn` (`src/lib/cn.ts`)
   is clsx plus tailwind-merge, so the later class wins a conflict.
 - No inline `style`, and no class string written on an element. The lint
-  rule `ot/cva-only-classname` (in `@open-tomato/rafa-eslint-config/react`)
-  allows a `className` value only as a variants call, a `cn(...)` over
-  variants calls and the passthrough, or the passthrough alone. Stories and
-  tests are exempt.
-- The repo compiles with `isolatedDeclarations`, so an exported `cva` call
+  rule `@open-tomato/cva-only-classname` (in
+  `@open-tomato/eslint-config/cva`) allows a `className` value only as a
+  variants call, a `cn(...)` over variants calls and the passthrough, or
+  the passthrough alone. Stories and tests are exempt.
+- The package compiles with `isolatedDeclarations` (from
+  `@open-tomato/typescript-config`), so an exported `cva` call
   carries an explicit function type, as `chartRootVariants` does.
 
 ## Theming
@@ -168,20 +170,21 @@ Tailwind v4 colour token, so `--color-series-1` is also `bg-series-1`.
 The consuming app defines every name: light values in its Tailwind
 `@theme` block, the dark re-step under `:root[data-theme="dark"]`, and
 `@custom-variant dark` on that attribute. Dark mode is
-`data-theme="dark"` on `<html>`. The demo's `src/styles.css` is the
-reference set, and the demo's test holds it to the names listed here. The
-app's stylesheet adds `@source` for this package's files so Tailwind
-generates the classes the components use. Canvas cannot read CSS
-variables, so the React engine reads the tokens from the computed style
+`data-theme="dark"` on `<html>`. This package's `.storybook/theme.css`
+and the Atlas demo's `src/styles.css` hold the reference set, and the
+demo's test holds it to the names listed here. The app's stylesheet
+adds `@source` for this package's files so Tailwind generates the
+classes the components use. Canvas cannot read CSS variables, so the
+React engine reads the tokens from the computed style
 (`useResolvedTokens`) and re-reads them on a theme flip.
 
 ## Stories
 
 Storybook 10 on `@storybook/react-vite`. Vite is Storybook's own builder
-and appears nowhere else: the package builds with `bun build` and the demo
-serves with `Bun.serve`. `.storybook/preview.ts` imports the demo's
-`styles.css`, which Tailwind compiles there, so no story imports tokens.
-Its `theme` toolbar global sets `data-theme` on the document.
+and appears nowhere else: the package builds with `bun build`.
+`.storybook/preview.ts` imports `.storybook/theme.css`, the token values
+in light and dark, which Tailwind compiles there, so no story imports
+tokens. Its `theme` toolbar global sets `data-theme` on the document.
 
 - A story sits beside its component as `{C}.stories.tsx`.
 - The header is `import type { Meta, StoryObj } from '@storybook/react-vite'`,
@@ -213,8 +216,8 @@ each test. Component tests use `@testing-library/react`.
 - The headless engine is tested by drawing: a line chart and a radar to
   SVG, the same string twice, a bundle of the entry with no React import,
   and a drawing in a child process with no DOM.
-- The root's `bun test` skips this package (the root `bunfig.toml`'s
-  `pathIgnorePatterns`), so run its tests from this folder.
+- Run the tests from this folder, so `bun test` reads this folder's
+  `bunfig.toml` and its preload.
 
 ## Visual regression
 
@@ -232,8 +235,9 @@ A machine only ever compares against baselines it wrote:
 CI runs no visual gate yet, because baselines have no durable store there.
 The suite's file is `stories.visual.ts`, never `.spec.ts`, so `bun test`
 never picks it up. Playwright is pinned to an exact version, since a new
-Chromium moves pixels. The suite serves on port 6016; `@open-tomato/atlas-ui`'s
-serves on 6017, so the two can run at once.
+Chromium moves pixels. The suite serves on port 6016, and
+`@open-tomato/atlas-ui`'s suite in rafa serves on 6017, so the two can
+run at once.
 
 ## Gate order
 
@@ -249,8 +253,10 @@ bun run check:stories     # every story, light and dark, no console or page erro
 bun run test:visual       # local only, against this machine's baselines
 ```
 
-CI's `atlas` job in `.github/workflows/verify.yml` runs all but the last
-on `ubuntu-latest`, as one matrix leg per package.
+CI's `verify` job (`.github/workflows/verify.yml`) runs this package's
+`check-types` and `lint`, through the root's `check-types:all` and
+`lint:all`. The tests, the build and the Storybook gates run locally for
+now.
 
 ## Publish shape
 
@@ -270,15 +276,12 @@ on `ubuntu-latest`, as one matrix leg per package.
 - `publishConfig` names npmjs for the registry and for the
   `@open-tomato` scope, and `access: public`.
 - Peer: `react` ^19. Dependencies: `echarts`, `class-variance-authority`,
-  `clsx`, `tailwind-merge` and `zod`, all from the public npm registry. No
-  dependency on a private workspace member: the graph check refuses one
-  for a publishable member.
+  `clsx`, `tailwind-merge` and `zod`, all from the public npm registry,
+  and no dependency on a private package.
 
 ## Privacy
 
-This package is public. No tracked file under `addons/atlas/` names a
-host, a home path, an IP, a LAN name, a private registry, a self-hosted
-runner or a private repository. `privacy.sweep.test.ts`, which lives here
-once for all of `addons/atlas/`, enforces it: it holds sha256 hashes of
-the banned lowercase terms, so the terms never appear in it, and its
-header gives the one-line command that prints the hash of a new term.
+This package is public. No tracked file in it names a host, a home path,
+an IP, a LAN name, a private registry, a self-hosted runner or a private
+repository. The repository's privacy gate (`bun run gate:privacy`, and
+`gate:privacy:history` in CI) enforces it over every file here.
