@@ -3,10 +3,9 @@ import type { ClassProp } from 'class-variance-authority/types';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
- * Group switcher — the topbar's group pill + recent-groups menu.
- * From the topbar demo screen's "group switcher" card; app-shell spec: Top Bar.
- * The trigger is fixed/max width (truncating), and the component carries
- * no topbar-scope dependency — it may later live in the sidebar.
+ * The switcher's trigger: the active option as a pill.
+ * Fixed/max width (truncating), and the component carries no top-bar-scope
+ * dependency — it may later live in the sidebar.
  */
 export const contextSwitcherTrigger: (props?: ClassProp) => string = cva([
   'flex max-w-[240px] cursor-pointer items-center gap-2.5',
@@ -14,7 +13,7 @@ export const contextSwitcherTrigger: (props?: ClassProp) => string = cva([
   'font-body text-[13px] text-fg1 transition-colors hover:bg-surface-2',
 ]);
 
-/** A recent-group row (the menu's top section). */
+/** A recent-option row (the menu's top section). */
 export const contextRow: (
   props?: {
     active?: boolean | null | undefined;
@@ -38,7 +37,7 @@ export const contextRow: (
 
 export type ContextRowVariants = VariantProps<typeof contextRow>;
 
-/** The trigger's active-group name, truncating inside the pill. */
+/** The trigger's active option name, truncating inside the pill. */
 export const contextSwitcherName: (props?: ClassProp) => string = cva(
   'min-w-0 truncate font-semibold',
 );
@@ -49,10 +48,10 @@ export const contextSwitcherChevron: (props?: ClassProp) => string = cva('shrink
 /** The open menu's fixed width. */
 export const contextSwitcherMenu: (props?: ClassProp) => string = cva('w-[300px]');
 
-/** The check mark trailing the active recent-group row. */
+/** The check mark trailing the active recent row. */
 export const contextRowCheck: (props?: ClassProp) => string = cva('shrink-0 text-accent');
 
-/** A recent row's body: the mark beside the name and member count. */
+/** A recent row's body: the mark beside the name and meta line. */
 export const contextRowBody: (props?: ClassProp) => string = cva(
   'flex min-w-0 items-center gap-2.5',
 );
@@ -60,17 +59,17 @@ export const contextRowBody: (props?: ClassProp) => string = cva(
 /** A recent row's text column. */
 export const contextRowText: (props?: ClassProp) => string = cva('min-w-0');
 
-/** A recent row's group name. */
+/** A recent row's option name. */
 export const contextRowName: (props?: ClassProp) => string = cva(
   'block truncate text-[13px] font-semibold',
 );
 
-/** A recent row's mono member count under the name. */
-export const contextRowMembers: (props?: ClassProp) => string = cva(
+/** A recent row's mono meta line under the name. */
+export const contextRowMeta: (props?: ClassProp) => string = cva(
   'block font-mono text-[11px] font-normal text-fg3',
 );
 
-/** The "See all groups" row's trailing mono total. */
+/** The "see all" row's trailing mono total. */
 export const contextSwitcherTotal: (props?: ClassProp) => string = cva(
   'font-mono text-[11px] text-fg3',
 );
