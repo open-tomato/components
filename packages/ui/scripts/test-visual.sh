@@ -16,6 +16,17 @@
 # failing assert run is repeated once, and only the shots that fail both
 # runs count; they are listed in visual-stable.json.
 set -euo pipefail
+
+# `bun x` runs a binary under Bun when node is not on PATH, and the test
+# runner (Jest) cannot load there: it dies with "The superclass is not a
+# constructor." before any test runs. A host with node only in login shells
+# hits this, so name the cause before anything else runs.
+if ! command -v node >/dev/null 2>&1; then
+  echo "test-visual: node is not on PATH; bun x would run the Storybook test runner under Bun, which cannot load Jest." >&2
+  echo "test-visual: put node on PATH (for example by running through a login shell) and retry." >&2
+  exit 1
+fi
+
 cd "$(dirname "$0")/.."
 
 # 6016, not 6006 — must not collide with a `storybook dev` session.
