@@ -19,7 +19,7 @@ const KINDS: EntityKinds = {
 
 describe('Entity', () => {
   it('renders every layout with its title and subtitle', () => {
-    for (const layout of ['inline', 'cell', 'title'] as const) {
+    for (const layout of ['inline', 'stack', 'cell', 'title'] as const) {
       const { unmount } = render(<Entity layout={layout} title={`t-${layout}`} subtitle="sub" />);
       expect(screen.getByText(`t-${layout}`)).toBeTruthy();
       if (layout !== 'inline') expect(screen.getByText('sub')).toBeTruthy();
@@ -65,6 +65,43 @@ describe('Entity', () => {
     expect(titleRow?.contains(screen.getByText('Name'))).toBe(true);
     expect(titleRow?.contains(screen.getByText('meta'))).toBe(false);
     expect(metaRow !== titleRow && metaRow?.contains(screen.getByText('meta'))).toBe(true);
+  });
+
+  it('stack layout keeps trailing on the title row, as inline does', () => {
+    const { container } = render(
+      <Entity layout="stack" title="Name" subtitle="meta" trailing={<b>3</b>} />,
+    );
+    const titleRow = container.firstElementChild?.firstElementChild;
+    expect(titleRow?.contains(screen.getByText('3'))).toBe(true);
+    expect(titleRow?.contains(screen.getByText('meta'))).toBe(false);
+  });
+
+  it('stack layout takes the glyph and default texts from the kind map', () => {
+    const { container } = render(
+      <EntityKindsProvider kinds={KINDS}>
+        <Entity layout="stack" kind="worker" />
+      </EntityKindsProvider>,
+    );
+    const titleRow = container.firstElementChild?.firstElementChild;
+    expect(titleRow?.querySelector('.text-primary')).not.toBeNull();
+    expect(titleRow?.contains(screen.getByText('Default worker'))).toBe(true);
+    expect(titleRow?.contains(screen.getByText('idle'))).toBe(false);
+  });
+
+  it('badge leads the second line, before the subtitle, in every two-line layout', () => {
+    for (const layout of ['stack', 'cell', 'title'] as const) {
+      const { unmount } = render(
+        <Entity layout={layout} title="Name" subtitle={<i>slug</i>} badge={<b>MCP</b>} />,
+      );
+      const meta = screen.getByText('slug').parentElement;
+      expect(meta?.firstElementChild === screen.getByText('MCP')).toBe(true);
+      unmount();
+    }
+  });
+
+  it('a meta line holding only a badge still renders', () => {
+    render(<Entity layout="title" title="Name" badge={<b>MCP</b>} />);
+    expect(screen.getByText('MCP')).toBeTruthy();
   });
 
   it('sets the title in the small mono face when mono, and the name face otherwise', () => {

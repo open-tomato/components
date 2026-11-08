@@ -22,10 +22,10 @@ export type EntityLayout = 'inline' | 'stack' | 'cell' | 'title';
 export interface EntityProps
   extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /**
-   * `inline` — one line (leading + title); `stack` — the inline line with a
-   * greyed second line under it, starting below the leading (for a status
-   * dot); `cell` — leading beside a compact double line (for a tile);
-   * `title` — larger tile with a double line.
+   * `inline` — one line (leading + title + trailing); `stack` — that same
+   * line with a greyed second line under it, starting below the leading
+   * (for a status dot); `cell` — leading beside a compact double line (for
+   * a tile); `title` — larger tile with a double line.
    */
   layout?: EntityLayout;
   /** Key into the `EntityKinds` map: supplies icon, tone and default texts. */
@@ -41,21 +41,41 @@ export interface EntityProps
   mono?: boolean;
   /** Greyed second line; falls back to the kind's default subtitle. */
   subtitle?: ReactNode;
-  /** Companion after the text (a badge, a count) — on the second line when there is one. */
+  /**
+   * A tag that leads the second line, before the subtitle (a type badge).
+   * Only the two-line layouts (`stack`, `cell`, `title`) show it.
+   */
+  badge?: ReactNode;
+  /**
+   * Companion after the text (a count, a badge): on the title line in
+   * `inline` and `stack`, after the subtitle in `cell` and `title`.
+   */
   trailing?: ReactNode;
+}
+
+/** The greyed second line: badge, subtitle, then trailing; nothing when all are empty. */
+function metaLine(badge: ReactNode, subtitle: ReactNode, trailing?: ReactNode): ReactNode {
+  if (badge == null && subtitle == null && trailing == null) return null;
+  return (
+    <span className={entityMeta()}>
+      {badge}
+      {subtitle}
+      {trailing}
+    </span>
+  );
 }
 
 /**
  * `Entity` — one display template for the recurring things in tables,
- * cards and menus. The three `layout`s share one slot set (`leading`,
- * `title`, `subtitle`, `trailing`); a `kind` looks up its glyph, accent and
+ * cards and menus. The four `layout`s share one slot set (`leading`,
+ * `title`, `subtitle`, `badge`, `trailing`); a `kind` looks up its glyph, accent and
  * default texts in the `EntityKinds` map the implementor supplies through
  * `EntityKindsProvider` (spec: "Known Entities").
  */
 export const Entity: import('react').ForwardRefExoticComponent<
   EntityProps & import('react').RefAttributes<HTMLElement>
 > = forwardRef<HTMLElement, EntityProps>(
-  ({ className, layout = 'inline', kind, leading, title, mono, subtitle, trailing, ...props }, ref) => {
+  ({ className, layout = 'inline', kind, leading, title, mono, subtitle, badge, trailing, ...props }, ref) => {
     const kinds = useEntityKinds();
     const found = kind != null
       ? kinds[kind]
@@ -92,13 +112,9 @@ export const Entity: import('react').ForwardRefExoticComponent<
         <span className={entityCell()}>
           {inlineLeading}
           {inlineTitle}
+          {trailing}
         </span>,
-        (resolvedSubtitle != null || trailing != null) && (
-          <span className={entityMeta()}>
-            {resolvedSubtitle}
-            {trailing}
-          </span>
-        ),
+        metaLine(badge, resolvedSubtitle),
       );
     }
 
@@ -112,10 +128,9 @@ export const Entity: import('react').ForwardRefExoticComponent<
     const glyphSize = large
       ? 16
       : 13;
-    const stack = trailing != null
+    const stack = badge != null || trailing != null
       ? toolTitleStack()
       : entityCellStack();
-    const hasMeta = resolvedSubtitle != null || trailing != null;
     return createElement(
       'div',
       { ref, className: cn(root, className), ...props },
@@ -126,12 +141,7 @@ export const Entity: import('react').ForwardRefExoticComponent<
       )),
       <div className={stack}>
         {resolvedTitle != null && <span className={entityTitleName()}>{resolvedTitle}</span>}
-        {hasMeta && (
-          <span className={entityMeta()}>
-            {resolvedSubtitle}
-            {trailing}
-          </span>
-        )}
+        {metaLine(badge, resolvedSubtitle, trailing)}
       </div>,
     );
   },

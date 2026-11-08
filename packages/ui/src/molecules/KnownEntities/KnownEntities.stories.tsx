@@ -5,11 +5,20 @@ import { Avatar } from '../../atoms/Avatar';
 import { Badge } from '../../atoms/Badge';
 import { Icon } from '../../atoms/Icon';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
+import { cn } from '../../lib';
 
 import { Entity } from './Entity';
 import { EntityKindsProvider } from './EntityKinds';
 import { type EntityKinds } from './entityKindsContext';
-import { ACTIVITY_STATUS_TONE, entityTone, type ActivityStatus } from './KnownEntities.variants';
+import {
+  ACTIVITY_STATUS_TONE,
+  entityDot,
+  entityMetaRef,
+  entityMetaRefText,
+  entityMetaSeparator,
+  entityTone,
+  type ActivityStatus,
+} from './KnownEntities.variants';
 import { ModelFooter } from './ModelFooter';
 
 /** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
@@ -34,20 +43,18 @@ const Status = ({ status }: { status: ActivityStatus }) => (
 /** The meta line's `{id} · {branch}`: a quiet separator and the branch glyph. */
 const BranchMeta = ({ id, branch }: { id: string; branch: string }) => (
   <>
-    <span className="shrink-0">{id}</span>
-    <span className="text-border-strong">·</span>
-    <span className="inline-flex min-w-0 items-center gap-1">
+    {id}
+    <span className={entityMetaSeparator()}>·</span>
+    <span className={entityMetaRef()}>
       <Icon name="git-branch" size={10} />
-      <span className="min-w-0 truncate">{branch}</span>
+      <span className={entityMetaRefText()}>{branch}</span>
     </span>
   </>
 );
 
 /** A model's accent dot, for an entity whose kind supplies no icon. */
 const AccentDot = () => (
-  <span className={entityTone({ tone: 'accent' })}>
-    <span className="block size-2 rounded-full bg-current" aria-hidden />
-  </span>
+  <span className={cn(entityDot(), entityTone({ tone: 'accent' }))} aria-hidden />
 );
 
 const Row = ({ label, children }: { label: string; children: ReactNode }) => (
@@ -127,7 +134,7 @@ export const Session: Story = {
       <Row label="failed">
         <Entity layout="inline" leading={<Status status="failed" />} title="rate-limit-bug" />
       </Row>
-      <Row label="cell">
+      <Row label="stack">
         <Entity
           layout="stack"
           leading={<Status status="done" />}
@@ -135,7 +142,7 @@ export const Session: Story = {
           subtitle={<BranchMeta id="worker-7d2f" branch="feat/jwt-login" />}
         />
       </Row>
-      <Row label="no branch">
+      <Row label="stack, no branch">
         <Entity
           layout="stack"
           leading={<Status status="waiting" />}
@@ -218,8 +225,8 @@ export const Task: Story = {
 };
 
 /**
- * Spec: a `title` entity — icon tile; bold name over the type badge and
- * the slug, the badge leading the second line.
+ * Spec: a `title` entity — icon tile; bold name over the type badge in
+ * `badge`, which leads the second line, and the slug.
  */
 export const Tool: Story = {
   args: BASE_ARGS,
@@ -230,7 +237,8 @@ export const Tool: Story = {
           layout="title"
           kind="tool"
           title="Repo Search"
-          subtitle={<><Badge tone="neutral" size="sm">MCP</Badge>gh-search</>}
+          badge={<Badge tone="neutral" size="sm">MCP</Badge>}
+          subtitle="gh-search"
         />
       </Row>
       <Row label="skill">
@@ -238,7 +246,8 @@ export const Tool: Story = {
           layout="title"
           kind="skill"
           title="Component from design"
-          subtitle={<><Badge tone="info" size="sm">skill</Badge>component-from-design</>}
+          badge={<Badge tone="info" size="sm">skill</Badge>}
+          subtitle="component-from-design"
         />
       </Row>
     </div>

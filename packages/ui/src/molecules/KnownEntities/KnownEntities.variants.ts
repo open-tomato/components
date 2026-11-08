@@ -77,6 +77,18 @@ export const entityMeta: (props?: ClassProp) => string = cva(
   ],
 );
 
+/** An entity's accent dot (paints `currentColor`; pair it with `entityTone`). */
+export const entityDot: (props?: ClassProp) => string = cva('block size-2 shrink-0 rounded-full bg-current');
+
+/** The quiet `·` between the parts of a meta line. */
+export const entityMetaSeparator: (props?: ClassProp) => string = cva('text-border-strong');
+
+/** A reference inside a meta line (a branch): a small glyph and its name. */
+export const entityMetaRef: (props?: ClassProp) => string = cva('inline-flex min-w-0 items-center gap-1');
+
+/** The name of a meta-line reference; ellipsizes before it pushes the row. */
+export const entityMetaRefText: (props?: ClassProp) => string = cva('min-w-0 truncate');
+
 /** model-footer — inherits the footer's color wholesale (no accent). */
 export const modelFooter: (props?: ClassProp) => string = cva(
   'inline-flex min-w-0 items-center gap-1.5 text-current',

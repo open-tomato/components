@@ -25,8 +25,9 @@ import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
  * Self-describing column types: a self-defining table grid can infer the
  * component to use if the data type for a column is of
  * `{entity}-{variant}`. Target shape: JSON table configs naming types such
- * as (`entity-cell`, `entity-inline`, `entity-title`, `quota-progress`,
- * `amount-over-time`, `badge`, `text`, `relative-time`, `context-menu`, …).
+ * as (`entity-inline`, `entity-stack`, `entity-cell`, `entity-title`,
+ * `quota-progress`, `amount-over-time`, `badge`, `text`, `relative-time`,
+ * `context-menu`, …).
  *
  * A lightweight lookup, deliberately: one typed data contract per type
  * (`CellTypeDataMap`) and one render function per type. A config-driven

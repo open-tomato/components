@@ -9,6 +9,9 @@ import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { cn } from '../../lib';
 import {
   ACTIVITY_STATUS_TONE,
+  entityMetaRef,
+  entityMetaRefText,
+  entityMetaSeparator,
   entityTile,
   entityTone,
 } from '../../molecules/KnownEntities/KnownEntities.variants';
@@ -203,11 +206,11 @@ const STATUS_BADGE = {
 /** The meta line's `{id} · {branch}`: a quiet separator and the branch glyph. */
 const BranchMeta = ({ id, branch }: { id: string; branch: string }) => (
   <>
-    <span className="shrink-0">{id}</span>
-    <span className="text-border-strong">·</span>
-    <span className="inline-flex min-w-0 items-center gap-1">
+    {id}
+    <span className={entityMetaSeparator()}>·</span>
+    <span className={entityMetaRef()}>
       <Icon name="git-branch" size={10} />
-      <span className="min-w-0 truncate">{branch}</span>
+      <span className={entityMetaRefText()}>{branch}</span>
     </span>
   </>
 );
