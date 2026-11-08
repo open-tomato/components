@@ -4,6 +4,13 @@
 # The visual suite does not run here. Its baselines are per machine and stay
 # on the developer's machine, untracked (packages/ui/README.md, "CI").
 #
+# A push to integration runs too, for one reason beyond checking the merge:
+# GitHub lets a pull request restore caches only from its own ref or its base
+# branch, so the bun binary that setup-bun caches must be saved under
+# refs/heads/integration for pull requests to skip the release download.
+# setup-bun saves that cache only when its whole job succeeds, so a small job
+# seeds it on its own, and a red verify run on integration cannot stop it.
+#
 # Actions are pinned by commit SHA, with the release tag beside each pin, so a
 # moved tag cannot change what runs. The token can only read the repository.
 name: verify
@@ -16,6 +23,7 @@ on:
       - 'stretch/**'
   push:
     branches:
+      - integration
       - 'stretch/**'
 
 permissions:
@@ -26,6 +34,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  bun-cache:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/integration' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
