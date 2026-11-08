@@ -27,7 +27,7 @@ const STORY_DATA_TAG = /@storyData[ \t]+\w/;
  */
 const AWAITING_DECISION: Readonly<Record<string, string>> = {
   'ContextSwitcher/ContextSwitcher.variants.ts#contextRow':
-    'issue 71 (the ContextSwitcher labels) left the switcher in src/stories; whether it becomes an exported component is still open',
+    'issue 96 (ContextSwitcher: a story fixture or an exported organism?) decides whether the switcher becomes an export',
 };
 
 interface VaryingExport {

@@ -5,4 +5,4 @@ level: none
 package: @open-tomato/components
 ---
 
-- test: the fixture guard's entry for `contextRow` says issue 71 left the switcher in src/stories and the export question is still open
+- test: the fixture guard's entry for `contextRow` points at issue 96, which decides whether the switcher becomes an export
