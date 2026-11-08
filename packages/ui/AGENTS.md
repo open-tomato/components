@@ -240,9 +240,11 @@ braced command that runs it.
 
 `.github/workflows/verify.yml` is the only workflow: the privacy and
 control-byte gates, lint, types, the build, and the unit and render tests,
-on every pull request. The visual suite and its baselines stay local and
-private: never add a visual job, a baseline upload or a self-hosted runner
-to GitHub Actions.
+on every pull request and every push to `integration`; a small `bun-cache`
+job on that push saves the bun binary under the integration ref, where
+pull requests can restore it. The visual suite and its baselines stay
+local and private: never add a visual job, a baseline upload or a
+self-hosted runner to GitHub Actions.
 
 ## Open debt measured from `@ar/web`
 
