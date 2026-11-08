@@ -26,7 +26,7 @@ describe('shell fixtures', () => {
     expect(screen.queryByText('acme labs')).toBeNull();
   });
 
-  it('TopbarDemo renders the title beside the group switcher', async () => {
+  it('TopbarDemo renders the title beside the context switcher', async () => {
     await act(async () => {
       render(<TopbarDemo title="usage" />);
     });
