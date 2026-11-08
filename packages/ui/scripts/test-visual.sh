@@ -65,4 +65,6 @@ fi
 echo "visual: first pass failed, repeating once to separate flakes from moved shots"
 cp visual-report.json visual-report.first.json
 run_pass visual-report.json || true
+# A static page of the failed shots, sorted by the shape of each change.
+bun scripts/visual-review/main.ts || true
 bun scripts/visual-stable.ts visual-report.first.json visual-report.json
