@@ -78,10 +78,11 @@ export const appShellBrandWordmark: (props?: ClassProp) => string = cva(
 
 /**
  * The topbar's page title. It takes the band's free space, so what follows
- * it sits at the far end, and it ellipsizes before it pushes them out.
+ * it sits at the far end, and it ellipsizes before it pushes them out. `m-0`
+ * clears the base `h1` margin, which would lift it off the band's centre.
  */
 export const appShellTitle: (props?: ClassProp) => string = cva(
-  'min-w-0 flex-1 truncate font-display text-lg font-bold tracking-[-0.015em] text-fg1',
+  'm-0 min-w-0 flex-1 truncate font-display text-lg font-bold tracking-[-0.015em] text-fg1',
 );
 
 /** Takes the free space of a flex zone, pushing what follows to its far end. */

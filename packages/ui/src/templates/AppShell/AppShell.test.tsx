@@ -98,6 +98,12 @@ describe('AppShell brand, title and spacer', () => {
     expect(title.className).toContain('truncate');
   });
 
+  it('title clears the global h1 margin, so the topbar centres it', () => {
+    render(<AppShellTitle>Usage</AppShellTitle>);
+    const title = screen.getByRole('heading', { level: 1, name: 'Usage' });
+    expect(title.className.split(' ')).toContain('m-0');
+  });
+
   it('spacer is hidden from assistive tech and takes the free space', () => {
     render(<AppShellSpacer data-testid="spacer" />);
     const spacer = screen.getByTestId('spacer');
