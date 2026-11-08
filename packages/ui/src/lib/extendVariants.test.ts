@@ -126,6 +126,25 @@ describe('extendVariants', () => {
     expect(ring()).toBe('ring-2');
   });
 
+  it('reads an undefined default in the extension as unset, keeping the base\'s', () => {
+    const quiet = extendVariants(pressableConfig, { defaultVariants: { tone: undefined } });
+    expect(quiet().split(' ')).toContain('text-fg1');
+  });
+
+  it('falls back to the default for an empty-string prop, the way cva does', () => {
+    const plain = extendVariants(pressableConfig);
+    const empty = { rounded: '' as 'md' };
+    expect(plain(empty)).toBe(cva(pressableConfig.base, pressableConfig)(empty));
+  });
+
+  it('drops the base compounds that name a replaced key', () => {
+    const sized = extendVariants(
+      { variants: { size: { sm: 'h-6' } }, compoundVariants: [{ size: 'sm', class: 'base-compound' }] },
+      { variants: { size: { sm: 'h-5', lg: 'h-9' } }, defaultVariants: { size: 'sm' } },
+    );
+    expect(sized()).toBe('h-5');
+  });
+
   it('leaves the configs it was given untouched', () => {
     const before = JSON.stringify(pressableConfig);
     chip({ tone: 'accent', inline: true });

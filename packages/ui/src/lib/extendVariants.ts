@@ -63,9 +63,17 @@ function without<T>(record: Record<string, T> | undefined, drop: ReadonlySet<str
   return Object.fromEntries(Object.entries(record ?? {}).filter(([key]) => !drop.has(key)));
 }
 
-/** A copy of `record` without the keys whose value is `undefined`, as cva reads props. */
-function defined(record: Selection): Selection {
-  return Object.fromEntries(Object.entries(record).filter(([, value]) => value !== undefined));
+/**
+ * A copy of `record` without the keys left unset: `undefined`, and `''`,
+ * which cva also answers with the default.
+ */
+function chosenOnly(record: Selection | undefined): Selection {
+  return Object.fromEntries(Object.entries(record ?? {}).filter(([, value]) => value !== undefined && value !== ''));
+}
+
+/** True when a compound's condition names one of the `keys`. */
+function namesAny(compound: object, keys: ReadonlySet<string>): boolean {
+  return Object.keys(compound).some((key) => keys.has(key));
 }
 
 /**
@@ -77,9 +85,10 @@ function defined(record: Selection): Selection {
  * classes come after the blueprint's and win a tailwind conflict, and the
  * call site's `class` or `className` comes last. When a variant key is in
  * both sets, the extension's options replace the base's for that key, like
- * tailwind-variants' `extend`; the same goes for `defaultVariants`.
- * Compounds of both sets match against the props resolved with both sets'
- * defaults.
+ * tailwind-variants' `extend`; the same goes for `defaultVariants`, and
+ * the base's compounds that name that key are dropped with its options.
+ * The other compounds of both sets match against the props resolved with
+ * both sets' defaults.
  *
  *   const chipVariants = extendVariants(touchableConfig, {
  *     base: 'gap-1 text-sm',
@@ -96,13 +105,13 @@ export function extendVariants<
 ): VariantsFunction<MergedSchema<B, E>> {
   const replaced = new Set(Object.keys(config.variants ?? {}));
   const defaults = {
-    ...without<unknown>(baseConfig.defaultVariants, replaced),
-    ...config.defaultVariants,
+    ...without(chosenOnly(baseConfig.defaultVariants), replaced),
+    ...chosenOnly(config.defaultVariants),
   };
   // Defaults are resolved here, so the inner cva functions take none of their own.
   const base = plainCva(baseConfig.base, {
     variants: without(baseConfig.variants, replaced),
-    compoundVariants: baseConfig.compoundVariants,
+    compoundVariants: baseConfig.compoundVariants?.filter((compound) => !namesAny(compound, replaced)),
   });
   const own = plainCva(config.base, {
     variants: config.variants ?? {},
@@ -111,7 +120,7 @@ export function extendVariants<
 
   return (props) => {
     const { class: classProp, className, ...chosen } = props ?? {};
-    const resolved = { ...defaults, ...defined(chosen) };
+    const resolved = { ...defaults, ...chosenOnly(chosen) };
     return cn(base(resolved), own(resolved), classProp, className);
   };
 }
