@@ -25,10 +25,7 @@ const STORY_DATA_TAG = /@storyData[ \t]+\w/;
  * keyed `<file>#<export>`. The test fails when an entry no longer matches a
  * varying fixture, so the list cannot outlive what it excuses.
  */
-const AWAITING_DECISION: Readonly<Record<string, string>> = {
-  'ContextSwitcher/ContextSwitcher.variants.ts#contextRow':
-    'issue 71 (the ContextSwitcher labels) left the switcher in src/stories; whether it becomes an exported component is still open',
-};
+const AWAITING_DECISION: Readonly<Record<string, string>> = {};
 
 interface VaryingExport {
   readonly name: string;
