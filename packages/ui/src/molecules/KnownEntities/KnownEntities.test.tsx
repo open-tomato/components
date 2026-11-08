@@ -67,6 +67,17 @@ describe('Entity', () => {
     expect(metaRow !== titleRow && metaRow?.contains(screen.getByText('meta'))).toBe(true);
   });
 
+  it('sets the title in the small mono face when mono, and the name face otherwise', () => {
+    render(<Entity title="sam" mono />);
+    render(<Entity title="auth-refactor" />);
+    const mono = screen.getByText('sam').className.split(' ');
+    const name = screen.getByText('auth-refactor').className.split(' ');
+    expect(mono).toContain('font-mono');
+    expect(mono).not.toContain('font-semibold');
+    expect(name).toContain('font-semibold');
+    expect(name).not.toContain('font-mono');
+  });
+
   it('shows the trailing slot of an inline entity', () => {
     render(<Entity title="Name" trailing={<b>badge</b>} />);
     expect(screen.getByText('badge')).toBeTruthy();

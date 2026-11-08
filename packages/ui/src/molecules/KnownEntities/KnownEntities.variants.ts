@@ -52,10 +52,21 @@ export const entityCell: (props?: ClassProp) => string = cva('flex min-w-0 items
 
 export const entityCellStack: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
 
-/** inline layout — the semibold name beside the leading mark. */
-export const entityInlineName: (props?: ClassProp) => string = cva(
-  'truncate text-sm font-semibold leading-tight text-fg1',
-);
+/**
+ * inline and stack layouts — the title beside the leading mark: the
+ * semibold name face, or the small mono face for handles and model names.
+ */
+export const entityInlineName: (
+  props?: { mono?: boolean | null | undefined } & ClassProp,
+) => string = cva('truncate', {
+  variants: {
+    mono: {
+      false: 'text-sm font-semibold leading-tight text-fg1',
+      true: 'font-mono text-xs text-fg2',
+    },
+  },
+  defaultVariants: { mono: false },
+});
 
 /** The greyed mono meta line (second line of the cell and title layouts). */
 export const entityMeta: (props?: ClassProp) => string = cva(

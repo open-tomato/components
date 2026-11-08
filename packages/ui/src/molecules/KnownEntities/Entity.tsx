@@ -34,6 +34,11 @@ export interface EntityProps
   leading?: ReactNode;
   /** Top line; falls back to the kind's default title. */
   title?: ReactNode;
+  /**
+   * Sets the title of the `inline` and `stack` layouts in the small mono
+   * face, for handles, model names and ids.
+   */
+  mono?: boolean;
   /** Greyed second line; falls back to the kind's default subtitle. */
   subtitle?: ReactNode;
   /** Companion after the text (a badge, a count) — on the second line when there is one. */
@@ -50,7 +55,7 @@ export interface EntityProps
 export const Entity: import('react').ForwardRefExoticComponent<
   EntityProps & import('react').RefAttributes<HTMLElement>
 > = forwardRef<HTMLElement, EntityProps>(
-  ({ className, layout = 'inline', kind, leading, title, subtitle, trailing, ...props }, ref) => {
+  ({ className, layout = 'inline', kind, leading, title, mono, subtitle, trailing, ...props }, ref) => {
     const kinds = useEntityKinds();
     const found = kind != null
       ? kinds[kind]
@@ -68,7 +73,7 @@ export const Entity: import('react').ForwardRefExoticComponent<
         <Icon name={glyph} size={12} />
       </span>
     ));
-    const inlineTitle = resolvedTitle != null && <span className={entityInlineName()}>{resolvedTitle}</span>;
+    const inlineTitle = resolvedTitle != null && <span className={entityInlineName({ mono })}>{resolvedTitle}</span>;
 
     if (layout === 'inline') {
       return createElement(

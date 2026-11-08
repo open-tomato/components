@@ -4,8 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { Avatar } from '../../atoms/Avatar';
+import { Icon } from '../../atoms/Icon';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
-import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
+import { cn } from '../../lib';
+import {
+  ACTIVITY_STATUS_TONE,
+  entityTile,
+  entityTone,
+} from '../../molecules/KnownEntities/KnownEntities.variants';
 import { makeColumns, ITEMS, type Item } from '../../stories/items';
 
 import { renderCellContent } from './cellTypes';
@@ -194,6 +200,18 @@ const STATUS_BADGE = {
   failed: { tone: 'danger', dot: false },
 } as const;
 
+/** The meta line's `{id} · {branch}`: a quiet separator and the branch glyph. */
+const BranchMeta = ({ id, branch }: { id: string; branch: string }) => (
+  <>
+    <span className="shrink-0">{id}</span>
+    <span className="text-border-strong">·</span>
+    <span className="inline-flex min-w-0 items-center gap-1">
+      <Icon name="git-branch" size={10} />
+      <span className="min-w-0 truncate">{branch}</span>
+    </span>
+  </>
+);
+
 /** The page spec's table config, resolved through the registry. */
 const CONFIG_COLUMNS: Column<ItemRow>[] = [
   {
@@ -208,7 +226,7 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
         />
       ),
       title: r.name,
-      subtitle: `${r.id} · feat/${r.name}`,
+      subtitle: <BranchMeta id={r.id} branch={`feat/${r.name}`} />,
     }),
   },
   {
@@ -216,6 +234,11 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     header: 'Owner · Model',
     width: 170,
     cell: (r) => renderCellContent('entity-cell', {
+      leading: (
+        <span className={cn(entityTile({ size: 'sm' }), entityTone({ tone: r.tone }))}>
+          <Icon name="bot" size={13} />
+        </span>
+      ),
       title: r.owner,
       subtitle: r.model,
     }),
@@ -258,6 +281,7 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     cell: (r) => renderCellContent('entity-inline', {
       leading: <Avatar name={r.by} size="sm" status="none" />,
       title: r.by,
+      mono: true,
     }),
   },
   {

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 
 import { Avatar } from '../../atoms/Avatar';
 import { Badge } from '../../atoms/Badge';
+import { Icon } from '../../atoms/Icon';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
 
 import { Entity } from './Entity';
@@ -28,6 +29,18 @@ const Status = ({ status }: { status: ActivityStatus }) => (
     pulse={status === 'running'}
     label={status}
   />
+);
+
+/** The meta line's `{id} · {branch}`: a quiet separator and the branch glyph. */
+const BranchMeta = ({ id, branch }: { id: string; branch: string }) => (
+  <>
+    <span className="shrink-0">{id}</span>
+    <span className="text-border-strong">·</span>
+    <span className="inline-flex min-w-0 items-center gap-1">
+      <Icon name="git-branch" size={10} />
+      <span className="min-w-0 truncate">{branch}</span>
+    </span>
+  </>
 );
 
 /** A model's accent dot, for an entity whose kind supplies no icon. */
@@ -119,7 +132,7 @@ export const Session: Story = {
           layout="stack"
           leading={<Status status="done" />}
           title="auth-refactor"
-          subtitle="worker-7d2f · feat/jwt-login"
+          subtitle={<BranchMeta id="worker-7d2f" branch="feat/jwt-login" />}
         />
       </Row>
       <Row label="no branch">
@@ -144,10 +157,10 @@ export const Model: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
       <Row label="inline, dot">
-        <Entity layout="inline" leading={<AccentDot />} title="sonnet-4-5" />
+        <Entity layout="inline" leading={<AccentDot />} title="sonnet-4-5" mono />
       </Row>
       <Row label="inline, icon">
-        <Entity layout="inline" kind="model" title="opus-4-5" />
+        <Entity layout="inline" kind="model" title="opus-4-5" mono />
       </Row>
       <Row label="model-footer">
         <span className="font-mono text-[11px] text-fg3">
