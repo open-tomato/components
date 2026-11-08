@@ -1,6 +1,6 @@
 /**
- * The review page's only script, inlined as text: it keeps one verdict per
- * batch in localStorage, under a key named after the run, and writes the
+ * The review page's only script, inlined as text: it filters the page by
+ * shape of change, keeps one verdict per batch in localStorage, under a key named after the run, and writes the
  * accept command and the red list from them. The page still reads without
  * it; storage that throws (a private window) just keeps verdicts in memory.
  */
@@ -37,12 +37,21 @@ export const VERDICT_SCRIPT: string = String.raw`
       save();
       render();
       if (verdict) {
-        const next = batches.slice(batches.indexOf(batch) + 1).find((other) => !verdicts[other.dataset.key]);
+        const next = batches.slice(batches.indexOf(batch) + 1).find((other) => !verdicts[other.dataset.key] && other.offsetParent !== null);
         if (next) next.scrollIntoView({ block: 'start' });
       }
     });
   }
   document.getElementById('undecided').addEventListener('change', (event) => document.body.classList.toggle('undecided', event.target.checked));
+  const filters = [...document.querySelectorAll('[data-filter]')];
+  for (const button of filters) {
+    button.addEventListener('click', () => {
+      const shape = button.dataset.filter;
+      if (shape) document.body.dataset.shape = shape;
+      else delete document.body.dataset.shape;
+      for (const other of filters) other.classList.toggle('active', other === button);
+    });
+  }
   render();
 })();
 `;

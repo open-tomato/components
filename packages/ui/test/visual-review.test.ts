@@ -207,9 +207,29 @@ describe('component batches', () => {
   it('renders one section per component with verdict buttons and the run name', () => {
     const shots = [shot('organisms-table--rows', 'Organisms/Table Rows', spread)];
     const page = renderPage({ shots, generatedAt: 'now', staleDiffFiles: 0, diffHref: 'd', storybookHref: 's' });
-    expect(page).toContain('id="organisms-table" data-key="organisms-table" data-name="Organisms/Table"');
+    expect(page).toContain('id="organisms-table" data-key="organisms-table" data-shapes="spread" data-name="Organisms/Table"');
     expect(page).toContain('data-verdict="green"');
     expect(page).toContain(`data-run="${runFingerprint(shots)}"`);
     expect(page).toContain('bun run visual:accept');
+  });
+});
+
+describe('the shape filter', () => {
+  const shot = (storyId: string, paints: readonly Paint[]): ReviewShot => ({
+    ...toShot({ ...FAILURE, storyId, story: storyId, diffFile: `${storyId}--light-diff.png` }, measureDiff(diffImage(paints))),
+    stability: 'moved',
+  });
+
+  it('offers a button per shape present, and tags shots and batches with their shapes', () => {
+    const page = renderPage({
+      shots: [shot('atoms-a--x', block(0, 0, 10, 10)), shot('atoms-a--y', block(0, 0, 3, 3))],
+      generatedAt: 'now', staleDiffFiles: 0, diffHref: 'd', storybookHref: 's',
+    });
+    expect(page).toContain('data-filter="one-spot"');
+    expect(page).toContain('data-filter="faint"');
+    expect(page).not.toContain('data-filter="spread"');
+    expect(page).toContain('data-shapes="one-spot faint"');
+    expect(page).toContain('<figure class="shot" data-shape="faint">');
+    expect(page).toContain('body[data-shape="faint"] .batch:not([data-shapes~="faint"])');
   });
 });
