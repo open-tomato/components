@@ -5,6 +5,15 @@ export {
 } from './chartTone';
 export { cn } from './cn';
 export {
+  extendVariants,
+  type ExtensionConfig,
+  type MergedSchema,
+  type VariantSchema,
+  type VariantSelection,
+  type VariantsConfig,
+  type VariantsFunction,
+} from './extendVariants';
+export {
   formatCurrency,
   formatDate,
   formatDuration,
