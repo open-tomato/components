@@ -14,7 +14,11 @@ export const itemGoal: (props?: ClassProp) => string = cva('text-fg2');
 /** The Model cell's mono id. */
 export const itemModel: (props?: ClassProp) => string = cva('font-mono text-[12.5px] text-fg2');
 
-/** The Usage cell: mono, and dimmed when the item used none. */
+/**
+ * The Usage cell: mono, and dimmed when the item used none.
+ *
+ * @storyData whether the demo row's usage count is zero
+ */
 export const itemCount: (
   props?: {
     empty?: boolean | null | undefined;
