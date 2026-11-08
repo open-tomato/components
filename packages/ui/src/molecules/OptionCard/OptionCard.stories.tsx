@@ -7,7 +7,7 @@ import { StrokeIcon } from '../../lib/icons';
 
 import { OptionCard } from './OptionCard';
 
-/** One selectable card for both pickers — group choice and 2FA method. */
+/** One selectable card for both pickers — context choice and 2FA method. */
 const meta: Meta<typeof OptionCard> = {
   title: 'Molecules/OptionCard',
   component: OptionCard,
@@ -19,14 +19,14 @@ const meta: Meta<typeof OptionCard> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Group picker row — centered, Monogram leading, role badge. */
-export const Workspace: Story = {
+/** Context picker row — centered, Monogram leading, role badge. */
+export const Context: Story = {
   args: {
     selected: true,
     leading: <Monogram name="open-garden" />,
     title: 'open-garden',
     meta: <Badge tone="neutral">member</Badge>,
-    description: 'Main group · invited by sam · 12 members',
+    description: 'Primary context · invited by sam · 12 members',
   },
 };
 

@@ -46,7 +46,7 @@ import {
 
 /**
  * Story harness for the AppShell stories. The chrome is the REAL library
- * components — the group switcher, SearchSuggest, NotificationsBell,
+ * components — the context switcher, SearchSuggest, NotificationsBell,
  * ThemeSwitcher, ProfileMenu in the topbar; SidebarNav +
  * SidebarQuota + SidebarQuickAccess in the rail — this file only
  * supplies demo data, placeholder page content and the LiveShell wiring.
@@ -66,10 +66,10 @@ export const NAV_PRIMARY: SidebarNavConfigItem[] = [
   { id: 'usage', label: 'Usage', icon: 'zap' },
 ];
 
-const GROUPS: ContextOption[] = [
-  { id: 'og', name: 'open-garden', members: 12, tone: 'accent' },
-  { id: 'rt', name: 'bright-orchard', members: 6, tone: 'primary' },
-  { id: 'vp', name: 'vine-patch', members: 3, tone: 'gold' },
+const CONTEXTS: ContextOption[] = [
+  { id: 'og', name: 'open-garden', meta: '12 members', tone: 'accent' },
+  { id: 'rt', name: 'bright-orchard', meta: '6 members', tone: 'primary' },
+  { id: 'vp', name: 'vine-patch', meta: '3 members', tone: 'gold' },
 ];
 
 /** A neutral demo map for the suggestion kinds — the kit ships none. */
@@ -151,7 +151,7 @@ export const TopbarDemo = ({ title }: { title: string }): JSX.Element => {
   const [theme, setTheme] = useState<ThemeName>('light');
   return (
     <>
-      <ContextSwitcher contexts={GROUPS} activeId="og" />
+      <ContextSwitcher contexts={CONTEXTS} activeId="og" />
       <AppShellTitle>{title.charAt(0).toUpperCase() + title.slice(1)}</AppShellTitle>
       <EntityKindsProvider kinds={SUGGESTION_KINDS}>
         <SearchSuggest
