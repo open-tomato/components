@@ -72,7 +72,7 @@ export interface Report {
 
 /** The terminal colour codes jest writes into failure messages (ESC, then `[…m`). */
 const ANSI = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, 'g');
-const DIFF_PATH = /__diff_output__\/(\S+?-diff\.png)/;
+const DIFF_PATHS = /__diff_output__\/(\S+?-diff\.png)/g;
 const PIXELS = /\((\d+) differing pixels\)/;
 const SIZE = /same size as the snapshot \((\d+x\d+)\), but was different \((\d+x\d+)\)/;
 
@@ -85,31 +85,49 @@ export function parseDiffFile(file: string): { readonly storyId: string; readonl
     : { storyId: stem.slice(0, cut), theme: stem.slice(cut + 2) };
 }
 
+/**
+ * Cuts one failure message into one part per diff image it names. The
+ * test runner compares both themes before failing a story, so one
+ * message can join several jest-image-snapshot errors; each error states
+ * its figures before its own `See diff for details:` path, so a part runs
+ * from the end of the previous path to the end of its own.
+ */
+function splitAtDiffPaths(message: string): readonly { readonly diffFile: string; readonly text: string }[] {
+  const matches = [...message.matchAll(DIFF_PATHS)];
+  const ends = matches.map((match) => (match.index ?? 0) + match[0].length);
+  return matches.map((match, i) => ({
+    diffFile: match[1] ?? '',
+    text: message.slice(i === 0
+      ? 0
+      : ends[i - 1], ends[i]),
+  }));
+}
+
 /** Reads every failed comparison of one report, with its diff file and figures. */
 export function readFailures(report: Report): readonly Failure[] {
   return report.testResults.flatMap((result) => result.assertionResults)
     .filter((assertion) => assertion.status !== 'passed')
-    .flatMap((assertion) => (assertion.failureMessages ?? []).map((raw) => {
-      const message = raw.replace(ANSI, '');
-      const diffFile = DIFF_PATH.exec(message)?.[1];
-      if (diffFile === undefined) return null;
-      const pixels = PIXELS.exec(message)?.[1];
-      const size = SIZE.exec(message);
+    .flatMap((assertion) => {
       const story = assertion.fullName.replace(/ (smoke|play)-test$/, '');
-      return {
-        story,
-        title: assertion.fullName,
-        diffFile,
-        ...parseDiffFile(diffFile),
-        reportedPixels: pixels === undefined
-          ? null
-          : Number(pixels),
-        sizeChange: size === null
-          ? null
-          : `${size[1]} to ${size[2]}`,
-      };
-    }))
-    .filter((failure): failure is Failure => failure !== null);
+      return (assertion.failureMessages ?? [])
+        .flatMap((raw) => splitAtDiffPaths(raw.replace(ANSI, '')))
+        .map(({ diffFile, text }) => {
+          const pixels = PIXELS.exec(text)?.[1];
+          const size = SIZE.exec(text);
+          return {
+            story,
+            title: assertion.fullName,
+            diffFile,
+            ...parseDiffFile(diffFile),
+            reportedPixels: pixels === undefined
+              ? null
+              : Number(pixels),
+            sizeChange: size === null
+              ? null
+              : `${size[1]} to ${size[2]}`,
+          };
+        });
+    });
 }
 
 function isChanged(data: Buffer, index: number): boolean {
