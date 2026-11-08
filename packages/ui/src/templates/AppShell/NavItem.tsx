@@ -6,8 +6,8 @@ import {
   type RefAttributes,
 } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   navItem,
@@ -40,7 +40,7 @@ export const NavItem: ForwardRefExoticComponent<
         ? 'page'
         : undefined}
       className={cn(
-        touchable({ rounded: 'md', noBrightness: false }),
+        touchableVariants({ rounded: 'md', noBrightness: false }),
         navItem({ active, collapsed }),
         className,
       )}

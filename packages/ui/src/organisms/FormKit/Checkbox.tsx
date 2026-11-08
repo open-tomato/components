@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   checkboxBox,
@@ -36,7 +36,7 @@ export const Checkbox: { (props: CheckboxProps): import('react').JSX.Element; di
     aria-checked={checked}
     onClick={() => onChange(!checked)}
     className={cn(
-      touchable({ rounded: 'sm', noBrightness: false }),
+      touchableVariants({ rounded: 'sm', noBrightness: false }),
       checkboxRow(),
       className,
     )}

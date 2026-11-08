@@ -2,8 +2,8 @@ import type { SelectionItem } from '../Breadcrumb';
 
 import { forwardRef, Fragment, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   stepperConnector,
@@ -84,7 +84,7 @@ export const Stepper: ForwardRefExoticComponent<PropsWithoutRef<StepperProps> & 
                   type="button"
                   onClick={() => onChange(i)}
                   className={cn(
-                    touchable({ inline: true, noBrightness: false }),
+                    touchableVariants({ inline: true, noBrightness: false }),
                     stepperButton(),
                   )}
                 >

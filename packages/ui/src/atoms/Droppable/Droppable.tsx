@@ -2,7 +2,7 @@ import { type CSSProperties, type ReactNode } from 'react';
 
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
-import { touchable } from '../Touchable/Touchable.variants';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   droppableInline,
@@ -78,7 +78,7 @@ export const DroppableInline: { (p: DroppableInlineProps): import('react').JSX.E
       title={reason ?? 'Click or drop to replace'}
       disabled={disabled}
       className={cn(
-        touchable({ inline: true, rounded: 'full', noBrightness: false }),
+        touchableVariants({ inline: true, rounded: 'full', noBrightness: false }),
         droppableInline({ state, rounded }),
         className,
       )}
@@ -144,7 +144,7 @@ export const DroppableZone: { (p: DroppableZoneProps): import('react').JSX.Eleme
         {...handlers}
         disabled={disabled}
         className={cn(
-          touchable({ rounded: 'lg', noBrightness: false }),
+          touchableVariants({ rounded: 'lg', noBrightness: false }),
           droppableZone({ state, compact, disabled: disabled === true }),
         )}
       >

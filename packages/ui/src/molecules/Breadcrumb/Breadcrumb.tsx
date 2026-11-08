@@ -1,7 +1,7 @@
 import { forwardRef, Fragment, type HTMLAttributes } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import { breadcrumb, breadcrumbItem, breadcrumbSeparator } from './Breadcrumb.variants';
 
@@ -53,7 +53,7 @@ export const Breadcrumb: import('react').ForwardRefExoticComponent<BreadcrumbPro
               : undefined}
             onClick={() => onChange?.(i)}
             className={cn(
-              touchable({ inline: true, rounded: 'sm', noBrightness: false }),
+              touchableVariants({ inline: true, rounded: 'sm', noBrightness: false }),
               breadcrumbItem({
                 state: i === index
                   ? 'current'

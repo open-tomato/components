@@ -1,4 +1,4 @@
 export { Touchable } from './Touchable';
 export type { TouchableProps } from './Touchable';
-export { touchable } from './Touchable.variants';
-export type { TouchableVariants } from './Touchable.variants';
+/** `touchable` is the blueprint's name before it moved to `src/particles`; kept so the public export still resolves. */
+export { touchableVariants as touchable } from '../../particles/touchable';

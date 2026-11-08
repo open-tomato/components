@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ForwardRefExoticComponent, type PropsWithoutRef, type RefAttributes } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import { paginationButton, paginationRoot } from './Pagination.variants';
 
@@ -43,7 +43,7 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
         disabled={index === 0}
         onClick={() => onChange?.(Math.max(0, index - 1))}
         className={cn(
-          touchable({ inline: true, rounded: 'md', noBrightness: false }),
+          touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
           paginationButton({ active: false }),
         )}
       >
@@ -58,7 +58,7 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
             : undefined}
           onClick={() => onChange?.(i)}
           className={cn(
-            touchable({ inline: true, rounded: 'md', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
             paginationButton({ active: i === index }),
           )}
         >
@@ -71,7 +71,7 @@ export const Pagination: ForwardRefExoticComponent<PropsWithoutRef<PaginationPro
         disabled={index === count - 1}
         onClick={() => onChange?.(Math.min(count - 1, index + 1))}
         className={cn(
-          touchable({ inline: true, rounded: 'md', noBrightness: false }),
+          touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
           paginationButton({ active: false }),
         )}
       >

@@ -3,9 +3,9 @@ import { type CSSProperties, type JSX, type ReactNode } from 'react';
 
 import { Menu, MenuContent, MenuTrigger } from '../../atoms/Menu';
 import { menuItem } from '../../atoms/Menu/Menu.variants';
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   selectAdornment,
@@ -56,7 +56,7 @@ export const Select: {
       <MenuTrigger
         aria-label={ariaLabel}
         className={cn(
-          touchable({ inline: true, rounded: 'md', noBrightness: false }),
+          touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
           selectTrigger({ size }),
           className,
         )}

@@ -5,9 +5,9 @@ import {
   type RefAttributes,
 } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   searchClear,
@@ -52,7 +52,7 @@ export const SearchInput: ForwardRefExoticComponent<SearchInputProps & RefAttrib
           aria-label="Clear search"
           onClick={() => onChange('')}
           className={cn(
-            touchable({ inline: true, rounded: 'sm', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'sm', noBrightness: false }),
             searchClear(),
           )}
         >
