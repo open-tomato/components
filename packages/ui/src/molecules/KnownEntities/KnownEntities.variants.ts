@@ -52,10 +52,21 @@ export const entityCell: (props?: ClassProp) => string = cva('flex min-w-0 items
 
 export const entityCellStack: (props?: ClassProp) => string = cva('flex min-w-0 flex-col gap-[3px]');
 
-/** inline layout — the semibold name beside the leading mark. */
-export const entityInlineName: (props?: ClassProp) => string = cva(
-  'truncate text-sm font-semibold leading-tight text-fg1',
-);
+/**
+ * inline and stack layouts — the title beside the leading mark: the
+ * semibold name face, or the small mono face for handles and model names.
+ */
+export const entityInlineName: (
+  props?: { mono?: boolean | null | undefined } & ClassProp,
+) => string = cva('truncate', {
+  variants: {
+    mono: {
+      false: 'text-sm font-semibold leading-tight text-fg1',
+      true: 'font-mono text-xs text-fg2',
+    },
+  },
+  defaultVariants: { mono: false },
+});
 
 /** The greyed mono meta line (second line of the cell and title layouts). */
 export const entityMeta: (props?: ClassProp) => string = cva(
@@ -65,6 +76,18 @@ export const entityMeta: (props?: ClassProp) => string = cva(
     'font-mono text-[11px] leading-tight text-fg3',
   ],
 );
+
+/** An entity's accent dot (paints `currentColor`; pair it with `entityTone`). */
+export const entityDot: (props?: ClassProp) => string = cva('block size-2 shrink-0 rounded-full bg-current');
+
+/** The quiet `·` between the parts of a meta line. */
+export const entityMetaSeparator: (props?: ClassProp) => string = cva('text-border-strong');
+
+/** A reference inside a meta line (a branch): a small glyph and its name. */
+export const entityMetaRef: (props?: ClassProp) => string = cva('inline-flex min-w-0 items-center gap-1');
+
+/** The name of a meta-line reference; ellipsizes before it pushes the row. */
+export const entityMetaRefText: (props?: ClassProp) => string = cva('min-w-0 truncate');
 
 /** model-footer — inherits the footer's color wholesale (no accent). */
 export const modelFooter: (props?: ClassProp) => string = cva(

@@ -3,8 +3,18 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { useState } from 'react';
 
+import { Avatar } from '../../atoms/Avatar';
+import { Icon } from '../../atoms/Icon';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
-import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
+import { cn } from '../../lib';
+import {
+  ACTIVITY_STATUS_TONE,
+  entityMetaRef,
+  entityMetaRefText,
+  entityMetaSeparator,
+  entityTile,
+  entityTone,
+} from '../../molecules/KnownEntities/KnownEntities.variants';
 import { makeColumns, ITEMS, type Item } from '../../stories/items';
 
 import { renderCellContent } from './cellTypes';
@@ -193,12 +203,24 @@ const STATUS_BADGE = {
   failed: { tone: 'danger', dot: false },
 } as const;
 
+/** The meta line's `{id} · {branch}`: a quiet separator and the branch glyph. */
+const BranchMeta = ({ id, branch }: { id: string; branch: string }) => (
+  <>
+    {id}
+    <span className={entityMetaSeparator()}>·</span>
+    <span className={entityMetaRef()}>
+      <Icon name="git-branch" size={10} />
+      <span className={entityMetaRefText()}>{branch}</span>
+    </span>
+  </>
+);
+
 /** The page spec's table config, resolved through the registry. */
 const CONFIG_COLUMNS: Column<ItemRow>[] = [
   {
     key: 'item',
     header: 'Item',
-    cell: (r) => renderCellContent('entity-cell', {
+    cell: (r) => renderCellContent('entity-stack', {
       leading: (
         <StatusIndicator
           tone={ACTIVITY_STATUS_TONE[r.status]}
@@ -207,7 +229,7 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
         />
       ),
       title: r.name,
-      subtitle: `${r.id} · feat/${r.name}`,
+      subtitle: <BranchMeta id={r.id} branch={`feat/${r.name}`} />,
     }),
   },
   {
@@ -215,6 +237,11 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     header: 'Owner · Model',
     width: 170,
     cell: (r) => renderCellContent('entity-cell', {
+      leading: (
+        <span className={cn(entityTile({ size: 'sm' }), entityTone({ tone: r.tone }))}>
+          <Icon name="bot" size={13} />
+        </span>
+      ),
       title: r.owner,
       subtitle: r.model,
     }),
@@ -254,7 +281,11 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     key: 'by',
     header: 'By',
     width: 96,
-    cell: (r) => renderCellContent('entity-inline', { title: r.by }),
+    cell: (r) => renderCellContent('entity-inline', {
+      leading: <Avatar name={r.by} size="sm" status="none" />,
+      title: r.by,
+      mono: true,
+    }),
   },
   {
     key: 'menu',
@@ -274,8 +305,8 @@ const ConfigTable = Table<ItemRow>;
 /**
  * The self-describing table: every column resolves its renderer
  * from the `{entity}-{variant}` type registry, mirroring the JSON table
- * config in the page spec (entity-cell / badge / quota-progress /
- * amount-over-time / entity-inline / context-menu).
+ * config in the page spec (entity-stack / entity-cell / badge /
+ * quota-progress / amount-over-time / entity-inline / context-menu).
  * Fidelity source: the original screen's table region, captured
  * light+dark during the one-time port fidelity check. Spec-over-original
  * divergences: the usage bar colors by consumption thresholds, not
