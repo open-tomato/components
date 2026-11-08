@@ -60,7 +60,8 @@
     "test:visual": "scripts/test-visual.sh",
     "test:visual:update": "scripts/test-visual.sh --update",
     "check:stories": "node scripts/check-stories.mjs",
-    "visual:review": "bun scripts/visual-review/main.ts"
+    "visual:review": "bun scripts/visual-review/main.ts",
+    "visual:accept": "bun scripts/visual-review/accept.ts"
   },
   "engines": {
     "node": ">=22"
