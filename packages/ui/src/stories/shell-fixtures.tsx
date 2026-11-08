@@ -6,6 +6,10 @@ import { Monogram } from '../atoms/Monogram';
 import { EntityKindsProvider } from '../molecules/KnownEntities/EntityKinds';
 import { type EntityKinds } from '../molecules/KnownEntities/entityKindsContext';
 import {
+  ContextSwitcher,
+  type ContextOption,
+} from '../organisms/ContextSwitcher';
+import {
   NotificationsBell,
   type NotificationItem,
 } from '../organisms/NotificationsBell';
@@ -30,10 +34,6 @@ import {
   type SidebarNavConfigItem,
 } from '../templates/AppShell';
 
-import {
-  ContextSwitcher,
-  type ContextOption,
-} from './ContextSwitcher';
 import {
   liveShellFrame,
   placeholderPage,
