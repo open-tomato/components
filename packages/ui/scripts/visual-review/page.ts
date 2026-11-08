@@ -1,9 +1,14 @@
 /**
- * Renders measured shots as one static HTML page, sorted by the shape of
- * the change and, inside a shape, by shots that changed identically. The
+ * Renders measured shots as one static HTML page with one batch per
+ * component. Each batch gets a verdict (green: accept the new render; red:
+ * a bug to file), saved in the browser, and the page writes the accept
+ * command for the green batches. Inside a batch, shots sort by the shape
+ * of the change, and shots that changed identically sit together. The
  * page links the diff images in place, so it is read straight from disk.
  */
+import { groupByComponent, runFingerprint, type Batch } from './batches';
 import { FAINT_MAX_PIXELS, FEW_SPOTS_MAX, FEW_SPOTS_MAX_SHARE, SHAPES, type Shape, type Shot } from './measure';
+import { VERDICT_SCRIPT } from './verdicts';
 
 export type Stability = 'moved' | 'flaked' | 'unknown';
 
@@ -87,28 +92,42 @@ function renderShot(shot: ReviewShot, input: PageInput): string {
   const image = `${input.diffHref}/${encodeURIComponent(shot.diffFile)}`;
   const story = `${input.storybookHref}/iframe.html?id=${encodeURIComponent(shot.storyId)}&viewMode=story`;
   return `<figure class="shot">
-  <figcaption><strong>${escapeHtml(shot.story)}</strong> <span class="tag ${shot.stability}">${shot.stability}</span> <span class="tag">${escapeHtml(shot.theme)}</span><br>
+  <figcaption><strong>${escapeHtml(shot.story)}</strong> <span class="tag ${shot.stability}">${shot.stability}</span> <span class="tag">${escapeHtml(shot.theme)}</span> <span class="tag">${SHAPE_TEXT[shot.shape].title}</span><br>
   <span class="meta">${escapeHtml(describe(shot))}</span> · <a href="${story}">story</a></figcaption>
   ${renderCrops(shot, image)}
   <details><summary>Whole shot</summary><a href="${image}"><img loading="lazy" src="${image}" alt="Baseline, changed pixels and new screenshot for ${escapeHtml(shot.story)}"></a></details>
 </figure>`;
 }
 
-function renderShape(shape: Shape, shots: readonly ReviewShot[], input: PageInput): string {
-  const text = SHAPE_TEXT[shape];
-  const groups = groupBySignature(shots).map((group) => group.length === 1
+function renderShots(shots: readonly ReviewShot[], input: PageInput): string {
+  return groupBySignature(shots).map((group) => group.length === 1
     ? (group[0] === undefined
       ? ''
       : renderShot(group[0], input))
-    : `<section class="same"><h3>Same change in ${group.length} shots</h3>${group.map((shot) => renderShot(shot, input)).join('\n')}</section>`);
-  return `<section id="${shape}"><h2>${text.title} <small>${shots.length}</small></h2><p>${text.meaning}</p>${groups.join('\n')}</section>`;
+    : `<section class="same"><h3>Same change in ${group.length} shots</h3>${group.map((shot) => renderShot(shot, input)).join('\n')}</section>`)
+    .join('\n');
+}
+
+function renderBatch(batch: Batch, input: PageInput): string {
+  const shapes = SHAPES.map((shape) => [shape, batch.shots.filter((shot) => shot.shape === shape).length] as const)
+    .filter(([, count]) => count > 0)
+    .map(([shape, count]) => `${count} ${SHAPE_TEXT[shape].title.toLowerCase()}`)
+    .join(' · ');
+  return `<section class="batch" id="${batch.key}" data-key="${batch.key}" data-name="${escapeHtml(batch.name)}">
+<h2>${escapeHtml(batch.name)} <small>${batch.shots.length} shot${batch.shots.length === 1
+  ? ''
+  : 's'} · ${shapes}</small></h2>
+<div class="verdict"><button type="button" data-verdict="green">Green: accept</button><button type="button" data-verdict="red">Red: file it</button><button type="button" data-verdict="">Clear</button></div>
+<div class="shots">${renderShots(batch.shots, input)}</div>
+</section>`;
 }
 
 /** The whole review page. */
 export function renderPage(input: PageInput): string {
-  const byShape = SHAPES.map((shape) => [shape, input.shots.filter((shot) => shot.shape === shape)] as const);
+  const batches = groupByComponent(input.shots);
   const moved = input.shots.filter((shot) => shot.stability === 'moved').length;
-  const rows = byShape.map(([shape, shots]) => `<tr><td><a href="#${shape}">${SHAPE_TEXT[shape].title}</a></td><td>${shots.length}</td></tr>`).join('');
+  const shapes = SHAPES.map((shape) => `<tr><td title="${escapeHtml(SHAPE_TEXT[shape].meaning)}">${SHAPE_TEXT[shape].title}</td><td>${input.shots.filter((shot) => shot.shape === shape).length}</td></tr>`).join('');
+  const index = batches.map((batch) => `<li data-index="${batch.key}"><a href="#${batch.key}">${escapeHtml(batch.name)}</a> <small>${batch.shots.length}</small></li>`).join('');
   const stale = input.staleDiffFiles === 0
     ? ''
     : `<p>${input.staleDiffFiles} older diff images in the folder belong to no failure of this run and are left out.</p>`;
@@ -116,8 +135,8 @@ export function renderPage(input: PageInput): string {
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Visual review</title>
 <style>
-:root{--bg:#fbf8f3;--fg:#1d1a16;--muted:#6b645b;--line:#e4ddd2;--moved:#b42318;--flaked:#8a6100}
-@media (prefers-color-scheme:dark){:root{--bg:#151311;--fg:#eee8df;--muted:#a59d92;--line:#36312b;--moved:#ff8a7a;--flaked:#e8b84a}}
+:root{--bg:#fbf8f3;--fg:#1d1a16;--muted:#6b645b;--line:#e4ddd2;--moved:#b42318;--flaked:#8a6100;--green:#1a7f37}
+@media (prefers-color-scheme:dark){:root{--bg:#151311;--fg:#eee8df;--muted:#a59d92;--line:#36312b;--moved:#ff8a7a;--flaked:#e8b84a;--green:#6fdd8b}}
 body{margin:0 auto;max-width:1400px;padding:16px;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
 a{color:inherit}table{border-collapse:collapse}td{border-bottom:1px solid var(--line);padding:4px 12px 4px 0}
 h2{margin-top:40px;border-top:1px solid var(--line);padding-top:16px}h2 small{color:var(--muted);font-weight:400}
@@ -125,14 +144,30 @@ h2{margin-top:40px;border-top:1px solid var(--line);padding-top:16px}h2 small{co
 .shot{margin:12px 0 24px}.shot img{width:100%;height:auto;border:1px solid var(--line)}
 .meta{color:var(--muted);font-size:13px}.tag{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 5px}
 .tag.moved{color:var(--moved)}.tag.flaked{color:var(--flaked)}\n.crops{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:8px 0}.crop{display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--muted)}\n.pixels{max-width:100%;border:1px solid var(--line);background-repeat:no-repeat;image-rendering:pixelated}\ndetails summary{cursor:pointer;font-size:13px;color:var(--muted)}
-</style></head><body>
+.bar{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.index{columns:4 180px;padding-left:18px;font-size:14px}.index li.green a{color:var(--green)}.index li.red a{color:var(--moved)}
+.batch{border-top:1px solid var(--line);margin-top:32px;scroll-margin-top:48px}.batch h2{border:0;margin-top:16px;padding:0}
+.batch.green h2{color:var(--green)}.batch.red h2{color:var(--moved)}.batch.decided .shots{display:none}
+.verdict{display:flex;flex-wrap:wrap;gap:8px}button{font:inherit;font-size:14px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:transparent;color:inherit;cursor:pointer}
+.batch.green [data-verdict=green]{background:var(--green);color:var(--bg)}.batch.red [data-verdict=red]{background:var(--moved);color:var(--bg)}
+.out{width:100%;box-sizing:border-box;font:13px/1.4 ui-monospace,monospace;background:transparent;color:inherit;border:1px solid var(--line);border-radius:6px;padding:6px}
+body.undecided .batch.decided,body.undecided .index li.decided{display:none}
+</style></head><body data-run="${runFingerprint(input.shots)}">
 <h1>Visual review</h1>
 <p>${input.shots.length} failed shots, ${moved} of them failed on every pass. Built ${escapeHtml(input.generatedAt)}. Each image shows the baseline, the changed pixels in red, and the new screenshot.</p>
 <p>A story is shot light, then dark, and a failed light shot stops the story, so its dark shot was not compared.</p>
 ${stale}
-<table>${rows}</table>
-${byShape.filter(([, shots]) => shots.length > 0).map(([shape, shots]) => renderShape(shape, shots, input))
-  .join('\n')}
+<details><summary>Shots by shape of change</summary><table>${shapes}</table></details>
+<p>One batch per component, largest first. Give each a verdict: <strong>green</strong> accepts the new render, <strong>red</strong> marks a bug to file. Verdicts are saved in this browser for this run only, and a decided batch folds its shots away; Clear opens it again. Accepting a batch replaces only its failed shots' baselines, so a dark shot that was never compared is still checked by the next run.</p>
+<div class="bar"><span id="progress">0 of ${batches.length} decided</span><label><input type="checkbox" id="undecided"> Show undecided only</label></div>
+<ul class="index">${index}</ul>
+<h3>Accept the green batches</h3>
+<p class="meta">Run from packages/ui, then run <code>bun run test:visual</code> to write their new baselines.</p>
+<textarea class="out" id="accept" rows="2" readonly></textarea>
+<h3>Red batches to file</h3>
+<textarea class="out" id="red" rows="3" readonly></textarea>
+${batches.map((batch) => renderBatch(batch, input)).join('\n')}
+<script>${VERDICT_SCRIPT}</script>
 </body></html>
 `;
 }
