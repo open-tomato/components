@@ -11,6 +11,8 @@ export const ph: (props?: ClassProp) => string = cva(
  * The size and colour a demo filler gives one `Ph`, merged over the base
  * through Ph's className: `logo`/`title`/`line*` in ShellFiller,
  * `heading`/`body*` in CardFiller.
+ *
+ * @storyData the place each filler pill takes in a demo layout
  */
 export const phShape: (
   props?: {
@@ -52,7 +54,11 @@ export const shellFillerHeader: (props?: ClassProp) => string = cva(
 /** CardFiller's column of text rows. */
 export const cardFiller: (props?: ClassProp) => string = cva('flex flex-col gap-2');
 
-/** A tinted `item N` tile from the Content demo, one tone per brand colour. */
+/**
+ * A tinted `item N` tile from the Content demo, one tone per brand colour.
+ *
+ * @storyData the brand colour each demo tile is given
+ */
 export const contentTile: (
   props?: {
     tone?: 'primary' | 'accent' | 'gold' | null | undefined;

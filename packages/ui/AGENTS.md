@@ -52,7 +52,10 @@ Other trees:
 - `src/lib` — `cn()` and shared utilities (formatting lives here; never
   reimplement it inline)
 - `src/styles` — the theming split (see below)
-- `src/stories` — shared story fixtures/helpers
+- `src/stories` — shared story fixtures/helpers: data and filler only. A
+  template's story composes exports, so chrome a consumer needs ships from
+  the component. `fixture-variants.test.ts` fails a fixture `variants:`
+  block unless `@storyData` names the demo data it follows.
 - `src/cache` — the caching module (subpath exports `./cache`,
   `./cache/server`); unit tests in `src/cache/__tests__/`
 - `design/` — design reference pages for the rosetta comparator (see
