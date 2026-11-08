@@ -2,8 +2,8 @@ import type { IconName } from '../../atoms/Icon';
 import type { FC } from 'react';
 
 import { Icon } from '../../atoms/Icon';
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   navItem,
@@ -62,7 +62,7 @@ export const SidebarQuickAccess: FC<SidebarQuickAccessProps> = ({
             ? item.label
             : undefined}
           className={cn(
-            touchable({ rounded: 'md', noBrightness: false }),
+            touchableVariants({ rounded: 'md', noBrightness: false }),
             navItem({ active: false, collapsed }),
             // The theme's element defaults can beat Tailwind utilities
             // on `a` — win with `!` (see the layered-base gotcha in the docs).

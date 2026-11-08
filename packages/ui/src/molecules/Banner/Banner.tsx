@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   banner,
@@ -43,7 +43,7 @@ export const Banner: import('react').ForwardRefExoticComponent<BannerProps & imp
           type="button"
           onClick={action.onClick}
           className={cn(
-            touchable({ inline: true, rounded: 'md', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
             bannerAction({ tone }),
           )}
         >
@@ -56,7 +56,7 @@ export const Banner: import('react').ForwardRefExoticComponent<BannerProps & imp
           aria-label="Dismiss"
           onClick={onClose}
           className={cn(
-            touchable({ inline: true, rounded: 'sm', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'sm', noBrightness: false }),
             bannerDismiss(),
           )}
         >

@@ -2,8 +2,8 @@ import { useId, type ReactElement, type ReactNode } from 'react';
 
 import { Button } from '../../atoms/Button';
 import { Overlay } from '../../atoms/Overlay';
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 import { Stepper } from '../Stepper';
 
 import {
@@ -91,7 +91,7 @@ export const Wizard: { <A>(props: WizardProps<A>): ReactElement | null; displayN
               aria-label="Close"
               onClick={onClose}
               className={cn(
-                touchable({ inline: true, rounded: 'md', noBrightness: false }),
+                touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
                 wizardClose(),
               )}
             >

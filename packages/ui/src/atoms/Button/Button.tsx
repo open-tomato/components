@@ -6,7 +6,7 @@ import {
   type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 import { cn } from '../../lib';
-import { touchable } from '../Touchable/Touchable.variants';
+import { touchableVariants } from '../../particles/touchable';
 
 import { button, type ButtonVariants } from './Button.variants';
 
@@ -49,7 +49,7 @@ export const Button: ForwardRefExoticComponent<
           ? undefined
           : 'button'}
         className={cn(
-          touchable({ rounded: 'md', stretch: block, noBrightness: false }),
+          touchableVariants({ rounded: 'md', stretch: block, noBrightness: false }),
           button({ variant, size, block }),
           className,
         )}

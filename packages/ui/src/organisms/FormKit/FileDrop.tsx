@@ -2,9 +2,9 @@ import type { ReactNode } from 'react';
 
 import { DroppableZone } from '../../atoms/Droppable/Droppable';
 import { fmtBytes, type AcceptContract } from '../../atoms/Droppable/useDroppable';
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
+import { touchableVariants } from '../../particles/touchable';
 // Concrete files, not the Droppable barrel, to keep static-build chunks
 // acyclic (the React #130 lesson from Stage 4).
 
@@ -67,7 +67,7 @@ export const FileDrop: { (props: FileDropProps): import('react').JSX.Element; di
           aria-label="Remove file"
           onClick={() => onChange(null)}
           className={cn(
-            touchable({ inline: true, rounded: 'sm', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'sm', noBrightness: false }),
             fileChipRemove(),
           )}
         >

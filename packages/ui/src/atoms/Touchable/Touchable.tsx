@@ -2,8 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 
 import { cn } from '../../lib';
-
-import { touchable, type TouchableVariants } from './Touchable.variants';
+import { touchableVariants, type TouchableVariants } from '../../particles/touchable';
 
 export interface TouchableProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'>,
@@ -40,7 +39,7 @@ import('react').ForwardRefExoticComponent<TouchableProps & import('react').RefAt
           ? undefined
           : 'button'}
         className={cn(
-          touchable({ inline, stretch, noBrightness, rounded }),
+          touchableVariants({ inline, stretch, noBrightness, rounded }),
           className,
         )}
         {...props}

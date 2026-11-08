@@ -1,7 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 
 import { cn } from '../../lib';
-import { touchable } from '../Touchable/Touchable.variants';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   switchTrack,
@@ -30,7 +30,7 @@ import('react').ForwardRefExoticComponent<SwitchProps & import('react').RefAttri
         : undefined}
       onClick={() => onChange?.(!checked)}
       className={cn(
-        touchable({ inline: true, rounded: 'full', noBrightness: false }),
+        touchableVariants({ inline: true, rounded: 'full', noBrightness: false }),
         switchTrack({ size, tone }),
         className,
       )}

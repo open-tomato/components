@@ -8,8 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   accordionBody,
@@ -86,7 +86,7 @@ export const AccordionItem: ForwardRefExoticComponent<
         <h3 className={accordionHeading()}>
           <RadixAccordion.Trigger
             className={cn(
-              touchable({ noBrightness: false, rounded: 'none' }),
+              touchableVariants({ noBrightness: false, rounded: 'none' }),
               accordionTrigger(),
               accordionTriggerGroup(),
             )}

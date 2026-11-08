@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   radioCircle,
@@ -49,7 +49,7 @@ export const RadioGroup: { (props: RadioGroupProps): import('react').JSX.Element
           aria-checked={on}
           onClick={() => onChange(o.value)}
           className={cn(
-            touchable({ rounded: 'md', noBrightness: false }),
+            touchableVariants({ rounded: 'md', noBrightness: false }),
             radioOption({ checked: on }),
           )}
         >

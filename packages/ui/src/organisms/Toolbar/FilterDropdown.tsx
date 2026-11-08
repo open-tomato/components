@@ -7,9 +7,9 @@ import {
   MenuSep,
   MenuTrigger,
 } from '../../atoms/Menu';
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
 import { StrokeIcon } from '../../lib/icons';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   filterCheck,
@@ -59,7 +59,7 @@ export const FilterDropdown: FC<FilterDropdownProps> = ({
     <Menu modal={false}>
       <MenuTrigger
         className={cn(
-          touchable({ inline: true, rounded: 'md', noBrightness: false }),
+          touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
           filterTrigger({ active }),
           className,
         )}

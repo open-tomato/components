@@ -7,8 +7,8 @@ import {
   type ReactNode,
 } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   disclosureFrame,
@@ -60,7 +60,7 @@ export const TabsTrigger: ForwardRefExoticComponent<
     <RadixTabs.Trigger
       ref={ref}
       className={cn(
-        touchable({ inline: true, rounded: 'none', noBrightness: false }),
+        touchableVariants({ inline: true, rounded: 'none', noBrightness: false }),
         tabsTrigger(),
         className,
       )}

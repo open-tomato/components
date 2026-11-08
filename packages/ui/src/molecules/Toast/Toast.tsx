@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 // Direct file import, not the '../Banner' barrel: cross-molecule barrel
 // imports create a chunk cycle in the static Storybook build (React #130).
 import { ToneIcon } from '../Banner/ToneIcon';
@@ -39,7 +39,7 @@ export const Toast: import('react').ForwardRefExoticComponent<ToastProps & impor
           aria-label="Dismiss"
           onClick={onClose}
           className={cn(
-            touchable({ inline: true, rounded: 'sm', noBrightness: false }),
+            touchableVariants({ inline: true, rounded: 'sm', noBrightness: false }),
             toastClose(),
           )}
         >

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { touchable } from '../../atoms/Touchable/Touchable.variants';
 import { cn } from '../../lib';
+import { touchableVariants } from '../../particles/touchable';
 
 import {
   overlayHeader,
@@ -43,7 +43,7 @@ export const OverlayHeader: { (props: OverlayHeaderProps): import('react').JSX.E
       aria-label="Close"
       onClick={onClose}
       className={cn(
-        touchable({ inline: true, rounded: 'md', noBrightness: false }),
+        touchableVariants({ inline: true, rounded: 'md', noBrightness: false }),
         overlayHeaderClose(),
       )}
     >
