@@ -24,6 +24,7 @@ import {
   appShellTopbar,
   type AppShellBrandVariants,
   type AppShellSidebarVariants,
+  type AppShellVariants,
 } from './AppShell.variants';
 
 /**
@@ -46,20 +47,42 @@ import {
  *     </AppShellMain>
  *   </AppShell>
  *
+ * Height: the shell fills the box its parent gives it (`h-full`) and
+ * scrolls only its content slot, so the parent must have a height. Mounted
+ * at the page root, either size the root boxes
+ * (`html, body, #root { height: 100%; }`) or pass `viewport`, which makes
+ * the shell fill the viewport (`h-dvh`) whatever its parent. Without
+ * either, the shell is only as tall as its content and the rail stops
+ * where its nav ends.
+ *
  * Controlled throughout: the active page and `collapsed` live in the parent
  * and are threaded down — exactly like `open` on the surfaces and `query`
  * on the toolbar. Per the app-shell spec the sidebar collapse BUTTON belongs
  * to the topbar wrapper itself (`onToggleSidebar`), not to page chrome.
  */
 
-export type AppShellProps = HTMLAttributes<HTMLDivElement>;
+export interface AppShellProps
+  extends HTMLAttributes<HTMLDivElement>,
+  Omit<AppShellVariants, 'viewport'> {
+  /**
+   * Fill the viewport (`h-dvh`) instead of the parent's box. Use it for a
+   * shell mounted at the page root; leave it off when the shell sits under
+   * a banner or inside another layout, and size the parent instead.
+   */
+  viewport?: boolean;
+}
 
+/**
+ * The shell's frame: sidebar beside the main column. It fills the box its
+ * parent gives it, so the parent must have a height; pass `viewport` to
+ * fill the viewport instead.
+ */
 export const AppShell: ForwardRefExoticComponent<
   AppShellProps & RefAttributes<HTMLDivElement>
 > = forwardRef<
   HTMLDivElement, AppShellProps>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn(appShell(), className)} {...props} />
+  ({ className, viewport, ...props }, ref) => (
+    <div ref={ref} className={cn(appShell({ viewport }), className)} {...props} />
   ),
 );
 

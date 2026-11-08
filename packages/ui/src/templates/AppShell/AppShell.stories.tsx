@@ -14,6 +14,11 @@ import { AppShell } from './AppShell';
  * is the data-driven SidebarNav, the rail carries SidebarQuota +
  * SidebarQuickAccess, and the topbar composes the group switcher /
  * SearchSuggest / NotificationsBell / ThemeSwitcher / ProfileMenu.
+ *
+ * Height: these stories frame the shell in a fixed 560px box, because the
+ * shell fills the box its parent gives it. An app gives it that box by
+ * sizing its root (`html, body, #root { height: 100%; }`) or by passing
+ * `viewport`, which the Viewport story shows.
  */
 const meta: Meta<typeof AppShell> = {
   title: 'Templates/AppShell',
@@ -41,4 +46,13 @@ export const Collapsed: Story = {
  */
 export const WithContentFooter: Story = {
   render: () => <LiveShell page="settings" withFooter />,
+};
+
+/**
+ * `viewport`: the shell fills the viewport whatever its parent, as an app
+ * mounting it at the page root needs. The rail runs the full height.
+ */
+export const Viewport: Story = {
+  parameters: { layout: 'fullscreen' },
+  render: () => <LiveShell viewport />,
 };

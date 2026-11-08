@@ -59,6 +59,22 @@ describe('AppShell zones', () => {
   });
 });
 
+describe('AppShell height', () => {
+  it('fills the box its parent gives it by default', () => {
+    render(<AppShell data-testid="shell" />);
+    const shell = screen.getByTestId('shell');
+    expect(shell.className).toContain('h-full');
+    expect(shell.className).not.toContain('h-dvh');
+  });
+
+  it('fills the viewport with viewport, whatever its parent', () => {
+    render(<AppShell data-testid="shell" viewport />);
+    const shell = screen.getByTestId('shell');
+    expect(shell.className).toContain('h-dvh');
+    expect(shell.className).not.toContain('h-full');
+  });
+});
+
 describe('AppShell brand, title and spacer', () => {
   it('brand row shows the mark and the wordmark, and forwards ref and className', () => {
     const ref = createRef<HTMLDivElement>();
@@ -113,6 +129,25 @@ describe('AppShell brand, title and spacer', () => {
 });
 
 describe('LiveShell stories', () => {
+  it('frames the shell in a fixed box by default', async () => {
+    let view!: ReturnType<typeof render>;
+    await act(async () => {
+      view = render(<LiveShell />);
+    });
+    const outer = view.container.firstElementChild as HTMLElement;
+    expect(outer.className).toContain('h-[560px]');
+  });
+
+  it('renders the shell unframed, filling the viewport, for the viewport story', async () => {
+    let view!: ReturnType<typeof render>;
+    await act(async () => {
+      view = render(<LiveShell viewport />);
+    });
+    const outer = view.container.firstElementChild as HTMLElement;
+    expect(outer.className).toContain('h-dvh');
+    expect(outer.className).not.toContain('h-[560px]');
+  });
+
   it('renders the default shell and toggles the rail', async () => {
     await act(async () => {
       render(<LiveShell />);

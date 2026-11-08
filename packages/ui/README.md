@@ -110,8 +110,14 @@ tweaked at the consumer. The shells take their brand through slots
 (`AuthShell`'s `brand`, and `AppShellBrand` for the sidebar's brand row), and
 `Monogram` is the kit's neutral mark for them. In the topbar, `AppShellTitle`
 is the page title and pushes the controls after it to the far end;
-`AppShellSpacer` does the same anywhere else, such as the rail's foot. Demo content in stories uses the placeholder brand
-"Acme".
+`AppShellSpacer` does the same anywhere else, such as the rail's foot. Demo
+content in stories uses the placeholder brand "Acme".
+
+`AppShell` fills the box its parent gives it and scrolls only its content,
+so its parent must have a height. Mounted at the page root, size the root
+boxes (`html, body, #root { height: 100%; }`) or pass `viewport`, which makes
+the shell fill the viewport whatever its parent. Without either, the shell is
+only as tall as its content and the rail stops where its nav ends.
 
 ## Theming (v1: theme definition via CSS)
 

@@ -46,5 +46,6 @@ export {
   weekSummaryCard,
   type AppShellBrandVariants,
   type AppShellSidebarVariants,
+  type AppShellVariants,
   type NavItemVariants,
 } from './AppShell.variants';

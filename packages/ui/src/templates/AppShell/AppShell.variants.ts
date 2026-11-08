@@ -15,8 +15,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * aside/main/header flex zones, which is what ships here.
  */
 
-/** The frame: sidebar | main, filling whatever box the parent gives it. */
-export const appShell: (props?: ClassProp) => string = cva('flex h-full w-full overflow-hidden bg-bg');
+/**
+ * The frame: sidebar | main. By default it fills the box its parent gives
+ * it, so the parent must be sized; `viewport` makes it fill the viewport
+ * instead, for a shell mounted at the page root.
+ */
+export const appShell: (
+  props?: {
+    viewport?: boolean | null | undefined;
+  } & ClassProp,
+) => string = cva('flex w-full overflow-hidden bg-bg', {
+  variants: {
+    viewport: {
+      false: 'h-full',
+      true: 'h-dvh',
+    },
+  },
+  defaultVariants: { viewport: false },
+});
 
 /** The rail — collapse animates width; content is clipped, never squashed. */
 export const appShellSidebar: (
@@ -206,6 +222,7 @@ export const weekSummaryLimit: (props?: ClassProp) => string = cva('text-xs text
 /** The thin progress bar under the figures. */
 export const weekSummaryProgress: (props?: ClassProp) => string = cva('h-1');
 
+export type AppShellVariants = VariantProps<typeof appShell>;
 export type AppShellSidebarVariants = VariantProps<typeof appShellSidebar>;
 export type AppShellBrandVariants = VariantProps<typeof appShellBrand>;
 export type NavItemVariants = VariantProps<typeof navItem>;
