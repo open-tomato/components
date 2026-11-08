@@ -6,7 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *
  * Fills use the softer `*-wash` tier the feedback surfaces share.
  */
-export const banner: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
+export const banner: (props?: ({ tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('flex gap-3 rounded-md border px-[15px] py-[13px]', {
 
   variants: {
     tone: {
@@ -21,7 +21,7 @@ export const banner: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral'
 });
 
 /** Tone color for the leading icon. */
-export const bannerIcon: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('mt-px shrink-0', {
+export const bannerIcon: (props?: ({ tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva('mt-px shrink-0', {
 
   variants: {
     tone: {
@@ -36,7 +36,7 @@ export const bannerIcon: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neut
 });
 
 /** The optional tone-colored action button. */
-export const bannerAction: (props?: ({tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
+export const bannerAction: (props?: ({ tone?: 'info' | 'success' | 'danger' | 'neutral' | 'warning' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string = cva(
 
   'self-center shrink-0 rounded-md border bg-surface-1 px-3 py-1.5 text-[12.5px] font-semibold',
   {

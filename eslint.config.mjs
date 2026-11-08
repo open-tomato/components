@@ -1,22 +1,17 @@
-import baseConfig from './eslint.base.mjs';
+import baseConfig from '@open-tomato/eslint-config';
 
 /**
- * Root leaf: lints tools/ and root-level files. Each package under
- * packages/* carries its own leaf config extending ../../eslint.base.mjs.
+ * Root leaf: lints tools/ and root-level files over the shared open-tomato
+ * base. Each package under packages/* carries its own config.
  *
- * @type {import("eslint").Linter.Config} */
+ * @type {import("eslint").Linter.Config[]} */
 export default [
   {
     ignores: [
       'packages/**',
-      // Agent-harness prose (skills/agents) was never a lint target in the
-      // origin repos either.
-      '.claude/**',
+      // Agent-harness prose and planning folders are not lint targets.
       '.plans/**',
       '.specs/**',
-      '.rafa/**',
-      '.tmp/**',
-      '.docs/**',
     ],
   },
   ...baseConfig,

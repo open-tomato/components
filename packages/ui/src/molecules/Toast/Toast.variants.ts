@@ -7,7 +7,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * deferred to the motion pass — v1 is controlled: render it while it
  * should show.
  */
-export const toast: (props?: ({floating?: boolean | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+export const toast: (props?: ({ floating?: boolean | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string =
   cva(
     [
       'inline-flex items-center gap-2.5 rounded-md border px-3.5 py-[11px]',
@@ -27,7 +27,7 @@ export const toast: (props?: ({floating?: boolean | null | undefined;} & import(
   );
 
 /** Tone color for the leading icon (reads fine on the dark chrome). */
-export const toastIcon: (props?: ({tone?: 'success' | 'warning' | 'danger' | 'info' | 'neutral' | null | undefined;} & import('class-variance-authority/types').ClassProp) | undefined) => string =
+export const toastIcon: (props?: ({ tone?: 'success' | 'warning' | 'danger' | 'info' | 'neutral' | null | undefined; } & import('class-variance-authority/types').ClassProp) | undefined) => string =
   cva('shrink-0', {
     variants: {
       tone: {
