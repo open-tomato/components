@@ -17,12 +17,14 @@ import {
   toolTitleStack,
 } from './KnownEntities.variants';
 
-export type EntityLayout = 'inline' | 'cell' | 'title';
+export type EntityLayout = 'inline' | 'stack' | 'cell' | 'title';
 
 export interface EntityProps
   extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /**
-   * `inline` — one line (leading + title); `cell` — compact double line;
+   * `inline` — one line (leading + title); `stack` — the inline line with a
+   * greyed second line under it, starting below the leading (for a status
+   * dot); `cell` — leading beside a compact double line (for a tile);
    * `title` — larger tile with a double line.
    */
   layout?: EntityLayout;
@@ -61,17 +63,37 @@ export const Entity: import('react').ForwardRefExoticComponent<
     const tone = found?.tone;
     const glyph = found?.icon;
 
+    const inlineLeading = leading ?? (glyph != null && (
+      <span className={entityTone({ tone })}>
+        <Icon name={glyph} size={12} />
+      </span>
+    ));
+    const inlineTitle = resolvedTitle != null && <span className={entityInlineName()}>{resolvedTitle}</span>;
+
     if (layout === 'inline') {
       return createElement(
         'span',
         { ref, className: cn(entityCell(), className), ...props },
-        leading ?? (glyph != null && (
-          <span className={entityTone({ tone })}>
-            <Icon name={glyph} size={12} />
-          </span>
-        )),
-        resolvedTitle != null && <span className={entityInlineName()}>{resolvedTitle}</span>,
+        inlineLeading,
+        inlineTitle,
         trailing,
+      );
+    }
+
+    if (layout === 'stack') {
+      return createElement(
+        'div',
+        { ref, className: cn(entityCellStack(), className), ...props },
+        <span className={entityCell()}>
+          {inlineLeading}
+          {inlineTitle}
+        </span>,
+        (resolvedSubtitle != null || trailing != null) && (
+          <span className={entityMeta()}>
+            {resolvedSubtitle}
+            {trailing}
+          </span>
+        ),
       );
     }
 

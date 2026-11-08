@@ -9,6 +9,7 @@ describe('isKnownCellType', () => {
   it('recognises registered types only', () => {
     expect(isKnownCellType('badge')).toBe(true);
     expect(isKnownCellType('context-menu')).toBe(true);
+    expect(isKnownCellType('entity-stack')).toBe(true);
     expect(isKnownCellType('nope')).toBe(false);
   });
 });

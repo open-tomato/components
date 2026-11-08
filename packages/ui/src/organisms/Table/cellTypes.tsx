@@ -40,6 +40,7 @@ import { cellTypeRelativeTime, cellTypeText } from './Table.variants';
 export interface CellTypeDataMap {
   /* known entities */
   'entity-inline': EntityProps;
+  'entity-stack': EntityProps;
   'entity-cell': EntityProps;
   'entity-title': EntityProps;
   'model-footer': ModelFooterProps;
@@ -66,6 +67,7 @@ type CellRegistry = {
 
 const registry: CellRegistry = {
   'entity-inline': (d) => <Entity {...d} layout="inline" />,
+  'entity-stack': (d) => <Entity {...d} layout="stack" />,
   'entity-cell': (d) => <Entity {...d} layout="cell" />,
   'entity-title': (d) => <Entity {...d} layout="title" />,
   'model-footer': (d) => <ModelFooter {...d} />,
@@ -104,6 +106,7 @@ const registry: CellRegistry = {
  */
 const REQUIRED_KEYS: Record<KnownCellType, string[]> = {
   'entity-inline': [],
+  'entity-stack': [],
   'entity-cell': [],
   'entity-title': [],
   'model-footer': ['name'],

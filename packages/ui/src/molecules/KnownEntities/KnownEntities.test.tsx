@@ -52,6 +52,21 @@ describe('Entity', () => {
     expect(screen.getByText('badge')).toBeTruthy();
   });
 
+  it('stack layout puts leading on the title row and the subtitle on its own row below', () => {
+    const { container } = render(
+      <Entity layout="stack" leading={<i data-testid="lead" />} title="Name" subtitle="meta" />,
+    );
+    const root = container.firstElementChild;
+    const lead = screen.getByTestId('lead');
+    const titleRow = lead.parentElement;
+    const metaRow = root?.lastElementChild;
+    expect(root?.tagName).toBe('DIV');
+    expect(titleRow?.parentElement === root).toBe(true);
+    expect(titleRow?.contains(screen.getByText('Name'))).toBe(true);
+    expect(titleRow?.contains(screen.getByText('meta'))).toBe(false);
+    expect(metaRow !== titleRow && metaRow?.contains(screen.getByText('meta'))).toBe(true);
+  });
+
   it('shows the trailing slot of an inline entity', () => {
     render(<Entity title="Name" trailing={<b>badge</b>} />);
     expect(screen.getByText('badge')).toBeTruthy();

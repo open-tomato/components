@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { useState } from 'react';
 
+import { Avatar } from '../../atoms/Avatar';
 import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { ACTIVITY_STATUS_TONE } from '../../molecules/KnownEntities/KnownEntities.variants';
 import { makeColumns, ITEMS, type Item } from '../../stories/items';
@@ -198,7 +199,7 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
   {
     key: 'item',
     header: 'Item',
-    cell: (r) => renderCellContent('entity-cell', {
+    cell: (r) => renderCellContent('entity-stack', {
       leading: (
         <StatusIndicator
           tone={ACTIVITY_STATUS_TONE[r.status]}
@@ -254,7 +255,10 @@ const CONFIG_COLUMNS: Column<ItemRow>[] = [
     key: 'by',
     header: 'By',
     width: 96,
-    cell: (r) => renderCellContent('entity-inline', { title: r.by }),
+    cell: (r) => renderCellContent('entity-inline', {
+      leading: <Avatar name={r.by} size="sm" status="none" />,
+      title: r.by,
+    }),
   },
   {
     key: 'menu',
@@ -274,8 +278,8 @@ const ConfigTable = Table<ItemRow>;
 /**
  * The self-describing table: every column resolves its renderer
  * from the `{entity}-{variant}` type registry, mirroring the JSON table
- * config in the page spec (entity-cell / badge / quota-progress /
- * amount-over-time / entity-inline / context-menu).
+ * config in the page spec (entity-stack / entity-cell / badge /
+ * quota-progress / amount-over-time / entity-inline / context-menu).
  * Fidelity source: the original screen's table region, captured
  * light+dark during the one-time port fidelity check. Spec-over-original
  * divergences: the usage bar colors by consumption thresholds, not

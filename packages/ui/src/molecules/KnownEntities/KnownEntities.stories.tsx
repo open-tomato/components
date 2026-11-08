@@ -8,7 +8,7 @@ import { StatusIndicator } from '../../atoms/StatusIndicator';
 import { Entity } from './Entity';
 import { EntityKindsProvider } from './EntityKinds';
 import { type EntityKinds } from './entityKindsContext';
-import { ACTIVITY_STATUS_TONE, type ActivityStatus } from './KnownEntities.variants';
+import { ACTIVITY_STATUS_TONE, entityTone, type ActivityStatus } from './KnownEntities.variants';
 import { ModelFooter } from './ModelFooter';
 
 /** A neutral demo map — the kit ships no kinds; an implementor supplies its own. */
@@ -28,6 +28,13 @@ const Status = ({ status }: { status: ActivityStatus }) => (
     pulse={status === 'running'}
     label={status}
   />
+);
+
+/** A model's accent dot, for an entity whose kind supplies no icon. */
+const AccentDot = () => (
+  <span className={entityTone({ tone: 'accent' })}>
+    <span className="block size-2 rounded-full bg-current" aria-hidden />
+  </span>
 );
 
 const Row = ({ label, children }: { label: string; children: ReactNode }) => (
@@ -94,8 +101,8 @@ export const Agent: Story = {
 
 /**
  * Spec: the `inline` layout with a status mark in `leading` (running
- * pulses) and the `cell` layout with the status mark beside a title over
- * `{instance id} · {branch}` greyed below.
+ * pulses) and the `stack` layout: the status mark and title on the top
+ * line, `{instance id} · {branch}` greyed below, starting under the mark.
  */
 export const Session: Story = {
   args: BASE_ARGS,
@@ -109,7 +116,7 @@ export const Session: Story = {
       </Row>
       <Row label="cell">
         <Entity
-          layout="cell"
+          layout="stack"
           leading={<Status status="done" />}
           title="auth-refactor"
           subtitle="worker-7d2f · feat/jwt-login"
@@ -117,7 +124,7 @@ export const Session: Story = {
       </Row>
       <Row label="no branch">
         <Entity
-          layout="cell"
+          layout="stack"
           leading={<Status status="waiting" />}
           title="perf-investigate"
           subtitle="worker-93af"
@@ -128,7 +135,7 @@ export const Session: Story = {
 };
 
 /**
- * Spec: an inline entity — accent icon + name; `ModelFooter` — small icon
+ * Spec: an inline entity — an accent dot or the kind's icon + name; `ModelFooter` — small icon
  * + name inheriting the footer color, no accent of its own (shown here
  * inside a greyed footer-colored line).
  */
@@ -136,8 +143,8 @@ export const Model: Story = {
   args: BASE_ARGS,
   render: () => (
     <div className="flex flex-col gap-3">
-      <Row label="inline, no icon">
-        <Entity layout="inline" title="sonnet-4-5" />
+      <Row label="inline, dot">
+        <Entity layout="inline" leading={<AccentDot />} title="sonnet-4-5" />
       </Row>
       <Row label="inline, icon">
         <Entity layout="inline" kind="model" title="opus-4-5" />
@@ -198,8 +205,8 @@ export const Task: Story = {
 };
 
 /**
- * Spec: a `title` entity — icon tile; bold name over a subtitle and a
- * type badge in `trailing`.
+ * Spec: a `title` entity — icon tile; bold name over the type badge and
+ * the slug, the badge leading the second line.
  */
 export const Tool: Story = {
   args: BASE_ARGS,
@@ -210,8 +217,7 @@ export const Tool: Story = {
           layout="title"
           kind="tool"
           title="Repo Search"
-          subtitle="gh-search"
-          trailing={<Badge tone="neutral" size="sm">MCP</Badge>}
+          subtitle={<><Badge tone="neutral" size="sm">MCP</Badge>gh-search</>}
         />
       </Row>
       <Row label="skill">
@@ -219,8 +225,7 @@ export const Tool: Story = {
           layout="title"
           kind="skill"
           title="Component from design"
-          subtitle="component-from-design"
-          trailing={<Badge tone="info" size="sm">skill</Badge>}
+          subtitle={<><Badge tone="info" size="sm">skill</Badge>component-from-design</>}
         />
       </Row>
     </div>
