@@ -6,6 +6,7 @@
 import { describe, expect, it } from 'bun:test';
 import { PNG } from 'pngjs';
 
+import { componentKey, componentName, groupByComponent, planAccept, runFingerprint } from '../scripts/visual-review/batches';
 import {
   classify,
   FAINT_MAX_PIXELS,
@@ -164,5 +165,80 @@ describe('the review page', () => {
     expect(crops).toContain('background-position:-952px -112px');
     expect(crops).toContain('background-position:-1752px -112px');
     expect(renderCrops(shot('none-diff.png', []), 'none.png')).toBe('');
+  });
+});
+
+describe('component batches', () => {
+  const shot = (storyId: string, story: string, paints: readonly Paint[], theme = 'light'): ReviewShot => ({
+    ...toShot({ ...FAILURE, storyId, story, theme, diffFile: `${storyId}--${theme}-diff.png` }, measureDiff(diffImage(paints))),
+    stability: 'moved',
+  });
+  const spread = Array.from({ length: 7 }, (_, i) => block((i % 4) * 50, Math.floor(i / 4) * 50, 10, 10)).flat();
+
+  it('takes the component from the story id, and its title from the story name', () => {
+    expect(componentKey('molecules-known-entities--with-rows')).toBe('molecules-known-entities');
+    expect(componentName('Molecules/Known Entities With Rows', 'molecules-known-entities')).toBe('Molecules/Known Entities');
+    expect(componentName('Atoms/Button', 'atoms-button')).toBe('Atoms/Button');
+    expect(componentName('Odd', 'atoms-x')).toBe('atoms-x');
+  });
+
+  it('puts the largest component first, and its shots in shape order', () => {
+    const batches = groupByComponent([
+      shot('atoms-button--primary', 'Atoms/Button Primary', block(0, 0, 10, 10)),
+      shot('organisms-table--rows', 'Organisms/Table Rows', spread),
+      shot('organisms-table--empty', 'Organisms/Table Empty', block(0, 0, 10, 10)),
+    ]);
+    expect(batches.map((batch) => batch.name)).toEqual(['Organisms/Table', 'Atoms/Button']);
+    expect(batches[0]?.shots.map((item) => item.shape)).toEqual(['one-spot', 'spread']);
+  });
+
+  it('names a run by its failures, whatever their order', () => {
+    const a = shot('atoms-a--x', 'Atoms/A X', block(0, 0, 10, 10));
+    const b = shot('atoms-b--x', 'Atoms/B X', block(0, 0, 10, 10));
+    expect(runFingerprint([a, b])).toBe(runFingerprint([b, a]));
+    expect(runFingerprint([a, b])).not.toBe(runFingerprint([a]));
+  });
+
+  it('moves only the failed baselines of accepted components, and names unknown ones', () => {
+    const shots = [
+      shot('atoms-button--primary', 'Atoms/Button Primary', block(0, 0, 10, 10)),
+      shot('atoms-button--primary', 'Atoms/Button Primary', block(0, 0, 10, 10), 'dark'),
+      shot('organisms-table--rows', 'Organisms/Table Rows', spread),
+    ];
+    const plan = planAccept(shots, ['atoms-button', 'atoms-nope'], 'snaps', 'backup');
+    expect(plan.moves).toEqual([
+      { from: 'snaps/atoms-button--primary--dark.png', to: 'backup/atoms-button--primary--dark.png' },
+      { from: 'snaps/atoms-button--primary--light.png', to: 'backup/atoms-button--primary--light.png' },
+    ]);
+    expect(plan.unknown).toEqual(['atoms-nope']);
+  });
+
+  it('renders one section per component with verdict buttons and the run name', () => {
+    const shots = [shot('organisms-table--rows', 'Organisms/Table Rows', spread)];
+    const page = renderPage({ shots, generatedAt: 'now', staleDiffFiles: 0, diffHref: 'd', storybookHref: 's' });
+    expect(page).toContain('id="organisms-table" data-key="organisms-table" data-shapes="spread" data-name="Organisms/Table"');
+    expect(page).toContain('data-verdict="green"');
+    expect(page).toContain(`data-run="${runFingerprint(shots)}"`);
+    expect(page).toContain('bun run visual:accept');
+  });
+});
+
+describe('the shape filter', () => {
+  const shot = (storyId: string, paints: readonly Paint[]): ReviewShot => ({
+    ...toShot({ ...FAILURE, storyId, story: storyId, diffFile: `${storyId}--light-diff.png` }, measureDiff(diffImage(paints))),
+    stability: 'moved',
+  });
+
+  it('offers a button per shape present, and tags shots and batches with their shapes', () => {
+    const page = renderPage({
+      shots: [shot('atoms-a--x', block(0, 0, 10, 10)), shot('atoms-a--y', block(0, 0, 3, 3))],
+      generatedAt: 'now', staleDiffFiles: 0, diffHref: 'd', storybookHref: 's',
+    });
+    expect(page).toContain('data-filter="one-spot"');
+    expect(page).toContain('data-filter="faint"');
+    expect(page).not.toContain('data-filter="spread"');
+    expect(page).toContain('data-shapes="one-spot faint"');
+    expect(page).toContain('<figure class="shot" data-shape="faint">');
+    expect(page).toContain('body[data-shape="faint"] .batch:not([data-shapes~="faint"])');
   });
 });

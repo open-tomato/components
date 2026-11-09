@@ -8,6 +8,7 @@ describe('package root barrel', () => {
     expect(root.Button).toBeDefined();
     expect(root.Breadcrumb).toBeDefined();
     expect(root.Table).toBeDefined();
+    expect(root.ContextSwitcher).toBeDefined();
     expect(root.AppShell).toBeDefined();
   });
 

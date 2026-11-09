@@ -177,15 +177,18 @@ sessions.
 ```bash
 bun install
 bun run storybook          # component workbench
-bun run test               # unit (cache) + smoke layer (one test per story)
-bun run test:visual        # screenshot regression vs this machine's baselines
+bun run test               # unit project (vitest): the cache module's tests
+bun run test:full          # unit + the storybook smoke project (one test per story)
+bun run test:render        # render tests for every story and component (bun test)
+bun run test:visual        # screenshot regression vs this machine's baselines (local only)
 bun run test:visual:update # (re)seed this machine's baselines
 bun run check:stories      # every story renders error-free
 bun run build              # library build (dist/ — JS, d.ts, styles/)
 ```
 
-Visual baselines are per-environment and untracked — each machine (and CI)
-regenerates its own; they are never copied between environments.
+Visual baselines are per-machine and untracked — each machine regenerates
+its own; they are never copied between machines, and the visual suite never
+runs in GitHub Actions.
 
 ### Visual diff tolerance (to revisit)
 
