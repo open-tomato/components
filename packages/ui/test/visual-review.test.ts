@@ -81,6 +81,15 @@ describe('readFailures', () => {
     expect(readFailures(report([message('(5 differing pixels)')], 'passed'))).toEqual([]);
     expect(readFailures(report(['Error: page crashed']))).toEqual([]);
   });
+
+  it('reads every theme of a message that joins several failed comparisons', () => {
+    const part = (body: string, theme: string): string => message(body).replace('--light-diff', `--${theme}-diff`);
+    const joined = `${part('was 0.04% different from snapshot (397 differing pixels).', 'light')}\n\n${part('Expected image to be the same size as the snapshot (1280x720), but was different (1280x760).', 'dark')}`;
+    const failures = readFailures(report([joined]));
+    expect(failures).toHaveLength(2);
+    expect(failures[0]).toMatchObject({ theme: 'light', diffFile: 'atoms-field--default--light-diff.png', reportedPixels: 397, sizeChange: null });
+    expect(failures[1]).toMatchObject({ theme: 'dark', diffFile: 'atoms-field--default--dark-diff.png', reportedPixels: null, sizeChange: '1280x720 to 1280x760' });
+  });
 });
 
 describe('measureDiff', () => {

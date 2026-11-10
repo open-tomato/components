@@ -44,6 +44,14 @@ const config: TestRunnerConfig = {
   setup() {
     expect.extend({ toMatchImageSnapshot });
   },
+  // Both themes are captured and compared before the story fails: each
+  // theme keeps its own toMatchImageSnapshot call, so each writes its own
+  // baseline and diff image under `<story id>--<theme>`, but a mismatch
+  // throws, so the call is caught and the errors are thrown once after the
+  // loop. Otherwise a failed light shot would end the story and its dark
+  // shot would never be compared. The joined message holds each theme's
+  // own error, diff path included, which is what the review page
+  // (scripts/visual-review) reads.
   async postVisit(page, context) {
     // Async-loaded glyphs (atoms/Icon: per-name React.lazy chunks) mark
     // their stand-ins with data-glyph-pending. Wait until every pending
@@ -61,6 +69,7 @@ const config: TestRunnerConfig = {
         timeout: 15_000,
       });
     }
+    const failures: string[] = [];
     for (const theme of THEMES) {
       await page.evaluate((t) => {
         document.documentElement.setAttribute('data-theme', t);
@@ -72,14 +81,24 @@ const config: TestRunnerConfig = {
 
       const image = await page.screenshot({ animations: 'disabled' });
 
-      expect(image).toMatchImageSnapshot({
-        customSnapshotsDir,
-        customDiffDir,
-        customSnapshotIdentifier: `${context.id}--${theme}`,
-        customDiffConfig: { threshold: PIXEL_COLOR_THRESHOLD },
-        failureThreshold: MAX_CHANGED_PIXELS,
-        failureThresholdType: 'pixel',
-      });
+      try {
+        expect(image).toMatchImageSnapshot({
+          customSnapshotsDir,
+          customDiffDir,
+          customSnapshotIdentifier: `${context.id}--${theme}`,
+          customDiffConfig: { threshold: PIXEL_COLOR_THRESHOLD },
+          failureThreshold: MAX_CHANGED_PIXELS,
+          failureThresholdType: 'pixel',
+        });
+      } catch (error: unknown) {
+        const message = error instanceof Error
+          ? error.message
+          : String(error);
+        failures.push(`${theme} theme: ${message}`);
+      }
+    }
+    if (failures.length > 0) {
+      throw new Error(failures.join('\n\n'));
     }
   },
 };
