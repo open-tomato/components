@@ -94,9 +94,10 @@ radius, so it takes these steps:
    `fonts.css` (the weight range the CSS named, Google's `unicode-range`),
    and add the family's `OFL.txt` from github.com/google/fonts as
    `OFL-<family>.txt`.
-3. Point the role variable at the family in tokens.css AND theme.css
-   (the `@theme` block repeats the stacks), extend `FAMILIES` in
-   `fonts.test.ts`, and add the family to both NOTICE files.
+3. Point the role variable at the family in tokens.css (the only place
+   a font list lives: theme.css registers the roles through
+   `@theme reference`, with a generic fallback only), extend `FAMILIES`
+   in `fonts.test.ts`, and add the family to both NOTICE files.
 4. Assert the visual suite first (it fails), then reseed with
    `bun run test:visual:update` and assert twice more.
 

@@ -14,18 +14,19 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 const THEMES = ['light', 'dark'] as const;
 
 /**
- * Diff tolerance, provisional: README.md lists both values under "Visual
- * diff tolerance (to revisit)". Chromium does not draw text the same way
- * on every render, so the edge pixels of glyphs differ between passes of
- * the same page, at rest and with one worker. Measured on the kit's 658
- * shots: at the default per-pixel threshold (0.01) a flaky shot flagged up
- * to 396 pixels and the smallest reviewed real change 150; at 0.1 those
- * were 12 and 85. So a pixel counts as changed when its colour moves
- * past 0.1 (about 26 of 255 brightness levels), and a shot fails when
- * more than 20 pixels changed.
+ * Diff tolerance; README.md "Visual diff tolerance" holds the readings.
+ * The type faces ship in the package (src/styles/fonts/), so every pass
+ * draws text with the same font files, and the edge-pixel noise that
+ * once needed a wide tolerance is gone. Measured on 2026-11-10 over 3
+ * passes of the 674 shots at the exact setting (colour threshold 0, no
+ * changed pixel allowed), load average 11 to 15: 2022 of 2023
+ * comparisons matched exactly, and one shot differed by 1 pixel once,
+ * matching on its repeat. So a pixel counts as changed when its colour
+ * moves past 0.01 (jest-image-snapshot's default, about 3 of 255
+ * brightness levels), and a shot fails when more than 1 pixel changed.
  */
-const PIXEL_COLOR_THRESHOLD = 0.1;
-const MAX_CHANGED_PIXELS = 20;
+const PIXEL_COLOR_THRESHOLD = 0.01;
+const MAX_CHANGED_PIXELS = 1;
 
 const customSnapshotsDir = `${process.cwd()}/visual/__image_snapshots__`;
 const customDiffDir = `${process.cwd()}/visual/__diff_output__`;

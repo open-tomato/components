@@ -62,6 +62,16 @@ describe('fonts.css', () => {
     expect(stack).toBe(family);
   });
 
+  it('theme.css registers the utility roles by reference and names no family', () => {
+    const theme = readFileSync(join(import.meta.dir, 'theme.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    const block = /@theme reference \{([^}]*)\}/.exec(theme)?.[1] ?? '';
+    for (const role of ['--font-display', '--font-body', '--font-mono']) {
+      expect(block).toMatch(new RegExp(`${role}:\\s*(sans-serif|monospace);`));
+    }
+    const declared = [...theme.matchAll(/--font-[a-z]+:\s*([^;]+);/g)].map((match) => match[1] ?? '');
+    expect(declared.filter((value) => /["']/.test(value))).toEqual([]);
+  });
+
   it.each(FAMILIES)('declares $family and ships its OFL licence', ({ family, licence }) => {
     expect(css).toContain(`font-family: '${family}';`);
     const text = readFileSync(join(FONTS_DIR, licence), 'utf8');

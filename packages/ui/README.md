@@ -295,25 +295,47 @@ Visual baselines are per-machine and untracked — each machine regenerates
 its own; they are never copied between machines, and the visual suite never
 runs in GitHub Actions.
 
-### Visual diff tolerance (to revisit)
+### Visual diff tolerance
 
 Two parameters in `.storybook/test-runner.ts` decide when a screenshot
-counts as changed. Both are provisional: revisit them in a later iteration,
-for example once text renders the same way on every pass.
+counts as changed.
 
 | Parameter | Value | Meaning |
 |---|---|---|
-| `PIXEL_COLOR_THRESHOLD` | `0.1` | A pixel counts as changed when its colour moves past this pixelmatch threshold, about 26 of 255 brightness levels. |
-| `MAX_CHANGED_PIXELS` | `20` | A shot fails when more than this many pixels changed. |
+| `PIXEL_COLOR_THRESHOLD` | `0.01` | A pixel counts as changed when its colour moves past this pixelmatch threshold, about 3 of 255 brightness levels (jest-image-snapshot's default). |
+| `MAX_CHANGED_PIXELS` | `1` | A shot fails when more than this many pixels changed. |
 
-Why: Chromium draws the edges of text slightly differently from one render to
-the next, so at the previous near-exact setting (threshold `0.01`, one pixel
-failing a shot) a few shots failed on every run, even at rest with one test
-worker. Measured on the 658 shots: a flaky shot flagged at most 12 pixels at
-`0.1`, and the smallest reviewed real change flagged 85.
+Why: text used to draw differently from pass to pass, partly because Google
+Fonts answered with two font sets that rasterise differently, so the suite
+ran at a wide `0.1` and 20 pixels. The type faces now ship in the package,
+and the noise dropped to one pixel, seen once. Measured on 2026-11-10, 3
+passes over the 674 shots at the exact setting (colour threshold `0`, no
+changed pixel allowed), load average 11 to 15:
 
-The trade-off: a colour shift under about 26 brightness levels, or a change of
-20 pixels or fewer, passes unseen.
+| Reading | Result |
+|---|---|
+| Shot comparisons | 2023 (3 passes, plus one automatic repeat) |
+| Matched exactly | 2022 |
+| Differed | 1 shot, by 1 pixel, once; its repeat matched |
+
+At the new values, 2 more passes matched 674 of 674 on their first run.
+
+The 1-pixel shot (`Organisms/SearchSuggest Open`, light) had its diff
+image removed when its repeat passed, so what moved is not known. At the
+new values that pixel passes. A larger flake costs one repeat run: a
+failing run repeats once, and only shots that fail both runs count as
+moved.
+
+What the tighter setting catches, measured by shifting the light theme's
+text colour (`--fg1`) by 10 brightness levels:
+
+| Setting | Shots that failed |
+|---|---|
+| old (`0.1`, 20 pixels) | 0 of 674: the shift passed unseen |
+| new (`0.01`, 1 pixel) | 204 light shots, in both runs, changing 10 to 2837 pixels each |
+
+The trade-off now: a colour shift under about 3 brightness levels, or a
+change of 1 pixel, passes unseen.
 
 Pixel-fidelity against design sources:
 
