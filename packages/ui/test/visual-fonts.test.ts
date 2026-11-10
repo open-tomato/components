@@ -5,13 +5,14 @@
  * only static answers, refetching until one arrives, and keeps every
  * accepted answer in a disk cache so later pages never touch the network.
  */
-import { existsSync, mkdtempSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'bun:test';
 
 import {
+  answerFromCache,
   firstAcceptedAnswer,
   isStaticGoogleFontsCss,
   readCachedResponse,
@@ -189,6 +190,20 @@ describe('the font cache', () => {
     expect(readCachedResponse(dir, URL_A)).toBeUndefined();
   });
 
+  it('treats a corrupt entry as a miss', () => {
+    // Arrange
+    const dir = freshCacheDir();
+    writeCachedResponse(dir, URL_A, { contentType: 'font/woff2', body: Buffer.from('a') });
+    const [entry] = readdirSync(dir);
+    writeFileSync(join(dir, entry ?? ''), '{"url": "trunc');
+
+    // Act
+    const cached = readCachedResponse(dir, URL_A);
+
+    // Assert
+    expect(cached).toBeUndefined();
+  });
+
   it('leaves no temporary file behind after a write', () => {
     const dir = freshCacheDir();
 
@@ -196,5 +211,111 @@ describe('the font cache', () => {
 
     expect(readdirSync(dir).filter((name) => name.includes('.tmp'))).toEqual([]);
     expect(readdirSync(dir)).toHaveLength(1);
+  });
+});
+
+const FONT_URL_A = 'https://fonts.gstatic.com/s/manrope/v23/face-a.woff2';
+const WOFF2 = Buffer.from([0x77, 0x4f, 0x46, 0x32]);
+
+interface FakeAnswer {
+  ok: boolean;
+  contentType: string;
+  body: Buffer;
+}
+
+/**
+ * A stand-in for Playwright's Route: hands out scripted network answers
+ * (an Error entry throws) and records how the request was settled.
+ */
+function fakeRoute(url: string, answers: Array<FakeAnswer | Error>) {
+  const settled: Array<{ kind: 'fulfill'; body: Buffer; contentType: string } | { kind: 'abort' }> = [];
+  let fetches = 0;
+  const route = {
+    request: () => ({ url: () => url }),
+    fetch: async () => {
+      const answer = answers[Math.min(fetches, answers.length - 1)];
+      fetches += 1;
+      if (answer === undefined) throw new Error('fake route has no answers');
+      if (answer instanceof Error) throw answer;
+      return {
+        ok: () => answer.ok,
+        headers: () => ({ 'content-type': answer.contentType }),
+        body: async () => answer.body,
+      };
+    },
+    fulfill: async (options: { body: Buffer; contentType: string }) => {
+      settled.push({ kind: 'fulfill', body: options.body, contentType: options.contentType });
+    },
+    abort: async () => {
+      settled.push({ kind: 'abort' });
+    },
+  };
+  return { route, settled, fetches: () => fetches };
+}
+
+const acceptFont = (answer: FakeAnswer) => answer.ok && answer.contentType.startsWith('font/');
+
+describe('answerFromCache', () => {
+  it('answers a cached URL without fetching', async () => {
+    // Arrange
+    const dir = freshCacheDir();
+    writeCachedResponse(dir, FONT_URL_A, { contentType: 'font/woff2', body: WOFF2 });
+    const fake = fakeRoute(FONT_URL_A, [new Error('network must not be used')]);
+
+    // Act
+    await answerFromCache(fake.route, acceptFont, dir);
+
+    // Assert
+    expect(fake.fetches()).toBe(0);
+    expect(fake.settled).toEqual([{ kind: 'fulfill', body: WOFF2, contentType: 'font/woff2' }]);
+  });
+
+  it('fetches a miss, stores it and fulfils with it', async () => {
+    const dir = freshCacheDir();
+    const fake = fakeRoute(FONT_URL_A, [{ ok: true, contentType: 'font/woff2', body: WOFF2 }]);
+
+    await answerFromCache(fake.route, acceptFont, dir);
+
+    expect(fake.settled).toEqual([{ kind: 'fulfill', body: WOFF2, contentType: 'font/woff2' }]);
+    expect(readCachedResponse(dir, FONT_URL_A)?.body.equals(WOFF2)).toBe(true);
+  });
+
+  it('aborts and stores nothing when no answer is accepted', async () => {
+    const dir = freshCacheDir();
+    const fake = fakeRoute(FONT_URL_A, [{ ok: true, contentType: 'text/html', body: Buffer.from('<html>') }]);
+
+    await answerFromCache(fake.route, acceptFont, dir, 3);
+
+    expect(fake.fetches()).toBe(3);
+    expect(fake.settled).toEqual([{ kind: 'abort' }]);
+    expect(readCachedResponse(dir, FONT_URL_A)).toBeUndefined();
+  });
+
+  it('still fulfils when the cache cannot be written', async () => {
+    // Arrange: a plain file where the cache directory should be
+    const parent = mkdtempSync(join(tmpdir(), 'visual-fonts-'));
+    const dir = join(parent, 'cache');
+    writeFileSync(dir, 'not a directory');
+    const fake = fakeRoute(FONT_URL_A, [{ ok: true, contentType: 'font/woff2', body: WOFF2 }]);
+
+    // Act
+    await answerFromCache(fake.route, acceptFont, dir);
+
+    // Assert
+    expect(fake.settled).toEqual([{ kind: 'fulfill', body: WOFF2, contentType: 'font/woff2' }]);
+  });
+
+  it('refetches over a corrupt entry', async () => {
+    const dir = freshCacheDir();
+    writeCachedResponse(dir, FONT_URL_A, { contentType: 'font/woff2', body: Buffer.from('old') });
+    const [entry] = readdirSync(dir);
+    writeFileSync(join(dir, entry ?? ''), '');
+    mkdirSync(dir, { recursive: true });
+    const fake = fakeRoute(FONT_URL_A, [{ ok: true, contentType: 'font/woff2', body: WOFF2 }]);
+
+    await answerFromCache(fake.route, acceptFont, dir);
+
+    expect(fake.fetches()).toBe(1);
+    expect(fake.settled).toEqual([{ kind: 'fulfill', body: WOFF2, contentType: 'font/woff2' }]);
   });
 });

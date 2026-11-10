@@ -1,4 +1,4 @@
-import type { BrowserContext, Page, Route } from 'playwright';
+import type { BrowserContext, Page } from 'playwright';
 
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
@@ -100,15 +100,25 @@ function cacheFile(dir: string, url: string): string {
   return join(dir, `${key}.json`);
 }
 
-/** The stored response for `url`, or undefined when none is stored. */
+function isStoredEntry(value: unknown): value is StoredEntry {
+  if (typeof value !== 'object' || value === null) return false;
+  const entry = value as Record<string, unknown>;
+  return typeof entry.url === 'string' && typeof entry.contentType === 'string' && typeof entry.body === 'string';
+}
+
+/**
+ * The stored response for `url`, or undefined when none is stored. An
+ * entry that cannot be read or parsed counts as a miss, so a damaged file
+ * is fetched again and overwritten rather than failing every later page.
+ */
 export function readCachedResponse(dir: string, url: string): CachedResponse | undefined {
-  let raw: string;
+  let entry: unknown;
   try {
-    raw = readFileSync(cacheFile(dir, url), 'utf8');
+    entry = JSON.parse(readFileSync(cacheFile(dir, url), 'utf8'));
   } catch {
     return undefined;
   }
-  const entry = JSON.parse(raw) as StoredEntry;
+  if (!isStoredEntry(entry) || entry.url !== url) return undefined;
   return { contentType: entry.contentType, body: Buffer.from(entry.body, 'base64') };
 }
 
@@ -125,47 +135,88 @@ export function writeCachedResponse(dir: string, url: string, response: CachedRe
   renameSync(temporary, target);
 }
 
-interface FetchedResponse extends CachedResponse {
+/** What the pin decides on for one network answer. */
+export interface FetchedResponse extends CachedResponse {
   ok: boolean;
 }
 
-/** Answers the request from the cache, filling it on a miss. */
-async function answerFromCache(route: Route, accept: (answer: FetchedResponse) => boolean): Promise<void> {
+/**
+ * The parts of Playwright's Route the pin uses. Playwright's own Route
+ * fits it; tests pass a stand-in.
+ */
+export interface FontRoute {
+  request: () => { url: () => string };
+  fetch: (options: { timeout: number }) => Promise<{
+    ok: () => boolean;
+    headers: () => Record<string, string>;
+    body: () => Promise<Buffer>;
+  }>;
+  fulfill: (options: { status: number; contentType: string; headers: Record<string, string>; body: Buffer }) => Promise<void>;
+  abort: (errorCode: string) => Promise<void>;
+}
+
+function warn(message: string): void {
+  process.stderr.write(`visual-fonts: ${message}\n`);
+}
+
+/**
+ * Answers the request from the cache in `cacheDir`, filling it on a miss.
+ * Every path ends in a fulfil or an abort: a cache that cannot be written
+ * still fulfils with the fetched answer, and any other throw aborts the
+ * request so the page fails instead of waiting on it.
+ */
+export async function answerFromCache(
+  route: FontRoute,
+  accept: (answer: FetchedResponse) => boolean,
+  cacheDir: string = FONT_CACHE_DIR,
+  attempts: number = MAX_FETCH_ATTEMPTS,
+): Promise<void> {
   const url = route.request().url();
-  const cached = readCachedResponse(FONT_CACHE_DIR, url);
-  const answer = cached ?? await firstAcceptedAnswer(
-    async (): Promise<FetchedResponse> => {
-      const response = await route.fetch({ timeout: FETCH_TIMEOUT_MS });
-      return { ok: response.ok(), contentType: response.headers()['content-type'] ?? '', body: await response.body() };
-    },
-    accept,
-    MAX_FETCH_ATTEMPTS,
-    (error) => process.stderr.write(`visual-fonts: fetch of ${url} failed: ${String(error)}\n`),
-  );
-  if (answer === undefined) {
-    process.stderr.write(`visual-fonts: no accepted answer for ${url} after ${MAX_FETCH_ATTEMPTS} attempts; aborting it so the shots fail instead of drawing with other fonts\n`);
-    await route.abort('failed');
-    return;
+  try {
+    const cached = readCachedResponse(cacheDir, url);
+    const answer = cached ?? await firstAcceptedAnswer(
+      async (): Promise<FetchedResponse> => {
+        const response = await route.fetch({ timeout: FETCH_TIMEOUT_MS });
+        return { ok: response.ok(), contentType: response.headers()['content-type'] ?? '', body: await response.body() };
+      },
+      accept,
+      attempts,
+      (error) => warn(`fetch of ${url} failed: ${String(error)}`),
+    );
+    if (answer === undefined) {
+      warn(`no accepted answer for ${url} after ${attempts} attempts; aborting it so the shots fail instead of drawing with other fonts`);
+      await route.abort('failed');
+      return;
+    }
+    if (cached === undefined) {
+      try {
+        writeCachedResponse(cacheDir, url, answer);
+      } catch (error: unknown) {
+        warn(`could not store ${url} in ${cacheDir}: ${String(error)}`);
+      }
+    }
+    // The page is cross-origin to both hosts; font loads need CORS.
+    await route.fulfill({
+      status: 200,
+      contentType: answer.contentType,
+      headers: { 'access-control-allow-origin': '*' },
+      body: answer.body,
+    });
+  } catch (error: unknown) {
+    warn(`answering ${url} failed: ${String(error)}`);
+    await route.abort('failed').catch(() => {});
   }
-  if (cached === undefined) writeCachedResponse(FONT_CACHE_DIR, url, answer);
-  // The page is cross-origin to both hosts; font loads need CORS.
-  await route.fulfill({
-    status: 200,
-    contentType: answer.contentType,
-    headers: { 'access-control-allow-origin': '*' },
-    body: answer.body,
-  });
 }
 
 /** Routes the context's Google Fonts CSS and static font files through the cache. */
 async function pinGoogleFonts(context: BrowserContext): Promise<void> {
   await context.route(GOOGLE_FONTS_CSS, (route) => answerFromCache(
     route,
-    (answer) => answer.ok && isStaticGoogleFontsCss(answer.body.toString('utf8')),
+    (answer) => answer.ok && answer.contentType.startsWith('text/css') && isStaticGoogleFontsCss(answer.body.toString('utf8')),
   ));
   await context.route(STATIC_FONT_FILES, (route) => answerFromCache(
     route,
-    (answer) => answer.ok && answer.body.length > 0,
+    (answer) => answer.ok && answer.contentType.startsWith('font/') && answer.body.length > 0,
   ));
 }
 
