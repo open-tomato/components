@@ -87,7 +87,7 @@ That single import brings in, layer by layer:
 
 | Layer                  | File                                   | Role                                                                                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| fonts                  | `fonts.css`                            | type faces (Google Fonts today; swappable source)                                                    |
+| fonts                  | `fonts.css`                            | type faces, self-hosted woff2 files shipped in the package (OFL 1.1); swappable source               |
 | **theme definition**   | `tokens.css` (exported as `theme.css`) | the DEFAULT theme — semantic variables (`--bg`, `--fg1`, `--primary`, …) for light + dark            |
 | **component contract** | internal `@theme` mapping              | maps semantic variables onto Tailwind utilities (`bg-primary`, `text-fg1`, …) — stable across themes |
 | source scan            | `@source`                              | points your Tailwind build at the package's JS so the components' classes are generated              |
