@@ -11,3 +11,27 @@ Per section 4(d) of the Apache License 2.0, redistributions of this work
 — in source form or bundled/derivative form — must include a readable
 copy of the attribution notices in this file. In short: keep the credit
 to the original author and the origin projects above.
+
+Third-party fonts
+-----------------
+
+The type faces in packages/ui/src/styles/fonts/ are not covered by the
+Apache License 2.0 above. Each is licensed under the SIL Open Font
+License, Version 1.1, and its licence text, with the copyright line,
+ships beside the font files:
+
+- Bricolage Grotesque, Copyright 2022 The Bricolage Grotesque Project
+  Authors (https://github.com/ateliertriay/bricolage)
+  OFL-bricolage-grotesque.txt
+- Manrope, Copyright 2018 The Manrope Project Authors
+  (https://github.com/googlefonts/manrope)
+  OFL-manrope.txt
+- JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors
+  (https://github.com/JetBrains/JetBrainsMono)
+  OFL-jetbrains-mono.txt
+- Sansita Swashed, Copyright 2020 The Sansita Swashed Project Authors
+  (https://github.com/Omnibus-Type/Sansita-Swashed)
+  OFL-sansita-swashed.txt
+
+The woff2 files are the unmodified subsets Google Fonts serves for these
+families (fonts.gstatic.com/s/), renamed by family and script subset.

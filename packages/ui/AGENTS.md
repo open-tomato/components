@@ -71,6 +71,35 @@ meant to be overridden. `lib.css` is the published `styles.css` entry;
 `global.css` is the workbench entry (Storybook). The build copies all four into
 `dist/styles/`.
 
+Fonts split the same way. The role variables in tokens.css
+(`--font-display`, `--font-body`, `--font-mono`, `--font-accent`) are the
+font half of the theme definition: components ask for a role, never a
+family. `fonts.css` only declares the default faces, over woff2 files in
+`src/styles/fonts/` that the build copies to `dist/styles/fonts/`. A
+consumer switches fonts by redefining the role variables, like colors;
+README.md "Fonts" holds the consumer recipes, and
+`src/styles/fonts.test.ts` pins the contract (no remote URL, every file
+used, each role naming a declared family, each family's OFL text).
+
+Changing the DEFAULT faces is a theme change with a full visual blast
+radius, so it takes these steps:
+
+1. Fetch the Google Fonts CSS for the new family list with a current
+   Chrome user agent (an old one gets woff or ttf), and keep only an
+   answer whose font URLs are all static (`fonts.gstatic.com/s/`): the
+   generated `/l/font?kit=` set rasterises differently (see the history
+   of PR #99, the Google Fonts cache PR).
+2. Download each unique file into `src/styles/fonts/` as
+   `<family>-<subset>.woff2`, write one `@font-face` per file in
+   `fonts.css` (the weight range the CSS named, Google's `unicode-range`),
+   and add the family's `OFL.txt` from github.com/google/fonts as
+   `OFL-<family>.txt`.
+3. Point the role variable at the family in tokens.css AND theme.css
+   (the `@theme` block repeats the stacks), extend `FAMILIES` in
+   `fonts.test.ts`, and add the family to both NOTICE files.
+4. Assert the visual suite first (it fails), then reseed with
+   `bun run test:visual:update` and assert twice more.
+
 Note: tokens.css wraps its element defaults (`h1`–`h6`, `a`, `p`) in
 `@layer base`, so Tailwind utilities beat element rules without the `!`
 important modifier. Do not reintroduce unlayered element rules.

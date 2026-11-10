@@ -13,7 +13,9 @@
    Theming ("theme definition" approach, v1): tokens.css is the default theme
    (a copy ships alongside this file in dist/styles). Override by redefining
    the semantic variables (--bg, --fg1, --primary, …) after this import — or
-   load a different theme package.
+   load a different theme package. Fonts switch the same way: redefine the
+   role variables (--font-display, --font-body, --font-mono, --font-accent)
+   and declare your own faces; fonts.css holds the default faces.
    theme.css (the variable→utility mapping) is part of the components and is
    not meant to be overridden. */
 @import "./fonts.css";

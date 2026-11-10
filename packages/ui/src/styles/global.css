@@ -5,7 +5,7 @@
      fonts.css   type faces (swappable source)
      tokens.css  DEFAULT THEME DEFINITION (semantic variables, light + dark)
      theme.css   COMPONENT CONTRACT (variables → Tailwind utility mapping)
-   @import statements MUST come first — Google Fonts before any other rule. */
+   @import statements MUST come first, before any other rule. */
 @import "./fonts.css";
 @import "tailwindcss";
 @import "./tokens.css";

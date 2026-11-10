@@ -28,10 +28,13 @@ const config: UserConfig = defineConfig({
     // Theme-definition split shipped alongside the JS: lib.css becomes the
     // "./styles.css" export; tokens.css doubles as the overridable default
     // theme ("./theme.css" export). See src/styles/lib.css for the contract.
+    // fonts.css points at ./fonts/ by relative URL, so the woff2 files and
+    // their OFL texts land next to it in dist/styles/fonts/.
     viteStaticCopy({
       targets: [
         { src: 'src/styles/lib.css', dest: 'styles', rename: { stripBase: true, name: 'index.css' } },
         { src: 'src/styles/fonts.css', dest: 'styles', rename: { stripBase: true } },
+        { src: 'src/styles/fonts/*', dest: 'styles/fonts', rename: { stripBase: true } },
         { src: 'src/styles/tokens.css', dest: 'styles', rename: { stripBase: true } },
         { src: 'src/styles/theme.css', dest: 'styles', rename: { stripBase: true } },
       ],

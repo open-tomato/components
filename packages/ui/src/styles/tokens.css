@@ -11,9 +11,9 @@
    no explicit theme is set.
    ========================================================================== */
 
-/* ----- Google Fonts are imported from styles/global.css to keep @import   -
-       statements at the top of the bundled CSS (postcss/CSS spec requires
-       them before any other rule). ----------------------------------------- */
+/* ----- The type faces (fonts.css) are imported from global.css and       -
+       lib.css to keep @import statements at the top of the bundled CSS
+       (postcss/CSS spec requires them before any other rule). ---------- */
 
 /* ============================================================================
    BASE VALUES — raw values, not used directly by components
