@@ -22,5 +22,11 @@
     "rule": "email",
     "sha256": "3c205d8fc749f72977b9331e3179773c315bb1f4860c366de2abe9ec9337730b",
     "why": "The committer of every squash merge made on GitHub: the vendor's public no-reply address."
+  },
+  {
+    "path": "packages/ui/test/visual-fonts.test.ts",
+    "rule": "sample-url",
+    "sha256": "fc9e1824b0e63191b9c26237bc1e3f710168b33e78dc4dd967e1f7f41dc94a3f",
+    "why": "Google Fonts' public font CDN host: the visual suite's font pin tells its static files from its generated ones by this URL, so the test has to name it. No personal data."
   }
 ]
