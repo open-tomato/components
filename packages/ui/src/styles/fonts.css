@@ -1,6 +1,16 @@
 /* Type faces for the design system, served from the package itself.
-   Kept separate so a consumer (or the future theming package) can swap
-   the source without touching the theme contract.
+
+   Contract: this sheet only DECLARES faces. Which family each role draws
+   with is set by the role variables in tokens.css (--font-display,
+   --font-body, --font-mono, --font-accent), the font half of the theme
+   definition. To switch fonts, a consumer redefines those variables after
+   the styles import, the same way it redefines the color variables, and
+   declares its own faces when the family is not a system font. A face
+   downloads only when text draws with it, so the faces below cost
+   nothing once no role names them. README.md ("Fonts") has the recipes.
+
+   The url()s are relative: the build copies ./fonts/ next to this file in
+   dist/styles/, and a consumer's bundler resolves them from there.
 
    The woff2 files in ./fonts/ are the static files Google Fonts serves
    for the families and weights below (fonts.gstatic.com/s/, fetched

@@ -15,16 +15,22 @@ const FONTS_DIR = join(import.meta.dir, 'fonts');
 const WOFF2_SIGNATURE = 'wOF2';
 
 interface ShippedFamily {
+  /** The role variable in tokens.css that names this family. */
+  role: string;
   family: string;
   licence: string;
 }
 
-/** The families the theme's font stacks name, with their licence files. */
+/**
+ * The font contract: each role variable's stack starts with a family
+ * fonts.css declares, and each family ships its licence. A consumer
+ * switches fonts by redefining these four variables (README "Fonts").
+ */
 const FAMILIES: ShippedFamily[] = [
-  { family: 'Bricolage Grotesque', licence: 'OFL-bricolage-grotesque.txt' },
-  { family: 'Manrope', licence: 'OFL-manrope.txt' },
-  { family: 'JetBrains Mono', licence: 'OFL-jetbrains-mono.txt' },
-  { family: 'Sansita Swashed', licence: 'OFL-sansita-swashed.txt' },
+  { role: '--font-display', family: 'Bricolage Grotesque', licence: 'OFL-bricolage-grotesque.txt' },
+  { role: '--font-body', family: 'Manrope', licence: 'OFL-manrope.txt' },
+  { role: '--font-mono', family: 'JetBrains Mono', licence: 'OFL-jetbrains-mono.txt' },
+  { role: '--font-accent', family: 'Sansita Swashed', licence: 'OFL-sansita-swashed.txt' },
 ];
 
 const css = readFileSync(join(import.meta.dir, 'fonts.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
@@ -48,6 +54,12 @@ describe('fonts.css', () => {
   it('uses every shipped woff2 file once', () => {
     const named = urls.map((url) => url.replace('./fonts/', '')).sort();
     expect(named).toEqual([...shippedFonts].sort());
+  });
+
+  it.each(FAMILIES)('$role names $family first, the face fonts.css declares', ({ role, family }) => {
+    const tokens = readFileSync(join(import.meta.dir, 'tokens.css'), 'utf8');
+    const stack = new RegExp(`${role}:\\s*"([^"]+)"`).exec(tokens)?.[1];
+    expect(stack).toBe(family);
   });
 
   it.each(FAMILIES)('declares $family and ships its OFL licence', ({ family, licence }) => {

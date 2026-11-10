@@ -69,7 +69,7 @@ the root `src/index.tsx`. Styling is variants-only: axes live in
 | `@open-tomato/components` | every component, `cn()` |
 | `@open-tomato/components/styles.css` | the styles entry: fonts + default theme + component contract + Tailwind `@source` scan |
 | `@open-tomato/components/theme.css` | the default theme definition alone (semantic variables, light + dark) |
-| `@open-tomato/components/fonts.css` | the type-face layer alone |
+| `@open-tomato/components/fonts.css` | the default type faces alone: `@font-face` rules over the woff2 files in `dist/styles/fonts/` (see [Fonts](#fonts)) |
 | `@open-tomato/components/cache` | browser cache: `useCache`, `QueryProvider`, `defaultQueryClient`, re-exported TanStack Query core |
 | `@open-tomato/components/cache/server` | server cache: `createServerCache` (Redis cache-aside; `ioredis` optional peer) |
 
@@ -121,12 +121,22 @@ only as tall as its content and the rail stops where its nav ends.
 
 ## Theming (v1: theme definition via CSS)
 
-Component layout is fixed; the **token variables are the theme**. Override the
-semantic variables after the styles import:
+Component layout is fixed; the **variables are the theme**. A theme has two
+halves, and both switch the same way: redefine the variables after the
+styles import.
+
+- **Colors**: the semantic color variables (`--bg`, `--fg1`, `--primary`, …).
+- **Fonts**: four role variables (`--font-display`, `--font-body`,
+  `--font-mono`, `--font-accent`) say which family each role draws with, and
+  `fonts.css` declares the faces those families load from.
+
+### Colors
+
+Override the semantic variables after the styles import:
 
 ```css
 @import "tailwindcss";
-@import "components-library/styles.css";
+@import "@open-tomato/components/styles.css";
 
 /* your theme definition — same contract tokens.css fulfills */
 :root, [data-theme='light'] {
@@ -140,6 +150,101 @@ semantic variables after the styles import:
 
 The variable→utility mapping itself is part of the components — don't override
 it.
+
+### Fonts
+
+**The contract.** Components never name a family. They ask for a ROLE,
+through a Tailwind utility, an element default or a class, and the role
+variable names the family:
+
+| Role variable | Default family | Drawn by |
+| --- | --- | --- |
+| `--font-display` | Bricolage Grotesque | `h1`–`h4`, the `font-display` utility |
+| `--font-body` | Manrope | `html`/`body` (so all text by default), `h5`, `h6`, the `font-body` utility |
+| `--font-mono` | JetBrains Mono | `code`, `kbd`, `samp`, `pre`, `.mono`, `.eyebrow`, the `font-mono` utility |
+| `--font-accent` | Sansita Swashed | the `.accent-text` class |
+
+The components ask for weights 400 to 800 (`font-normal`, `font-medium`,
+`font-semibold`, `font-bold`, `font-extrabold`), and the theme defines
+`--fw-light` (300) too. A family without one of those weights still draws:
+the browser picks the nearest weight it has, or fakes bold.
+
+`fonts.css` (inside `styles.css`, and exported alone as
+`@open-tomato/components/fonts.css`) declares the default faces: woff2
+files shipped in the package under `dist/styles/fonts/`, which it reaches
+by relative `url()`. A bundler (Vite, webpack, Next.js, …) resolves those
+URLs and emits the files with your build. If you serve the CSS file
+yourself, with no bundler, serve the `fonts/` folder next to it. The page
+makes no request to a font service.
+
+**What a page downloads.** A browser fetches a face only when text on the
+page draws with it, and only the script subsets that text needs
+(`unicode-range`). Measured in a Vite + Tailwind consumer: a page with a
+heading, a paragraph and a code span fetched 3 files (the latin subset of
+Bricolage Grotesque, Manrope and JetBrains Mono). With the three role
+variables pointed at other families it fetched none. The default files
+still sit in your build output, unused.
+
+**Switch a role to a font the system already has.** Redefine the role
+variable after the styles import, like a color:
+
+```css
+@import "tailwindcss";
+@import "@open-tomato/components/styles.css";
+
+:root {
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+```
+
+**Switch a role to your own font files.** Declare the faces, then point
+the role at them. Your files resolve against your CSS file, the same way
+the package's resolve against its own:
+
+```css
+@import "tailwindcss";
+@import "@open-tomato/components/styles.css";
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900; /* a variable font: one rule covers every weight */
+  font-display: swap;
+  src: url("./fonts/inter-latin.woff2") format("woff2");
+}
+
+:root {
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Inter", system-ui, sans-serif;
+}
+```
+
+A font from a hosted service works the same way: its CSS `@import` goes
+first in your entry, before `@import "tailwindcss"`, because CSS only
+honours `@import` at the top of a file. Then point the role at the
+service's family name.
+
+**Keep the default fonts, but load them from somewhere else.** Redeclare
+the four families with `@font-face` rules of your own, under the same
+family names, after the styles import. Of two faces that match, the
+browser uses the one declared last, so it fetches your file and never
+the package's. That holds only while your face covers what the page
+draws: measured with a redeclared Manrope, the browser fetched only the
+consumer's file, but when that file lacked the latin glyphs it fetched
+the package's file too, for the missing characters. So give your rules
+the weight range and the characters your text needs.
+
+**Keep a role's fallback list.** Each default ends in system families
+(`system-ui, sans-serif`, `Menlo, Consolas, monospace`). Keep a fallback
+list on your override, so text still draws while a face loads
+(`font-display: swap`) or if it fails to load.
+
+**A theme package, later.** The color variables, the role variables and
+the faces are together one theme definition. A future theming package
+can ship all three as one import, so a consumer switches colors and fonts
+with one line. Today the role variables live in `tokens.css` (the
+`./theme.css` export) and the faces in `fonts.css`.
 
 ## Caching
 
@@ -236,5 +341,11 @@ attribution: redistributions in source or bundled form must retain the
 [LICENSE](LICENSE) and the notices in [NOTICE](NOTICE) — the credit to the
 original author and the origin projects (Open Tomato and the design-extraction project).
 Don't strip the credit; everything else is fair game.
+
+The fonts in `dist/styles/fonts/` are not under Apache-2.0: Bricolage
+Grotesque, Manrope, JetBrains Mono and Sansita Swashed are each under the
+[SIL Open Font License 1.1](https://openfontlicense.org), and each
+licence text ships beside the files (`OFL-*.txt`). [NOTICE](NOTICE)
+lists them.
 
 Copyright 2026 Marcos Tomatti.
