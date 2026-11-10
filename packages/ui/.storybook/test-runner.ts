@@ -1,8 +1,6 @@
 import { waitForPageReady, type TestRunnerConfig } from '@storybook/test-runner';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-import { prepareWithStaticFonts } from './visual-fonts';
-
 /**
  * Visual regression layer — one PNG per story × theme, diffed against the
  * baselines of THIS environment (baselines are untracked and never cross
@@ -43,9 +41,6 @@ declare const expect: {
 };
 
 const config: TestRunnerConfig = {
-  // Every story file's page loads the fonts through a static-only pin;
-  // see visual-fonts.ts for why one CSS answer used to fail a whole file.
-  prepare: prepareWithStaticFonts,
   setup() {
     expect.extend({ toMatchImageSnapshot });
   },
