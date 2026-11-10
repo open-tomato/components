@@ -81,7 +81,7 @@
   --slate-500: #4E5C6E;
 
   /* --- Type families ----------------------------------------------------- */
-  --font-display: "Bricolage Grotesque", "Sansita", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
   --font-accent: "Sansita Swashed", "Bricolage Grotesque", cursive;
